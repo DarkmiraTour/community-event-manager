@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.s3_client.version: '2018-10-16'
+    app.s3_client.region: 'ile-de-france'
+    app.s3_client.endpoint: 'http://minio:9000'
+    app.s3_client.key: '%env(MINIO_KEY)%'
+    app.s3_client.secret: '%env(MINIO_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -28,3 +33,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    app.s3_client:
+        class: Aws\S3\S3Client
+        arguments:
+            -
+                version: '%app.s3_client.version%'
+                region: '%app.s3_client.region%'
+                endpoint: '%app.s3_client.endpoint%'
+                use_path_style_endpoint: true
+                credentials:
+                    key: '%app.s3_client.key%'
+                    secret: '%app.s3_client.secret%'

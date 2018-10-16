@@ -1,0 +1,23 @@
+oneup_flysystem:
+    adapters:
+        bucket_with_no_public_access:
+            awss3v3:
+                client: app.s3_client
+                bucket: bucket_with_no_public_access
+                options:
+                    visibility: private
+                    ACL: private
+        bucket_with_public_download:
+            awss3v3:
+                client: app.s3_client
+                bucket: bucket_with_public_download
+                options:
+                    visibility: public
+                    ACL: public
+    filesystems:
+        bucket_with_no_public_access:
+            adapter: bucket_with_no_public_access
+            alias: bucket_with_no_public_access
+        bucket_with_public_download:
+            adapter: bucket_with_public_download
+            alias: bucket_with_public_download
