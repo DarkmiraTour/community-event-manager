@@ -1,9 +1,42 @@
 {
+    "aws/aws-sdk-php": {
+        "version": "3.69.7"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
+    "league/flysystem": {
+        "version": "1.0.48"
+    },
+    "league/flysystem-aws-s3-v3": {
+        "version": "1.0.21"
+    },
+    "mtdowling/jmespath.php": {
+        "version": "2.4.0"
+    },
+    "oneup/flysystem-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0eb87bba411c227da027fe5f7c1dc7954b02f242"
+        }
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"

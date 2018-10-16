@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+    postgres:
+        image: postgres
+        ports:
+            - '5433:5432'
+    php:
+        build: php-fpm
+        ports:
+            - '9002:9000'
+        volumes:
+            - ../:/var/www/symfony:cached
+            - ./logs/symfony:/var/www/symfony/var/logs:cached
+        links:
+            - postgres
+    nginx:
+        build: nginx
+        ports:
+            - '8080:80'
+        links:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx:cached
+    minio:
+        image: minio/minio:RELEASE.2018-05-16T23-35-33Z
+        volumes:
+            - "./data/minio:/data"
+        ports:
+            - '9001:9000'
+        environment:
+            MINIO_ACCESS_KEY: minio
+            MINIO_SECRET_KEY: 9DF496D117AB8
+        command: server /data
+        restart: unless-stopped
+    createbuckets:
+        image: minio/mc:RELEASE.2018-04-28T00-08-20Z
+        depends_on:
+            - minio
+        entrypoint: >
+            /bin/sh -c "
+            /usr/bin/mc config host add minio http://minio:9000 minio minio123;
+
+            /usr/bin/mc mb minio/bucket_with_no_public_access;
+            /usr/bin/mc policy none minio/bucket_with_no_public_access;
+
+            /usr/bin/mc mb minio/bucket_with_public_download;
+            /usr/bin/mc policy download minio/bucket_with_public_download;
+
+            exit 0;
+            "
