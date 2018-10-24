@@ -2,6 +2,9 @@ index:
     path: /
     controller: App\Controller\Home::handle
 
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 organisation:
     resource: routes/organisations.yaml
     prefix: organisations
@@ -9,3 +12,15 @@ organisation:
 speaker:
     resource: routes/speakers.yaml
     prefix: speakers
+
+sponsorship_level:
+    resource: routes/sponsorshipLevel.yaml
+    prefix: sponsorship-level
+
+sponsorship_benefit:
+    resource: routes/sponsorshipBenefit.yaml
+    prefix: sponsorship-benefit
+
+sponsorship_level_benefit:
+    resource: routes/sponsorshipLevelBenefit.yaml
+    prefix: sponsorship-level-benefit

@@ -1,0 +1,30 @@
+sponsorship_level_benefit_view:
+    path: /
+    methods: [GET]
+    controller: App\Controller\SponsorshipLevelBenefit\View::handle
+
+sponsorship_level_benefit_edit:
+    path: /edit
+    methods: [GET]
+    controller: App\Controller\SponsorshipLevelBenefit\Edit::handle
+
+sponsorship_level_benefit_edit_level_position:
+    path: /edit-sponsorship-level-position
+    methods: [PUT]
+    controller: App\Controller\SponsorshipLevelBenefit\Edit::editSponsorshipLevelPosition
+    options:
+        expose: true
+
+sponsorship_level_benefit_edit_benefit_position:
+    path: /edit-sponsorship-benefit-position
+    methods: [PUT]
+    controller: App\Controller\SponsorshipLevelBenefit\Edit::editSponsorshipBenefitPosition
+    options:
+        expose: true
+
+sponsorship_level_benefit_edit_datas:
+    path: /edit-datas
+    methods: [PUT]
+    controller: App\Controller\SponsorshipLevelBenefit\Edit::editDatas
+    options:
+        expose: true

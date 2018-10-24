@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Edit Sponsorship Level{% endblock %}
+
+{% block content %}
+    <h1>Edit Sponsorship Level</h1>
+
+    {{ include('sponsorshipLevel/_form.html.twig', {'button_label': 'Update', 'method_value': 'PUT'}) }}
+
+    <a href="{{ path('sponsorship_level_index') }}">back to list</a>
+{% endblock %}

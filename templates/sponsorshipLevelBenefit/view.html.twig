@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsorship Level Benefits{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col col-6">
+            <h1>Sponsorship Level Benefits</h1>
+        </div>
+        <div class="col col-6">
+            <p class="text-right">
+                <a class="btn btn-secondary" href="{{ path('sponsorship_level_benefit_edit') }}">Edit</a>
+            </p>
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Benefits</th>
+                {% for level in levels %}
+                    <th>{{ level.label }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for levelBenefit in levelBenefits %}
+                <tr>
+                    <td>{{ levelBenefit.benefit.label }}</td>
+                    {% for level in levelBenefit.levels %}
+                        <td>
+                            {% if level.isChecked %}
+                                {% if level.text is not null %}
+                                    {{ level.text }}
+                                {% else %}
+                                    <i class="fa fa-check"></i>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="thead-dark">
+            <tr>
+                <th>Price</th>
+                {% for level in levels %}
+                    <th>{{ level.price|number_format(2, ',', ' ')~'€' }}</th>
+                {% endfor %}
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

@@ -1,0 +1,23 @@
+sponsorship_benefit_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\SponsorshipBenefit\Index::handle
+
+sponsorship_benefit_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Controller\SponsorshipBenefit\Create::handle
+
+sponsorship_benefit_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Controller\SponsorshipBenefit\Edit::handle
+    requirements:
+        id: '%routing.uuid%'
+
+sponsorship_benefit_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Controller\SponsorshipBenefit\Delete::handle
+    requirements:
+        id: '%routing.uuid%'
