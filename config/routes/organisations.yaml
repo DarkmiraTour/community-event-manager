@@ -11,3 +11,9 @@ organisation_show:
     path: /{id}
     requirements:
         id: '\d+'
+
+organisation_edit:
+    controller: App\Controller\Organisation\Edit:handle
+    path: /edit/{id}
+    requirements:
+        id: '\d+'

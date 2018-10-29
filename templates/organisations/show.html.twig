@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
 {% endblock %}
 
 {% block title %}Community event manager - {{ organisation.name }}{% endblock %}
@@ -31,5 +31,8 @@
             </tbody>
         </table>
         <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to liste</a>
+        <div class="float-right">
+            <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
+        </div>
     </div>
 {% endblock %}

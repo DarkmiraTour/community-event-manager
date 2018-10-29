@@ -20,7 +20,7 @@ final class Show
         $this->repository = $repository;
     }
 
-    public function handle(int $id)
+    public function handle(int $id): Response
     {
         /** @var Organisation $organisation */
         $organisation = $this->repository->findOneById($id);
