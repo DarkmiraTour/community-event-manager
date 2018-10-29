@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+{% endblock %}
+
+{% block title %}Community event manager - {{ organisation.name }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Organisations - {{ organisation.name }}</h1>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ organisation.name }}</td>
+                </tr>
+                <tr>
+                    <th>Website</th>
+                    <td><a href="{{ organisation.website }}">{{ organisation.website }}</a></td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>{{ organisation.address | default('N/A') }}</td>
+                </tr>
+                <tr>
+                    <th>Comment</th>
+                    <td>{{ organisation.comment | default('N/A') }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to liste</a>
+    </div>
+{% endblock %}

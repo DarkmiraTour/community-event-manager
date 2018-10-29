@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
-
+use App\Entity\Organisation;
 use App\Repository\OrganisationRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class Index
+final class Show
 {
     private $renderer;
     private $repository;
@@ -19,12 +20,17 @@ final class Index
         $this->repository = $repository;
     }
 
-    public function handle()
+    public function handle(int $id)
     {
-        $organisations = $this->repository->findAll();
+        /** @var Organisation $organisation */
+        $organisation = $this->repository->findOneById($id);
+
+        if (null === $organisation) {
+            throw new NotFoundHttpException();
+        }
 
         return new Response(
-            $this->renderer->render('organisations/list.html.twig', ['organisations' => $organisations])
+            $this->renderer->render('organisations/show.html.twig', ['organisation' => $organisation])
         );
     }
 }

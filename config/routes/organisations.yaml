@@ -5,3 +5,9 @@ organisation_list:
 organisation_create:
     controller: App\Controller\Organisation\Create::handle
     path: /create
+
+organisation_show:
+    controller: App\Controller\Organisation\Show:handle
+    path: /{id}
+    requirements:
+        id: '\d+'
