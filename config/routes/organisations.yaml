@@ -1,0 +1,3 @@
+organisation_list:
+    controller: App\Controller\Organisation\Index::handle
+    path: /
