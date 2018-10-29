@@ -1,3 +1,7 @@
 organisation_list:
     controller: App\Controller\Organisation\Index::handle
     path: /
+
+organisation_create:
+    controller: App\Controller\Organisation\Create::handle
+    path: /create
