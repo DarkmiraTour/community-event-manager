@@ -11,6 +11,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "symfony/asset": {
+        "version": "v4.1.6"
+    },
     "symfony/cache": {
         "version": "v4.1.6"
     },
@@ -78,6 +81,15 @@
             "branch": "master",
             "version": "4.0",
             "ref": "5f514d9d3b8a8aac3d62ae6a86b18b90ed0c7826"
+        }
+    },
+    "symfony/webpack-encore-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "8e81b0743207474b384548d9bc73fb03b218a9bf"
         }
     },
     "symfony/yaml": {
