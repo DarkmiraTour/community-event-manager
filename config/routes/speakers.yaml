@@ -1,0 +1,25 @@
+speaker_index:
+    path: /
+    controller: App\Controller\Speaker\Index::handle
+
+speaker_create:
+    path: /create
+    controller: App\Controller\Speaker\Create::handle
+
+speaker_show:
+    path: /{id}
+    controller: App\Controller\Speaker\Show::handle
+    requirements:
+        id: '\d+'
+
+speaker_edit:
+    path: /{id}/edit
+    controller: App\Controller\Speaker\Edit::handle
+    requirements:
+        id: '\d+'
+
+speaker_delete:
+    path: /{id}/delete
+    controller: App\Controller\Speaker\Delete::handle
+    requirements:
+        id: '\d+'

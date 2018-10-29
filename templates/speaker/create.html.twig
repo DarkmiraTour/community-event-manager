@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Speaker{% endblock %}
+
+{% block body %}
+    <h1>New speaker</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">Save</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('speaker_index') }}" class="btn btn-light">back to list</a>
+{% endblock %}

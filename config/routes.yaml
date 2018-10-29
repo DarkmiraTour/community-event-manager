@@ -5,3 +5,7 @@ index:
 organisation:
     resource: routes/organisations.yaml
     prefix: organisations
+
+speaker:
+    resource: routes/speakers.yaml
+    prefix: speakers

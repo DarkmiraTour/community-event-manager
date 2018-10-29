@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Speaker{% endblock %}
+
+{% block body %}
+    <h1>Edit Speaker</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">Save</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('speaker_index') }}">back to list</a>
+
+    {{ include('speaker/_delete_form.html.twig') }}
+{% endblock %}
