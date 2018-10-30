@@ -16,9 +16,9 @@
         {{ form_row(form.address) }}
         {{ form_row(form.comment) }}
 
-        <button type="submit" class="btn btn-success">Edit organisation</button>
+        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
+        <button type="submit" class="btn btn-success float-right">Edit organisation</button>
         {{ form_end(form) }}
 
-        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
     </div>
 {% endblock %}
