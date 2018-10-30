@@ -1,0 +1,22 @@
+knp_gaufrette:
+    adapters:
+        bucket_photos:
+            aws_s3:
+                service_id: Aws\S3\S3Client
+                bucket_name: 'events'
+                detect_content_type: true
+                options:
+                    directory: photos
+    filesystems:
+        photos:
+            adapter: bucket_photos
+
+services:
+    Aws\S3\S3Client:
+        factory: [Aws\S3\S3Client, 'factory']
+        arguments:
+            -   version: latest
+                region: '%env(S3_REGION)%'
+                credentials:
+                    key: '%env(S3_KEY)%'
+                    secret: '%env(S3_SECRET)%'

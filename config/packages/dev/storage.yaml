@@ -1,0 +1,10 @@
+services:
+    Aws\S3\S3Client:
+        arguments:
+            -   version: latest
+                region: '%env(S3_REGION)%'
+                endpoint: 'http://storage:9000'
+                use_path_style_endpoint: true
+                credentials:
+                    key: '%env(S3_KEY)%'
+                    secret: '%env(S3_SECRET)%'

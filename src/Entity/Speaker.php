@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -133,12 +134,16 @@ class Speaker
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getPhoto()
     {
+        if (is_string($this->photo)) {
+            return new File($this->photo, false);
+        }
+
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(File $photo): self
     {
         $this->photo = $photo;
 

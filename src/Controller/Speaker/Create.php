@@ -5,6 +5,7 @@ namespace App\Controller\Speaker;
 use App\Entity\Speaker;
 use App\Form\SpeakerType;
 use App\Repository\SpeakerRepository;
+use App\Service\FileUploader;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,18 +19,21 @@ final class Create
     private $speakerRepository;
     private $formFactory;
     private $router;
+    private $fileUploader;
 
     public function __construct(
         Twig_Environment $renderer,
         SpeakerRepository $speakerRepository,
         FormFactoryInterface $formFactory,
-        RouterInterface $router
+        RouterInterface $router,
+        FileUploader $fileUploader
     )
     {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->formFactory = $formFactory;
         $this->router = $router;
+        $this->fileUploader = $fileUploader;
     }
 
     public function handle(Request $request): Response
@@ -39,6 +43,9 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $filename = $this->fileUploader->upload($speaker->getPhoto());
+            $speaker->setPhoto($filename);
+
             $this->speakerRepository->save($speaker);
 
             return new RedirectResponse($this->router->generate('speaker_index'));
