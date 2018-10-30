@@ -43,7 +43,9 @@ final class Edit
             throw new NotFoundHttpException();
         }
 
-        $form = $this->formFactory->create(OrganisationType::class, $organisation);
+        $form = $this->formFactory->create(OrganisationType::class, $organisation, [
+            'method' => 'PUT'
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

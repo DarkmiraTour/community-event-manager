@@ -1,26 +1,30 @@
 organisation_list:
-    controller: App\Controller\Organisation\Index::handle
     path: /
+    controller: App\Controller\Organisation\Index::handle
+    methods: [GET]
 
 organisation_create:
-    controller: App\Controller\Organisation\Create::handle
     path: /create
+    controller: App\Controller\Organisation\Create::handle
+    methods: [GET, POST]
 
 organisation_show:
-    controller: App\Controller\Organisation\Show:handle
     path: /{id}
+    controller: App\Controller\Organisation\Show:handle
+    methods: [GET]
     requirements:
         id: '\d+'
 
 organisation_edit:
-    controller: App\Controller\Organisation\Edit:handle
     path: /{id}/edit
+    controller: App\Controller\Organisation\Edit:handle
+    methods: [GET, PUT]
     requirements:
         id: '\d+'
 
 organisation_delete:
-    controller: App\Controller\Organisation\Delete:handle
     path: /{id}/delete
+    controller: App\Controller\Organisation\Delete:handle
     methods: [DELETE]
     requirements:
         id: '\d+'
