@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SpeakerRepository")
@@ -17,46 +18,64 @@ class Speaker
     private $id;
 
     /**
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\Length(max=5)
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=5)
      */
     private $title;
 
     /**
+     * @Assert\Email()
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="text")
      */
     private $biography;
 
     /**
+     * @Assert\Length(max=255)
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
 
     /**
+     * @Assert\Url()
+     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $twitter;
 
     /**
+     * @Assert\Url()
+     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $facebook;
 
     /**
+     * @Assert\Url()
+     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $linkedin;
 
     /**
+     * @Assert\Url()
+     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $github;
