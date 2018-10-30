@@ -14,6 +14,13 @@ organisation_show:
 
 organisation_edit:
     controller: App\Controller\Organisation\Edit:handle
-    path: /edit/{id}
+    path: /{id}/edit
+    requirements:
+        id: '\d+'
+
+organisation_delete:
+    controller: App\Controller\Organisation\Delete:handle
+    path: /{id}/delete
+    methods: [DELETE]
     requirements:
         id: '\d+'

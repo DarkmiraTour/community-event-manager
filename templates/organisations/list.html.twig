@@ -28,7 +28,7 @@
                     <td>
                         <a href="{{ path('organisation_show', {'id': organisation.id}) }}" class="btn btn-info">Show</a>
                         <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
-                        <a href="" class="btn btn-danger">Delete</a>
+                        {{ include('organisations/_delete_form.html.twig', {'organisation': organisation}) }}
                     </td>
                 </tr>
             {% endfor %}

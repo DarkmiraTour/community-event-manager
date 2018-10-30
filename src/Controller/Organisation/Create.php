@@ -6,7 +6,7 @@ namespace App\Controller\Organisation;
 
 use App\Entity\Organisation;
 use App\Form\OrganisationType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\OrganisationRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,19 +17,19 @@ final class Create
 {
     private $renderer;
     private $formFactory;
-    private $entityManager;
+    private $repository;
     private $router;
 
     public function __construct(
         \Twig_Environment $renderer,
         FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
+        OrganisationRepository $repository,
         RouterInterface $router
     )
     {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
+        $this->repository = $repository;
         $this->router = $router;
     }
 
@@ -40,8 +40,7 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($organisation);
-            $this->entityManager->flush();
+            $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_list'));
         }
