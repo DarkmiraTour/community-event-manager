@@ -28,8 +28,8 @@ final class Show
             throw new NotFoundHttpException();
         }
 
-        return new Response(
-            $this->renderer->render('organisations/show.html.twig', ['organisation' => $organisation])
-        );
+        return new Response($this->renderer->render('organisations/show.html.twig', [
+            'organisation' => $organisation,
+        ]));
     }
 }

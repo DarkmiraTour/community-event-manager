@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
-
 use App\Repository\OrganisationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
@@ -24,8 +23,8 @@ final class Index
     {
         $organisations = $this->repository->findAll();
 
-        return new Response(
-            $this->renderer->render('organisations/list.html.twig', ['organisations' => $organisations])
-        );
+        return new Response($this->renderer->render('organisations/list.html.twig', [
+            'organisations' => $organisations,
+        ]));
     }
 }

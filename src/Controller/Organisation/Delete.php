@@ -24,8 +24,7 @@ final class Delete
         OrganisationRepository $repository,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfManager
-    )
-    {
+    ) {
         $this->repository = $repository;
         $this->router = $router;
         $this->csrfManager = $csrfManager;

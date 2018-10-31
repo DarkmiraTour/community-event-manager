@@ -26,8 +26,7 @@ final class Create
         FormFactoryInterface $formFactory,
         OrganisationRepository $repository,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->repository = $repository;
@@ -46,8 +45,8 @@ final class Create
             return new RedirectResponse($this->router->generate('organisation_list'));
         }
 
-        return new Response(
-            $this->renderer->render('organisations/create.html.twig', ['form' => $form->createView()])
-        );
+        return new Response($this->renderer->render('organisations/create.html.twig', [
+            'form' => $form->createView(),
+        ]));
     }
 }

@@ -27,8 +27,7 @@ final class Edit
         OrganisationRepository $repository,
         FormFactoryInterface $formFactory,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->repository = $repository;
         $this->formFactory = $formFactory;
@@ -37,7 +36,6 @@ final class Edit
 
     public function handle(Request $request, int $id): Response
     {
-        /** @var Organisation $organisation */
         $organisation = $this->repository->find($id);
 
         if (null === $organisation) {
@@ -45,7 +43,7 @@ final class Edit
         }
 
         $form = $this->formFactory->create(OrganisationType::class, $organisation, [
-            'method' => 'PUT'
+            'method' => 'PUT',
         ]);
         $form->handleRequest($request);
 
@@ -53,12 +51,13 @@ final class Edit
             $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_show', [
-                'id' => $organisation->getId()
+                'id' => $organisation->getId(),
             ]));
         }
 
         return new Response($this->renderer->render('organisations/edit.html.twig', [
-            'form' => $form->createView(), 'organisation' => $organisation
+            'form' => $form->createView(),
+            'organisation' => $organisation,
         ]));
     }
 }
