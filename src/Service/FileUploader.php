@@ -2,21 +2,22 @@
 
 namespace App\Service;
 
-use Gaufrette\Filesystem;
+use Gaufrette\FilesystemInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 
-class FileUploader
+final class FileUploader implements FileUploaderInterface
 {
     private $filesystem;
 
-    public function __construct(Filesystem $filesystem)
+    public function __construct(FilesystemInterface $filesystem)
     {
         $this->filesystem = $filesystem;
     }
 
     public function upload(File $file): File
     {
-        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+        $filename = Uuid::uuid4()->toString() . '.' . $file->guessExtension();
 
         $this->filesystem->write($filename, file_get_contents($file->getPathname()));
 
