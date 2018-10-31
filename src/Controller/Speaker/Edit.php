@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -27,8 +27,7 @@ final class Edit
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         FileUploader $fileUploader
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->formFactory = $formFactory;
@@ -52,7 +51,9 @@ final class Edit
 
             $this->speakerRepository->save($speaker);
 
-            return new RedirectResponse($this->router->generate('speaker_edit', ['id' => $speaker->getId()]));
+            return new RedirectResponse($this->router->generate('speaker_edit', [
+                'id' => $speaker->getId(),
+            ]));
         }
 
         return new Response($this->renderer->render('speaker/create.html.twig', [

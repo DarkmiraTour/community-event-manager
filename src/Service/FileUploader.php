@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Service;
 
@@ -14,7 +14,7 @@ class FileUploader
         $this->filesystem = $filesystem;
     }
 
-    public function upload(File $file)
+    public function upload(File $file): File
     {
         $filename = md5(uniqid()) . '.' . $file->guessExtension();
 

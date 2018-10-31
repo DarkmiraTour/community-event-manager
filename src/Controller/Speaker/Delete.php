@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -24,8 +24,7 @@ final class Delete
         SpeakerRepository $speakerRepository,
         CsrfTokenManagerInterface $csrfTokenManager,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->csrfTokenManager = $csrfTokenManager;

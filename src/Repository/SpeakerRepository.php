@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -19,13 +19,13 @@ class SpeakerRepository extends ServiceEntityRepository
         parent::__construct($registry, Speaker::class);
     }
 
-    public function save(Speaker $speaker)
+    public function save(Speaker $speaker): void
     {
         $this->getEntityManager()->persist($speaker);
         $this->getEntityManager()->flush();
     }
 
-    public function remove(Speaker $speaker)
+    public function remove(Speaker $speaker): void
     {
         $this->getEntityManager()->remove($speaker);
         $this->getEntityManager()->flush();

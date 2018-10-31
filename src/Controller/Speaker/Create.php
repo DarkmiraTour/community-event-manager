@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -27,8 +27,7 @@ final class Create
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         FileUploader $fileUploader
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->formFactory = $formFactory;

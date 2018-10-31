@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -21,6 +21,8 @@ final class Index
     {
         $speakers = $this->speakerRepository->findAll();
 
-        return new Response($this->renderer->render('speaker/index.html.twig', ['speakers' => $speakers]));
+        return new Response($this->renderer->render('speaker/index.html.twig', [
+            'speakers' => $speakers,
+        ]));
     }
 }
