@@ -7,13 +7,14 @@ namespace App\Controller\Organisation;
 
 use App\Repository\OrganisationRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment as Twig;
 
 final class Index
 {
     private $renderer;
     private $repository;
 
-    public function __construct(\Twig_Environment $renderer, OrganisationRepository $repository)
+    public function __construct(Twig $renderer, OrganisationRepository $repository)
     {
         $this->renderer = $renderer;
         $this->repository = $repository;
