@@ -2,16 +2,18 @@
 
 namespace App\Controller\Speaker;
 
+use App\Dto\SpeakerRequest;
 use App\Form\SpeakerType;
-use App\Repository\SpeakerRepository;
-use App\Service\FileUploader;
+use App\Repository\SpeakerRepositoryInterface;
+use App\Service\FileUploaderInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Edit
 {
@@ -22,11 +24,11 @@ final class Edit
     private $fileUploader;
 
     public function __construct(
-        Twig_Environment $renderer,
-        SpeakerRepository $speakerRepository,
+        Twig $renderer,
+        SpeakerRepositoryInterface $speakerRepository,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        FileUploader $fileUploader
+        FileUploaderInterface $fileUploader
     ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
@@ -37,18 +39,19 @@ final class Edit
 
     public function handle(Request $request): Response
     {
-        $speaker = $this->speakerRepository->find($request->attributes->get('id'));
+        $id = Uuid::fromString($request->attributes->get('id'))->toString();
+
+        $speaker = $this->speakerRepository->find($id);
         if (!$speaker) {
             throw new NotFoundHttpException();
         }
 
-        $form = $this->formFactory->create(SpeakerType::class, $speaker);
+        $speakerRequest = SpeakerRequest::createFromEntity($speaker);
+        $form = $this->formFactory->create(SpeakerType::class, $speakerRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $filename = $this->fileUploader->upload($speaker->getPhoto());
-            $speaker->setPhoto($filename);
-
+            $speaker = $speakerRequest->updateEntity($speaker);
             $this->speakerRepository->save($speaker);
 
             return new RedirectResponse($this->router->generate('speaker_edit', [

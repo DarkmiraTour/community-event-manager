@@ -2,7 +2,7 @@
 
 namespace App\Controller\Speaker;
 
-use App\Repository\SpeakerRepository;
+use App\Repository\SpeakerRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Delete
 {
@@ -20,8 +20,8 @@ final class Delete
     private $router;
 
     public function __construct(
-        Twig_Environment $renderer,
-        SpeakerRepository $speakerRepository,
+        Twig $renderer,
+        SpeakerRepositoryInterface $speakerRepository,
         CsrfTokenManagerInterface $csrfTokenManager,
         RouterInterface $router
     ) {

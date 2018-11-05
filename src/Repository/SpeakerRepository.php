@@ -2,32 +2,63 @@
 
 namespace App\Repository;
 
+use App\Dto\SpeakerRequest;
 use App\Entity\Speaker;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
-/**
- * @method Speaker|null find($id, $lockMode = null, $lockVersion = null)
- * @method Speaker|null findOneBy(array $criteria, array $orderBy = null)
- * @method Speaker[]    findAll()
- * @method Speaker[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
-class SpeakerRepository extends ServiceEntityRepository
+class SpeakerRepository implements SpeakerRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    private $repository;
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry, Speaker::class);
+        $this->entityManager = $entityManager;
+        $this->repository = $entityManager->getRepository(Speaker::class);
+    }
+
+    public function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
+    }
+
+    public function find(string $id): Speaker
+    {
+        return $this->repository->find($id);
+    }
+
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
     }
 
     public function save(Speaker $speaker): void
     {
-        $this->getEntityManager()->persist($speaker);
-        $this->getEntityManager()->flush();
+        $this->entityManager->persist($speaker);
+        $this->entityManager->flush();
     }
 
     public function remove(Speaker $speaker): void
     {
-        $this->getEntityManager()->remove($speaker);
-        $this->getEntityManager()->flush();
+        $this->entityManager->remove($speaker);
+        $this->entityManager->flush();
+    }
+
+    public function createFromRequest(SpeakerRequest $speakerRequest): Speaker
+    {
+        return new Speaker(
+            $this->nextIdentity(),
+            $speakerRequest->name,
+            $speakerRequest->title,
+            $speakerRequest->email,
+            $speakerRequest->biography,
+            '',
+            $speakerRequest->twitter,
+            $speakerRequest->facebook,
+            $speakerRequest->linkedin,
+            $speakerRequest->github
+        );
     }
 }

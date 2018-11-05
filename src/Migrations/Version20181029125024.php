@@ -3,24 +3,32 @@
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181029125024 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
+        $schema->createSequence('speaker_id_seq');
 
-        $this->addSql('CREATE SEQUENCE speaker_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE speaker (id INT NOT NULL, name VARCHAR(255) NOT NULL, title VARCHAR(5) NOT NULL, email VARCHAR(255) NOT NULL, biography TEXT NOT NULL, photo VARCHAR(255) NOT NULL, twitter VARCHAR(255) DEFAULT NULL, facebook VARCHAR(255) DEFAULT NULL, linkedin VARCHAR(255) DEFAULT NULL, github VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $table = $schema->createTable('speaker');
+        $table->addColumn('id', Type::GUID);
+        $table->addColumn('name', Type::STRING, ['length' => 255]);
+        $table->addColumn('title', Type::STRING, ['length' => 5]);
+        $table->addColumn('email', Type::STRING, ['length' => 255]);
+        $table->addColumn('biography', Type::TEXT);
+        $table->addColumn('photo', Type::STRING, ['length' => 255]);
+        $table->addColumn('twitter', Type::STRING, ['length' => 255, 'notnull' => false]);
+        $table->addColumn('facebook', Type::STRING, ['length' => 255, 'notnull' => false]);
+        $table->addColumn('linkedin', Type::STRING, ['length' => 255, 'notnull' => false]);
+        $table->addColumn('github', Type::STRING, ['length' => 255, 'notnull' => false]);
+
+        $table->setPrimaryKey(['id']);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
-
-        $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP SEQUENCE speaker_id_seq CASCADE');
-        $this->addSql('DROP TABLE speaker');
+        $schema->dropTable('speaker');
     }
 }

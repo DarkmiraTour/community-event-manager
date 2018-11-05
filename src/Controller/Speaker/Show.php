@@ -2,18 +2,18 @@
 
 namespace App\Controller\Speaker;
 
-use App\Repository\SpeakerRepository;
+use App\Repository\SpeakerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Show
 {
     private $renderer;
     private $speakerRepository;
 
-    public function __construct(Twig_Environment $renderer, SpeakerRepository $speakerRepository)
+    public function __construct(Twig $renderer, SpeakerRepositoryInterface $speakerRepository)
     {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
@@ -26,6 +26,8 @@ final class Show
             throw new NotFoundHttpException();
         }
 
-        return new Response($this->renderer->render('speaker/show.html.twig', ['speaker' => $speaker]));
+        return new Response($this->renderer->render('speaker/show.html.twig', [
+            'speaker' => $speaker
+        ]));
     }
 }

@@ -1,87 +1,91 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SpeakerRepository")
+ * @ORM\Entity()
  */
 class Speaker
 {
+    public function __construct(
+        UuidInterface $id,
+        string $name,
+        string $title,
+        string $email,
+        string $biography,
+        string $photo,
+        string $twitter = null,
+        string $facebook = null,
+        string $linkedin = null,
+        string $github = null
+    ) {
+        $this->id = $id->toString();
+        $this->name = $name;
+        $this->title = $title;
+        $this->email = $email;
+        $this->biography = $biography;
+        $this->photo = $photo;
+        $this->twitter = $twitter;
+        $this->facebook = $facebook;
+        $this->linkedin = $linkedin;
+        $this->github = $github;
+    }
+
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="guid")
      */
     private $id;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
-     * @Assert\Length(max=5)
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=5)
      */
     private $title;
 
     /**
-     * @Assert\Email()
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="text")
      */
     private $biography;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $photo;
 
     /**
-     * @Assert\Url()
-     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $twitter;
 
     /**
-     * @Assert\Url()
-     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $facebook;
 
     /**
-     * @Assert\Url()
-     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $linkedin;
 
     /**
-     * @Assert\Url()
-     * @Assert\Length(max=255)
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $github;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -134,16 +138,12 @@ class Speaker
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): string
     {
-        if (is_string($this->photo)) {
-            return new File($this->photo, false);
-        }
-
         return $this->photo;
     }
 
-    public function setPhoto(File $photo): self
+    public function setPhoto(string $photo)
     {
         $this->photo = $photo;
 

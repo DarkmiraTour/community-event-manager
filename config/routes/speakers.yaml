@@ -13,18 +13,18 @@ speaker_show:
     methods: [GET]
     controller: App\Controller\Speaker\Show::handle
     requirements:
-        id: '^[a-zA-Z0-9\-]{36}$'
+        id: '%routing.uuid%'
 
 speaker_edit:
     path: /{id}/edit
-    methods: [GET, PUT]
+    methods: [GET, POST, PUT]
     controller: App\Controller\Speaker\Edit::handle
     requirements:
-        id: '^[a-zA-Z0-9\-]{36}$'
+        id: '%routing.uuid%'
 
 speaker_delete:
     path: /{id}/delete
     methods: [DELETE]
     controller: App\Controller\Speaker\Delete::handle
     requirements:
-        id: '^[a-zA-Z0-9\-]{36}$'
+        id: '%routing.uuid%'
