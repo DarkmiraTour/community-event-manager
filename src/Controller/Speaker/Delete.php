@@ -3,6 +3,7 @@
 namespace App\Controller\Speaker;
 
 use App\Repository\SpeakerRepositoryInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,7 +34,9 @@ final class Delete
 
     public function handle(Request $request): Response
     {
-        $speaker = $this->speakerRepository->find($request->attributes->get('id'));
+        $id = Uuid::fromString($request->attributes->get('id'))->toString();
+
+        $speaker = $this->speakerRepository->find($id);
         if (!$speaker) {
             throw new NotFoundHttpException();
         }

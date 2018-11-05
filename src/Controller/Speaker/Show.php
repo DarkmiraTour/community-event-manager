@@ -3,6 +3,7 @@
 namespace App\Controller\Speaker;
 
 use App\Repository\SpeakerRepositoryInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,7 +22,9 @@ final class Show
 
     public function handle(Request $request): Response
     {
-        $speaker = $this->speakerRepository->find($request->attributes->get('id'));
+        $id = Uuid::fromString($request->attributes->get('id'))->toString();
+
+        $speaker = $this->speakerRepository->find($id);
         if (!$speaker) {
             throw new NotFoundHttpException();
         }
