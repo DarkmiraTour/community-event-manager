@@ -4,6 +4,8 @@ namespace App\Repository\Organisation;
 
 use App\Entity\Organisation;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineOrganisationRepository implements OrganisationRepositoryInterface
 {
@@ -24,6 +26,11 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
     public function findAll()
     {
         return $this->repository->findAll();
+    }
+
+    public function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
     }
 
     public function save(Organisation $organisation): void

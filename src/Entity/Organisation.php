@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,8 +15,7 @@ class Organisation
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="guid")
      */
     private $id;
 
@@ -43,15 +43,16 @@ class Organisation
      */
     private $comment;
 
-    public function __construct(string $name, string $website, string $address, string $comment)
+    public function __construct(UuidInterface $id, string $name, string $website, string $address = null, string $comment = null)
     {
+        $this->id = $id->toString();
         $this->name = $name;
         $this->website = $website;
         $this->address = $address;
         $this->comment = $comment;
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

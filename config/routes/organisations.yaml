@@ -13,18 +13,18 @@ organisation_show:
     controller: App\Controller\Organisation\Show:handle
     methods: [GET]
     requirements:
-        id: '\d+'
+        id: '%routing.uuid%'
 
 organisation_edit:
     path: /{id}/edit
     controller: App\Controller\Organisation\Edit:handle
     methods: [GET, PUT]
     requirements:
-        id: '\d+'
+        id: '%routing.uuid%'
 
 organisation_delete:
     path: /{id}/delete
     controller: App\Controller\Organisation\Delete:handle
     methods: [DELETE]
     requirements:
-        id: '\d+'
+        id: '%routing.uuid%'

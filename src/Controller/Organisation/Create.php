@@ -42,6 +42,7 @@ final class Create
 
         if ($form->isSubmitted() && $form->isValid()) {
             $organisation = new Organisation(
+                $this->repository->nextIdentity(),
                 $organisationRequest->name,
                 $organisationRequest->website,
                 $organisationRequest->address,
