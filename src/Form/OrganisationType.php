@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Dto\OrganisationRequest;
 use App\Entity\Organisation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,7 +26,7 @@ class OrganisationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Organisation::class,
+            'data_class' => OrganisationRequest::class,
         ]);
     }
 }

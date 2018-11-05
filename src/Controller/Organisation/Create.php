@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
+use App\Dto\OrganisationRequest;
 use App\Entity\Organisation;
 use App\Form\OrganisationType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
@@ -35,11 +36,17 @@ final class Create
 
     public function handle(Request $request): Response
     {
-        $organisation = new Organisation();
-        $form = $this->formFactory->create(OrganisationType::class, $organisation);
+        $organisationRequest = new OrganisationRequest();
+        $form = $this->formFactory->create(OrganisationType::class, $organisationRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $organisation = new Organisation(
+                $organisationRequest->name,
+                $organisationRequest->website,
+                $organisationRequest->address,
+                $organisationRequest->comment
+            );
             $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_list'));

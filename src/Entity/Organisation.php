@@ -43,6 +43,14 @@ class Organisation
      */
     private $comment;
 
+    public function __construct(string $name, string $website, string $address, string $comment)
+    {
+        $this->name = $name;
+        $this->website = $website;
+        $this->address = $address;
+        $this->comment = $comment;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

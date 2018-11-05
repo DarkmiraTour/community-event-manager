@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
+use App\Dto\OrganisationRequest;
 use App\Form\OrganisationType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -40,13 +41,24 @@ final class Edit
         if (null === $organisation) {
             throw new NotFoundHttpException();
         }
+        $organisationRequest = new OrganisationRequest(
+            $organisation->getName(),
+            $organisation->getWebsite(),
+            $organisation->getAddress(),
+            $organisation->getComment()
+        );
 
-        $form = $this->formFactory->create(OrganisationType::class, $organisation, [
+        $form = $this->formFactory->create(OrganisationType::class, $organisationRequest, [
             'method' => 'PUT',
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $organisation->setName($organisationRequest->name)
+                ->setWebsite($organisationRequest->website)
+                ->setAddress($organisationRequest->address)
+                ->setComment($organisationRequest->comment);
+
             $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_show', [
