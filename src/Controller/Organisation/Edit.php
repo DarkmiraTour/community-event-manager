@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
-use App\Entity\Organisation;
 use App\Form\OrganisationType;
-use App\Repository\OrganisationRepository;
+use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +23,7 @@ final class Edit
 
     public function __construct(
         Twig $renderer,
-        OrganisationRepository $repository,
+        OrganisationRepositoryInterface $repository,
         FormFactoryInterface $formFactory,
         RouterInterface $router
     ) {
@@ -34,7 +33,7 @@ final class Edit
         $this->router = $router;
     }
 
-    public function handle(Request $request, int $id): Response
+    public function handle(Request $request, string $id): Response
     {
         $organisation = $this->repository->find($id);
 

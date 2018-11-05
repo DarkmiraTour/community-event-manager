@@ -6,7 +6,7 @@ namespace App\Controller\Organisation;
 
 use App\Entity\Organisation;
 use App\Form\OrganisationType;
-use App\Repository\OrganisationRepository;
+use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ final class Create
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
-        OrganisationRepository $repository,
+        OrganisationRepositoryInterface $repository,
         RouterInterface $router
     ) {
         $this->renderer = $renderer;

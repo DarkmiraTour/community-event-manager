@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Organisation;
 
-use App\Repository\OrganisationRepository;
+use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ final class Delete
     private $csrfManager;
 
     public function __construct(
-        OrganisationRepository $repository,
+        OrganisationRepositoryInterface $repository,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfManager
     ) {
@@ -30,7 +30,7 @@ final class Delete
         $this->csrfManager = $csrfManager;
     }
 
-    public function handle(Request $request, int $id): Response
+    public function handle(Request $request, string $id): Response
     {
         $organisation = $this->repository->find($id);
         if (null === $organisation) {
