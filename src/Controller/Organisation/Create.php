@@ -41,13 +41,7 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $organisation = new Organisation(
-                $this->repository->nextIdentity(),
-                $organisationRequest->name,
-                $organisationRequest->website,
-                $organisationRequest->address,
-                $organisationRequest->comment
-            );
+            $organisation = $this->repository->createFrom($organisationRequest);
             $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_list'));

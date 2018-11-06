@@ -2,6 +2,7 @@
 
 namespace App\Repository\Organisation;
 
+use App\Dto\OrganisationRequest;
 use App\Entity\Organisation;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -26,6 +27,17 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
     public function findAll()
     {
         return $this->repository->findAll();
+    }
+
+    public function createFrom(OrganisationRequest $organisationRequest)
+    {
+        return new Organisation(
+            $this->nextIdentity(),
+            $organisationRequest->name,
+            $organisationRequest->website,
+            $organisationRequest->address,
+            $organisationRequest->comment
+        );
     }
 
     public function nextIdentity(): UuidInterface

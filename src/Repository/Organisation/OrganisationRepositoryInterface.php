@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Organisation;
 
+use App\Dto\OrganisationRequest;
 use App\Entity\Organisation;
 use Ramsey\Uuid\UuidInterface;
 
@@ -15,6 +16,8 @@ interface OrganisationRepositoryInterface
      * @return Organisation[]
      */
     public function findAll();
+
+    public function createFrom(OrganisationRequest $organisationRequest);
 
     public function nextIdentity(): UuidInterface;
 
