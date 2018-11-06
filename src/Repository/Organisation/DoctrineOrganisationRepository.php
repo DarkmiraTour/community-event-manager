@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository\Organisation;
 
 use App\Dto\OrganisationRequest;
@@ -29,7 +31,7 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
         return $this->repository->findAll();
     }
 
-    public function createFrom(OrganisationRequest $organisationRequest)
+    public function createFrom(OrganisationRequest $organisationRequest): Organisation
     {
         return new Organisation(
             $this->nextIdentity(),

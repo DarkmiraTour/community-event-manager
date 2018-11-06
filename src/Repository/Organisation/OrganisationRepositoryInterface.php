@@ -17,7 +17,7 @@ interface OrganisationRepositoryInterface
      */
     public function findAll();
 
-    public function createFrom(OrganisationRequest $organisationRequest);
+    public function createFrom(OrganisationRequest $organisationRequest): Organisation;
 
     public function nextIdentity(): UuidInterface;
 
