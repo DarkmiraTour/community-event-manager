@@ -27,7 +27,7 @@
                 <td>{{ speaker.title }}</td>
                 <td>{{ speaker.email }}</td>
                 <td>{{ speaker.biography }}</td>
-                <td>{{ speaker.photo }}</td>
+                <td><img src="{{speaker.photo|storage_url}}" class="img-fluid"></td>
                 <td>{{ speaker.twitter }} {{ speaker.facebook }} {{ speaker.linkedin }} {{ speaker.github }}</td>
                 <td>
                     <a href="{{ path('speaker_show', {'id': speaker.id}) }}">Show</a>

@@ -51,6 +51,10 @@ final class Edit
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!empty($speakerRequest->photo)) {
+                $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
+            }
+
             $speaker = $speakerRequest->updateEntity($speaker);
             $this->speakerRepository->save($speaker);
 
@@ -59,7 +63,7 @@ final class Edit
             ]));
         }
 
-        return new Response($this->renderer->render('speaker/create.html.twig', [
+        return new Response($this->renderer->render('speaker/edit.html.twig', [
             'speaker' => $speaker,
             'form' => $form->createView(),
         ]));

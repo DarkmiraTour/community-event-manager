@@ -15,12 +15,12 @@ final class FileUploader implements FileUploaderInterface
         $this->filesystem = $filesystem;
     }
 
-    public function upload(File $file): File
+    public function upload(File $file): string
     {
         $filename = Uuid::uuid4()->toString() . '.' . $file->guessExtension();
 
         $this->filesystem->write($filename, file_get_contents($file->getPathname()));
 
-        return new File($filename, false);
+        return $filename;
     }
 }

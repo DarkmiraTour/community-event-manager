@@ -43,6 +43,8 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
+
             $speaker = $this->speakerRepository->createFromRequest($speakerRequest);
             $this->speakerRepository->save($speaker);
 

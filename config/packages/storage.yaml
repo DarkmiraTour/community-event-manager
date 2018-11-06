@@ -1,12 +1,16 @@
+parameters:
+    storage_bucket_name: 'events'
+    storage_directory_path: 'photos'
+
 knp_gaufrette:
     adapters:
         bucket_photos:
             aws_s3:
                 service_id: Aws\S3\S3Client
-                bucket_name: 'events'
+                bucket_name: '%storage_bucket_name%'
                 detect_content_type: true
                 options:
-                    directory: photos
+                    directory: '%storage_directory_path%'
     filesystems:
         photos:
             adapter: bucket_photos
@@ -17,6 +21,16 @@ services:
         arguments:
             -   version: latest
                 region: '%env(S3_REGION)%'
+                use_path_style_endpoint: true
                 credentials:
                     key: '%env(S3_KEY)%'
                     secret: '%env(S3_SECRET)%'
+
+    Gaufrette\Extras\Resolvable\ResolverInterface:
+        alias: Gaufrette\Extras\Resolvable\Resolver\AwsS3PublicUrlResolver
+
+    Gaufrette\Extras\Resolvable\Resolver\AwsS3PublicUrlResolver:
+        arguments:
+            - '@Aws\S3\S3Client'
+            - '%storage_bucket_name%'
+            - '%storage_directory_path%'

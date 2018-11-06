@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ speaker.photo }}</td>
+                <td><img src="{{ speaker.photo|storage_url }}" alt="Avatar" class="img-fluid"></td>
             </tr>
             <tr>
                 <th>Twitter</th>
@@ -50,9 +50,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('speaker_index') }}">back to list</a>
+    <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+    <div class="float-right">
+        <a href="{{ path('speaker_index', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
+        {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
+    </div>
 
-    <a href="{{ path('speaker_edit', {'id': speaker.id}) }}">edit</a>
-
-    {{ include('speaker/_delete_form.html.twig') }}
 {% endblock %}

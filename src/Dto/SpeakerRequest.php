@@ -3,6 +3,7 @@
 namespace App\Dto;
 
 use App\Entity\Speaker;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class SpeakerRequest
@@ -32,10 +33,14 @@ final class SpeakerRequest
     public $biography;
 
     /**
-     * @Assert\Length(max=255)
-     * @Assert\NotBlank()
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg"})
      */
     public $photo;
+
+    /**
+     * @Assert\Length(max=255)
+     */
+    public $photoPath;
 
     /**
      * @Assert\Url()
@@ -69,7 +74,7 @@ final class SpeakerRequest
         $request->title = $speaker->getTitle();
         $request->email = $speaker->getEmail();
         $request->biography = $speaker->getBiography();
-        $request->photo = $speaker->getPhoto();
+        $request->photo = new File($speaker->getPhoto(), false);
         $request->twitter = $speaker->getTwitter();
         $request->facebook = $speaker->getFacebook();
         $request->linkedin = $speaker->getLinkedin();
@@ -84,11 +89,14 @@ final class SpeakerRequest
             ->setTitle($this->title)
             ->setEmail($this->email)
             ->setBiography($this->biography)
-            ->setPhoto('')
             ->setTwitter($this->twitter)
             ->setFacebook($this->facebook)
             ->setLinkedin($this->linkedin)
             ->setGithub($this->github);
+
+        if ($this->photoPath) {
+            $speaker->setPhoto($this->photoPath);
+        }
 
         return $speaker;
     }

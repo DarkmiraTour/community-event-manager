@@ -35,6 +35,9 @@
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
+    "gaufrette/extras": {
+        "version": "v0.1.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.3.3"
     },

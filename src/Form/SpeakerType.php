@@ -43,7 +43,7 @@ class SpeakerType extends AbstractType
             ->add(
                 'photo',
                 FileType::class,
-                ['required' => true]
+                ['required' => false]
             )
             ->add(
                 'twitter',

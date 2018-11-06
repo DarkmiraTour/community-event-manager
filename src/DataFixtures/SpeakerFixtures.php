@@ -4,17 +4,23 @@ namespace App\DataFixtures;
 
 use App\Entity\Speaker;
 use App\Repository\SpeakerRepositoryInterface;
+use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
+use Symfony\Component\HttpFoundation\File\File;
 
 class SpeakerFixtures extends Fixture
 {
     private $speakerRepository;
+    private $fileUploader;
 
-    public function __construct(SpeakerRepositoryInterface $speakerRepository)
-    {
+    public function __construct(
+        SpeakerRepositoryInterface $speakerRepository,
+        FileUploaderInterface $fileUploader
+    ) {
         $this->speakerRepository = $speakerRepository;
+        $this->fileUploader = $fileUploader;
     }
 
     public function load(ObjectManager $manager)
@@ -27,8 +33,8 @@ class SpeakerFixtures extends Fixture
                 $faker->name,
                 $faker->title,
                 $faker->email,
-                $faker->sentences($faker->numberBetween(0, 4), true),
-                '',
+                $faker->sentences($faker->numberBetween(1, 4), true),
+                $this->fileUploader->upload(new File($faker->image('/tmp', 240, 240))),
                 $faker->boolean ? $faker->url : null,
                 $faker->boolean ? $faker->url : null,
                 $faker->boolean ? $faker->url : null,

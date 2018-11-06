@@ -7,10 +7,21 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn btn-success">Save</button>
+        <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        <button type="submit" class="btn btn-success float-right">Edit speaker</button>
     {{ form_end(form) }}
 
-    <a href="{{ path('speaker_index') }}">back to list</a>
+    <script>
+        document.querySelector("input[type=file]").addEventListener('change', function (element) {
+            let target = element.target;
 
-    {{ include('speaker/_delete_form.html.twig') }}
+            // Change the node's value by removing the fake path (Chrome)
+            const value = target.value.replace("C:\\fakepath\\", "");
+            if (value !== undefined || value !== '') {
+                document.querySelector(".custom-file-label").dataset.content = value;
+                document.querySelector(".custom-file-label").textContent = value;
+            }
+        });
+    </script>
+    
 {% endblock %}

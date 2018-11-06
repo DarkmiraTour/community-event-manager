@@ -6,5 +6,5 @@ use Symfony\Component\HttpFoundation\File\File;
 
 interface FileUploaderInterface
 {
-    public function upload(File $file): File;
+    public function upload(File $file): string;
 }

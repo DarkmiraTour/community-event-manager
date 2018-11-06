@@ -54,7 +54,7 @@ class SpeakerRepository implements SpeakerRepositoryInterface
             $speakerRequest->title,
             $speakerRequest->email,
             $speakerRequest->biography,
-            '',
+            $speakerRequest->photoPath,
             $speakerRequest->twitter,
             $speakerRequest->facebook,
             $speakerRequest->linkedin,
