@@ -41,24 +41,15 @@ final class Edit
         if (null === $organisation) {
             throw new NotFoundHttpException();
         }
-        $organisationRequest = new OrganisationRequest(
-            $organisation->getName(),
-            $organisation->getWebsite(),
-            $organisation->getAddress(),
-            $organisation->getComment()
-        );
 
+        $organisationRequest = OrganisationRequest::createFrom($organisation);
         $form = $this->formFactory->create(OrganisationType::class, $organisationRequest, [
             'method' => 'PUT',
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $organisation->setName($organisationRequest->name)
-                ->setWebsite($organisationRequest->website)
-                ->setAddress($organisationRequest->address)
-                ->setComment($organisationRequest->comment);
-
+            $organisationRequest->updateOrganisation($organisation);
             $this->repository->save($organisation);
 
             return new RedirectResponse($this->router->generate('organisation_show', [
