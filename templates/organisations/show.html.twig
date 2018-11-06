@@ -30,7 +30,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to liste</a>
+        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
         <div class="float-right">
             <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
             {{ include('organisations/_delete_form.html.twig', {'organisation': organisation}) }}
