@@ -24,9 +24,9 @@
                     <div class="card-body">
 
                         <ul class="nav nav-tabs" id="tabContent" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="all_days-tab" data-toggle="tab" href="#all_days" role="tab" aria-controls="all_days" aria-selected="true">All days</a>
-                            </li>
+                            {#<li class="nav-item">#}
+                                {#<a class="nav-link active" id="all_days-tab" data-toggle="tab" href="#all_days" role="tab" aria-controls="all_days" aria-selected="true">All days</a>#}
+                            {#</li>#}
                             {% for key,day in days %}
                                 <li class="nav-item">
                                     <a class="nav-link" id="day-{{ key }}-tab" data-toggle="tab" href="#day-{{ key }}" role="tab" aria-controls="day-{{ key }}" aria-selected="false">{{ key }}</a>
@@ -35,13 +35,31 @@
                         </ul>
 
                         <div class="tab-content">
-                            <div class="tab-pane active" id="all_days" role="tabpanel" aria-labelledby="all_days-tab">
-                                AllContent
-                            </div>
+                            {#<div class="tab-pane active" id="all_days" role="tabpanel" aria-labelledby="all_days-tab">#}
+                                {#AllContent#}
+                            {#</div>#}
 
                             {% for key,day in days %}
                                 <div class="tab-pane" id="day-{{ key }}" role="tabpanel" aria-labelledby="day-{{ key }}-tab">
-                                    {{ day[0].day.format('d/m/Y') }}
+
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                {% for schedule in day %}
+                                                    <th>{{ schedule.place }}</th>
+                                                {% endfor %}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for schedule in day %}
+                                            {% for activity in schedule.activities if schedule.activities|length > 0 %}
+                                                <td>{{ activity.name }}</td>
+                                            {% else %}
+                                                <td>Not have activities</td>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
                                 </div>
                             {% endfor %}
                         </div>
@@ -53,7 +71,7 @@
 
         <br>
         <div class="text-right">
-            <a href="{{ path('schedule_create') }}" class="btn btn-outline-primary">Add new day to schedule</a>
+            <a href="{{ path('schedule_create') }}" class="btn btn-outline-primary">Add new Room to schedule</a>
         </div>
 
     </div>
