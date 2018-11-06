@@ -1,23 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
 {% block title %}Speaker{% endblock %}
 
 {% block body %}
-    <h1>Speaker</h1>
+    <div class="container">
+        <h1>Speaker</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ speaker.id }}</td>
+                <th>Title</th>
+                <td>{{ speaker.title }}</td>
             </tr>
             <tr>
                 <th>Name</th>
                 <td>{{ speaker.name }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ speaker.title }}</td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -47,13 +48,13 @@
                 <th>Github</th>
                 <td>{{ speaker.github }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
-    <div class="float-right">
-        <a href="{{ path('speaker_index', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
-        {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
+        <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        <div class="float-right">
+            <a href="{{ path('speaker_edit', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
+            {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
+        </div>
     </div>
-
 {% endblock %}

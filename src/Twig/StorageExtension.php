@@ -6,7 +6,7 @@ use Gaufrette\Extras\Resolvable\ResolverInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class StorageExtension extends AbstractExtension
+final class StorageExtension extends AbstractExtension
 {
     private $awsS3PublicUrlResolver;
 

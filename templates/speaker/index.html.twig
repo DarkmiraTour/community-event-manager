@@ -1,44 +1,48 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
 {% block title %}Speakers{% endblock %}
 
 {% block body %}
-    <h1>Speakers</h1>
-    <a href="{{ path('speaker_create') }}" class="btn btn-success float-right mb-3">Add speaker</a>
+    <div class="container">
+        <h1>Speakers</h1>
+        <a href="{{ path('speaker_create') }}" class="btn btn-success float-right mb-3">Add speaker</a>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Email</th>
-            <th>Biography</th>
-            <th>Photo</th>
-            <th>Socials</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for speaker in speakers %}
+        <table class="table table-striped">
+            <thead>
             <tr>
-                <td>{{ speaker.id }}</td>
-                <td>{{ speaker.name }}</td>
-                <td>{{ speaker.title }}</td>
-                <td>{{ speaker.email }}</td>
-                <td>{{ speaker.biography }}</td>
-                <td><img src="{{speaker.photo|storage_url}}" class="img-fluid"></td>
-                <td>{{ speaker.twitter }} {{ speaker.facebook }} {{ speaker.linkedin }} {{ speaker.github }}</td>
-                <td>
-                    <a href="{{ path('speaker_show', {'id': speaker.id}) }}">Show</a>
-                    <a href="{{ path('speaker_edit', {'id': speaker.id}) }}">Edit</a>
-                </td>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Biography</th>
+                <th>Photo</th>
+                <th>Socials</th>
+                <th>Actions</th>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for speaker in speakers %}
+                <tr>
+                    <td>{{ speaker.title }}</td>
+                    <td>{{ speaker.name }}</td>
+                    <td>{{ speaker.email }}</td>
+                    <td>{{ speaker.biography }}</td>
+                    <td><img src="{{ speaker.photo|storage_url }}" class="img-fluid"></td>
+                    <td>{{ speaker.twitter }} {{ speaker.facebook }} {{ speaker.linkedin }} {{ speaker.github }}</td>
+                    <td>
+                        <a href="{{ path('speaker_show', {'id': speaker.id}) }}">Show</a>
+                        <a href="{{ path('speaker_edit', {'id': speaker.id}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
