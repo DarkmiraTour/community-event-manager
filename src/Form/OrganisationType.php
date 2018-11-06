@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Dto\OrganisationRequest;
@@ -11,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OrganisationType extends AbstractType
+final class OrganisationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
