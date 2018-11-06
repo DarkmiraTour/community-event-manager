@@ -1,0 +1,9 @@
+schedule_index:
+  path: /
+  controller: App\Controller\Schedule\Index::handle
+  methods: [GET]
+
+schedule_create:
+  path: /create
+  controller: App\Controller\Schedule\Create::handle
+  methods: [GET, POST]
