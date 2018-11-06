@@ -10,12 +10,12 @@ use Ramsey\Uuid\UuidInterface;
 
 final class DoctrineOrganisationRepository implements OrganisationRepositoryInterface
 {
-    private $ementityManager;
+    private $entityManager;
     private $repository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->ementityManager = $entityManager;
+        $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository(Organisation::class);
     }
 
@@ -47,13 +47,13 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
 
     public function save(Organisation $organisation): void
     {
-        $this->ementityManager->persist($organisation);
-        $this->ementityManager->flush();
+        $this->entityManager->persist($organisation);
+        $this->entityManager->flush();
     }
 
     public function remove(Organisation $organisation): void
     {
-        $this->ementityManager->remove($organisation);
-        $this->ementityManager->flush();
+        $this->entityManager->remove($organisation);
+        $this->entityManager->flush();
     }
 }
