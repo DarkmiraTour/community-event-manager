@@ -33,7 +33,7 @@ class Schedule
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="activity")
+     * @ORM\OneToMany(targetEntity="App\Entity\Activity", mappedBy="schedule")
      */
     private $activities;
 
@@ -94,7 +94,7 @@ class Schedule
     /**
      * @return ArrayCollection
      */
-    public function getActivities(): ?ArrayCollection
+    public function getActivities()
     {
         return $this->activities;
     }
