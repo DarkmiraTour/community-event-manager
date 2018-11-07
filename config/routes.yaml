@@ -28,3 +28,7 @@ sponsorship_level_benefit:
 special_benefit:
     resource: routes/specialBenefit.yaml
     prefix: special-benefit
+
+talks:
+    resource: routes/talks.yaml
+    prefix: talks

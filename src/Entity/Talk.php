@@ -32,4 +32,31 @@ class Talk
         $this->title = $title;
         $this->description = $description;
     }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title): self
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description): self
+    {
+        $this->description = $description;
+        return $this;
+    }
 }
