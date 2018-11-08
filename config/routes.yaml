@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\Home::handle
+
+organisation:
+    resource: routes/organisations.yaml
+    prefix: organisations

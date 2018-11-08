@@ -53,6 +53,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "ramsey/uuid": {
+        "version": "3.8.0"
+    },
     "symfony/asset": {
         "version": "v4.1.6"
     },
