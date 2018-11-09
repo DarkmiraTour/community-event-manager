@@ -1,0 +1,30 @@
+speaker_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\Speaker\Index::handle
+
+speaker_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Controller\Speaker\Create::handle
+
+speaker_show:
+    path: /{id}
+    methods: [GET]
+    controller: App\Controller\Speaker\Show::handle
+    requirements:
+        id: '%routing.uuid%'
+
+speaker_edit:
+    path: /{id}/edit
+    methods: [GET, POST, PUT]
+    controller: App\Controller\Speaker\Edit::handle
+    requirements:
+        id: '%routing.uuid%'
+
+speaker_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Controller\Speaker\Delete::handle
+    requirements:
+        id: '%routing.uuid%'

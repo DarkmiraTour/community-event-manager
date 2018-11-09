@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
+{% block title %}New Speaker{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>New speaker</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        <button type="submit" class="btn btn-success float-right">Add speaker</button>
+        {{ form_end(form) }}
+
+        <script>
+            document.querySelector("input[type=file]").addEventListener('change', function (element) {
+                let target = element.target;
+
+                // Change the node's value by removing the fake path (Chrome)
+                const value = target.value.replace("C:\\fakepath\\", "");
+                if (value !== undefined || value !== '') {
+                    document.querySelector(".custom-file-label").dataset.content = value;
+                    document.querySelector(".custom-file-label").textContent = value;
+                }
+            });
+        </script>
+    </div>
+{% endblock %}
