@@ -14,6 +14,7 @@ final class Version20181106155324 extends AbstractMigration
         $table->addColumn('id', Type::GUID);
         $table->addColumn('title', Type::STRING, ['length' => 255]);
         $table->addColumn('description', Type::TEXT);
+        $table->addColumn('speaker_id', Type::GUID);
     }
 
     public function down(Schema $schema): void

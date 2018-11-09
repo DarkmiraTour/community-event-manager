@@ -21,6 +21,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Speaker</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -29,6 +30,7 @@
                         <tr>
                             <td>{{ talk.title }}</td>
                             <td>{{ talk.description }}</td>
+                            <td>{{ talk.speaker.name }}</td>
                             <td>
                                 <a href="{{ path('talk_show', {'id': talk.id}) }}">Show</a>
                             </td>

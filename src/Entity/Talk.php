@@ -26,11 +26,17 @@ class Talk
      */
     private $description;
 
-    public function __construct(UuidInterface $id, string $title, string $description)
+    /**
+     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="talks")
+     */
+    private $speaker;
+
+    public function __construct(UuidInterface $id, string $title, string $description, Speaker $speaker)
     {
         $this->id = $id->toString();
         $this->title = $title;
         $this->description = $description;
+        $this->speaker = $speaker;
     }
 
     public function getId(): string
@@ -57,6 +63,17 @@ class Talk
     public function setDescription($description): self
     {
         $this->description = $description;
+        return $this;
+    }
+
+    public function getSpeaker()
+    {
+        return $this->speaker;
+    }
+
+    public function setSpeaker($speaker)
+    {
+        $this->speaker = $speaker;
         return $this;
     }
 }

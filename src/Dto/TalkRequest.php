@@ -18,12 +18,15 @@ final class TalkRequest
      */
     public $description;
 
+    public $speaker;
+
     public static function createFromEntity(Talk $talk): TalkRequest
     {
         $request = new self;
 
         $request->title = $talk->getTitle();
         $request->description = $talk->getDescription();
+        $request->speaker = $talk->getSpeaker();
 
         return $request;
     }
@@ -31,7 +34,8 @@ final class TalkRequest
     public function updateEntity(Talk $talk): Talk
     {
         $talk->setTitle($this->title)
-            ->setDescription($this->description);
+            ->setDescription($this->description)
+            ->setSpeaker($this->speaker);
 
         return $talk;
     }

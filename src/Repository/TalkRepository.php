@@ -51,7 +51,8 @@ final class TalkRepository implements TalkRepositoryInterface
         return new Talk(
             $this->nextIdentity(),
             $talkRequest->title,
-            $talkRequest->description
+            $talkRequest->description,
+            $talkRequest->speaker
         );
     }
 }
