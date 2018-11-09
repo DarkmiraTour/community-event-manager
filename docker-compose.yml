@@ -15,7 +15,9 @@ services:
         depends_on:
             - postgres
     node:
-        image: node:alpine
+        build:
+            context: docker/node
+            dockerfile: Dockerfile
         volumes:
             - ./:/var/www/symfony
         working_dir: /var/www/symfony
