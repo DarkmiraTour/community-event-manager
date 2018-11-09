@@ -106,6 +106,7 @@ final class Edit
         if ($checked) {
             return new JsonResponse($this->addSponsorshipLevelBenefit($sponsorshipLevel, $sponsorshipBenefit, $content));
         }
+
         return new JsonResponse([false]);
     }
 
@@ -119,6 +120,7 @@ final class Edit
             return [true];
         }
         $this->sponsorshipLevelBenefitManager->remove($sponsorshipLevelBenefit);
+
         return [true];
     }
 

@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import Routing from '../Components/Routing';
 import '../../css/sponsorshipLevelBenefit/edit.scss';
+import SnackBar from '../Components/SnackBar';
 
 $(document).ready(function() {
     updateLevelArrows();
@@ -24,6 +25,10 @@ function sendLevelPosition(level_id, move) {
             _token: token
         },
         success: function(result) {
+            if (result[0] === false) {
+                new SnackBar('error', 'Une erreur est survenue lors de l\'enregistrement');
+                return false;
+            }
             moveLevel(level_id, result['new_level_id'], move);
         }
     });
@@ -103,6 +108,10 @@ function sendBenefitPosition(benefit_id, move) {
             _token: token
         },
         success: function(result) {
+            if (result[0] === false) {
+                new SnackBar('error', 'Une erreur est survenue lors de l\'enregistrement');
+                return false;
+            }
             moveBenefit(benefit_id, result['new_benefit_id'], move);
         }
     });
@@ -198,6 +207,11 @@ function saveDatas(benefit_id, level_id, is_checked, text) {
             text: text,
             _token: token
         },
-        success: function(result) {}
+        success: function(result) {
+            if (result[0] === false) {
+                new SnackBar('error', 'Une erreur est survenue lors de l\'enregistrement');
+                return false;
+            }
+        }
     });
 }
