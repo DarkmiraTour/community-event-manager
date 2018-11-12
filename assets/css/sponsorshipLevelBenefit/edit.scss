@@ -1,0 +1,22 @@
+#sponsorshipLevelBenefitForm .fa {
+    cursor: pointer;
+}
+
+.list_benefits input[type="text"] {
+    width: 80%;
+}
+
+.list_benefits .move-action {
+    width: 10%;
+    float: left;
+}
+
+.list_benefits .benefit-label {
+    margin-top: 8%;
+    display: inline-block;
+}
+
+.list_benefits td:first-child {
+  padding-top: 5px;
+  padding-bottom: 0px;
+}

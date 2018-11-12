@@ -9,6 +9,13 @@
         "gaufrette/extras": "^0.1.0",
         "knplabs/knp-gaufrette-bundle": "^0.5.3",
         "ramsey/uuid": "^3.8",
+        "ramsey/uuid": "^3.8",
+        "doctrine/annotations": "^1.6",
+        "friendsofsymfony/jsrouting-bundle": "^2.2",
+        "fzaninotto/faker": "^1.8",
+        "ninsuo/symfony-collection": "^2.1",
+        "sensio/framework-extra-bundle": "^5.2",
+        "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
@@ -17,14 +24,17 @@
         "symfony/security-csrf": "*",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
+        "symfony/web-profiler-bundle": "*",
         "symfony/webpack-encore-pack": "^1.0",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "twbs/bootstrap": "^4.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "fzaninotto/faker": "^1.8",
+        "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",
-        "symfony/maker-bundle": "^1.8"
+        "symfony/maker-bundle": "^1.8",
+        "symfony/var-dumper": "*"
     },
     "config": {
         "preferred-install": {

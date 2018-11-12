@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-toggle">
+            <a class="navbar-brand" href="{{ path('index') }}">DarkMira</a>
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item {{ app.request.get('_route') == 'index' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('index') }}">Home</a>
+                </li>
+                <li class="nav-item {{ 'level_' in app.request.attributes.get('_route') ? 'active' }}">
+                    <a class="nav-link" href="{{ path('sponsorship_level_index') }}">Sponsorship Levels</a>
+                </li>
+                <li class="nav-item {{ 'benefit_' in app.request.attributes.get('_route') ? 'active' }}">
+                    <a class="nav-link" href="{{ path('sponsorship_benefit_index') }}">Sponsorship Benefits</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

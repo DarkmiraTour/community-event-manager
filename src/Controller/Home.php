@@ -12,9 +12,8 @@ final class Home
 {
     public function __construct(Twig_Environment $renderer)
     {
-         $this->renderer = $renderer;
+        $this->renderer = $renderer;
     }
-
     public function handle(Request $request): Response
     {
         return new Response($this->renderer->render('home.html.twig'));
