@@ -10,7 +10,9 @@ You need to have Docker to build the application, find more informations on [htt
 ##Installation
 
 - Get the application with `git clone https://github.com/DarkmiraTour/community-event-manager.git`
-- build application with `docker-compose up -d`
+- Build application : `docker-compose up -d`
+- Create database : `docker-compose exec php bin/console doctrine:migrations:migrate`
+- To have test datas : `docker-compose exec php bin/console doctrine:fixtures:load`
 
 ##Configuration
 
