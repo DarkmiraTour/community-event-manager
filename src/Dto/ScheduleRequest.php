@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
-
 use App\Entity\Schedule;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,18 +14,15 @@ final class ScheduleRequest
      */
     public $day;
 
-
     /**
      * @var string
      * @Assert\NotBlank()
      */
-    public $place;
+    public $location;
 
-
-    public function __construct(string $day = null, string $place = null)
+    public function __construct(string $day = null, string $location = null)
     {
         $this->day = $day;
-        $this->place = $place;
     }
 
     public static function createForm(Schedule $schedule): ScheduleRequest
@@ -39,6 +35,6 @@ final class ScheduleRequest
     public function updateSchedule(Schedule $schedule): void
     {
         $schedule->setDay($this->day);
-        $schedule->setPlace($this->place);
+        $schedule->setLocation($this->location);
     }
 }

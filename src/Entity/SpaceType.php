@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Entity;
@@ -10,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Schedule
+class SpaceType
 {
     /**
      * @ORM\Id()
@@ -19,19 +18,19 @@ class Schedule
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(length=100)
      */
-    private $day;
+    private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Space", mappedBy="schedule")
+     * @ORM\Column()
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Space", mappedBy="type")
      */
     private $spaces;
-
-    public function __construct()
-    {
-        $this->spaces = new ArrayCollection();
-    }
 
     public function getId(): ?string
     {
@@ -43,17 +42,27 @@ class Schedule
         $this->id = $id;
     }
 
-    public function getDay(): ?\DateTime
+    public function getName(): ?string
     {
-        return $this->day;
+        return $this->name;
     }
 
-    public function setDay(\DateTime $day): void
+    public function setName(string $name): void
     {
-        $this->day = $day;
+        $this->name = $name;
     }
 
-    public function getSpaces()
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getSpaces(): ?ArrayCollection
     {
         return $this->spaces;
     }
