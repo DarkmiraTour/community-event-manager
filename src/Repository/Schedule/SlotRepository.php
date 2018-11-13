@@ -44,9 +44,13 @@ final class SlotRepository implements SlotRepositoryInterface
 
     public function createFrom(SlotRequest $slotRequest): Slot
     {
+        $diff = $slotRequest->end->diff($slotRequest->start);
+
+        $duration = ($diff->h * 60) + $diff->i;
+
         $slot = new Slot();
         $slot->setId($this->nextIdentity()->toString());
-        $slot->setDuration((int) $slotRequest->duration);
+        $slot->setDuration($duration);
         $slot->setTitle($slotRequest->title);
         $slot->setType($slotRequest->type);
         $slot->setStart($slotRequest->start);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\Schedule;
 use App\Entity\SpaceType as SpaceTypeEntity;
 use App\Dto\SpaceRequest;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -40,6 +41,13 @@ class SpaceType extends AbstractType
                     'class' => 'form-control',
                     'placeholder' => 'Example: Room 1, Hall',
                 ],
+            ])
+            ->add('schedule', EntityType::class, [
+                'class' => Schedule::class,
+                'choice_label' => function (Schedule $schedule) {
+                    return $schedule->getDay()->format('d/m/Y');
+                },
+                'attr' => ['class' => 'form-control'],
             ])
         ;
     }

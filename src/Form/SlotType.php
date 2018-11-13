@@ -9,7 +9,6 @@ use App\Entity\Space;
 use App\Entity\SlotType as SlotTypeEntity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,13 +43,6 @@ final class SlotType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Example: PHP in 2019',
-                ],
-            ])
-            ->add('duration', NumberType::class, [
-                'required' => true,
-                'label' => 'Duration in Minutes',
-                'attr' => [
-                    'class' => 'form-control',
                 ],
             ])
             ->add('start', TimeType::class, [

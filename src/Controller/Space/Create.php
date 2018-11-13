@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Space;
 
-use App\Dto\ScheduleRequest;
 use App\Dto\SpaceRequest;
-use App\Form\ScheduleType;
 use App\Form\SpaceType;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
-use App\Repository\Space\SpaceRepositoryInterface;
+use App\Repository\Schedule\SpaceRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

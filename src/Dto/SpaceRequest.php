@@ -10,6 +10,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class SpaceRequest
 {
     /**
+     * @var string
+     * @Assert\NotBlank()
+     */
+    public $schedule;
+
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     */
+    public $type;
+
+    /**
      * @var bool
      * @Assert\NotBlank()
      */
@@ -19,34 +31,31 @@ final class SpaceRequest
      * @var string
      * @Assert\NotBlank()
      */
-    public $type;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     */
     public $name;
 
-    public function __construct(bool $visible = true, string $type = null, string $name = null)
+    public function __construct(string $schedule = null, string $type = null, bool $visible = true, string $name = null)
     {
-        $this->visible = $visible;
+        $this->schedule = $schedule;
         $this->type = $type;
+        $this->visible = $visible;
         $this->name = $name;
     }
 
     public static function createFromEntity(Space $space): SpaceRequest
     {
         return new SpaceRequest(
-            $space->getVisible(),
+            $space->getSchedule(),
             $space->getType(),
+            $space->getVisible(),
             $space->getName()
         );
     }
 
     public function updateSpace(Space $space): void
     {
-        $space->setVisible($this->visible);
+        $space->setSchedule($this->schedule);
         $space->setType($this->type);
+        $space->setVisible($this->visible);
         $space->setName($this->name);
     }
 }
