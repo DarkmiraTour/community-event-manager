@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Space;
+namespace App\Repository\Schedule;
 
 use App\Dto\SpaceRequest;
 use App\Entity\Space;

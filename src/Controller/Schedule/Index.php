@@ -46,8 +46,6 @@ final class Index
 
         $formSchedule = $this->formFactory->create(ScheduleType::class, new ScheduleRequest());
 
-        $formSchedule = $this->formFactory->create(ScheduleType::class, new ScheduleRequest());
-
         return new Response($this->renderer->render('schedule/index.html.twig', [
             'schedules' => $schedules,
             'formSchedule' => $formSchedule->createView(),
