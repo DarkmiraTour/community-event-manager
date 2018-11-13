@@ -5,10 +5,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-###> PhpStorm ###
-/.idea/
-###< PhpStorm ###
-
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 /public/build/
