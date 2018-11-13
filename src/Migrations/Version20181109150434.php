@@ -12,7 +12,7 @@ final class Version20181109150434 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
-        $table = $schema->createTable('special_sponsorship');
+        $table = $schema->createTable('special_benefit');
         $table->addColumn('id', Type::GUID);
         $table->addColumn('label', Type::STRING, ['length' => 255]);
         $table->addColumn('price', Type::FLOAT);
@@ -24,8 +24,6 @@ final class Version20181109150434 extends AbstractMigration
 
     public function down(Schema $schema) : void
     {
-        if ($schema->hasTable('special_sponsorship')) {
-            $schema->dropTable('special_sponsorship');
-        }
+        $schema->dropTable('special_benefit');
     }
 }

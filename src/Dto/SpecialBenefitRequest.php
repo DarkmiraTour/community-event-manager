@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
-use App\Entity\SpecialSponsorship;
+use App\Entity\SpecialBenefit;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class SpecialSponsorshipRequest
+final class SpecialBenefitRequest
 {
     /**
      * @Assert\NotBlank()
@@ -33,18 +33,16 @@ final class SpecialSponsorshipRequest
         $this->description = $description;
     }
 
-    public static function createFromEntity(SpecialSponsorship $specialSponsorship): SpecialSponsorshipRequest
+    public static function createFromEntity(SpecialBenefit $specialBenefit): SpecialBenefitRequest
     {
-        return new SpecialSponsorshipRequest(
-            $specialSponsorship->getLabel(),
-            $specialSponsorship->getPrice(),
-            $specialSponsorship->getDescription()
+        return new self(
+            $specialBenefit->getLabel(),
+            $specialBenefit->getPrice(),
+            $specialBenefit->getDescription()
         );
     }
-    public function updateEntity(SpecialSponsorship $specialSponsorship): void
+    public function updateEntity(SpecialBenefit $specialBenefit): void
     {
-        $specialSponsorship->setLabel($this->label);
-        $specialSponsorship->setPrice($this->price);
-        $specialSponsorship->setDescription($this->description);
+        $specialBenefit->setAll($this->label, $this->price, $this->description);
     }
 }

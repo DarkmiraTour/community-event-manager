@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -7,9 +9,9 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SpecialSponsorship\SpecialSponsorshipRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\SpecialBenefit\SpecialBenefitRepository")
  */
-class SpecialSponsorship
+class SpecialBenefit
 {
     /**
      * @ORM\Id()
@@ -55,23 +57,9 @@ class SpecialSponsorship
         return $this->label;
     }
 
-    public function setLabel(string $label): self
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -79,8 +67,10 @@ class SpecialSponsorship
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setAll(string $label, float $price, string $description)
     {
+        $this->label = $label;
+        $this->price = $price;
         $this->description = $description;
 
         return $this;

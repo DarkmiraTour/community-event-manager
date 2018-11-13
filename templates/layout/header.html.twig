@@ -12,11 +12,11 @@
                 <li class="nav-item {{ 'level_' in app.request.attributes.get('_route') ? 'active' }}">
                     <a class="nav-link" href="{{ path('sponsorship_level_index') }}">Sponsorship Levels</a>
                 </li>
-                <li class="nav-item {{ 'benefit_' in app.request.attributes.get('_route') ? 'active' }}">
+                <li class="nav-item {{ 'sponsorship_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
                     <a class="nav-link" href="{{ path('sponsorship_benefit_index') }}">Sponsorship Benefits</a>
                 </li>
-                <li class="nav-item {{ 'special_sponsorship_' in app.request.attributes.get('_route') ? 'active' }}">
-                    <a class="nav-link" href="{{ path('special_sponsorship_index') }}">Special Sponsorships</a>
+                <li class="nav-item {{ 'special_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
+                    <a class="nav-link" href="{{ path('special_benefit_index') }}">Special Sponsorships</a>
                 </li>
             </ul>
         </div>

@@ -9,7 +9,7 @@
         </div>
         <div class="col col-6">
             <p class="text-right">
-                <a class="btn btn-primary" href="{{ path('special_sponsorship_create') }}">Create new</a>
+                <a class="btn btn-primary" href="{{ path('special_benefit_create') }}">Create new</a>
             </p>
         </div>
     </div>
@@ -23,16 +23,16 @@
             </tr>
         </thead>
         <tbody>
-        {% for specialSponsorship in specialSponsorships %}
+        {% for specialBenefit in specialBenefits %}
             <tr>
-                <td>{{ specialSponsorship.label }}</td>
-                <td>{{ specialSponsorship.price }}</td>
+                <td>{{ specialBenefit.label }}</td>
+                <td>{{ specialBenefit.price }}</td>
                 <td class="text-right">
-                    <a class="btn btn-info btn-sm" href="{{ path('special_sponsorship_show', {'id': specialSponsorship.id}) }}">Show</a>
-                    <a class="btn btn-secondary btn-sm" href="{{ path('special_sponsorship_edit', {'id': specialSponsorship.id}) }}">edit</a>
-                    <form class="d-inline" method="post" action="{{ path('special_sponsorship_delete', {'id': specialSponsorship.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <a class="btn btn-info btn-sm" href="{{ path('special_benefit_show', {'id': specialBenefit.id}) }}">Show</a>
+                    <a class="btn btn-secondary btn-sm" href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">edit</a>
+                    <form class="d-inline" method="post" action="{{ path('special_benefit_delete', {'id': specialBenefit.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                         <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialSponsorship.id) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialBenefit.id) }}">
                         <button class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </td>
