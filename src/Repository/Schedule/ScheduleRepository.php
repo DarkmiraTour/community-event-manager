@@ -68,5 +68,4 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         $this->entityManager->remove($schedule);
         $this->entityManager->flush();
     }
-
 }

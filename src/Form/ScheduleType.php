@@ -29,7 +29,7 @@ class ScheduleType extends AbstractType
                 'data' => ' -- Select -- ',
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('place', TextType::class, [
+            ->add('location', TextType::class, [
                 'required' => true,
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Ex: Room 1, Room 2...']
             ])

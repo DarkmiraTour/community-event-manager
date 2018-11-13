@@ -24,43 +24,67 @@
                     <div class="card-body">
 
                         <ul class="nav nav-tabs" id="tabContent" role="tablist">
-                            {#<li class="nav-item">#}
-                                {#<a class="nav-link active" id="all_days-tab" data-toggle="tab" href="#all_days" role="tab" aria-controls="all_days" aria-selected="true">All days</a>#}
-                            {#</li>#}
-                            {% for key,day in days %}
+                            {% for key,day in schedules %}
                                 <li class="nav-item">
-                                    <a class="nav-link" id="day-{{ key }}-tab" data-toggle="tab" href="#day-{{ key }}" role="tab" aria-controls="day-{{ key }}" aria-selected="false">{{ key }}</a>
+                                    <a class="nav-link {{ (key == 0) ? 'active show' : '' }}" id="day-{{ key }}-tab" data-toggle="tab" href="#day-{{ key }}" role="tab" aria-controls="day-{{ key }}" aria-selected="false">{{ day.day.format('d/m/Y') }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
 
                         <div class="tab-content">
-                            {#<div class="tab-pane active" id="all_days" role="tabpanel" aria-labelledby="all_days-tab">#}
-                                {#AllContent#}
-                            {#</div>#}
 
-                            {% for key,day in days %}
-                                <div class="tab-pane" id="day-{{ key }}" role="tabpanel" aria-labelledby="day-{{ key }}-tab">
+                            {% for key,day in schedules %}
+                                <div class="tab-pane {{ (key == 0) ? 'active show' : '' }}" id="day-{{ key }}" role="tabpanel" aria-labelledby="day-{{ key }}-tab">
 
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                {% for schedule in day %}
-                                                    <th>{{ schedule.place }}</th>
-                                                {% endfor %}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for schedule in day %}
-                                            {% for activity in schedule.activities if schedule.activities|length > 0 %}
-                                                <td>{{ activity.name }}</td>
-                                            {% else %}
-                                                <td>Not have activities</td>
-                                            {% endfor %}
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <div class="card">
+                                                <div class="card-header"><span class="fa fa-clock"></span></div>
+                                            </div>
+                                        </div>
+                                        {% for space in day.spaces %}
+                                            <div class="col">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <strong>{{ space.name }}</strong>
+
+                                                        {% if space.visible == true %}
+                                                            <span class="badge badge-primary">Visible</span>
+                                                        {% else %}
+                                                            <span class="badge badge-danger">Not Visible</span>
+                                                        {% endif %}
+
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group">
+                                                        {% for slot in space.slots %}
+                                                            <li class="list-group-item">{{ slot.name }}</li>
+                                                        {% else %}
+                                                            <div class="alert alert-danger">Not have slots</div>
+                                                        {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col">
+                                                <div class="alert alert-danger">Not have spaces</div>
+                                            </div>
                                         {% endfor %}
-                                        </tbody>
-                                    </table>
+                                    </div>
+
+                                    <br>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="text-right">
+                                                <a href="#" data-toggle="modal" data-target="#modalAddSpace"  class="btn btn-outline-primary">Add Space</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             {% endfor %}
                         </div>
 
@@ -70,10 +94,35 @@
         </div>
 
         <br>
-        <div class="text-right">
-            <a href="{{ path('schedule_create') }}" class="btn btn-outline-primary">Add new Room to schedule</a>
-        </div>
 
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAddSpace" tabindex="-1" role="dialog" aria-labelledby="addSpaceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSpaceModalLabel">New Space?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(formSpace, {'action': path('schedule_space_insert')}) }}
+                <div class="modal-body">
+                    {{ form_row(formSpace.visible) }}
+                    <br>
+                    {{ form_row(formSpace.type) }}
+                    <br>
+                    {{ form_row(formSpace.name) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save new space</button>
+                </div>
+
+                {{ form_end(formSpace) }}
+            </div>
+        </div>
     </div>
 
 
@@ -81,12 +130,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    <script>
-        // $('#tabContent a').on('click', function (e) {
-        //
-        //     e.preventDefault();
-        //     $(this).tab('show')
-        // })
-    </script>
 {% endblock %}
 
