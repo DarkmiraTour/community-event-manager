@@ -26,7 +26,7 @@ final class SpecialBenefitRequest
      */
     public $description;
 
-    public function __construct(string $label = null, float $price = null, string $description = null)
+    public function __construct(string $label, float $price, string $description)
     {
         $this->label = $label;
         $this->price = $price;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\SpecialBenefit;
 
 use App\Form\SpecialBenefitType;
-use App\Dto\SpecialBenefitRequest;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -43,12 +42,11 @@ final class Create
      */
     public function handle(Request $request): Response
     {
-        $specialBenefitRequest = new SpecialBenefitRequest();
-
-        $form = $this->formFactory->create(SpecialBenefitType::class, $specialBenefitRequest);
+        $form = $this->formFactory->create(SpecialBenefitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $specialBenefitRequest = $form->getData();
             $specialBenefit = $this->specialBenefitManager->createFrom($specialBenefitRequest);
             $this->specialBenefitManager->save($specialBenefit);
 
