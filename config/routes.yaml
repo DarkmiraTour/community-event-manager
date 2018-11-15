@@ -24,3 +24,7 @@ sponsorship_benefit:
 sponsorship_level_benefit:
     resource: routes/sponsorshipLevelBenefit.yaml
     prefix: sponsorship-level-benefit
+
+app_login:
+    path: /login
+    prefix: login
