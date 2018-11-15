@@ -41,8 +41,9 @@ final class SpecialBenefitRequest
             $specialBenefit->getDescription()
         );
     }
+
     public function updateEntity(SpecialBenefit $specialBenefit): void
     {
-        $specialBenefit->updateEntity($this->label, $this->price, $this->description);
+        $specialBenefit->updateSpecialBenefit($this->label, $this->price, $this->description);
     }
 }

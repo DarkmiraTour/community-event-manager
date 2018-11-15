@@ -61,8 +61,6 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 
     /**
      * @param SpecialBenefit $specialBenefit
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function save(SpecialBenefit $specialBenefit): void
     {
@@ -71,8 +69,6 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 
     /**
      * @param SpecialBenefit $specialBenefit
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function remove(SpecialBenefit $specialBenefit): void
     {
