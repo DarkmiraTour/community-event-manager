@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\SpecialBenefit;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -12,7 +11,7 @@ use Faker\Factory as Faker;
 
 final class SpecialBenefitFixtures extends Fixture
 {
-    public const NB_SPECIAL_BENEFIT = 10;
+    public const SPECIAL_BENEFIT_NBR = 10;
 
     private $specialBenefitManager;
 
@@ -28,10 +27,9 @@ final class SpecialBenefitFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker::create();
-        for ($nbSpecialBenefit = 0; $nbSpecialBenefit < self::NB_SPECIAL_BENEFIT; ++$nbSpecialBenefit) {
-            $specialBenefit = new SpecialBenefit(
-                $this->specialBenefitManager->nextIdentity(),
-                "Special Package {$nbSpecialBenefit}",
+        for ($specialBenefitNbr = 0; $specialBenefitNbr < self::SPECIAL_BENEFIT_NBR; ++$specialBenefitNbr) {
+            $specialBenefit = $this->specialBenefitManager->createWith(
+                "Special Package {$specialBenefitNbr}",
                 $faker->randomFloat(2),
                 $faker->text()
             );

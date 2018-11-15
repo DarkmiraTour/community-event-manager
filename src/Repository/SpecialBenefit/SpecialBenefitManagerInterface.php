@@ -11,6 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 interface SpecialBenefitManagerInterface
 {
     public function find(string $id): ?SpecialBenefit;
+
     /**
      * @return SpecialBenefit[]
      */
@@ -18,7 +19,7 @@ interface SpecialBenefitManagerInterface
 
     public function createFrom(SpecialBenefitRequest $specialBenefitRequest): SpecialBenefit;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $label, float $price, string $description): SpecialBenefit;
 
     public function save(SpecialBenefit $specialBenefit): void;
 

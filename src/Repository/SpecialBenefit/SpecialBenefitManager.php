@@ -6,7 +6,6 @@ namespace App\Repository\SpecialBenefit;
 
 use App\Entity\SpecialBenefit;
 use App\Dto\SpecialBenefitRequest;
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 final class SpecialBenefitManager implements SpecialBenefitManagerInterface
@@ -47,12 +46,20 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
     }
 
     /**
-     * @return UuidInterface
+     * @param string $label
+     * @param float $price
+     * @param string $description
+     * @return SpecialBenefit
      * @throws \Exception
      */
-    public function nextIdentity(): UuidInterface
+    public function createWith(string $label, float $price, string $description): SpecialBenefit
     {
-        return Uuid::uuid4();
+        return new SpecialBenefit(
+            $this->nextIdentity(),
+            $label,
+            $price,
+            $description
+        );
     }
 
     /**
@@ -73,5 +80,14 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
     public function remove(SpecialBenefit $specialBenefit): void
     {
         $this->repository->remove($specialBenefit);
+    }
+
+    /**
+     * @return UuidInterface
+     * @throws \Exception
+     */
+    private function nextIdentity(): UuidInterface
+    {
+        return $this->repository->nextIdentity();
     }
 }

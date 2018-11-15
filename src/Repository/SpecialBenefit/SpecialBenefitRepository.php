@@ -6,19 +6,35 @@ namespace App\Repository\SpecialBenefit;
 
 use App\Entity\SpecialBenefit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-/**
- * @method SpecialBenefit|null find($id, $lockMode = null, $lockVersion = null)
- * @method SpecialBenefit|null findOneBy(array $criteria, array $orderBy = null)
- * @method SpecialBenefit[]    findAll()
- * @method SpecialBenefit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class SpecialBenefitRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, SpecialBenefit::class);
+    }
+
+    /**
+     * @param mixed    $id
+     * @param int|null $lockMode
+     * @param int|null $lockVersion
+     * @return SpecialBenefit|null
+     */
+    public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit
+    {
+        return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    /**
+     * @return UuidInterface
+     * @throws \Exception
+     */
+    public function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
     }
 
     /**

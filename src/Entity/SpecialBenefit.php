@@ -67,7 +67,7 @@ class SpecialBenefit
         return $this->description;
     }
 
-    public function setAll(string $label, float $price, string $description)
+    public function updateEntity(string $label, float $price, string $description)
     {
         $this->label = $label;
         $this->price = $price;
