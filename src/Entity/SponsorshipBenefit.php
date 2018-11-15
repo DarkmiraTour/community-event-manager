@@ -47,19 +47,24 @@ class SponsorshipBenefit
         $this->sponsorshipLevelBenefits = new ArrayCollection();
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function getPosition(): ?int
     {
-        $this->label = $label;
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }
@@ -89,22 +94,16 @@ class SponsorshipBenefit
         }
 
         $this->sponsorshipLevelBenefits->removeElement($sponsorshipLevelBenefit);
-        if ($sponsorshipLevelBenefit->getSponsorshipLevel() === $this) {
-            $sponsorshipLevelBenefit->setSponsorshipLevel(null);
+        if ($sponsorshipLevelBenefit->getSponsorshipBenefit() === $this) {
+            $sponsorshipLevelBenefit->setSponsorshipBenefit(null);
         }
 
         return $this;
     }
 
-    public function getPosition(): ?int
+    public function updateSponsorshipBenefit(string $label, ?int $position): void
     {
-        return $this->position;
-    }
-
-    public function setPosition(?int $position): self
-    {
+        $this->label = $label;
         $this->position = $position;
-
-        return $this;
     }
 }

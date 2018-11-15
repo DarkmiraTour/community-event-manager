@@ -26,7 +26,7 @@ final class SponsorshipLevelRequest
      */
     public $position;
 
-    public function __construct(string $label = null, float $price = null, int $position = null)
+    public function __construct(string $label, float $price, ?int $position = null)
     {
         $this->label = $label;
         $this->price = $price;
@@ -35,7 +35,7 @@ final class SponsorshipLevelRequest
 
     public static function createFromEntity(SponsorshipLevel $sponsorshipLevel): SponsorshipLevelRequest
     {
-        return new SponsorshipLevelRequest(
+        return new self(
             $sponsorshipLevel->getLabel(),
             $sponsorshipLevel->getPrice(),
             $sponsorshipLevel->getPosition()
@@ -44,8 +44,12 @@ final class SponsorshipLevelRequest
 
     public function updateEntity(SponsorshipLevel $sponsorshipLevel): void
     {
-        $sponsorshipLevel->setLabel($this->label);
-        $sponsorshipLevel->setPrice($this->price);
-        $sponsorshipLevel->setPosition($this->position);
+        $sponsorshipLevel->updateSponsorshipLevel($this->label, $this->price, $this->position);
+    }
+
+    public function updateFromForm(string $label, float $price): void
+    {
+        $this->label = $label;
+        $this->price = $price;
     }
 }

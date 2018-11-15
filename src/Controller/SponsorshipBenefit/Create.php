@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\SponsorshipBenefit;
 
 use App\Form\SponsorshipBenefitType;
-use App\Dto\SponsorshipBenefitRequest;
 use App\Repository\SponsorshipBenefit\SponsorshipBenefitManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -33,22 +32,12 @@ final class Create
         $this->router = $router;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
     public function handle(Request $request): Response
     {
-        $sponsorshipBenefitRequest = new SponsorshipBenefitRequest();
-
-        $form = $this->formFactory->create(SponsorshipBenefitType::class, $sponsorshipBenefitRequest);
+        $form = $this->formFactory->create(SponsorshipBenefitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $sponsorshipBenefitRequest = $form->getData();
             $position = $this->sponsorshipBenefitManager->getMaxPosition();
             $sponsorshipBenefitRequest->position = ++$position;
 

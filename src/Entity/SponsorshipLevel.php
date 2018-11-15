@@ -54,31 +54,29 @@ class SponsorshipLevel
         $this->sponsorshipLevelBenefits = new ArrayCollection();
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function setPrice(float $price): self
+    public function getPosition(): ?int
     {
-        $this->price = $price;
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }
@@ -115,15 +113,10 @@ class SponsorshipLevel
         return $this;
     }
 
-    public function getPosition(): ?int
+    public function updateSponsorshipLevel(string $label, float $price, ?int $position): void
     {
-        return $this->position;
-    }
-
-    public function setPosition(int $position): self
-    {
+        $this->label = $label;
+        $this->price = $price;
         $this->position = $position;
-
-        return $this;
     }
 }

@@ -94,8 +94,8 @@ final class Edit
             return new JsonResponse([false]);
         }
 
-        $checked = ($request->request->get('is_checked') !== 'false');
-        $content = $request->request->get('text', null);
+        $checked = $request->request->get('is_checked') !== 'false' ? true : false;
+        $content = $request->request->get('text', null) ? $request->request->get('text') : null;
 
         $sponsorshipBenefit = $sponsorshipBenefitManager->find($request->request->get('benefit_id'));
         $sponsorshipLevel = $sponsorshipLevelManager->find($request->request->get('level_id'));
@@ -111,7 +111,7 @@ final class Edit
         return new JsonResponse([false]);
     }
 
-    private function editSponsorshipLevelBenefit(bool $checked, SponsorshipLevelBenefit $sponsorshipLevelBenefit, string $content = null): array
+    private function editSponsorshipLevelBenefit(bool $checked, SponsorshipLevelBenefit $sponsorshipLevelBenefit, ?string $content): array
     {
         $sponsorshipLevelBenefitRequest = SponsorshipLevelBenefitRequest::createFromEntity($sponsorshipLevelBenefit);
         if ($checked) {
@@ -126,7 +126,7 @@ final class Edit
         return [true];
     }
 
-    private function addSponsorshipLevelBenefit(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, string $content = null): array
+    private function addSponsorshipLevelBenefit(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content): array
     {
         $sponsorshipLevelBenefitRequest = new SponsorshipLevelBenefitRequest(
             $sponsorshipLevel,

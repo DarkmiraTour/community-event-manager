@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Repository\SpecialBenefit;
 
 use App\Entity\SpecialBenefit;
-use Ramsey\Uuid\UuidInterface;
 
 interface SpecialBenefitRepositoryInterface
 {
+    public function createSpecialBenefit(string $label, float $price, string $description): SpecialBenefit;
+
     /**
      * @param mixed    $id
      * @param int|null $lockMode
@@ -19,8 +20,6 @@ interface SpecialBenefitRepositoryInterface
     public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit;
 
     public function findAll(): array;
-
-    public function nextIdentity(): UuidInterface;
 
     public function save(SpecialBenefit $specialBenefit): void;
 

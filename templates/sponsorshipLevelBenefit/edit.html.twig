@@ -36,7 +36,7 @@
                         </span>
                     </td>
                     {% for level in levelBenefit.levels %}
-                        <td data-id="{{ level.id }}">
+                        <td class="benefit_level" data-id="{{ level.id }}">
                             <input type="checkbox" {{ level.isChecked ? 'checked' }} title="is Checked" />
                             <input type="text" value="{{ level.text }}" title="text" /> <i class="fa fa-check text-hide"></i>
                         </td>

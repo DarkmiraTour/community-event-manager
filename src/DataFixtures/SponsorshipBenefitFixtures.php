@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\SponsorshipBenefit;
 use App\Repository\SponsorshipBenefit\SponsorshipBenefitManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
 final class SponsorshipBenefitFixtures extends Fixture
 {
-    public const NB_SPONSORSHIP_BENEFIT = 14;
+    public const SPONSORSHIP_BENEFIT_NBR = 14;
 
     private $sponsorshipBenefitManager;
 
@@ -20,20 +19,14 @@ final class SponsorshipBenefitFixtures extends Fixture
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
     }
 
-    /**
-     * @param ObjectManager $manager
-     *
-     * @throws \Exception
-     */
     public function load(ObjectManager $manager): void
     {
-        for ($iteratorIndex = 0; $iteratorIndex < self::NB_SPONSORSHIP_BENEFIT; $iteratorIndex++) {
-            $sponsorshipBenefit = new SponsorshipBenefit(
-                $this->sponsorshipBenefitManager->nextIdentity(),
-                "Benefit {$iteratorIndex}",
-                $iteratorIndex
+        for ($sponsorshipBenefitNbr = 0; $sponsorshipBenefitNbr < self::SPONSORSHIP_BENEFIT_NBR; $sponsorshipBenefitNbr++) {
+            $sponsorshipBenefit = $this->sponsorshipBenefitManager->createWith(
+                "Benefit {$sponsorshipBenefitNbr}",
+                $sponsorshipBenefitNbr
             );
-            $this->setReference("sponsorship-benefit-{$iteratorIndex}", $sponsorshipBenefit);
+            $this->setReference("sponsorship-benefit-{$sponsorshipBenefitNbr}", $sponsorshipBenefit);
             $manager->persist($sponsorshipBenefit);
         }
         $manager->flush();

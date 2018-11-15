@@ -6,29 +6,22 @@ namespace App\Repository\SponsorshipLevel;
 
 use App\Entity\SponsorshipLevel;
 use App\Dto\SponsorshipLevelRequest;
-use Ramsey\Uuid\UuidInterface;
 
 interface SponsorshipLevelManagerInterface
 {
-    public function find(string $id): ?SponsorshipLevel;
+    public function find(string $id): SponsorshipLevel;
 
-    /**
-     * @return SponsorshipLevel[]
-     */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SponsorshipLevelRequest $sponsorshipLevelRequest): SponsorshipLevel;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $label, float $price, ?int $position): SponsorshipLevel;
 
     public function save(SponsorshipLevel $sponsorshipLevel): void;
 
     public function remove(SponsorshipLevel $sponsorshipLevel): void;
 
-    /**
-     * @return SponsorshipLevel[]
-     */
-    public function getOrderedList();
+    public function getOrderedList(): array;
 
     public function switchPosition(string $move, string $id): SponsorshipLevel;
 

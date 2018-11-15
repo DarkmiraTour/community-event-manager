@@ -6,20 +6,16 @@ namespace App\Repository\SponsorshipBenefit;
 
 use App\Entity\SponsorshipBenefit;
 use App\Dto\SponsorshipBenefitRequest;
-use Ramsey\Uuid\UuidInterface;
 
 interface SponsorshipBenefitManagerInterface
 {
-    public function find(string $id): ?SponsorshipBenefit;
+    public function find(string $id): SponsorshipBenefit;
 
-    /**
-     * @return SponsorshipBenefit[]
-     */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SponsorshipBenefitRequest $sponsorshipBenefitRequest): SponsorshipBenefit;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $label, ?int $position): SponsorshipBenefit;
 
     public function save(SponsorshipBenefit $sponsorshipBenefit): void;
 
@@ -29,8 +25,5 @@ interface SponsorshipBenefitManagerInterface
 
     public function getMaxPosition(): ?int;
 
-    /**
-     * @return SponsorshipBenefit[]
-     */
-    public function getOrderedList();
+    public function getOrderedList(): array;
 }

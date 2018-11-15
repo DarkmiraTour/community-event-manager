@@ -6,67 +6,45 @@ namespace App\Repository\SponsorshipBenefit;
 
 use App\Entity\SponsorshipBenefit;
 use App\Dto\SponsorshipBenefitRequest;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterface
 {
-    private $entityManager;
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(SponsorshipBenefitRepositoryInterface $repository)
     {
-        $this->entityManager = $entityManager;
-        $this->repository = $entityManager->getRepository(SponsorshipBenefit::class);
+        $this->repository = $repository;
     }
 
-    public function find(string $id): ?SponsorshipBenefit
+    public function find(string $id): SponsorshipBenefit
     {
-        return $this->repository->find($id);
+        return $this->checkEntity($this->repository->find($id));
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }
 
-    /**
-     * @param SponsorshipBenefitRequest $sponsorshipBenefitRequest
-     *
-     * @return SponsorshipBenefit
-     *
-     * @throws \Exception
-     */
     public function createFrom(SponsorshipBenefitRequest $sponsorshipBenefitRequest): SponsorshipBenefit
     {
-        return new SponsorshipBenefit(
-            $this->nextIdentity(),
-            $sponsorshipBenefitRequest->label,
-            $sponsorshipBenefitRequest->position
-        );
+        return $this->repository->createSponsorshipBenefit($sponsorshipBenefitRequest->label, $sponsorshipBenefitRequest->position);
     }
 
-    /**
-     * @return UuidInterface
-     *
-     * @throws \Exception
-     */
-    public function nextIdentity(): UuidInterface
+    public function createWith(string $label, ?int $position): SponsorshipBenefit
     {
-        return Uuid::uuid4();
+        return $this->repository->createSponsorshipBenefit($label, $position);
     }
 
     public function save(SponsorshipBenefit $sponsorshipBenefit): void
     {
-        $this->entityManager->persist($sponsorshipBenefit);
-        $this->entityManager->flush();
+        $this->repository->save($sponsorshipBenefit);
     }
 
     public function remove(SponsorshipBenefit $sponsorshipBenefit): void
     {
-        $this->entityManager->remove($sponsorshipBenefit);
-        $this->entityManager->flush();
+        $this->repository->remove($sponsorshipBenefit);
     }
 
     public function switchPosition(string $move, string $id): SponsorshipBenefit
@@ -81,28 +59,28 @@ final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterf
         $sponsorshipBenefit->setPosition($new_position);
         $new_sponsorshipBenefit->setPosition($first_position);
 
-        $this->entityManager->persist($sponsorshipBenefit);
-        $this->entityManager->persist($new_sponsorshipBenefit);
-        $this->entityManager->flush();
+        $this->save($sponsorshipBenefit);
+        $this->save($new_sponsorshipBenefit);
 
         return $new_sponsorshipBenefit;
     }
 
-    /**
-     * @return int|null
-     *
-     * @throws \Doctrine\ORM\ORMException
-     */
     public function getMaxPosition(): ?int
     {
         return (int) $this->repository->getMaxPosition();
     }
 
-    /**
-     * @return SponsorshipBenefit[]
-     */
-    public function getOrderedList()
+    public function getOrderedList(): array
     {
         return $this->repository->findBy([], ['position' => 'asc']);
+    }
+
+    private function checkEntity(?SponsorshipBenefit $sponsorshipBenefit): SponsorshipBenefit
+    {
+        if (!$sponsorshipBenefit) {
+            throw new NotFoundHttpException();
+        }
+
+        return $sponsorshipBenefit;
     }
 }

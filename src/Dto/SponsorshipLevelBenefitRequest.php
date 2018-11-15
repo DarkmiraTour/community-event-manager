@@ -26,7 +26,7 @@ final class SponsorshipLevelBenefitRequest
      */
     public $content;
 
-    public function __construct(SponsorshipLevel $sponsorshipLevel = null, SponsorshipBenefit $sponsorshipBenefit = null, string $content = null)
+    public function __construct(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content)
     {
         $this->sponsorshipLevel = $sponsorshipLevel;
         $this->sponsorshipBenefit = $sponsorshipBenefit;
@@ -35,7 +35,7 @@ final class SponsorshipLevelBenefitRequest
 
     public static function createFromEntity(SponsorshipLevelBenefit $sponsorshipLevelBenefit): SponsorshipLevelBenefitRequest
     {
-        return new SponsorshipLevelBenefitRequest(
+        return new self(
             $sponsorshipLevelBenefit->getSponsorshipLevel(),
             $sponsorshipLevelBenefit->getSponsorshipBenefit(),
             $sponsorshipLevelBenefit->getContent()
@@ -44,8 +44,6 @@ final class SponsorshipLevelBenefitRequest
 
     public function updateEntity(SponsorshipLevelBenefit $sponsorshipLevelBenefit): void
     {
-        $sponsorshipLevelBenefit->setSponsorshipLevel($this->sponsorshipLevel);
-        $sponsorshipLevelBenefit->setSponsorshipBenefit($this->sponsorshipBenefit);
-        $sponsorshipLevelBenefit->setContent($this->content);
+        $sponsorshipLevelBenefit->updateSponsorshipLevelBenefit($this->sponsorshipLevel, $this->sponsorshipBenefit, $this->content);
     }
 }

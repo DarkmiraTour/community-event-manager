@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\SponsorshipLevelBenefit;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -30,26 +29,19 @@ final class SponsorshipLevelBenefitFixtures extends Fixture implements Dependent
      */
     public function load(ObjectManager $manager): void
     {
-        for ($iteratorIndex = 0; $iteratorIndex < SponsorshipLevelFixtures::NB_SPONSORSHIP_LEVEL; $iteratorIndex++) {
-            $this->createSponsorshipLevelBenefit($manager, $iteratorIndex);
+        for ($sponsorshipLevelNbr = 0; $sponsorshipLevelNbr < SponsorshipLevelFixtures::SPONSORSHIP_LEVEL_NBR; $sponsorshipLevelNbr++) {
+            $this->createSponsorshipLevelBenefit($manager, $sponsorshipLevelNbr);
         }
         $manager->flush();
     }
 
-    /**
-     * @param ObjectManager $manager
-     * @param int           $sponsorshipLevelIndex
-     *
-     * @throws \Exception
-     */
-    private function createSponsorshipLevelBenefit(ObjectManager $manager, int $sponsorshipLevelIndex): void
+    private function createSponsorshipLevelBenefit(ObjectManager $manager, int $sponsorshipLevelNbr): void
     {
-        $nbSponsorship = $this->faker->numberBetween(1, SponsorshipBenefitFixtures::NB_SPONSORSHIP_BENEFIT);
-        for ($iteratorIndex = 0; $iteratorIndex < $nbSponsorship; $iteratorIndex++) {
-            $sponsorshipLevelBenefit = new SponsorshipLevelBenefit(
-                $this->sponsorshipLevelBenefitManager->nextIdentity(),
-                $this->getReference("sponsorship-level-{$sponsorshipLevelIndex}"),
-                $this->getReference("sponsorship-benefit-{$iteratorIndex}"),
+        $nbSponsorship = $this->faker->numberBetween(1, SponsorshipBenefitFixtures::SPONSORSHIP_BENEFIT_NBR);
+        for ($sponsorshipLevelBenefitNbr = 0; $sponsorshipLevelBenefitNbr < $nbSponsorship; $sponsorshipLevelBenefitNbr++) {
+            $sponsorshipLevelBenefit = $this->sponsorshipLevelBenefitManager->createWith(
+                $this->getReference("sponsorship-level-{$sponsorshipLevelNbr}"),
+                $this->getReference("sponsorship-benefit-{$sponsorshipLevelBenefitNbr}"),
                 $this->faker->optional()->word
             );
             $manager->persist($sponsorshipLevelBenefit);

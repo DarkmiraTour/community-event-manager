@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\SpecialBenefit;
 
 use App\Dto\SpecialBenefitRequest;
-use App\Entity\SpecialBenefit;
 use App\Form\SpecialBenefitType;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,19 +33,9 @@ final class Edit
         $this->router = $router;
     }
 
-    /**
-     * @param Request        $request
-     * @param SpecialBenefit $specialBenefit
-     * @ParamConverter("specialBenefit", class="App:SpecialBenefit")
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function handle(Request $request, SpecialBenefit $specialBenefit): Response
+    public function handle(Request $request): Response
     {
+        $specialBenefit = $this->specialBenefitManager->find($request->attributes->get('id'));
         $specialBenefitRequest = SpecialBenefitRequest::createFromEntity($specialBenefit);
 
         $form = $this->formFactory->create(SpecialBenefitType::class, $specialBenefitRequest, [
@@ -56,6 +44,7 @@ final class Edit
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $specialBenefitRequest = $form->getData();
             $specialBenefitRequest->updateEntity($specialBenefit);
             $this->specialBenefitManager->save($specialBenefit);
 
