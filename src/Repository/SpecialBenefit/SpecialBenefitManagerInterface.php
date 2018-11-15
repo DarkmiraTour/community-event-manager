@@ -12,10 +12,7 @@ interface SpecialBenefitManagerInterface
 {
     public function find(string $id): ?SpecialBenefit;
 
-    /**
-     * @return SpecialBenefit[]
-     */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SpecialBenefitRequest $specialBenefitRequest): SpecialBenefit;
 

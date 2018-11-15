@@ -22,10 +22,7 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
         return $this->repository->find($id);
     }
 
-    /**
-     * @return SpecialBenefit[]
-     */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }

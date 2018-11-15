@@ -28,10 +28,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
         return parent::find($id, $lockMode, $lockVersion);
     }
 
-    /**
-     * @return SpecialBenefit[]
-     */
-    public function findAll()
+    public function findAll(): array
     {
         return parent::findAll();
     }

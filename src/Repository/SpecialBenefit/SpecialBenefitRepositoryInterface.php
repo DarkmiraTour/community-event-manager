@@ -17,10 +17,7 @@ interface SpecialBenefitRepositoryInterface
      */
     public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit;
 
-    /**
-     * @return SpecialBenefit[]
-     */
-    public function findAll();
+    public function findAll(): array;
 
     public function nextIdentity(): UuidInterface;
 
