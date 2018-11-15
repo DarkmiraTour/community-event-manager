@@ -24,3 +24,7 @@ sponsorship_benefit:
 sponsorship_level_benefit:
     resource: routes/sponsorshipLevelBenefit.yaml
     prefix: sponsorship-level-benefit
+
+special_benefit:
+    resource: routes/specialBenefit.yaml
+    prefix: special-benefit
