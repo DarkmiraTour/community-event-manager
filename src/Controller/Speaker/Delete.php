@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -12,7 +14,11 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Twig\Environment as Twig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 final class Delete
 {
     private $renderer;
@@ -41,7 +47,7 @@ final class Delete
             throw new NotFoundHttpException();
         }
 
-        $token = new CsrfToken('delete' . $speaker->getId(), $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$speaker->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->speakerRepository->remove($speaker);
         }

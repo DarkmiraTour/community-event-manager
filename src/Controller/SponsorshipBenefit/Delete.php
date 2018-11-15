@@ -11,7 +11,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 final class Delete
 {
     private $sponsorshipBenefitManager;
@@ -22,8 +26,7 @@ final class Delete
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+    ) {
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -37,7 +40,7 @@ final class Delete
             throw new NotFoundHttpException();
         }
 
-        $token = new CsrfToken('delete' . $id, $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$id, $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->sponsorshipBenefitManager->remove($sponsorshipBenefit);
         }

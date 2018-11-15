@@ -1,0 +1,30 @@
+special_benefit_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\SpecialBenefit\Index::handle
+
+special_benefit_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Controller\SpecialBenefit\Create::handle
+
+special_benefit_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Controller\SpecialBenefit\Edit::handle
+    requirements:
+        id: '%routing.uuid%'
+
+special_benefit_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Controller\SpecialBenefit\Delete::handle
+    requirements:
+        id: '%routing.uuid%'
+
+special_benefit_show:
+    path: /{id}
+    controller: App\Controller\SpecialBenefit\Show:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'

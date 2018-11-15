@@ -23,19 +23,20 @@ final class SponsorshipLevelFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws \Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
-        for ($sl = 0; $sl < self::NB_SPONSORSHIP_LEVEL; ++$sl) {
+        for ($iteratorIndex = 0; $iteratorIndex < self::NB_SPONSORSHIP_LEVEL; $iteratorIndex++) {
             $sponsorshipLevel = new SponsorshipLevel(
                 $this->sponsorshipLevelManager->nextIdentity(),
-                "Level {$sl}",
+                "Level {$iteratorIndex}",
                 $faker->randomFloat(2),
-                $sl
+                $iteratorIndex
             );
-            $this->setReference("sponsorship-level-{$sl}", $sponsorshipLevel);
+            $this->setReference("sponsorship-level-{$iteratorIndex}", $sponsorshipLevel);
             $manager->persist($sponsorshipLevel);
         }
         $manager->flush();

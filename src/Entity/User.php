@@ -9,26 +9,26 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\UuidInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="app_user")
+ * @ORM\Entity(repositoryClass="App\Repository\User\UserRepository")
  */
-final class User implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="guid", unique=true)
      */
     private $id;
 
     /**
-     * @ORM\Column(type="uuid", unique=true)
-     */
-    private $uuid;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $username;
 
     /**
      * @ORM\Column(type="json")
@@ -36,46 +36,32 @@ final class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=100)
      */
     private $password;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
+    public function __construct(
+        UuidInterface $id,
+        string $email,
+        string $username
+    ) {
+        $this->id = $id->toString();
         $this->email = $email;
+        $this->username = $username;
+        $this->roles = $this->getRoles();
+    }
+
+    public function upgradeToAdmin(): self
+    {
+        $roles = $this->roles;
+
+        $roles[] = 'ROLE_ADMIN';
+
+        $this->roles = array_unique($roles);
 
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -85,16 +71,6 @@ final class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function getPassword(): string
     {
         return (string) $this->password;
@@ -107,27 +83,17 @@ final class User implements UserInterface
         return $this;
     }
 
-    public function upgradeToAdmin(): self
-    {
-        $this->roles = ['ROLE_ADMIN'];
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getSalt()
+    public function getSalt(): void
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+    }
+
+    public function getUsername(): string
+    {
+        return $this->username;
     }
 }

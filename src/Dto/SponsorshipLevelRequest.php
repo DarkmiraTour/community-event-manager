@@ -41,6 +41,7 @@ final class SponsorshipLevelRequest
             $sponsorshipLevel->getPosition()
         );
     }
+
     public function updateEntity(SponsorshipLevel $sponsorshipLevel): void
     {
         $sponsorshipLevel->setLabel($this->label);

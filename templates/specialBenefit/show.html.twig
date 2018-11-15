@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Special Sponsorship - {{ specialBenefit.label }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Special Sponsorship - {{ specialBenefit.label }}</h1>
+
+        <table class="table mt-lg-5">
+            <tbody>
+                <tr>
+                    <th>Label</th>
+                    <td>{{ specialBenefit.label }}</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td>{{ specialBenefit.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><b>Description</b></p>
+        <p class="border p-md-2" style="min-height:150px">{{ specialBenefit.description | nl2br}}</p>
+        <a href="{{ path('special_benefit_index') }}" class="btn btn-light">Back to list</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="float-right">
+                <a class="btn btn-secondary btn-sm" href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
+                <form class="d-inline" method="post" action="{{ path('special_benefit_delete', {'id': specialBenefit.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialBenefit.id) }}">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

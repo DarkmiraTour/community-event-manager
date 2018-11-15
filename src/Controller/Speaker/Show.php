@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -30,7 +32,7 @@ final class Show
         }
 
         return new Response($this->renderer->render('speaker/show.html.twig', [
-            'speaker' => $speaker
+            'speaker' => $speaker,
         ]));
     }
 }

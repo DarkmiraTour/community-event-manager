@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Dto;
 
@@ -68,7 +70,7 @@ final class SpeakerRequest
 
     public static function createFromEntity(Speaker $speaker): self
     {
-        $request = new self;
+        $request = new self();
 
         $request->name = $speaker->getName();
         $request->title = $speaker->getTitle();

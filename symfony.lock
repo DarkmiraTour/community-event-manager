@@ -146,6 +146,12 @@
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
+    "pdepend/pdepend": {
+        "version": "2.5.2"
+    },
+    "phpmd/phpmd": {
+        "version": "2.6.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -163,6 +169,9 @@
     },
     "ramsey/uuid": {
         "version": "3.8.0"
+    },
+    "roave/security-advisories": {
+        "version": "dev-master"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -284,6 +293,15 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/phpunit-bridge": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "b4c7d939cac9a67e02366fa7971746e9cbf1dad0"
+        }
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.9.0"
     },
@@ -306,6 +324,15 @@
             "branch": "master",
             "version": "4.0",
             "ref": "5f514d9d3b8a8aac3d62ae6a86b18b90ed0c7826"
+        }
+    },
+    "symfony/security-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
     },
     "symfony/security-core": {

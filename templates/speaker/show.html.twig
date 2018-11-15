@@ -52,9 +52,11 @@
         </table>
 
         <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
-        <div class="float-right">
-            <a href="{{ path('speaker_edit', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
-            {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="float-right">
+                <a href="{{ path('speaker_edit', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
+                {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

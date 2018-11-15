@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Security;
 
@@ -19,7 +21,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     use TargetPathTrait;
 
@@ -67,7 +69,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
@@ -85,9 +86,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example : return new RedirectResponse($this->router->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        // return new RedirectResponse($this->router->generate('app_homepage'));
+        return new RedirectResponse($this->router->generate('login_success'));
     }
 
     protected function getLoginUrl()

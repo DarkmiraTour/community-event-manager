@@ -1,0 +1,12 @@
+language: php
+
+php:
+    - 7.2
+
+before_script:
+    - composer install
+
+script:
+    - docker run --rm -v $(pwd):/app phpqa/php-cs-fixer fix --dry-run --diff -vvv
+    - docker run --rm -v $(pwd):/app composer vendor/phpmd/phpmd/src/bin/phpmd src text phpmd.xml
+    - docker run --rm -v $(pwd):/app composer bin/phpunit

@@ -33,7 +33,6 @@ class Organisation
     private $website;
 
     /**
-     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $address;

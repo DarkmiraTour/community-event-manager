@@ -35,7 +35,9 @@ final class SponsorshipLevelBenefitManager implements SponsorshipLevelBenefitMan
 
     /**
      * @param SponsorshipLevelBenefitRequest $sponsorshipLevelBenefitRequest
+     *
      * @return SponsorshipLevelBenefit
+     *
      * @throws \Exception
      */
     public function createFrom(SponsorshipLevelBenefitRequest $sponsorshipLevelBenefitRequest): SponsorshipLevelBenefit
@@ -50,6 +52,7 @@ final class SponsorshipLevelBenefitManager implements SponsorshipLevelBenefitMan
 
     /**
      * @return UuidInterface
+     *
      * @throws \Exception
      */
     public function nextIdentity(): UuidInterface

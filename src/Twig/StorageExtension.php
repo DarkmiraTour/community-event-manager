@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Twig;
 
@@ -18,7 +20,7 @@ final class StorageExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('storage_url', [$this, 'formatUrl'])
+            new TwigFilter('storage_url', [$this, 'formatUrl']),
         ];
     }
 

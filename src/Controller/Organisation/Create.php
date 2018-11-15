@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Organisation;
 
 use App\Dto\OrganisationRequest;
-use App\Entity\Organisation;
 use App\Form\OrganisationType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -14,7 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 final class Create
 {
     private $renderer;

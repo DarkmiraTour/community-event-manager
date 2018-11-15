@@ -13,8 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 final class Edit
 {
     private $renderer;
@@ -23,12 +27,11 @@ final class Edit
     private $router;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->formFactory = $formFactory;
@@ -37,8 +40,10 @@ final class Edit
 
     /**
      * @param Request $request
-     * @param string $id
+     * @param string  $id
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

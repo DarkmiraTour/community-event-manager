@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181107143554 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $this->createSponsorshipBenefitTable($schema);
         $this->createSponsorshipLevelTable($schema);
@@ -53,7 +53,7 @@ final class Version20181107143554 extends AbstractMigration
         $table->addForeignKeyConstraint('sponsorship_benefit', ['sponsorship_benefit_id'], ['id']);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         if ($schema->hasTable('sponsorship_benefit')) {
             $schema->dropTable('sponsorship_benefit');

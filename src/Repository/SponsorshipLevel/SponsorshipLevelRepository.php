@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository\SponsorshipLevel;
 
 use App\Entity\SponsorshipLevel;
@@ -21,6 +23,7 @@ class SponsorshipLevelRepository extends ServiceEntityRepository
 
     /**
      * @return int|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getMaxPosition()

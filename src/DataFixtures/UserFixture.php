@@ -1,29 +1,47 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\User;
+use App\Repository\User\UserRepositoryInterface;
 
-final class UserFixture extends Fixture
+class UserFixture extends Fixture
 {
+    private $encodedPassword;
+    private $userRepository;
 
-	private $encodedPassword;
-
-	public function __construct(UserPasswordEncoderInterface $encodedPassword)
-	{
-		$this->encodedPassword = $encodedPassword;
-	}
-
-    public function load(ObjectManager $manager)
+    public function __construct(UserPasswordEncoderInterface $encodedPassword, UserRepositoryInterface $userRepository)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-        $user = new User();
+        $this->encodedPassword = $encodedPassword;
+        $this->userRepository = $userRepository;
+    }
 
-        $user->setPassword($this->encodedPassword->encodePassword($user, 'random_password'));
+    public function load(ObjectManager $manager): void
+    {
+        $user = new User(
+            $this->userRepository->nextIdentity(),
+            'user@test.com',
+            'usertest'
+        );
 
+        $user->setPassword($this->encodedPassword->encodePassword($user, 'userpass'));
+        $manager->persist($user);
+
+        $admin = new User(
+            $this->userRepository->nextIdentity(),
+            'admin@test.com',
+            'admintest'
+        );
+
+        $admin->upgradeToAdmin();
+        $admin->setPassword($this->encodedPassword->encodePassword($admin, 'adminpass'));
+
+        $manager->persist($admin);
         $manager->flush();
     }
 }

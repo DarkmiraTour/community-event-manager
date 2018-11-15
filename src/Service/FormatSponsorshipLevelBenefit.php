@@ -18,8 +18,7 @@ final class FormatSponsorshipLevelBenefit
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager
-    )
-    {
+    ) {
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->sponsorshipLevelBenefitManager = $sponsorshipLevelBenefitManager;
@@ -35,12 +34,12 @@ final class FormatSponsorshipLevelBenefit
         $benefits = $this->sponsorshipBenefitManager->getOrderedList();
         $levels = $this->sponsorshipLevelManager->getOrderedList();
 
-        foreach ($benefits As $benefit) {
-            $tab = array();
+        foreach ($benefits as $benefit) {
+            $tab = [];
             $tab['benefit']['id'] = $benefit->getId();
             $tab['benefit']['label'] = $benefit->getLabel();
 
-            foreach ($levels As $level) {
+            foreach ($levels as $level) {
                 $sponsorshipLevelBenefit = $this->sponsorshipLevelBenefitManager->getByBenefitAndLevel($benefit, $level);
 
                 $tabLevel['id'] = $level->getId();

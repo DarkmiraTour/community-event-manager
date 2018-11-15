@@ -13,6 +13,7 @@ use Ramsey\Uuid\UuidInterface;
 interface SponsorshipLevelBenefitManagerInterface
 {
     public function find(string $id): ?SponsorshipLevelBenefit;
+
     /**
      * @return SponsorshipLevelBenefit[]
      */
