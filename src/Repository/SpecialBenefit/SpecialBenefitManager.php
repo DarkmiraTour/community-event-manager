@@ -12,7 +12,7 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 {
     private $repository;
 
-    public function __construct(SpecialBenefitRepository $repository)
+    public function __construct(SpecialBenefitRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

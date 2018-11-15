@@ -9,7 +9,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SpecialBenefit\SpecialBenefitRepository")
+ * @ORM\Entity()
  */
 class SpecialBenefit
 {

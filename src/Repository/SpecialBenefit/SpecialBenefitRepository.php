@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class SpecialBenefitRepository extends ServiceEntityRepository
+class SpecialBenefitRepository extends ServiceEntityRepository implements SpecialBenefitRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -26,6 +26,14 @@ class SpecialBenefitRepository extends ServiceEntityRepository
     public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit
     {
         return parent::find($id, $lockMode, $lockVersion);
+    }
+
+    /**
+     * @return SpecialBenefit[]
+     */
+    public function findAll()
+    {
+        return parent::findAll();
     }
 
     /**
