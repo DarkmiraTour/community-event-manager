@@ -35,6 +35,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
 
     /**
      * @return UuidInterface
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public function nextIdentity(): UuidInterface

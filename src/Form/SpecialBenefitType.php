@@ -38,9 +38,9 @@ final class SpecialBenefitType extends AbstractType implements DataMapperInterfa
     public function mapDataToForms($data, $forms)
     {
         $forms = iterator_to_array($forms);
-        $forms['label']->setData($data ? $data->label : '');
-        $forms['price']->setData($data ? $data->price : null);
-        $forms['description']->setData($data ? $data->description : '');
+        $forms['label']->setData($data && isset($data->label) ? $data->label : '');
+        $forms['price']->setData($data && isset($data->price) ? $data->price : null);
+        $forms['description']->setData($data && isset($data->description) ? $data->description : '');
     }
 
     public function configureOptions(OptionsResolver $resolver)

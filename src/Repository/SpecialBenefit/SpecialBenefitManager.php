@@ -30,6 +30,7 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
     /**
      * @param SpecialBenefitRequest $specialBenefitRequest
      * @return SpecialBenefit
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public function createFrom(SpecialBenefitRequest $specialBenefitRequest): SpecialBenefit
@@ -47,6 +48,7 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
      * @param float $price
      * @param string $description
      * @return SpecialBenefit
+     * @throws \InvalidArgumentException
      * @throws \Exception
      */
     public function createWith(string $label, float $price, string $description): SpecialBenefit

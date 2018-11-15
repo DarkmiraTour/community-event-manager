@@ -11,8 +11,6 @@ use Faker\Factory as Faker;
 
 final class SpecialBenefitFixtures extends Fixture
 {
-    public const SPECIAL_BENEFIT_NBR = 10;
-
     private $specialBenefitManager;
 
     public function __construct(SpecialBenefitManagerInterface $specialBenefitManager)
@@ -27,7 +25,7 @@ final class SpecialBenefitFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Faker::create();
-        for ($specialBenefitNbr = 0; $specialBenefitNbr < self::SPECIAL_BENEFIT_NBR; ++$specialBenefitNbr) {
+        for ($specialBenefitNbr = 0; $specialBenefitNbr < 10; ++$specialBenefitNbr) {
             $specialBenefit = $this->specialBenefitManager->createWith(
                 "Special Package {$specialBenefitNbr}",
                 $faker->randomFloat(2),
