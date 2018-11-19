@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Dto\TalkRequest;
+use App\Entity\Speaker;
 use App\Entity\Talk;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -41,11 +42,6 @@ final class TalkRepository implements TalkRepositoryInterface
         return $this->repository->findAll();
     }
 
-    public function nextIdentity(): UuidInterface
-    {
-        return Uuid::uuid4();
-    }
-
     public function createFromRequest(TalkRequest $talkRequest): Talk
     {
         return new Talk(
@@ -54,5 +50,20 @@ final class TalkRepository implements TalkRepositoryInterface
             $talkRequest->description,
             $talkRequest->speaker
         );
+    }
+
+    public function createWith(string $title, string $description, Speaker $speaker): Talk
+    {
+        return new Talk(
+            $this->nextIdentity(),
+            $title,
+            $description,
+            $speaker
+        );
+    }
+
+    private function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
     }
 }

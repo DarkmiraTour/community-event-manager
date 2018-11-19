@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Dto\TalkRequest;
+use App\Entity\Speaker;
 use App\Entity\Talk;
-use Ramsey\Uuid\UuidInterface;
 
 interface TalkRepositoryInterface
 {
@@ -16,7 +16,7 @@ interface TalkRepositoryInterface
 
     public function findAll(): array;
 
-    public function nextIdentity(): UuidInterface;
-
     public function createFromRequest(TalkRequest $talkRequest): Talk;
+
+    public function createWith(string $title, string $description, Speaker $speaker): Talk;
 }

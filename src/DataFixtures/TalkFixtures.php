@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Talk;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Repository\TalkRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -29,8 +28,7 @@ final class TalkFixtures extends Fixture implements DependentFixtureInterface
         for ($iterationCount = 0; $iterationCount < 10; $iterationCount++) {
             $speakerIndex = $faker->numberBetween(0, count($speakers) - 1);
 
-            $talk = new Talk(
-                $this->talkRepository->nextIdentity(),
+            $talk = $this->talkRepository->createWith(
                 $faker->sentence,
                 $faker->paragraphs(3, true),
                 $speakers[$speakerIndex]
