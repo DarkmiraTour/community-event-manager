@@ -12,7 +12,7 @@ interface TalkRepositoryInterface
 
     public function remove(Talk $talk): void;
 
-    public function find(string $id): Talk;
+    public function find(string $id): ?Talk;
 
     public function findAll(): array;
 

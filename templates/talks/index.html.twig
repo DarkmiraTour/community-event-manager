@@ -6,43 +6,41 @@
 
 {% block title %}Talks{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>Talks</h1>
-                <a href="{{ path('talk_create') }}" class="btn btn-success float-right mb-3">Add talk</a>
-            </div>
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Talks</h1>
+            <a href="{{ path('talk_create') }}" class="btn btn-success float-right mb-3">Add talk</a>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-striped">
-                    <thead>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Speaker</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for talk in talks %}
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Speaker</th>
-                        <th>Action</th>
+                        <td>{{ talk.title }}</td>
+                        <td>{{ talk.description }}</td>
+                        <td>{{ talk.speaker.name }}</td>
+                        <td>
+                            <a href="{{ path('talk_show', {'id': talk.id}) }}">Show</a>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for talk in talks %}
-                        <tr>
-                            <td>{{ talk.title }}</td>
-                            <td>{{ talk.description }}</td>
-                            <td>{{ talk.speaker.name }}</td>
-                            <td>
-                                <a href="{{ path('talk_show', {'id': talk.id}) }}">Show</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="8">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

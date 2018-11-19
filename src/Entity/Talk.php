@@ -66,12 +66,12 @@ class Talk
         return $this;
     }
 
-    public function getSpeaker()
+    public function getSpeaker(): Speaker
     {
         return $this->speaker;
     }
 
-    public function setSpeaker($speaker)
+    public function setSpeaker($speaker): self
     {
         $this->speaker = $speaker;
         return $this;

@@ -6,21 +6,19 @@
 
 {% block title %}New talk{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1>New talk</h1>
-            </div>
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>New talk</h1>
         </div>
-        <div class="row">
-            <div class="col-12">
-                {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
-                    <button type="submit" class="btn btn-success float-right">Add talk</button>
-                {{ form_end(form) }}
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+            <button type="submit" class="btn btn-success float-right">Add talk</button>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

@@ -25,6 +25,6 @@ talk_edit:
 talk_delete:
     path: /{id}/delete
     methods: [DELETE]
-    controller: App\Controller\Talk\Delete:handle
+    controller: App\Controller\Talk\Delete::handle
     requirements:
         id: '%routing.uuid%'

@@ -31,7 +31,7 @@ final class TalkRepository implements TalkRepositoryInterface
         $this->entityManager->flush();
     }
 
-    public function find(string $id): Talk
+    public function find(string $id): ?Talk
     {
         return $this->repository->find($id);
     }

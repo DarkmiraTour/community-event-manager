@@ -26,7 +26,7 @@ final class TalkFixtures extends Fixture implements DependentFixtureInterface
         $speakers = $this->speakerRepository->findAll();
         $faker = Faker::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($iterationCount = 0; $iterationCount < 10; $iterationCount++) {
             $speakerIndex = $faker->numberBetween(0, count($speakers) - 1);
 
             $talk = new Talk(
