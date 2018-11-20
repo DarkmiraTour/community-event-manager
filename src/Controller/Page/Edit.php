@@ -40,15 +40,6 @@ final class Edit
         $this->fileUploader = $fileUploader;
     }
 
-    /**
-     * @param Request $request
-     * @param Page $page
-     * @ParamConverter("page", class="App:Page")
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
     public function handle(Request $request, Page $page): Response
     {
         $pageRequest = PageRequest::createFromEntity($page);

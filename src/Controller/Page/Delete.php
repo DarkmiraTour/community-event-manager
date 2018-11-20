@@ -30,12 +30,6 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @param Request $request
-     * @param Page $page
-     * @ParamConverter("page", class="App:Page")
-     * @return RedirectResponse
-     */
     public function handle(Request $request, Page $page): RedirectResponse
     {
         $token = new CsrfToken('delete' . $page->getId(), $request->request->get('_token'));

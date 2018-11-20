@@ -22,12 +22,6 @@ final class Index
         $this->pageManager = $pageManager;
     }
 
-    /**
-     * @return Response
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
     public function handle(): Response
     {
         return new Response($this->renderer->render('page/index.html.twig', [
