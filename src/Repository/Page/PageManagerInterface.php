@@ -9,7 +9,7 @@ use App\Dto\PageRequest;
 
 interface PageManagerInterface
 {
-    public function find(string $id): Page;
+    public function find(string $id): ?Page;
 
     public function findAll(): array;
 

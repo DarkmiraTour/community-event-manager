@@ -6,7 +6,6 @@ namespace App\Repository\Page;
 
 use App\Entity\Page;
 use App\Dto\PageRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class PageManager implements PageManagerInterface
 {
@@ -17,9 +16,9 @@ final class PageManager implements PageManagerInterface
         $this->repository = $repository;
     }
 
-    public function find(string $id): Page
+    public function find(string $id): ?Page
     {
-        return $this->checkEntity($this->repository->find($id));
+        return $this->repository->find($id);
     }
 
     public function findAll(): array
@@ -37,22 +36,19 @@ final class PageManager implements PageManagerInterface
         return $this->repository->createPage($title, $content, $background);
     }
 
+    /**
+     * @param Page $page
+     */
     public function save(Page $page): void
     {
         $this->repository->save($page);
     }
 
+    /**
+     * @param Page $page
+     */
     public function remove(Page $page): void
     {
         $this->repository->remove($page);
-    }
-
-    private function checkEntity(?Page $page): Page
-    {
-        if (!$page) {
-            throw new NotFoundHttpException();
-        }
-
-        return $page;
     }
 }

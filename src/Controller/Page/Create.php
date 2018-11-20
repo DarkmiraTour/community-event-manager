@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Environment as Twig;
+use Twig_Environment As Twig;
 
 final class Create
 {
@@ -28,7 +28,8 @@ final class Create
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         FileUploaderInterface $fileUploader
-    ) {
+    )
+    {
         $this->renderer = $renderer;
         $this->pageManager = $pageManager;
         $this->formFactory = $formFactory;
@@ -36,6 +37,13 @@ final class Create
         $this->fileUploader = $fileUploader;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function handle(Request $request): Response
     {
         $form = $this->formFactory->create(PageType::class);

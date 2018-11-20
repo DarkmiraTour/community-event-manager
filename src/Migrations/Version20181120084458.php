@@ -10,11 +10,9 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181120084458 extends AbstractMigration
 {
-    private const TABLE_NAME = 'page';
-
-    public function up(Schema $schema): void
+    public function up(Schema $schema) : void
     {
-        $table = $schema->createTable(self::TABLE_NAME);
+        $table = $schema->createTable('page');
         $table->addColumn('id', Type::GUID);
         $table->addColumn('title', Type::STRING, ['length' => 255]);
         $table->addColumn('content', Type::TEXT);
@@ -23,8 +21,8 @@ final class Version20181120084458 extends AbstractMigration
         $table->setPrimaryKey(['id']);
     }
 
-    public function down(Schema $schema): void
+    public function down(Schema $schema) : void
     {
-        $schema->dropTable(self::TABLE_NAME);
+        $schema->dropTable('page');
     }
 }

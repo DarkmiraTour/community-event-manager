@@ -45,30 +45,32 @@ class Page
         $this->background = $background;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function getBackground(): string
+    public function getBackground(): ?string
     {
         return $this->background;
     }
 
-    public function updatePage(string $title, string $content, string $background): void
+    public function updatePage(string $title, string $content, string $background): self
     {
         $this->title = $title;
         $this->content = $content;
         $this->background = $background;
+
+        return $this;
     }
 }

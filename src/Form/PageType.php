@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PageType extends AbstractType implements DataMapperInterface
@@ -20,7 +21,7 @@ final class PageType extends AbstractType implements DataMapperInterface
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
-            ->add('background', FileType::class, [
+            ->add('background',FileType::class, [
                 'required' => false,
             ])
             ->setDataMapper($this)
@@ -46,7 +47,6 @@ final class PageType extends AbstractType implements DataMapperInterface
                 $forms['content']->getData(),
                 $forms['background']->getData()
             );
-
             return;
         }
 

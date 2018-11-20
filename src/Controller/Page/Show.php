@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Page;
 
+use App\Entity\Page;
 use App\Repository\Page\PageManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
@@ -20,10 +21,16 @@ final class Show
         $this->pageManager = $pageManager;
     }
 
-    public function handle(Request $request): Response
+    /**
+     * @param Page $page
+     * @ParamConverter("page", class="App:Page")
+     * @return Response
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function handle(Page $page): Response
     {
-        $page = $this->pageManager->find($request->attributes->get('id'));
-
         return new Response($this->renderer->render('page/show.html.twig', [
             'page' => $page,
         ]));
