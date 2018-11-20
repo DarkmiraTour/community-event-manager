@@ -43,3 +43,7 @@ app_logout:
 schedule:
     resource: routes/schedule.yaml
     prefix: schedule
+
+page:
+    resource: routes/page.yaml
+    prefix: page
