@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Page;
 
-use App\Entity\Page;
 use App\Repository\Page\PageManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -30,8 +28,10 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    public function handle(Request $request, Page $page): RedirectResponse
+    public function handle(Request $request): RedirectResponse
     {
+        $page = $this->pageManager->find($request->attributes->get('id'));
+
         $token = new CsrfToken('delete' . $page->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->pageManager->remove($page);
