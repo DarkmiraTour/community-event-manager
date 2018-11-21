@@ -164,6 +164,9 @@
     "ramsey/uuid": {
         "version": "3.8.0"
     },
+    "roave/security-advisories": {
+        "version": "dev-master"
+    },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
         "recipe": {
@@ -283,6 +286,15 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.1",
+            "ref": "b4c7d939cac9a67e02366fa7971746e9cbf1dad0"
+        }
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.9.0"
