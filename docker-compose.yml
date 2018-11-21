@@ -15,13 +15,13 @@ services:
         depends_on:
             - postgres
     node:
-        image: node:alpine
+        image: node:11
         volumes:
             - ./:/var/www/symfony
         working_dir: /var/www/symfony
         environment:
             NODE_ENV: development
-        command: yarn install && yarn encore dev
+        command: sh -c "yarn install && yarn encore dev"
         restart: "no"
     nginx:
         image: nginx:latest
