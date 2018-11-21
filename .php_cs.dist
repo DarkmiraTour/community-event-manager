@@ -2,9 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->in('src')
-    ->notPath('Kernel.php')
-;
-
+    ->notPath('Kernel.php');
 
 return PhpCsFixer\Config::create()
     ->setRules([
@@ -13,6 +11,8 @@ return PhpCsFixer\Config::create()
         'array_syntax' => ['syntax' => 'short'],
         'declare_strict_types' => true,
         'void_return' => true,
+        'yoda_style' => false,
+        'increment_style' => 'post'
     ])
     ->setUsingCache(false)
     ->setRiskyAllowed(true)
