@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Organisation;
 
 use App\Dto\OrganisationRequest;
-use App\Entity\Organisation;
 use App\Form\OrganisationType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -27,8 +27,7 @@ final class Edit
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->formFactory = $formFactory;
@@ -37,8 +36,10 @@ final class Edit
 
     /**
      * @param Request $request
-     * @param string $id
+     * @param string  $id
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

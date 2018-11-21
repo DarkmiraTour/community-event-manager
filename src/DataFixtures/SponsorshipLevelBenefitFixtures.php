@@ -25,29 +25,31 @@ final class SponsorshipLevelBenefitFixtures extends Fixture implements Dependent
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws \Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        for ($sl = 0; $sl < SponsorshipLevelFixtures::NB_SPONSORSHIP_LEVEL; ++$sl) {
-            $this->createSponsorshipLevelBenefit($manager, $sl);
+        for ($iteratorIndex = 0; $iteratorIndex < SponsorshipLevelFixtures::NB_SPONSORSHIP_LEVEL; $iteratorIndex++) {
+            $this->createSponsorshipLevelBenefit($manager, $iteratorIndex);
         }
         $manager->flush();
     }
 
     /**
      * @param ObjectManager $manager
-     * @param int $sponsorshipLevelIndex
+     * @param int           $sponsorshipLevelIndex
+     *
      * @throws \Exception
      */
-    private function createSponsorshipLevelBenefit(ObjectManager $manager, int $sponsorshipLevelIndex)
+    private function createSponsorshipLevelBenefit(ObjectManager $manager, int $sponsorshipLevelIndex): void
     {
         $nbSponsorship = $this->faker->numberBetween(1, SponsorshipBenefitFixtures::NB_SPONSORSHIP_BENEFIT);
-        for ($sb = 0; $sb < $nbSponsorship; ++$sb) {
+        for ($iteratorIndex = 0; $iteratorIndex < $nbSponsorship; $iteratorIndex++) {
             $sponsorshipLevelBenefit = new SponsorshipLevelBenefit(
                 $this->sponsorshipLevelBenefitManager->nextIdentity(),
                 $this->getReference("sponsorship-level-{$sponsorshipLevelIndex}"),
-                $this->getReference("sponsorship-benefit-{$sb}"),
+                $this->getReference("sponsorship-benefit-{$iteratorIndex}"),
                 $this->faker->optional()->word
             );
             $manager->persist($sponsorshipLevelBenefit);

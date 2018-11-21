@@ -6,7 +6,6 @@ namespace App\Repository\SpecialBenefit;
 
 use App\Entity\SpecialBenefit;
 use App\Dto\SpecialBenefitRequest;
-use Ramsey\Uuid\UuidInterface;
 
 interface SpecialBenefitManagerInterface
 {

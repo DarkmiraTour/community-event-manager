@@ -10,11 +10,14 @@ use Twig_Environment;
 
 final class Home
 {
+    private $renderer;
+
     public function __construct(Twig_Environment $renderer)
     {
         $this->renderer = $renderer;
     }
-    public function handle(Request $request): Response
+
+    public function handle(): Response
     {
         return new Response($this->renderer->render('home.html.twig'));
     }

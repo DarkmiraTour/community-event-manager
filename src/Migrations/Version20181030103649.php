@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181030103649 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $table = $schema->createTable('organisation');
         $table->addColumn('id', Type::GUID);
@@ -23,7 +23,7 @@ final class Version20181030103649 extends AbstractMigration
         $table->addUniqueIndex(['id']);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         if ($schema->hasTable('organisation')) {
             $schema->dropTable('organisation');

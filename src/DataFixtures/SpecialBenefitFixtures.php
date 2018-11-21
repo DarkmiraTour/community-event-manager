@@ -20,12 +20,13 @@ final class SpecialBenefitFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws \Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
-        for ($specialBenefitNbr = 0; $specialBenefitNbr < 10; ++$specialBenefitNbr) {
+        for ($specialBenefitNbr = 0; $specialBenefitNbr < 10; $specialBenefitNbr++) {
             $specialBenefit = $this->specialBenefitManager->createWith(
                 "Special Package {$specialBenefitNbr}",
                 $faker->randomFloat(2),

@@ -18,16 +18,17 @@ final class View
     public function __construct(
         Twig_Environment $renderer,
         SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipLevelBenefitManager = $sponsorshipLevelBenefitManager;
     }
 
     /**
-     * @param FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit
+     * @param FormatSponsorshipLevelBenefit    $formatSponsorshipLevelBenefit
      * @param SponsorshipLevelManagerInterface $sponsorshipLevelManager
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

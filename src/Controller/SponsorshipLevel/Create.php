@@ -26,8 +26,7 @@ final class Create
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->formFactory = $formFactory;
@@ -36,7 +35,9 @@ final class Create
 
     /**
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

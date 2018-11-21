@@ -22,8 +22,7 @@ final class Delete
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+    ) {
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -37,7 +36,7 @@ final class Delete
             throw new NotFoundHttpException();
         }
 
-        $token = new CsrfToken('delete' . $id, $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$id, $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->sponsorshipBenefitManager->remove($sponsorshipBenefit);
         }

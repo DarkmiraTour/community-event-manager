@@ -17,7 +17,6 @@
     <rule ref="rulesets/design.xml/DevelopmentCodeFragment"/>
     <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass"/>
     <rule ref="rulesets/naming.xml/BooleanGetMethodName"/>
-    <rule ref="rulesets/unusedcode.xml/UnusedFormalParameter"/>
     <rule ref="rulesets/unusedcode.xml/UnusedLocalVariable"/>
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateField"/>
     <rule ref="rulesets/unusedcode.xml/UnusedPrivateMethod"/>

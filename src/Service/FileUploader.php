@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Service;
 
@@ -17,7 +19,7 @@ final class FileUploader implements FileUploaderInterface
 
     public function upload(File $file): string
     {
-        $filename = Uuid::uuid4()->toString() . '.' . $file->guessExtension();
+        $filename = Uuid::uuid4()->toString().'.'.$file->guessExtension();
 
         $this->filesystem->write($filename, file_get_contents($file->getPathname()));
 

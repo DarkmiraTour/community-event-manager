@@ -29,17 +29,18 @@ final class Edit
         Twig_Environment $renderer,
         SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager,
         CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipLevelBenefitManager = $sponsorshipLevelBenefitManager;
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
-     * @param FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit
+     * @param FormatSponsorshipLevelBenefit    $formatSponsorshipLevelBenefit
      * @param SponsorshipLevelManagerInterface $sponsorshipLevelManager
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
@@ -58,7 +59,7 @@ final class Edit
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             return new JsonResponse([false]);
         }
-        
+
         $move = $request->request->get('move');
         $id = $request->request->get('id');
 
@@ -93,8 +94,8 @@ final class Edit
             return new JsonResponse([false]);
         }
 
-        $checked = $request->request->get('is_checked') !== 'false' ? true : false;
-        $content = $request->request->get('text',null) ? $request->request->get('text') : null;
+        $checked = ($request->request->get('is_checked') !== 'false');
+        $content = $request->request->get('text', null);
 
         $sponsorshipBenefit = $sponsorshipBenefitManager->find($request->request->get('benefit_id'));
         $sponsorshipLevel = $sponsorshipLevelManager->find($request->request->get('level_id'));
@@ -117,6 +118,7 @@ final class Edit
             $sponsorshipLevelBenefitRequest->content = $content;
             $sponsorshipLevelBenefitRequest->updateEntity($sponsorshipLevelBenefit);
             $this->sponsorshipLevelBenefitManager->save($sponsorshipLevelBenefit);
+
             return [true];
         }
         $this->sponsorshipLevelBenefitManager->remove($sponsorshipLevelBenefit);

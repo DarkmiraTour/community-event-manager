@@ -16,14 +16,14 @@ final class Index
     public function __construct(
         Twig_Environment $renderer,
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
     }
 
     /**
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

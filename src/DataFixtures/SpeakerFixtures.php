@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -23,7 +25,7 @@ class SpeakerFixtures extends Fixture
         $this->fileUploader = $fileUploader;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
 

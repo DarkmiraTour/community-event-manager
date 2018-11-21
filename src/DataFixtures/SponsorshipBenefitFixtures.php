@@ -22,17 +22,18 @@ final class SponsorshipBenefitFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws \Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        for ($sb = 0; $sb < self::NB_SPONSORSHIP_BENEFIT; ++$sb) {
+        for ($iteratorIndex = 0; $iteratorIndex < self::NB_SPONSORSHIP_BENEFIT; $iteratorIndex++) {
             $sponsorshipBenefit = new SponsorshipBenefit(
                 $this->sponsorshipBenefitManager->nextIdentity(),
-                "Benefit {$sb}",
-                $sb
+                "Benefit {$iteratorIndex}",
+                $iteratorIndex
             );
-            $this->setReference("sponsorship-benefit-{$sb}", $sponsorshipBenefit);
+            $this->setReference("sponsorship-benefit-{$iteratorIndex}", $sponsorshipBenefit);
             $manager->persist($sponsorshipBenefit);
         }
         $manager->flush();
