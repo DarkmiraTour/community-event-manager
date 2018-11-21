@@ -6,7 +6,7 @@ namespace App\Controller\Page;
 
 use App\Repository\Page\PageManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment As Twig;
+use Twig\Environment As Twig;
 
 final class Index
 {

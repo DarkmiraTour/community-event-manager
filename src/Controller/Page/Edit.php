@@ -5,17 +5,15 @@ declare(strict_types=1);
 namespace App\Controller\Page;
 
 use App\Dto\PageRequest;
-use App\Entity\Page;
 use App\Form\PageType;
 use App\Repository\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment As Twig;
+use Twig\Environment As Twig;
 
 final class Edit
 {
@@ -40,8 +38,10 @@ final class Edit
         $this->fileUploader = $fileUploader;
     }
 
-    public function handle(Request $request, Page $page): Response
+    public function handle(Request $request): Response
     {
+        $page = $this->pageManager->find($request->attributes->get('id'));
+
         $pageRequest = PageRequest::createFromEntity($page);
         $backgroundPath = $pageRequest->backgroundPath;
 
