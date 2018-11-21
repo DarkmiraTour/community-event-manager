@@ -47,5 +47,4 @@ services:
             - MINIO_SECRET_KEY=${S3_SECRET}
         volumes:
             - ./var/s3:/data
-        entrypoint: sh
-        command: -c 'mkdir -p /data/events && /usr/bin/minio server /data'
+        command: 'server /data'
