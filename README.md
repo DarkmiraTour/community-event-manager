@@ -9,11 +9,14 @@ You will need Docker to build the application, find more informations on [the do
 
 ## Installation
 
-- Get the application with `git clone https://github.com/DarkmiraTour/community-event-manager.git`
-- Build application : `docker-compose up -d`
-- Copy env file : `cp .env.dist .env`
-- Create database : `docker-compose exec php bin/console doctrine:migrations:migrate`
-- To have install data : `docker-compose exec php bin/console doctrine:fixtures:load`
+``` bash
+# Clone the application
+git clone https://github.com/DarkmiraTour/community-event-manager.git
+cd community-event-manager/
+
+# Build and initialize the project
+make install
+```
 
 ## Configuration
 
@@ -21,7 +24,27 @@ You will need Docker to build the application, find more informations on [the do
 
 ## Access
 
+Once you already `make install` the project, run it with:
+
+``` bash
+make
+```
+
+Then you should access to:
+
 * Application : [http://127.0.0.1:8080](http://127.0.0.1:8080)
 * Minio : [http://127.0.0.1:9001](http://127.0.0.1:9001)
 
 (NOTE: If you’re using Docker Toolbox, change 127.0.0.1 by the ip of your virtual machine, ie 192.168.99.100)
+
+## Test
+
+Run tests suite:
+
+``` bash
+make test
+```
+
+## License
+
+This application is under [GPL-3.0 License](LICENSE).
