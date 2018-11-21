@@ -22,6 +22,7 @@ final class PageRequest
 
     /**
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg"})
+     * @Assert\File(maxSize="5M")
      */
     public $background;
 
