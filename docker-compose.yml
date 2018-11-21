@@ -41,7 +41,10 @@ services:
     storage:
         image: minio/minio:latest
         ports:
-          - '9001:9000'
+            - '9001:9000'
+        environment:
+            - MINIO_ACCESS_KEY=${S3_KEY}
+            - MINIO_SECRET_KEY=${S3_SECRET}
         volumes:
-          - ./var/s3:/data
+            - ./var/s3:/data
         command: 'server /data'
