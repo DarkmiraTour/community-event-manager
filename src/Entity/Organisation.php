@@ -33,21 +33,21 @@ class Organisation
     private $website;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Contact", cascade={"persist"})
      */
-    private $address;
+    private $contact;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $comment;
 
-    public function __construct(UuidInterface $id, string $name, string $website, string $address = null, string $comment = null)
+    public function __construct(UuidInterface $id, string $name, string $website, Contact $contact = null, string $comment = null)
     {
         $this->id = $id->toString();
         $this->name = $name;
         $this->website = $website;
-        $this->address = $address;
+        $this->contact = $contact;
         $this->comment = $comment;
     }
 
@@ -80,14 +80,14 @@ class Organisation
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getContact(): ?Contact
     {
-        return $this->address;
+        return $this->contact;
     }
 
-    public function setAddress(?string $address): self
+    public function setContact(?Contact $contact): self
     {
-        $this->address = $address;
+        $this->contact = $contact;
 
         return $this;
     }

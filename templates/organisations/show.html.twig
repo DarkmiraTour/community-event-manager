@@ -21,10 +21,29 @@
                     <th>Website</th>
                     <td><a href="{{ organisation.website }}">{{ organisation.website }}</a></td>
                 </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>{{ organisation.address | default('N/A') }}</td>
-                </tr>
+                {% if organisation.contact %}
+                    <tr>
+                        <th>Contact</th>
+                        <td>{{ organisation.contact.firstName }} {{ organisation.contact.lastName }}
+                            {% for address in organisation.contact.addresses %}
+                                 <address>
+                                    {{ address.streetAddress }}<br />
+                                    {{ address.streetAddressComplementary }}<br />
+                                    {{ address.postalCode }} {{ address.city }}
+                                </address>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ organisation.contact.email }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <th>Contact</th>
+                        <td><i>No contact provided.</i></td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <th>Comment</th>
                     <td>{{ organisation.comment | default('N/A') }}</td>

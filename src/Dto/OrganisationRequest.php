@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
+use App\Entity\Contact;
 use App\Entity\Organisation;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -20,15 +21,15 @@ final class OrganisationRequest
      */
     public $website;
 
-    public $address;
+    public $contact;
 
     public $comment;
 
-    public function __construct(string $name = null, string $website = null, string $address = null, string $comment = null)
+    public function __construct(string $name = null, string $website = null, Contact $contact = null, string $comment = null)
     {
         $this->name = $name;
         $this->website = $website;
-        $this->address = $address;
+        $this->contact = $contact;
         $this->comment = $comment;
     }
 
@@ -37,7 +38,7 @@ final class OrganisationRequest
         return new OrganisationRequest(
             $organisation->getName(),
             $organisation->getWebsite(),
-            $organisation->getAddress(),
+            $organisation->getContact(),
             $organisation->getComment()
         );
     }
@@ -46,7 +47,7 @@ final class OrganisationRequest
     {
         $organisation->setName($this->name);
         $organisation->setWebsite($this->website);
-        $organisation->setAddress($this->address);
+        $organisation->setContact($this->contact);
         $organisation->setComment($this->comment);
     }
 }
