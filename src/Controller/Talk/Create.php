@@ -1,8 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Talk;
 
-use App\Dto\TalkRequest;
 use App\Form\TalkType;
 use App\Repository\TalkRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -33,11 +34,11 @@ final class Create
 
     public function handle(Request $request): Response
     {
-        $talkRequest = new TalkRequest();
-        $form = $this->formFactory->create(TalkType::class, $talkRequest);
+        $form = $this->formFactory->create(TalkType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $talkRequest = $form->getData();
             $talk = $this->talkRepository->createFromRequest($talkRequest);
             $this->talkRepository->save($talk);
 
@@ -45,7 +46,7 @@ final class Create
         }
 
         return new Response($this->renderer->render('talks/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]));
     }
 }

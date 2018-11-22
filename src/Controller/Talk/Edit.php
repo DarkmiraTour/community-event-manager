@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Talk;
 
@@ -51,13 +53,13 @@ final class Edit
             $this->talkRepository->save($talk);
 
             return new RedirectResponse($this->router->generate('talk_show', [
-                'id' => $talk->getId()
+                'id' => $talk->getId(),
             ]));
         }
 
         return new Response($this->renderer->render('talks/edit.html.twig', [
             'talk' => $talk,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]));
     }
 }

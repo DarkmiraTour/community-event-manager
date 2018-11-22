@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -52,6 +54,7 @@ class Talk
     public function setTitle($title): self
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -63,6 +66,7 @@ class Talk
     public function setDescription($description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -74,6 +78,7 @@ class Talk
     public function setSpeaker($speaker): self
     {
         $this->speaker = $speaker;
+
         return $this;
     }
 }

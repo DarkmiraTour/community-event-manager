@@ -1,10 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Talk;
 
 use App\Repository\TalkRepositoryInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment as Twig;
@@ -30,7 +31,7 @@ final class Show
         }
 
         return new Response($this->renderer->render('talks/show.html.twig', [
-            'talk' => $talk
+            'talk' => $talk,
         ]));
     }
 }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Form;
 
@@ -31,7 +33,7 @@ final class TalkType extends AbstractType
                 EntityType::class,
                 [
                     'class' => Speaker::class,
-                    'choice_label' => 'name'
+                    'choice_label' => 'name',
                 ]
             );
     }
