@@ -21,8 +21,7 @@ final class Delete
         PageManagerInterface $pageManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+    ) {
         $this->pageManager = $pageManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -32,7 +31,7 @@ final class Delete
     {
         $page = $this->pageManager->find($request->attributes->get('id'));
 
-        $token = new CsrfToken('delete' . $page->getId(), $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$page->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->pageManager->remove($page);
         }

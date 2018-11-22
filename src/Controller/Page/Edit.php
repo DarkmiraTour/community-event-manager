@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Environment As Twig;
+use Twig\Environment as Twig;
 
 final class Edit
 {
@@ -29,8 +29,7 @@ final class Edit
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         FileUploaderInterface $fileUploader
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->pageManager = $pageManager;
         $this->formFactory = $formFactory;

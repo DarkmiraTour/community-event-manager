@@ -52,6 +52,7 @@ final class PageManager implements PageManagerInterface
         if (!$page) {
             throw new NotFoundHttpException();
         }
+
         return $page;
     }
 }

@@ -6,7 +6,7 @@ namespace App\Controller\Page;
 
 use App\Repository\Page\PageManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Twig\Environment As Twig;
+use Twig\Environment as Twig;
 
 final class Index
 {
@@ -16,8 +16,7 @@ final class Index
     public function __construct(
         Twig $renderer,
         PageManagerInterface $pageManager
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->pageManager = $pageManager;
     }
