@@ -24,4 +24,4 @@ You will need Docker to build the application, find more informations on [the do
 * Application : [http://127.0.0.1:8080](http://127.0.0.1:8080)
 * Minio : [http://127.0.0.1:9001](http://127.0.0.1:9001)
 
-(If you’re using docker toolbox, change the ip by the ip for your virtual machine, ie 192.168.99.100)
+(NOTE: If you’re using Docker Toolbox, change 127.0.0.1 by the ip of your virtual machine, ie 192.168.99.100)
