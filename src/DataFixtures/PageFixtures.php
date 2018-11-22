@@ -24,12 +24,13 @@ final class PageFixtures extends Fixture
 
     /**
      * @param ObjectManager $manager
+     *
      * @throws \Exception
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
-        for ($pageNbr = 0; $pageNbr < 3; ++$pageNbr) {
+        for ($pageNbr = 0; $pageNbr < 3; $pageNbr++) {
             $page = $this->pageManager->createWith(
                 "Page {$pageNbr}",
                 $faker->text(),
