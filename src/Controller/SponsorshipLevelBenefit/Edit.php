@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Edit
 {
@@ -26,7 +26,7 @@ final class Edit
     private $csrfTokenManager;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager,
         CsrfTokenManagerInterface $csrfTokenManager
     ) {

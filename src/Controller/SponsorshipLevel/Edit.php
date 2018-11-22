@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Edit
 {
@@ -23,7 +23,7 @@ final class Edit
     private $router;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router

@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Home
 {
     private $renderer;
 
-    public function __construct(Twig_Environment $renderer)
+    public function __construct(Twig $renderer)
     {
         $this->renderer = $renderer;
     }

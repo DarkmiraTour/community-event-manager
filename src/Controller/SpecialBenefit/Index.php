@@ -6,7 +6,7 @@ namespace App\Controller\SpecialBenefit;
 
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment as Twig;
+use Twig\Environment as Twig;
 
 final class Index
 {

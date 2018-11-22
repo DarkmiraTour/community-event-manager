@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Create
 {
@@ -22,7 +22,7 @@ final class Create
     private $router;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router

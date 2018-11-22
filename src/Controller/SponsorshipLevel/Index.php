@@ -6,7 +6,7 @@ namespace App\Controller\SponsorshipLevel;
 
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Index
 {
@@ -14,7 +14,7 @@ final class Index
     private $sponsorshipLevelManager;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager
     ) {
         $this->renderer = $renderer;
