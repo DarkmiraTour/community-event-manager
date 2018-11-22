@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
 use App\Dto\SpeakerRequest;
-use App\Entity\Speaker;
 use App\Form\SpeakerType;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;

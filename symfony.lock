@@ -146,6 +146,12 @@
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
+    "pdepend/pdepend": {
+        "version": "2.5.2"
+    },
+    "phpmd/phpmd": {
+        "version": "2.6.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },

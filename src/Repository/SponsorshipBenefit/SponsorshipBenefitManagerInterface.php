@@ -11,6 +11,7 @@ use Ramsey\Uuid\UuidInterface;
 interface SponsorshipBenefitManagerInterface
 {
     public function find(string $id): ?SponsorshipBenefit;
+
     /**
      * @return SponsorshipBenefit[]
      */

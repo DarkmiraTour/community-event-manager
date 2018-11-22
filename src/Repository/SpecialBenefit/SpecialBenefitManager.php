@@ -29,7 +29,9 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 
     /**
      * @param SpecialBenefitRequest $specialBenefitRequest
+     *
      * @return SpecialBenefit
+     *
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
@@ -45,9 +47,11 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 
     /**
      * @param string $label
-     * @param float $price
+     * @param float  $price
      * @param string $description
+     *
      * @return SpecialBenefit
+     *
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
@@ -79,6 +83,7 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 
     /**
      * @return UuidInterface
+     *
      * @throws \Exception
      */
     private function nextIdentity(): UuidInterface

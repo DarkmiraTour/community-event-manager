@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181109150434 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $table = $schema->createTable('special_benefit');
         $table->addColumn('id', Type::GUID);
@@ -21,7 +21,7 @@ final class Version20181109150434 extends AbstractMigration
         $table->setPrimaryKey(['id']);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $schema->dropTable('special_benefit');
     }

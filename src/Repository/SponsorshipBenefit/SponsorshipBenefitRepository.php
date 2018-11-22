@@ -23,6 +23,7 @@ class SponsorshipBenefitRepository extends ServiceEntityRepository
 
     /**
      * @return int|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getMaxPosition()

@@ -21,6 +21,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
      * @param mixed    $id
      * @param int|null $lockMode
      * @param int|null $lockVersion
+     *
      * @return SpecialBenefit|null
      */
     public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit
@@ -35,6 +36,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
 
     /**
      * @return UuidInterface
+     *
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
@@ -45,6 +47,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
 
     /**
      * @param SpecialBenefit $specialBenefit
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
@@ -56,6 +59,7 @@ class SpecialBenefitRepository extends ServiceEntityRepository implements Specia
 
     /**
      * @param SpecialBenefit $specialBenefit
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

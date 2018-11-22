@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
@@ -41,7 +43,7 @@ final class Delete
             throw new NotFoundHttpException();
         }
 
-        $token = new CsrfToken('delete' . $speaker->getId(), $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$speaker->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->speakerRepository->remove($speaker);
         }

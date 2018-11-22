@@ -33,7 +33,9 @@ final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterf
 
     /**
      * @param SponsorshipBenefitRequest $sponsorshipBenefitRequest
+     *
      * @return SponsorshipBenefit
+     *
      * @throws \Exception
      */
     public function createFrom(SponsorshipBenefitRequest $sponsorshipBenefitRequest): SponsorshipBenefit
@@ -47,6 +49,7 @@ final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterf
 
     /**
      * @return UuidInterface
+     *
      * @throws \Exception
      */
     public function nextIdentity(): UuidInterface
@@ -87,6 +90,7 @@ final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterf
 
     /**
      * @return int|null
+     *
      * @throws \Doctrine\ORM\ORMException
      */
     public function getMaxPosition(): ?int

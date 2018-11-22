@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Home
 {
-    public function __construct(Twig_Environment $renderer)
+    private $renderer;
+
+    public function __construct(Twig $renderer)
     {
         $this->renderer = $renderer;
     }
-    public function handle(Request $request): Response
+
+    public function handle(): Response
     {
         return new Response($this->renderer->render('home.html.twig'));
     }

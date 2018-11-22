@@ -23,22 +23,22 @@ final class Delete
         SpecialBenefitManagerInterface $specialBenefitManager,
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager
-    )
-    {
+    ) {
         $this->specialBenefitManager = $specialBenefitManager;
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param SpecialBenefit $specialBenefit
      * @ParamConverter("specialBenefit", class="App:SpecialBenefit")
+     *
      * @return RedirectResponse
      */
     public function handle(Request $request, SpecialBenefit $specialBenefit): RedirectResponse
     {
-        $token = new CsrfToken('delete' . $specialBenefit->getId(), $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$specialBenefit->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->specialBenefitManager->remove($specialBenefit);
         }

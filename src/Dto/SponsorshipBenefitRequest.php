@@ -33,6 +33,7 @@ final class SponsorshipBenefitRequest
             $sponsorshipBenefit->getPosition()
         );
     }
+
     public function updateEntity(SponsorshipBenefit $sponsorshipBenefit): void
     {
         $sponsorshipBenefit->setLabel($this->label);

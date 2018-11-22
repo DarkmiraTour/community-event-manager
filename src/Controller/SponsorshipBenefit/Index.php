@@ -6,7 +6,7 @@ namespace App\Controller\SponsorshipBenefit;
 
 use App\Repository\SponsorshipBenefit\SponsorshipBenefitManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment as Twig;
 
 final class Index
 {
@@ -14,16 +14,16 @@ final class Index
     private $sponsorshipBenefitManager;
 
     public function __construct(
-        Twig_Environment $renderer,
+        Twig $renderer,
         SponsorshipBenefitManagerInterface $sponsorshipBenefitManager
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
     }
 
     /**
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

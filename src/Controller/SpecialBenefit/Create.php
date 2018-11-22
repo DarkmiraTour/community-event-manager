@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
-use Twig_Environment As Twig;
+use Twig\Environment as Twig;
 
 final class Create
 {
@@ -25,8 +25,7 @@ final class Create
         SpecialBenefitManagerInterface $specialBenefitManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->specialBenefitManager = $specialBenefitManager;
         $this->formFactory = $formFactory;
@@ -35,7 +34,9 @@ final class Create
 
     /**
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

@@ -41,6 +41,7 @@ final class SponsorshipLevelBenefitRequest
             $sponsorshipLevelBenefit->getContent()
         );
     }
+
     public function updateEntity(SponsorshipLevelBenefit $sponsorshipLevelBenefit): void
     {
         $sponsorshipLevelBenefit->setSponsorshipLevel($this->sponsorshipLevel);

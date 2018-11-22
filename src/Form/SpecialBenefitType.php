@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SpecialBenefitType extends AbstractType implements DataMapperInterface
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('label', TextType::class)
@@ -25,7 +25,7 @@ final class SpecialBenefitType extends AbstractType implements DataMapperInterfa
         ;
     }
 
-    public function mapFormsToData($forms, &$data)
+    public function mapFormsToData($forms, &$data): void
     {
         $forms = iterator_to_array($forms);
         $data = new SpecialBenefitRequest(
@@ -35,7 +35,7 @@ final class SpecialBenefitType extends AbstractType implements DataMapperInterfa
         );
     }
 
-    public function mapDataToForms($data, $forms)
+    public function mapDataToForms($data, $forms): void
     {
         $forms = iterator_to_array($forms);
         $forms['label']->setData($data && isset($data->label) ? $data->label : '');
@@ -43,7 +43,7 @@ final class SpecialBenefitType extends AbstractType implements DataMapperInterfa
         $forms['description']->setData($data && isset($data->description) ? $data->description : '');
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => SpecialBenefitRequest::class,

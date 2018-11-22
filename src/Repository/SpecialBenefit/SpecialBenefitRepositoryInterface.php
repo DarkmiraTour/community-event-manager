@@ -13,6 +13,7 @@ interface SpecialBenefitRepositoryInterface
      * @param mixed    $id
      * @param int|null $lockMode
      * @param int|null $lockVersion
+     *
      * @return SpecialBenefit|null
      */
     public function find($id, $lockMode = null, $lockVersion = null): ?SpecialBenefit;

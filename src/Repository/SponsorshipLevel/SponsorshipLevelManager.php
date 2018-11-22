@@ -33,7 +33,9 @@ final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
 
     /**
      * @param SponsorshipLevelRequest $sponsorshipLevelRequest
+     *
      * @return SponsorshipLevel
+     *
      * @throws \Exception
      */
     public function createFrom(SponsorshipLevelRequest $sponsorshipLevelRequest): SponsorshipLevel
@@ -48,6 +50,7 @@ final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
 
     /**
      * @return UuidInterface
+     *
      * @throws \Exception
      */
     public function nextIdentity(): UuidInterface
@@ -66,6 +69,7 @@ final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
         $this->entityManager->remove($sponsorshipLevel);
         $this->entityManager->flush();
     }
+
     /**
      * @return SponsorshipLevel[]
      */
@@ -95,6 +99,7 @@ final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
 
     /**
      * @return int|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getMaxPosition(): ?int
