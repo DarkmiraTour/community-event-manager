@@ -30,6 +30,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
+        "phpmd/phpmd": "^2.6",
         "roave/security-advisories": "dev-master",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",

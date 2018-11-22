@@ -13,7 +13,6 @@
     <rule ref="rulesets/design.xml/EvalExpression"/>
     <rule ref="rulesets/design.xml/ExitExpression"/>
     <rule ref="rulesets/design.xml/GotoStatement"/>
-    <rule ref="rulesets/design.xml/CouplingBetweenObjects"/>
     <rule ref="rulesets/design.xml/DevelopmentCodeFragment"/>
     <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass"/>
     <rule ref="rulesets/naming.xml/BooleanGetMethodName"/>
