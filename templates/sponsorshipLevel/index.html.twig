@@ -27,7 +27,7 @@
         {% for level in levels %}
             <tr>
                 <td>{{ level.label }}</td>
-                <td>{{ level.price }}</td>
+                <td>{{ level.price|localizedcurrency(currency) }}</td>
                 <td class="text-right">
                     <a class="btn btn-secondary btn-sm" href="{{ path('sponsorship_level_edit', {'id': level.id}) }}">edit</a>
                     <form class="d-inline" method="post" action="{{ path('sponsorship_level_delete', {'id': level.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
