@@ -17,6 +17,11 @@ interface ScheduleRepositoryInterface
      */
     public function findAll();
 
+    /**
+     * @return Schedule[]
+     */
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null);
+
     public function createFrom(ScheduleRequest $scheduleRequest): Schedule;
 
     public function nextIdentity(): UuidInterface;

@@ -25,6 +25,7 @@ class Schedule
 
     /**
      * @ORM\OneToMany(targetEntity="Space", mappedBy="schedule")
+     * @ORM\OrderBy({"visible"="DESC"})
      */
     private $spaces;
 

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Dto;
@@ -33,7 +34,7 @@ final class SpaceRequest
         $this->name = $name;
     }
 
-    public static function createForm(Space $space): SpaceRequest
+    public static function createFromEntity(Space $space): SpaceRequest
     {
         return new SpaceRequest(
             $space->getVisible(),

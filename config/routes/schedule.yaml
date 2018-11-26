@@ -12,3 +12,22 @@ schedule_space_insert:
   path: /space/create
   controller: App\Controller\Space\Create::handle
   methods: [POST]
+
+schedule_slot_insert:
+  path: /slot/create
+  controller: App\Controller\Slot\Create::handle
+  methods: [POST]
+
+schedule_slot_edit:
+  path: /slot/{id}/edit
+  methods: [GET, POST, PUT]
+  controller: App\Controller\Slot\Edit::handle
+  requirements:
+    id: '%routing.uuid%'
+
+schedule_slot_delete:
+  path: /{id}/delete
+  methods: [DELETE]
+  controller: App\Controller\Slot\Delete::handle
+  requirements:
+    id: '%routing.uuid%'

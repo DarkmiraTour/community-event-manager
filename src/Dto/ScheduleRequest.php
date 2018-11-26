@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Dto;
@@ -25,7 +26,7 @@ final class ScheduleRequest
         $this->day = $day;
     }
 
-    public static function createForm(Schedule $schedule): ScheduleRequest
+    public static function createFromEntity(Schedule $schedule): ScheduleRequest
     {
         return new ScheduleRequest(
             $schedule->getDay()

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository\Schedule;
@@ -52,5 +53,4 @@ final class SpaceRepository implements SpaceRepositoryInterface
         $this->entityManager->remove($space);
         $this->entityManager->flush();
     }
-
 }
