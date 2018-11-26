@@ -24,7 +24,7 @@ page_delete:
 
 page_show:
     path: /{id}
-    controller: App\Controller\Page\Show:handle
+    controller: App\Controller\Page\Show::handle
     methods: [GET]
     requirements:
         id: '%routing.uuid%'

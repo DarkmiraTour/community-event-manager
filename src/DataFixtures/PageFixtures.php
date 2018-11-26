@@ -22,11 +22,6 @@ final class PageFixtures extends Fixture
         $this->fileUploader = $fileUploader;
     }
 
-    /**
-     * @param ObjectManager $manager
-     *
-     * @throws \Exception
-     */
     public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();

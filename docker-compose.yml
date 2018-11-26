@@ -12,7 +12,7 @@ services:
         volumes:
             - ./:/var/www/symfony:cached
             - ./var/logs/symfony:/var/www/symfony/var/logs:cached
-            - ./php-fpm/php-limit.ini:/usr/local/etc/php/conf.d/php-limit.ini
+            - ./docker/php-fpm/php-limit.ini:/usr/local/etc/php/conf.d/php-limit.ini
         depends_on:
             - postgres
     node:
