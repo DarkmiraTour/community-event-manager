@@ -31,6 +31,24 @@ security:
     # Note: Only the *first* access control that matches will be used
 
     access_control:
+        - { path: ^/organisations/create, roles: ROLE_ADMIN }
+        - { path: ^/organisations/%routing.uuid%/edit, roles: ROLE_ADMIN }
+        - { path: ^/organisations/%routing.uuid%/delete, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-benefit/create, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-benefit/%routing.uuid%/edit, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-benefit/%routing.uuid%/delete, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level/create, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level/%routing.uuid%/edit, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level/%routing.uuid%/delete, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level-benefit/edit, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level-benefit/edit-sponsorship-level-position, roles: ROLE_ADMIN }
+        - { path: ^/sponsorship-level-benefit/edit-datas, roles: ROLE_ADMIN }
+        - { path: ^/speakers/create, roles: ROLE_ADMIN }
+        - { path: ^/speakers/%routing.uuid%/edit, roles: ROLE_ADMIN }
+        - { path: ^/speakers/%routing.uuid%/delete, roles: ROLE_ADMIN }
+        - { path: ^/special-benefit/create, roles: ROLE_ADMIN }
+        - { path: ^/special-benefit/%routing.uuid%/edit, roles: ROLE_ADMIN }
+        - { path: ^/special-benefit/%routing.uuid%/delete, roles: ROLE_ADMIN }
         - { path: ^/organisations, roles: ROLE_USER }
         - { path: ^/sponsorship-level, roles: ROLE_USER }
         - { path: ^/sponsorship-level-benefit, roles: ROLE_USER }
@@ -40,5 +58,5 @@ security:
 
     encoders:
         App\Entity\User:
-            algorithm: bcrypt
-            cost: 10
+            algorithm: argon2i
+    
