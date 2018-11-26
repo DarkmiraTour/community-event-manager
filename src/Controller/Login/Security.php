@@ -24,7 +24,10 @@ final class Security
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return new Response(
-            $this->environment->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error])
+            $this->environment->render('security/login.html.twig', [
+                'last_username' => $lastUsername,
+                 'error' => $error,
+             ])
         );
     }
 
