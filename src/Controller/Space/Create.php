@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller\Space;
@@ -28,8 +29,7 @@ final class Create
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         SpaceRepositoryInterface $repository
-    )
-    {
+    ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->router = $router;

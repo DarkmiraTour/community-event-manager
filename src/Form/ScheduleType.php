@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ScheduleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $daysAvailables = [
             ' -- Select -- ' => '',
@@ -31,12 +31,12 @@ class ScheduleType extends AbstractType
             ])
             ->add('location', TextType::class, [
                 'required' => true,
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Ex: Room 1, Room 2...']
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Ex: Room 1, Room 2...'],
             ])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ScheduleRequest::class,

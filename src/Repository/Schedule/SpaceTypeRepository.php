@@ -1,12 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repository\Schedule;
 
 use App\Entity\SpaceType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 

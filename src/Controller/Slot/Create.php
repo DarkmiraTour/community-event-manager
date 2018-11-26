@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Controller\Slot;
 
-use App\Dto\ScheduleRequest;
-use App\Form\ScheduleType;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Dto\SlotRequest;
+use App\Form\SlotType;
+use App\Repository\Schedule\SlotRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ final class Create
         Twig $renderer,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        ScheduleRepositoryInterface $repository
+        SlotRepositoryInterface $repository
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
@@ -35,21 +35,15 @@ final class Create
 
     public function handle(Request $request): Response
     {
-        $scheduleRequest = new ScheduleRequest();
+        $slotRequest = new SlotRequest();
 
-        $form = $this->formFactory->create(ScheduleType::class, $scheduleRequest);
+        $form = $this->formFactory->create(SlotType::class, $slotRequest);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $schedule = $this->repository->createFrom($scheduleRequest);
+        $slot = $this->repository->createFrom($slotRequest);
 
-            $this->repository->save($schedule);
+        $this->repository->save($slot);
 
-            return new RedirectResponse($this->router->generate('schedule_index'));
-        }
-
-        return new Response($this->renderer->render('schedule/create.html.twig', [
-            'form' => $form->createView(),
-        ]));
+        return new RedirectResponse($this->router->generate('schedule_index'));
     }
 }

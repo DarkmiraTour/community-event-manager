@@ -22,11 +22,12 @@ class Slot
      * @var string
      * @ORM\Column(length=50)
      */
-    private $name;
+    private $title;
 
     /**
-     * @var string
-     * @ORM\Column(length=20)
+     * @var SlotType
+     * @ORM\ManyToOne(targetEntity="App\Entity\SlotType")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;
 
@@ -38,13 +39,13 @@ class Slot
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="time")
      */
     private $start;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="time_end", type="time")
      */
     private $end;
 
@@ -74,17 +75,17 @@ class Slot
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**
-     * @param string $name
+     * @param string $title
      */
-    public function setName(string $name): void
+    public function setTitle(string $title): void
     {
-        $this->name = $name;
+        $this->title = $title;
     }
 
     /**
@@ -136,17 +137,17 @@ class Slot
     }
 
     /**
-     * @return string
+     * @return SlotType
      */
-    public function getType(): string
+    public function getType(): SlotType
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
+     * @param SlotType $type
      */
-    public function setType(string $type): void
+    public function setType(SlotType $type): void
     {
         $this->type = $type;
     }
@@ -166,6 +167,4 @@ class Slot
     {
         $this->space = $space;
     }
-
-
 }

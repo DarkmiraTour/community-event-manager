@@ -31,11 +31,11 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $this->repository->findAll();
     }
 
-    /**
-     * @param ScheduleRequest $scheduleRequest
-     * @return Schedule
-     * @throws \Exception
-     */
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null)
+    {
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     public function createFrom(ScheduleRequest $scheduleRequest): Schedule
     {
         $schedule = new Schedule();
@@ -48,10 +48,6 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $schedule;
     }
 
-    /**
-     * @return UuidInterface
-     * @throws \Exception
-     */
     public function nextIdentity(): UuidInterface
     {
         return Uuid::uuid4();
