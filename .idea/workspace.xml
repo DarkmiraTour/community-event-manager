@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a94a1ee-f2ec-49b8-93ce-4b2ad6a8e93a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Schedule/Create.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Schedule/Create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Schedule/Index.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Schedule/Index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Slot/Create.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Slot/Create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Space/Create.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Space/Create.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/ScheduleRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/ScheduleRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/SlotRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/SlotRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dto/SpaceRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dto/SpaceRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Schedule.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Schedule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Slot.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Slot.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Space.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Space.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/SpaceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/SpaceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ScheduleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ScheduleType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/SlotType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SlotType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/SpaceType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/SpaceType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/ScheduleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/ScheduleRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/ScheduleRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/ScheduleRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SlotRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SlotRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SlotRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SlotRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SpaceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SpaceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SpaceRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SpaceRepositoryInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SpaceTypeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SpaceTypeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/Schedule/SpaceTypeRepositoryInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/Schedule/SpaceTypeRepositoryInterface.php" afterDir="false" />
-    </list>
+    <list default="true" id="0a94a1ee-f2ec-49b8-93ce-4b2ad6a8e93a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,56 +13,7 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Form/ScheduleType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Schedule/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="52" column="12" selection-start-line="52" selection-start-column="12" selection-end-line="52" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Dto/ScheduleRequest.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="39" column="1" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/schedule/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-              <folding>
-                <element signature="e#5536#5543#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Schedule.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -116,6 +44,7 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/templates/schedule/create.html.twig" />
         <option value="$PROJECT_DIR$/templates/schedule/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Slot/Create.php" />
       </list>
     </option>
   </component>
@@ -212,11 +141,16 @@
       <path value="$PROJECT_DIR$/vendor/mtdowling/jmespath.php" />
       <path value="$PROJECT_DIR$/vendor/ninsuo/symfony-collection" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/pdepend/pdepend" />
+      <path value="$PROJECT_DIR$/vendor/twig/extensions" />
+      <path value="$PROJECT_DIR$/vendor/phpmd/phpmd" />
+      <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1920" />
-    <option name="height" value="1044" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2756" />
+    <option name="width" value="1084" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -232,6 +166,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -265,12 +200,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="743000" />
+    <option name="totallyTimeSpent" value="951000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <frame x="2749" y="0" width="1091" height="1076" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18623266" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25072324" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
