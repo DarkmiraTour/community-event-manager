@@ -40,6 +40,14 @@ final class Create
         $form = $this->formFactory->create(SlotType::class, $slotRequest);
         $form->handleRequest($request);
 
+        if ($slotRequest->end <= $slotRequest->start) {
+            throw new \LogicException('date start cannot less than date end');
+        }
+
+        if ($slotRequest->end->diff($slotRequest->start)->i < 10) {
+            throw new \LogicException('duration cannot less than 10 minutes');
+        }
+
         $slot = $this->repository->createFrom($slotRequest);
 
         $this->repository->save($slot);

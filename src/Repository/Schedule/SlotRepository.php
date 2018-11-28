@@ -37,6 +37,11 @@ final class SlotRepository implements SlotRepositoryInterface
         return $this->repository->findAll();
     }
 
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     public function createFrom(SlotRequest $slotRequest): Slot
     {
         $slot = new Slot();
@@ -60,8 +65,31 @@ final class SlotRepository implements SlotRepositoryInterface
 
     public function save(Slot $slot): void
     {
+        $this->slotExistsForThisSpaceAndTime($slot);
+
         $this->entityManager->persist($slot);
         $this->entityManager->flush();
+    }
+
+    public function slotExistsForThisSpaceAndTime(Slot $slot): void
+    {
+        $end = new \DateTime($slot->getEnd()->format('H:i:s'));
+
+        $queryBuilder = $this->entityManager->createQueryBuilder()->select('MIN(s.end)')->from('App:Slot', 's');
+        $queryBuilder
+            ->where('s.end > :start')
+            ->andWhere('s.space = :space')
+            ->andWhere('s.id != :id')
+            ->setParameter('start', $slot->getStart()->format('H:i:s'))
+            ->setParameter('space', $slot->getSpace()->getId())
+            ->setParameter('id', $slot->getId())
+        ;
+
+        $slotExists = $queryBuilder->getQuery()->execute()[0];
+
+        if ($slotExists[1] && new \DateTime($slotExists[1]) < $end) {
+            throw new \LogicException('A slot already exists for this space and time');
+        }
     }
 
     public function remove(Slot $slot): void

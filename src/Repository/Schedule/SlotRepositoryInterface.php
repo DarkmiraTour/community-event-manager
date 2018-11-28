@@ -17,6 +17,11 @@ interface SlotRepositoryInterface
      */
     public function findAll(): array;
 
+    /**
+     * @return Slot[]
+     */
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array;
+
     public function createFrom(SlotRequest $slotRequest): Slot;
 
     public function nextIdentity(): UuidInterface;
