@@ -27,7 +27,7 @@ final class SpaceRepository implements SpaceRepositoryInterface
         return $this->repository->find($id);
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }

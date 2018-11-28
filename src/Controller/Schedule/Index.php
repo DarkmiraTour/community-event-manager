@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Schedule;
 
+use App\Dto\ScheduleRequest;
 use App\Dto\SlotRequest;
 use App\Dto\SpaceRequest;
+use App\Form\ScheduleType;
 use App\Form\SlotType;
 use App\Form\SpaceType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
@@ -42,8 +44,11 @@ final class Index
 
         $formSlot = $this->formFactory->create(SlotType::class, new SlotRequest());
 
+        $formSchedule = $this->formFactory->create(ScheduleType::class, new ScheduleRequest());
+
         return new Response($this->renderer->render('schedule/index.html.twig', [
             'schedules' => $schedules,
+            'formSchedule' => $formSchedule->createView(),
             'formSpace' => $form->createView(),
             'formSlot' => $formSlot->createView(),
             'timetable' => $this->scheduleService->mountTimetable($schedules),

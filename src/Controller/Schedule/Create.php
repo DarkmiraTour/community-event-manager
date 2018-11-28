@@ -40,16 +40,10 @@ final class Create
         $form = $this->formFactory->create(ScheduleType::class, $scheduleRequest);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $schedule = $this->repository->createFrom($scheduleRequest);
+        $schedule = $this->repository->createFrom($scheduleRequest);
 
-            $this->repository->save($schedule);
+        $this->repository->save($schedule);
 
-            return new RedirectResponse($this->router->generate('schedule_index'));
-        }
-
-        return new Response($this->renderer->render('schedule/create.html.twig', [
-            'form' => $form->createView(),
-        ]));
+        return new RedirectResponse($this->router->generate('schedule_index'));
     }
 }

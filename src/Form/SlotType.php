@@ -48,7 +48,10 @@ final class SlotType extends AbstractType
             ])
             ->add('duration', NumberType::class, [
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
+                'label' => 'Duration in Minutes',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
             ])
             ->add('start', TimeType::class, [
                 'required' => true,

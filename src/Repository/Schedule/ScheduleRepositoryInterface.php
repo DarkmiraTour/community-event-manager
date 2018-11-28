@@ -15,12 +15,12 @@ interface ScheduleRepositoryInterface
     /**
      * @return Schedule[]
      */
-    public function findAll();
+    public function findAll(): array;
 
     /**
      * @return Schedule[]
      */
-    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null);
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array;
 
     public function createFrom(ScheduleRequest $scheduleRequest): Schedule;
 

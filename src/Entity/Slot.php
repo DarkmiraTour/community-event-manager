@@ -38,13 +38,13 @@ class Slot
     private $duration;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      * @ORM\Column(type="time")
      */
     private $start;
 
     /**
-     * @var \DateTime
+     * @var \DateTimeInterface
      * @ORM\Column(name="time_end", type="time")
      */
     private $end;
@@ -105,33 +105,33 @@ class Slot
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
-    public function getStart(): ?\DateTime
+    public function getStart(): ?\DateTimeInterface
     {
         return $this->start;
     }
 
     /**
-     * @param \DateTime $start
+     * @param \DateTimeInterface $start
      */
-    public function setStart(\DateTime $start): void
+    public function setStart(\DateTimeInterface $start): void
     {
         $this->start = $start;
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
-    public function getEnd(): ?\DateTime
+    public function getEnd(): ?\DateTimeInterface
     {
         return $this->end;
     }
 
     /**
-     * @param \DateTime $end
+     * @param \DateTimeInterface $end
      */
-    public function setEnd(\DateTime $end): void
+    public function setEnd(\DateTimeInterface $end): void
     {
         $this->end = $end;
     }

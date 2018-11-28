@@ -26,12 +26,12 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $this->repository->find($id);
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }
 
-    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null)
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array
     {
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
@@ -40,10 +40,7 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
     {
         $schedule = new Schedule();
         $schedule->setId($this->nextIdentity()->toString());
-        $schedule->setDay(
-            new \DateTime($scheduleRequest->day)
-        );
-        $schedule->setPlace($scheduleRequest->place);
+        $schedule->setDay($scheduleRequest->day);
 
         return $schedule;
     }
