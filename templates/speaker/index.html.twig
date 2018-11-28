@@ -1,12 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
-{% endblock %}
-
 {% block title %}Speakers{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container">
         <h1>Speakers</h1>
         <a href="{{ path('speaker_create') }}" class="btn btn-success float-right mb-3">Add speaker</a>
