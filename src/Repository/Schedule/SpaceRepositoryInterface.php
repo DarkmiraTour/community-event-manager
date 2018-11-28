@@ -15,7 +15,7 @@ interface SpaceRepositoryInterface
     /**
      * @return Space[]
      */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SpaceRequest $spaceRequest): Space;
 

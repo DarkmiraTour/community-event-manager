@@ -15,13 +15,7 @@ final class ScheduleRequest
      */
     public $day;
 
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     */
-    public $location;
-
-    public function __construct(string $day = null, string $location = null)
+    public function __construct(string $day = null)
     {
         $this->day = $day;
     }
@@ -36,6 +30,5 @@ final class ScheduleRequest
     public function updateSchedule(Schedule $schedule): void
     {
         $schedule->setDay($this->day);
-        $schedule->setLocation($this->location);
     }
 }

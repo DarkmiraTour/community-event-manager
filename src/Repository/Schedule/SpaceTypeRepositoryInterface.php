@@ -14,7 +14,7 @@ interface SpaceTypeRepositoryInterface
     /**
      * @return SpaceType[]
      */
-    public function findAll();
+    public function findAll(): array;
 
     public function nextIdentity(): UuidInterface;
 

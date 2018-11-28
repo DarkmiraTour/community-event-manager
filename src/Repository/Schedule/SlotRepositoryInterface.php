@@ -15,7 +15,7 @@ interface SlotRepositoryInterface
     /**
      * @return Slot[]
      */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SlotRequest $slotRequest): Slot;
 

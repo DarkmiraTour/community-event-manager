@@ -44,12 +44,12 @@ class Schedule
         $this->id = $id;
     }
 
-    public function getDay(): ?\DateTime
+    public function getDay(): ?\DateTimeInterface
     {
         return $this->day;
     }
 
-    public function setDay(\DateTime $day): void
+    public function setDay(\DateTimeInterface $day): void
     {
         $this->day = $day;
     }
