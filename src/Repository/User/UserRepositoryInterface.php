@@ -13,7 +13,7 @@ interface UserRepositoryInterface
 
     public function findOneBy(array $criteria, array $orderBy = null): ?User;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $email, string $username): User;
 
     public function save(User $user): void;
 

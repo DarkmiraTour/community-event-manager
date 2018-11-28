@@ -19,12 +19,11 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Exceptions\EmptyPlainPasswordException;
+use App\Exceptions\InvalidTypeArgumentException;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
+final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
-    use TargetPathTrait;
-
     private $entityManager;
     private $router;
     private $csrfTokenManager;
@@ -47,8 +46,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
+            'email' => $request->request->get('login')['email'],
+            'password' => $request->request->get('login')['password'],
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
         $request->getSession()->set(
@@ -77,19 +76,27 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if (is_null($credentials) && !is_array($credentials)){
+            throw new InvalidTypeArgumentException('The argument `credentials` must be a not null array');
+        }
+
+        if (!isset($credentials['password'])){
+            throw new EmptyPlainPasswordException('The key `password` into the array `credentials` must not be empty');
+        }
+
+        return $this->passwordEncoder->isPasswordValid($user, (string) $credentials['password']);
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        if ($targetPath = $request->getSession()->get('_security.'.$providerKey.'.target_path')) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->router->generate('login_success'));
     }
 
-    protected function getLoginUrl()
+    public function getLoginUrl()
     {
         return $this->router->generate('app_login');
     }

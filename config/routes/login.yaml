@@ -1,9 +1,9 @@
 app_login:
     path: /
-    controller: App\Controller\Login\Security::login
+    controller: App\Controller\Login\Security::handle
     methods: [GET, POST]
 
 login_success:
     path: /success
-    controller: App\Controller\Login\Security::signInSuccessful
+    controller: App\Controller\Login\SignInSuccessful::handle
     methods: [GET]

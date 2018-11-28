@@ -4,24 +4,20 @@
 
 {% block content %}
 <div class="container">
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
+        {{ form_row(form.email, {'value': last_username}) }}
+        {{ form_row(form.password) }}
         <input type="hidden" name="_csrf_token"
             value="{{ csrf_token('authenticate') }}"
         >
-
         <button class="btn btn-lg btn-primary" type="submit">
             Sign in
         </button>
-    </form>
+    {{ form_end(form) }}
 </div>
 {% endblock %}

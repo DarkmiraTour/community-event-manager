@@ -4,43 +4,36 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
-use App\Repository\User\UserRepositoryInterface;
+use App\Repository\User\UserManagerInterface;
 
 class UserFixture extends Fixture
 {
-    private $encodedPassword;
-    private $userRepository;
+    private $userManager;
 
-    public function __construct(UserPasswordEncoderInterface $encodedPassword, UserRepositoryInterface $userRepository)
+    public function __construct(UserManagerInterface $userManager)
     {
-        $this->encodedPassword = $encodedPassword;
-        $this->userRepository = $userRepository;
+        $this->userManager = $userManager;
     }
 
     public function load(ObjectManager $manager): void
     {
-        $user = new User(
-            $this->userRepository->nextIdentity(),
+        $user = $this->userManager->create(
             'user@test.com',
-            'usertest'
+            'usertest',
+            'userpass'
         );
 
-        $user->setPassword($this->encodedPassword->encodePassword($user, 'userpass'));
-        $manager->persist($user);
-
-        $admin = new User(
-            $this->userRepository->nextIdentity(),
+        $admin = $this->userManager->create(
             'admin@test.com',
-            'admintest'
+            'admintest',
+            'adminpass'
         );
-
         $admin->upgradeToAdmin();
-        $admin->setPassword($this->encodedPassword->encodePassword($admin, 'adminpass'));
 
+        $manager->persist($user);
         $manager->persist($admin);
         $manager->flush();
     }

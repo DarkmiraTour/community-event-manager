@@ -7,6 +7,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\UuidInterface;
+use App\Exceptions\NotSupportedFunctionException;
 
 /**
  * @ORM\Table(name="app_user")
@@ -14,6 +15,9 @@ use Ramsey\Uuid\UuidInterface;
  */
 class User implements UserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
     /**
      * @ORM\Id()
      * @ORM\Column(type="guid", unique=true)
@@ -21,7 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100, unique=true)
+     * @ORM\Column(type="string", length=320, unique=true)
      */
     private $email;
 
@@ -36,7 +40,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=320)
      */
     private $password;
 
@@ -48,14 +52,12 @@ class User implements UserInterface
         $this->id = $id->toString();
         $this->email = $email;
         $this->username = $username;
-        $this->roles = $this->getRoles();
+        $this->roles = [self::ROLE_USER];
     }
 
     public function upgradeToAdmin(): self
     {
-        $roles = $this->roles;
-
-        $roles[] = 'ROLE_ADMIN';
+        $roles[] = self::ROLE_ADMIN;
 
         $this->roles = array_unique($roles);
 
@@ -65,8 +67,8 @@ class User implements UserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+
+        $roles[] = self::ROLE_USER;
 
         return array_unique($roles);
     }
@@ -76,20 +78,20 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
 
-    public function getSalt(): void
+    public function getSalt(): ?string
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        // the salt can be set here to add security with Argon2i algorithm
+        return null;
     }
 
     public function eraseCredentials(): void
     {
+        //as the plaintext password is not stored into this object, there is no sensitive data to remove, this function is still called by Symfony Authentication Guard
     }
 
     public function getUsername(): string

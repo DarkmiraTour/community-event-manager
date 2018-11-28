@@ -6,8 +6,6 @@ namespace App\Repository\User;
 
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Ramsey\Uuid\UuidInterface;
-use Ramsey\Uuid\Uuid;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
@@ -39,8 +37,8 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
         $this->entityManager->flush();
     }
 
-    public function nextIdentity(): UuidInterface
+    public function createWith(string $email, string $username): User
     {
-        return Uuid::uuid4();
+        return UserRepositoryFactory::create($email, $username);
     }
 }
