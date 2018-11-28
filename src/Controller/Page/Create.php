@@ -38,7 +38,9 @@ final class Create
 
     public function handle(Request $request): Response
     {
-        $form = $this->formFactory->create(PageType::class);
+        $form = $this->formFactory->create(PageType::class, null, [
+            'validation_groups' => ['addFile'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
