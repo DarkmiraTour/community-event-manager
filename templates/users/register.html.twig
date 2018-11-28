@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+<div class="container">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-lg btn-primary" type="submit">Confirm</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

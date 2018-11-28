@@ -1,0 +1,4 @@
+user_registration:
+    path: /registration
+    methods: [GET, POST]
+    controller: App\Controller\Login\Registration::handle

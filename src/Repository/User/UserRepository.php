@@ -10,9 +10,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
+    private $entityManager;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
+        $this->entityManager = $this->getEntityManager();
     }
 
     public function find($id, $lockMode = null, $lockVersion = null): ?User

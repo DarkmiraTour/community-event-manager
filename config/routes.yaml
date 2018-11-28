@@ -35,3 +35,7 @@ app_login:
 
 app_logout:
     path: /logout
+
+user:
+    resource: routes/users.yaml
+    prefix: users
