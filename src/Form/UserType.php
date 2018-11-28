@@ -15,7 +15,7 @@ use App\Dto\UserRequest;
 
 final class UserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, ['required' => true])

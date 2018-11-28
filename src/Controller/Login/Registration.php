@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Login;
 
 use App\Form\UserType;
-use App\Entity\User;
 use Twig\Environment as Twig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -37,7 +36,6 @@ final class Registration
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $newUser = $this->userManager->create(
                 $userRequest->getEmail(),
                 $userRequest->getUsername(),
@@ -52,20 +50,4 @@ final class Registration
             'form' => $form->createView(),
         ]));
     }
-    /*
-     * $organisationRequest = new OrganisationRequest();
-        $form = $this->formFactory->create(OrganisationType::class, $organisationRequest);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $organisation = $this->repository->createFrom($organisationRequest);
-            $this->repository->save($organisation);
-
-            return new RedirectResponse($this->router->generate('organisation_list'));
-        }
-
-        return new Response($this->renderer->render('organisations/create.html.twig', [
-            'form' => $form->createView(),
-        ]));
-     */
 }
