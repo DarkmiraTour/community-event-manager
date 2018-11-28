@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Repository\User;
 
 use App\Entity\User;
-use Ramsey\Uuid\UuidInterface;
 
 interface UserRepositoryInterface
 {

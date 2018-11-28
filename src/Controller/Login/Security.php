@@ -34,7 +34,7 @@ final class Security
         return new Response($this->environment->render('security/login.html.twig', [
                 'last_username' => $lastUsername,
                 'error' => $error,
-                'form' => $form->createView()
+                'form' => $form->createView(),
              ]));
     }
 }

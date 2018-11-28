@@ -76,11 +76,11 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        if (is_null($credentials) && !is_array($credentials)){
+        if (is_null($credentials) && !is_array($credentials)) {
             throw new InvalidTypeArgumentException('The argument `credentials` must be a not null array');
         }
 
-        if (!isset($credentials['password'])){
+        if (!isset($credentials['password'])) {
             throw new EmptyPlainPasswordException('The key `password` into the array `credentials` must not be empty');
         }
 
