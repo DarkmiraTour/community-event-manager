@@ -44,6 +44,16 @@
                 <th>Github</th>
                 <td>{{ speaker.github }}</td>
             </tr>
+            <tr>
+                <th>Talks</th>
+                <td>
+                    <ul>
+                        {% for talk in speaker.talks %}
+                            <li><a href="{{ path('talk_show', {'id': talk.id}) }}">{{ talk.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
             </tbody>
         </table>
 

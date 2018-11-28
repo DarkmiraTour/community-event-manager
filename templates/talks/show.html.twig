@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
+{% block title %}Talk{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Talk</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ talk.title }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ talk.description }}</td>
+                </tr>
+                <tr>
+                    <th>Speaker</th>
+                    <td>
+                        <a href="{{ path('speaker_show', {'id': talk.speaker.id}) }}">{{ talk.speaker.name }}</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+
+            <div class="float-right">
+                <a href="{{ path('talk_edit', {'id': talk.id}) }}" class="btn btn-warning">Edit</a>
+                {{ include('talks/_delete_form.html.twig', {'talk': talk}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class SpeakerRepository implements SpeakerRepositoryInterface
+final class SpeakerRepository implements SpeakerRepositoryInterface
 {
     private $repository;
     private $entityManager;

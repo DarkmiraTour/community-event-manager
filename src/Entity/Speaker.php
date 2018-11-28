@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 
@@ -86,6 +87,11 @@ class Speaker
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $github;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Talk::class, mappedBy="speaker")
+     */
+    private $talks;
 
     public function getId(): ?string
     {
@@ -198,5 +204,10 @@ class Speaker
         $this->github = $github;
 
         return $this;
+    }
+
+    public function getTalks(): Collection
+    {
+        return $this->talks;
     }
 }

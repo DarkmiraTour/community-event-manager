@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
+{% block title %}Edit talks{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Edit talk</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+            <button type="submit" class="btn btn-success float-right">Edit talk</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
