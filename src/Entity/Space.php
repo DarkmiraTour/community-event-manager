@@ -41,7 +41,7 @@ class Space
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Slot", mappedBy="space")
+     * @ORM\OneToMany(targetEntity="Slot", mappedBy="space", cascade={"all"})
      */
     private $slots;
 
