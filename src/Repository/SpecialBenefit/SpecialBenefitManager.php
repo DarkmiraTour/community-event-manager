@@ -6,7 +6,7 @@ namespace App\Repository\SpecialBenefit;
 
 use App\Entity\SpecialBenefit;
 use App\Dto\SpecialBenefitRequest;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SpecialBenefitManager implements SpecialBenefitManagerInterface
 {
@@ -17,9 +17,9 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
         $this->repository = $repository;
     }
 
-    public function find(string $id): ?SpecialBenefit
+    public function find(string $id): SpecialBenefit
     {
-        return $this->repository->find($id);
+        return $this->checkEntity($this->repository->find($id));
     }
 
     public function findAll(): array
@@ -27,67 +27,32 @@ final class SpecialBenefitManager implements SpecialBenefitManagerInterface
         return $this->repository->findAll();
     }
 
-    /**
-     * @param SpecialBenefitRequest $specialBenefitRequest
-     *
-     * @return SpecialBenefit
-     *
-     * @throws \InvalidArgumentException
-     * @throws \Exception
-     */
     public function createFrom(SpecialBenefitRequest $specialBenefitRequest): SpecialBenefit
     {
-        return new SpecialBenefit(
-            $this->nextIdentity(),
-            $specialBenefitRequest->label,
-            $specialBenefitRequest->price,
-            $specialBenefitRequest->description
-        );
+        return $this->repository->createSpecialBenefit($specialBenefitRequest->label, $specialBenefitRequest->price, $specialBenefitRequest->description);
     }
 
-    /**
-     * @param string $label
-     * @param float  $price
-     * @param string $description
-     *
-     * @return SpecialBenefit
-     *
-     * @throws \InvalidArgumentException
-     * @throws \Exception
-     */
     public function createWith(string $label, float $price, string $description): SpecialBenefit
     {
-        return new SpecialBenefit(
-            $this->nextIdentity(),
-            $label,
-            $price,
-            $description
-        );
+        return $this->repository->createSpecialBenefit($label, $price, $description);
     }
 
-    /**
-     * @param SpecialBenefit $specialBenefit
-     */
     public function save(SpecialBenefit $specialBenefit): void
     {
         $this->repository->save($specialBenefit);
     }
 
-    /**
-     * @param SpecialBenefit $specialBenefit
-     */
     public function remove(SpecialBenefit $specialBenefit): void
     {
         $this->repository->remove($specialBenefit);
     }
 
-    /**
-     * @return UuidInterface
-     *
-     * @throws \Exception
-     */
-    private function nextIdentity(): UuidInterface
+    private function checkEntity(?SpecialBenefit $specialBenefit): SpecialBenefit
     {
-        return $this->repository->nextIdentity();
+        if (!$specialBenefit) {
+            throw new NotFoundHttpException();
+        }
+
+        return $specialBenefit;
     }
 }

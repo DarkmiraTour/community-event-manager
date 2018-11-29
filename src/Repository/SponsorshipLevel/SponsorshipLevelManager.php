@@ -6,74 +6,48 @@ namespace App\Repository\SponsorshipLevel;
 
 use App\Entity\SponsorshipLevel;
 use App\Dto\SponsorshipLevelRequest;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
 {
-    private $entityManager;
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(SponsorshipLevelRepositoryInterface $repository)
     {
-        $this->entityManager = $entityManager;
-        $this->repository = $entityManager->getRepository(SponsorshipLevel::class);
+        $this->repository = $repository;
     }
 
-    public function find(string $id): ?SponsorshipLevel
+    public function find(string $id): SponsorshipLevel
     {
-        return $this->repository->find($id);
+        return $this->checkEntity($this->repository->find($id));
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }
 
-    /**
-     * @param SponsorshipLevelRequest $sponsorshipLevelRequest
-     *
-     * @return SponsorshipLevel
-     *
-     * @throws \Exception
-     */
     public function createFrom(SponsorshipLevelRequest $sponsorshipLevelRequest): SponsorshipLevel
     {
-        return new SponsorshipLevel(
-            $this->nextIdentity(),
-            $sponsorshipLevelRequest->label,
-            $sponsorshipLevelRequest->price,
-            $sponsorshipLevelRequest->position
-        );
+        return $this->repository->createSponsorshipLevel($sponsorshipLevelRequest->label, $sponsorshipLevelRequest->price, $sponsorshipLevelRequest->position);
     }
 
-    /**
-     * @return UuidInterface
-     *
-     * @throws \Exception
-     */
-    public function nextIdentity(): UuidInterface
+    public function createWith(string $label, float $price, ?int $position): SponsorshipLevel
     {
-        return Uuid::uuid4();
+        return $this->repository->createSponsorshipLevel($label, $price, $position);
     }
 
     public function save(SponsorshipLevel $sponsorshipLevel): void
     {
-        $this->entityManager->persist($sponsorshipLevel);
-        $this->entityManager->flush();
+        $this->repository->save($sponsorshipLevel);
     }
 
     public function remove(SponsorshipLevel $sponsorshipLevel): void
     {
-        $this->entityManager->remove($sponsorshipLevel);
-        $this->entityManager->flush();
+        $this->repository->remove($sponsorshipLevel);
     }
 
-    /**
-     * @return SponsorshipLevel[]
-     */
-    public function getOrderedList()
+    public function getOrderedList(): array
     {
         return $this->repository->findBy([], ['position' => 'asc']);
     }
@@ -90,20 +64,23 @@ final class SponsorshipLevelManager implements SponsorshipLevelManagerInterface
         $sponsorshipLevel->setPosition($new_position);
         $new_sponsorshipLevel->setPosition($first_position);
 
-        $this->entityManager->persist($sponsorshipLevel);
-        $this->entityManager->persist($new_sponsorshipLevel);
-        $this->entityManager->flush();
+        $this->save($sponsorshipLevel);
+        $this->save($new_sponsorshipLevel);
 
         return $new_sponsorshipLevel;
     }
 
-    /**
-     * @return int|null
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
     public function getMaxPosition(): ?int
     {
         return (int) $this->repository->getMaxPosition();
+    }
+
+    private function checkEntity(?SponsorshipLevel $sponsorshipLevel): SponsorshipLevel
+    {
+        if (!$sponsorshipLevel) {
+            throw new NotFoundHttpException();
+        }
+
+        return $sponsorshipLevel;
     }
 }

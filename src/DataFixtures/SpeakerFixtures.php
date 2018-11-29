@@ -12,7 +12,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
 use Symfony\Component\HttpFoundation\File\File;
 
-class SpeakerFixtures extends Fixture
+final class SpeakerFixtures extends Fixture
 {
     private $speakerRepository;
     private $fileUploader;

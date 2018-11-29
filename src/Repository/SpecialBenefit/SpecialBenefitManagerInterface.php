@@ -9,7 +9,7 @@ use App\Dto\SpecialBenefitRequest;
 
 interface SpecialBenefitManagerInterface
 {
-    public function find(string $id): ?SpecialBenefit;
+    public function find(string $id): SpecialBenefit;
 
     public function findAll(): array;
 

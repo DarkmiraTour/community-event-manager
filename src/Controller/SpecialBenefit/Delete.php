@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\SpecialBenefit;
 
-use App\Entity\SpecialBenefit;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -29,15 +27,10 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @param Request        $request
-     * @param SpecialBenefit $specialBenefit
-     * @ParamConverter("specialBenefit", class="App:SpecialBenefit")
-     *
-     * @return RedirectResponse
-     */
-    public function handle(Request $request, SpecialBenefit $specialBenefit): RedirectResponse
+    public function handle(Request $request): RedirectResponse
     {
+        $specialBenefit = $this->specialBenefitManager->find($request->attributes->get('id'));
+
         $token = new CsrfToken('delete'.$specialBenefit->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->specialBenefitManager->remove($specialBenefit);

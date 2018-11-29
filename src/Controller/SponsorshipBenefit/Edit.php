@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
@@ -34,24 +33,9 @@ final class Edit
         $this->router = $router;
     }
 
-    /**
-     * @param Request $request
-     * @param string  $id
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function handle(Request $request, string $id): Response
+    public function handle(Request $request): Response
     {
-        $sponsorshipBenefit = $this->sponsorshipBenefitManager->find($id);
-
-        if (null === $sponsorshipBenefit) {
-            throw new NotFoundHttpException();
-        }
-
+        $sponsorshipBenefit = $this->sponsorshipBenefitManager->find($request->attributes->get('id'));
         $sponsorshipBenefitRequest = SponsorshipBenefitRequest::createFromEntity($sponsorshipBenefit);
 
         $form = $this->formFactory->create(SponsorshipBenefitType::class, $sponsorshipBenefitRequest, [
@@ -60,6 +44,7 @@ final class Edit
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sponsorshipBenefitRequest = $form->getData();
             $sponsorshipBenefitRequest->updateEntity($sponsorshipBenefit);
             $this->sponsorshipBenefitManager->save($sponsorshipBenefit);
 

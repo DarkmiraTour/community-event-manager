@@ -8,72 +8,58 @@ use App\Entity\SponsorshipLevel;
 use App\Entity\SponsorshipBenefit;
 use App\Entity\SponsorshipLevelBenefit;
 use App\Dto\SponsorshipLevelBenefitRequest;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SponsorshipLevelBenefitManager implements SponsorshipLevelBenefitManagerInterface
 {
-    private $entityManager;
     private $repository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(SponsorshipLevelBenefitRepositoryInterface $repository)
     {
-        $this->entityManager = $entityManager;
-        $this->repository = $entityManager->getRepository(SponsorshipLevelBenefit::class);
+        $this->repository = $repository;
     }
 
-    public function find(string $id): ?SponsorshipLevelBenefit
+    public function find(string $id): SponsorshipLevelBenefit
     {
-        return $this->repository->find($id);
+        return $this->checkEntity($this->repository->find($id));
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->repository->findAll();
     }
 
-    /**
-     * @param SponsorshipLevelBenefitRequest $sponsorshipLevelBenefitRequest
-     *
-     * @return SponsorshipLevelBenefit
-     *
-     * @throws \Exception
-     */
     public function createFrom(SponsorshipLevelBenefitRequest $sponsorshipLevelBenefitRequest): SponsorshipLevelBenefit
     {
-        return new SponsorshipLevelBenefit(
-            $this->nextIdentity(),
-            $sponsorshipLevelBenefitRequest->sponsorshipLevel,
-            $sponsorshipLevelBenefitRequest->sponsorshipBenefit,
-            $sponsorshipLevelBenefitRequest->content
-        );
+        return $this->repository->createSponsorshipLevelBenefit($sponsorshipLevelBenefitRequest->sponsorshipLevel, $sponsorshipLevelBenefitRequest->sponsorshipBenefit, $sponsorshipLevelBenefitRequest->content);
     }
 
-    /**
-     * @return UuidInterface
-     *
-     * @throws \Exception
-     */
-    public function nextIdentity(): UuidInterface
+    public function createWith(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content): SponsorshipLevelBenefit
     {
-        return Uuid::uuid4();
+        return $this->repository->createSponsorshipLevelBenefit($sponsorshipLevel, $sponsorshipBenefit, $content);
     }
 
-    public function save(SponsorshipLevelBenefit $sponsorshipBenefit): void
+    public function save(SponsorshipLevelBenefit $sponsorshipLevelBenefit): void
     {
-        $this->entityManager->persist($sponsorshipBenefit);
-        $this->entityManager->flush();
+        $this->repository->save($sponsorshipLevelBenefit);
     }
 
-    public function remove(SponsorshipLevelBenefit $sponsorshipBenefit): void
+    public function remove(SponsorshipLevelBenefit $sponsorshipLevelBenefit): void
     {
-        $this->entityManager->remove($sponsorshipBenefit);
-        $this->entityManager->flush();
+        $this->repository->remove($sponsorshipLevelBenefit);
     }
 
     public function getByBenefitAndLevel(SponsorshipBenefit $sponsorshipBenefit, SponsorshipLevel $sponsorshipLevel): ?SponsorshipLevelBenefit
     {
         return $this->repository->findOneBy(['sponsorshipBenefit' => $sponsorshipBenefit, 'sponsorshipLevel' => $sponsorshipLevel]);
+    }
+
+    private function checkEntity(?SponsorshipLevelBenefit $sponsorshipLevelBenefit): SponsorshipLevelBenefit
+    {
+        if (!$sponsorshipLevelBenefit) {
+            throw new NotFoundHttpException();
+        }
+
+        return $sponsorshipLevelBenefit;
     }
 }

@@ -47,32 +47,30 @@ class SpecialBenefit
         $this->description = $description;
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function updateSpecialBenefit(string $label, float $price, string $description)
+    public function updateSpecialBenefit(string $label, float $price, string $description): void
     {
         $this->label = $label;
         $this->price = $price;
         $this->description = $description;
-
-        return $this;
     }
 }

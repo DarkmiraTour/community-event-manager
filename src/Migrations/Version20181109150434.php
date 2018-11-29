@@ -10,9 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20181109150434 extends AbstractMigration
 {
+    private const TABLE_NAME = 'special_benefit';
+
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('special_benefit');
+        $table = $schema->createTable(self::TABLE_NAME);
         $table->addColumn('id', Type::GUID);
         $table->addColumn('label', Type::STRING, ['length' => 255]);
         $table->addColumn('price', Type::FLOAT);
@@ -23,6 +25,6 @@ final class Version20181109150434 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('special_benefit');
+        $schema->dropTable(self::TABLE_NAME);
     }
 }

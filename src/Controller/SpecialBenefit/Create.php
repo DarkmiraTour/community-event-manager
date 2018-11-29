@@ -32,15 +32,6 @@ final class Create
         $this->router = $router;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
     public function handle(Request $request): Response
     {
         $form = $this->formFactory->create(SpecialBenefitType::class);

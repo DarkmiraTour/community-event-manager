@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\SponsorshipLevel;
 
 use App\Form\SponsorshipLevelType;
-use App\Dto\SponsorshipLevelRequest;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -44,12 +43,11 @@ final class Create
      */
     public function handle(Request $request): Response
     {
-        $sponsorshipLevelRequest = new SponsorshipLevelRequest();
-
-        $form = $this->formFactory->create(SponsorshipLevelType::class, $sponsorshipLevelRequest);
+        $form = $this->formFactory->create(SponsorshipLevelType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $sponsorshipLevelRequest = $form->getData();
             $position = $this->sponsorshipLevelManager->getMaxPosition();
             $sponsorshipLevelRequest->position = ++$position;
 
