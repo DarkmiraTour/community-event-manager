@@ -38,7 +38,7 @@ class SponsorshipLevelBenefit
      */
     private $content;
 
-    public function __construct(UuidInterface $id, SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, string $content = null)
+    public function __construct(UuidInterface $id, SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content)
     {
         $this->id = $id->toString();
         $this->sponsorshipLevel = $sponsorshipLevel;
@@ -46,12 +46,12 @@ class SponsorshipLevelBenefit
         $this->content = $content;
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function getSponsorshipLevel(): ?SponsorshipLevel
+    public function getSponsorshipLevel(): SponsorshipLevel
     {
         return $this->sponsorshipLevel;
     }
@@ -63,7 +63,7 @@ class SponsorshipLevelBenefit
         return $this;
     }
 
-    public function getSponsorshipBenefit(): ?SponsorshipBenefit
+    public function getSponsorshipBenefit(): SponsorshipBenefit
     {
         return $this->sponsorshipBenefit;
     }
@@ -80,10 +80,10 @@ class SponsorshipLevelBenefit
         return $this->content;
     }
 
-    public function setContent(?string $content): self
+    public function updateSponsorshipLevelBenefit(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content): void
     {
+        $this->sponsorshipLevel = $sponsorshipLevel;
+        $this->sponsorshipBenefit = $sponsorshipBenefit;
         $this->content = $content;
-
-        return $this;
     }
 }

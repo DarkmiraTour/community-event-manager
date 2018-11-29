@@ -21,13 +21,6 @@ final class Index
         $this->sponsorshipBenefitManager = $sponsorshipBenefitManager;
     }
 
-    /**
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
     public function handle(): Response
     {
         return new Response($this->renderer->render('sponsorshipBenefit/index.html.twig', [

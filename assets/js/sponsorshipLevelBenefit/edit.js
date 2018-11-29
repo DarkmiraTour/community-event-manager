@@ -6,8 +6,8 @@ import '../../css/sponsorshipLevelBenefit/edit.scss';
 import SnackBar from '../Components/SnackBar';
 
 $(document).ready(function() {
-    updateLevelArrows();
-    updateBenefitArrows();
+    updateLevelArrows(true);
+    updateBenefitArrows(true);
     initSponsorshipLevelBenefitActions();
 });
 
@@ -37,12 +37,12 @@ function sendLevelPosition(level_id, move) {
 function moveLevel(old_id, new_id, move) {
     moveBenefitTr(old_id, new_id, move);
     moveContentLevelTh(old_id, new_id, move);
-    updateLevelArrows();
+    updateLevelArrows(false, old_id);
 }
 
 function moveBenefitTr(old_id, new_id, move) {
     $('.benefit_tr').each(function() {
-        let old_content = '<td data-id="'+old_id+'">' + $(this).find('td[data-id="'+old_id+'"]').html() + '</td>';
+        let old_content = '<td class="benefit_level" data-id="'+old_id+'">' + $(this).find('td[data-id="'+old_id+'"]').html() + '</td>';
         $(this).find('td[data-id="'+old_id+'"]').remove();
         if (move === 'left') {
             $(this).find('td[data-id="'+new_id+'"]').before(old_content);
@@ -62,7 +62,7 @@ function moveContentLevelTh(old_id, new_id, move) {
     $('.level_th[data-id="'+new_id+'"]').after(old_content);
 }
 
-function updateLevelArrows() {
+function updateLevelArrows(start, old_id) {
     const countLevels = $('.list_levels .level_th').length;
 
     $('.list_levels .level_th').each(function() {
@@ -80,16 +80,30 @@ function updateLevelArrows() {
             $(this).find('.fa-caret-right').addClass('d-none');
         }
     });
-    initLevelActions();
-    initSponsorshipLevelBenefitActions();
+    if (start) {
+        initAllLevelActions();
+        return
+    }
+    initLevelActions(old_id);
+    initSponsorshipLevelBenefitActionsByLevel(old_id);
 }
 
-function initLevelActions() {
+function initAllLevelActions() {
     $('.level_th .fa-caret-left').click(function() {
         sendLevelPosition($(this).parent().attr('data-id'), 'left');
     });
 
     $('.level_th .fa-caret-right').click(function() {
+        sendLevelPosition($(this).parent().attr('data-id'), 'right');
+    });
+}
+
+function initLevelActions(old_id) {
+    $('.level_th[data-id="'+old_id+'"] .fa-caret-left').click(function() {
+        sendLevelPosition($(this).parent().attr('data-id'), 'left');
+    });
+
+    $('.level_th[data-id="'+old_id+'"] .fa-caret-right').click(function() {
         sendLevelPosition($(this).parent().attr('data-id'), 'right');
     });
 }
@@ -122,14 +136,14 @@ function moveBenefit(old_id, new_id, move) {
     $('.benefit_tr[data-id="'+old_id+'"]').remove();
     if (move === 'up') {
         $('.benefit_tr[data-id="'+new_id+'"]').before(old_object);
-        updateBenefitArrows();
+        updateBenefitArrows(false, old_id);
         return false;
     }
     $('.benefit_tr[data-id="'+new_id+'"]').after(old_object);
-    updateBenefitArrows();
+    updateBenefitArrows(false, old_id);
 }
 
-function updateBenefitArrows() {
+function updateBenefitArrows(start, old_id) {
     const countLevels = $('.list_benefits .benefit_tr').length;
     $('.list_benefits .benefit_tr').each(function() {
         let index = parseInt($(this).index());
@@ -148,16 +162,29 @@ function updateBenefitArrows() {
             $(this).find('.fa-caret-up').addClass('mt-md-3');
         }
     });
-    initBenefitActions();
-    initSponsorshipLevelBenefitActions();
+
+    if (start) {
+        initAllBenefitActions();
+    }
+    initBenefitActions(old_id);
+    initSponsorshipLevelBenefitActionsByBenefit(old_id);
 }
 
-function initBenefitActions() {
+function initAllBenefitActions() {
     $('.benefit_tr .fa-caret-up').click(function() {
         sendBenefitPosition($(this).closest('.benefit_tr').attr('data-id'), 'up');
     });
 
     $('.benefit_tr .fa-caret-down').click(function() {
+        sendBenefitPosition($(this).closest('.benefit_tr').attr('data-id'), 'down');
+    });
+}
+function initBenefitActions(old_id) {
+    $('.benefit_tr[data-id="'+old_id+'"] .fa-caret-up').click(function() {
+        sendBenefitPosition($(this).closest('.benefit_tr').attr('data-id'), 'up');
+    });
+
+    $('.benefit_tr[data-id="'+old_id+'"] .fa-caret-down').click(function() {
         sendBenefitPosition($(this).closest('.benefit_tr').attr('data-id'), 'down');
     });
 }
@@ -189,6 +216,64 @@ function initSponsorshipLevelBenefitActions() {
     });
 
     $('.benefit_tr input[type="text"]').keydown(function() {
+        $(this).parent().find('.fa-check').removeClass('text-hide');
+    });
+}
+function initSponsorshipLevelBenefitActionsByLevel(old_id) {
+    $('.benefit_tr .benefit_level[data-id="'+old_id+'"] input[type="checkbox"]').click(function() {
+        const benefit_id = $(this).closest('.benefit_tr').attr('data-id');
+        const level_id = $(this).parent().attr('data-id');
+        const is_check = $(this).is(':checked');
+
+        if (!is_check) {
+            $(this).parent().find('input[type="text"]').val("");
+        }
+
+        saveDatas(benefit_id, level_id, is_check);
+    });
+
+    $('.benefit_tr .benefit_level[data-id="'+old_id+'"] .fa-check').click(function() {
+        const benefit_id = $(this).closest('.benefit_tr').attr('data-id');
+        const level_id = $(this).parent().attr('data-id');
+        const text = $(this).parent().find('input[type="text"]').val();
+
+        if (text != null) {
+            $(this).parent().find('input[type="checkbox"]').prop('checked', true);
+        }
+        $(this).addClass('text-hide');
+        saveDatas(benefit_id, level_id, true, text);
+    });
+
+    $('.benefit_tr .benefit_level[data-id="'+old_id+'"] input[type="text"]').keydown(function() {
+        $(this).parent().find('.fa-check').removeClass('text-hide');
+    });
+}
+function initSponsorshipLevelBenefitActionsByBenefit(old_id) {
+    $('.benefit_tr[data-id="'+old_id+'"] input[type="checkbox"]').click(function() {
+        const benefit_id = $(this).closest('.benefit_tr').attr('data-id');
+        const level_id = $(this).parent().attr('data-id');
+        const is_check = $(this).is(':checked');
+
+        if (!is_check) {
+            $(this).parent().find('input[type="text"]').val("");
+        }
+
+        saveDatas(benefit_id, level_id, is_check);
+    });
+
+    $('.benefit_tr[data-id="'+old_id+'"] .fa-check').click(function() {
+        const benefit_id = $(this).closest('.benefit_tr').attr('data-id');
+        const level_id = $(this).parent().attr('data-id');
+        const text = $(this).parent().find('input[type="text"]').val();
+
+        if (text != null) {
+            $(this).parent().find('input[type="checkbox"]').prop('checked', true);
+        }
+        $(this).addClass('text-hide');
+        saveDatas(benefit_id, level_id, true, text);
+    });
+
+    $('.benefit_tr[data-id="'+old_id+'"] input[type="text"]').keydown(function() {
         $(this).parent().find('.fa-check').removeClass('text-hide');
     });
 }

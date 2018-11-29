@@ -8,20 +8,16 @@ use App\Entity\SponsorshipLevel;
 use App\Entity\SponsorshipBenefit;
 use App\Entity\SponsorshipLevelBenefit;
 use App\Dto\SponsorshipLevelBenefitRequest;
-use Ramsey\Uuid\UuidInterface;
 
 interface SponsorshipLevelBenefitManagerInterface
 {
-    public function find(string $id): ?SponsorshipLevelBenefit;
+    public function find(string $id): SponsorshipLevelBenefit;
 
-    /**
-     * @return SponsorshipLevelBenefit[]
-     */
-    public function findAll();
+    public function findAll(): array;
 
     public function createFrom(SponsorshipLevelBenefitRequest $sponsorshipLevelBenefitRequest): SponsorshipLevelBenefit;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(SponsorshipLevel $sponsorshipLevel, SponsorshipBenefit $sponsorshipBenefit, ?string $content): SponsorshipLevelBenefit;
 
     public function save(SponsorshipLevelBenefit $sponsorshipLevelBenefit): void;
 

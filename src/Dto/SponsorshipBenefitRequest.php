@@ -20,7 +20,7 @@ final class SponsorshipBenefitRequest
      */
     public $position;
 
-    public function __construct(string $label = null, int $position = null)
+    public function __construct(string $label, ?int $position = null)
     {
         $this->label = $label;
         $this->position = $position;
@@ -28,7 +28,7 @@ final class SponsorshipBenefitRequest
 
     public static function createFromEntity(SponsorshipBenefit $sponsorshipBenefit): SponsorshipBenefitRequest
     {
-        return new SponsorshipBenefitRequest(
+        return new self(
             $sponsorshipBenefit->getLabel(),
             $sponsorshipBenefit->getPosition()
         );
@@ -36,7 +36,11 @@ final class SponsorshipBenefitRequest
 
     public function updateEntity(SponsorshipBenefit $sponsorshipBenefit): void
     {
-        $sponsorshipBenefit->setLabel($this->label);
-        $sponsorshipBenefit->setPosition($this->position);
+        $sponsorshipBenefit->updateSponsorshipBenefit($this->label, $this->position);
+    }
+
+    public function updateFromForm(string $label): void
+    {
+        $this->label = $label;
     }
 }

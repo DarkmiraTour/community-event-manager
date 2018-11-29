@@ -27,15 +27,11 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    public function handle(Request $request, string $id): RedirectResponse
+    public function handle(Request $request): RedirectResponse
     {
-        $sponsorshipLevel = $this->sponsorshipLevelManager->find($id);
+        $sponsorshipLevel = $this->sponsorshipLevelManager->find($request->attributes->get('id'));
 
-        if (null === $sponsorshipLevel) {
-            throw new NotFoundHttpException();
-        }
-
-        $token = new CsrfToken('delete'.$id, $request->request->get('_token'));
+        $token = new CsrfToken('delete'.$sponsorshipLevel->getId(), $request->request->get('_token'));
         if ($this->csrfTokenManager->isTokenValid($token)) {
             $this->sponsorshipLevelManager->remove($sponsorshipLevel);
         }
