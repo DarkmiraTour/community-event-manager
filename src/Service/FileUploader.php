@@ -25,4 +25,15 @@ final class FileUploader implements FileUploaderInterface
 
         return $filename;
     }
+
+    public function get(string $fileName)
+    {
+        return $this->filesystem->read($fileName);
+    }
+
+    public function makeTempFile(string $fileName): void
+    {
+        $content = $this->get($fileName);
+        file_put_contents(sys_get_temp_dir().'/'.$fileName, $content);
+    }
 }

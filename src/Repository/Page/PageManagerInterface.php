@@ -11,6 +11,9 @@ interface PageManagerInterface
 {
     public function find(string $id): Page;
 
+    /**
+     * @return Page[]
+     */
     public function findAll(): array;
 
     public function createFrom(PageRequest $pageRequest): Page;

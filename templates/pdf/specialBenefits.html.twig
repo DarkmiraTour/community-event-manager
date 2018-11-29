@@ -1,0 +1,10 @@
+<page backtop="20mm" backright="10mm" backbottom="20mm" backleft="10mm">
+    {% for specialBenefit in specialBenefits %}
+        <h3 style="color: #6AA84F;padding-top:5px;">
+            <span style="margin-top:5px;">{{ specialBenefit.label }}</span>
+            <div style="text-align: center; width:130px; margin-left: 10px; padding:5px; background-color: #6AA84F; color: white; font-weight: bold; display: inline-block;">{{ specialBenefit.price|number_format(2, ',', ' ')~'€' }}</div>
+        </h3>
+        <p>{{ specialBenefit.description|nl2br }}</p>
+        {% if not loop.last %}<hr style="background-color: #6AA84F; border-color: #6AA84F; height: 5px;" />{% endif %}
+    {% endfor %}
+</page>
