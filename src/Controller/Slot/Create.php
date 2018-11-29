@@ -41,11 +41,12 @@ final class Create
         $form->handleRequest($request);
 
         if ($slotRequest->end <= $slotRequest->start) {
-            throw new \LogicException('date start cannot less than date end');
+            throw new \LogicException('The event cannot start after it ends');
         }
 
-        if ($slotRequest->end->diff($slotRequest->start)->i < 10) {
-            throw new \LogicException('duration cannot less than 10 minutes');
+        $diff = $slotRequest->end->diff($slotRequest->start);
+        if ($diff->i < 10 && $diff->h == 0) {
+            throw new \LogicException('The event should be longer than 10 minutes');
         }
 
         $slot = $this->repository->createFrom($slotRequest);
