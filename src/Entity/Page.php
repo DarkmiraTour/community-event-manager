@@ -6,7 +6,6 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -20,19 +19,16 @@ class Page
     private $id;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $background;
