@@ -21,7 +21,7 @@ schedule_space_insert:
   methods: [POST]
 
 schedule_space_delete:
-  path: /{id}/delete
+  path: /space/{id}/delete
   methods: [DELETE]
   controller: App\Controller\Space\Delete::handle
   requirements:
@@ -40,7 +40,7 @@ schedule_slot_edit:
     id: '%routing.uuid%'
 
 schedule_slot_delete:
-  path: /{id}/delete
+  path: /slot/{id}/delete
   methods: [DELETE]
   controller: App\Controller\Slot\Delete::handle
   requirements:
