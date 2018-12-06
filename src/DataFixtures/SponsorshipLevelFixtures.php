@@ -26,7 +26,7 @@ final class SponsorshipLevelFixtures extends Fixture
         for ($sponsorshipLevelNbr = 0; $sponsorshipLevelNbr < self::SPONSORSHIP_LEVEL_NBR; $sponsorshipLevelNbr++) {
             $sponsorshipLevel = $this->sponsorshipLevelManager->createWith(
                 "Level {$sponsorshipLevelNbr}",
-                $faker->randomFloat(2),
+                $faker->randomFloat(800, 15000),
                 $sponsorshipLevelNbr
             );
             $this->setReference("sponsorship-level-{$sponsorshipLevelNbr}", $sponsorshipLevel);
