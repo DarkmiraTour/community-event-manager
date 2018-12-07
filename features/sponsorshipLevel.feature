@@ -25,7 +25,7 @@ Feature: Sponsorship Level
 
   Scenario: I fill a string in price instead of a double when i edit a sponsorship level "Level 1"
     Given I am on "sponsorship-level/"
-    And I click "edit" on the row containing "Level 1"
+    And I click "Edit" on the row containing "Level 1"
     When I fill in "sponsorship_level[label]" with "Level 10"
     And I fill in "sponsorship_level[price]" with "error"
     And I press "Update"
@@ -33,7 +33,7 @@ Feature: Sponsorship Level
 
   Scenario: I don't fill all data needed when i edit a sponsorship level "Level 1"
     Given I am on "sponsorship-level/"
-    And I click "edit" on the row containing "Level 1"
+    And I click "Edit" on the row containing "Level 1"
     When I fill in "sponsorship_level[label]" with ""
     And I fill in "sponsorship_level[price]" with ""
     And I press "Update"
@@ -41,20 +41,20 @@ Feature: Sponsorship Level
 
   Scenario: I edit the sponsorship level "Level 1"
     Given I am on "sponsorship-level/"
-    And I click "edit" on the row containing "Level 1"
+    And I click "Edit" on the row containing "Level 1"
     When I fill in "sponsorship_level[label]" with "Level 10"
     And I press "Update"
     Then I should be on "sponsorship-level/"
     And I should see "Level 10"
 
   @javascript
-  Scenario: I delete the sponsorship level "Level 10"
+  Scenario: I cancel the delete of sponsorship level "Level 10"
     Given I am on "sponsorship-level/"
     When I press "Delete" on the row containing "Level 10" and cancel popup
     Then I should see "Level 10"
 
   @javascript
-  Scenario: I delete the sponsorship level "Level 10"
+  Scenario: I confirm the delete of sponsorship level "Level 10"
     Given I am on "sponsorship-level/"
     When I press "Delete" on the row containing "Level 10" and confirm popup
     Then I should not see "Level 10"
