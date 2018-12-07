@@ -46,3 +46,37 @@ services:
         volumes:
             - ./var/s3:/data
         command: 'server /data'
+    hub:
+        image: elgalu/selenium
+        volumes:
+          - /dev/shm:/dev/shm
+        privileged: true
+        environment:
+          - SELENIUM_HUB_HOST=hub
+          - SELENIUM_HUB_PORT=4445
+          - GRID=true
+          - CHROME=false
+          - FIREFOX=false
+        depends_on:
+          - php
+    chrome:
+        image: elgalu/selenium
+        depends_on:
+          - hub
+        volumes:
+          - /dev/shm:/dev/shm
+        privileged: true
+        environment:
+          - NOVNC=true
+          - SELENIUM_HUB_HOST=hub
+          - SELENIUM_HUB_PORT=4445
+          - SELENIUM_NODE_HOST={{CONTAINER_IP}}
+          - SCREEN_WIDTH=1300
+          - SCREEN_HEIGHT=999
+          - VIDEO=false
+          - GRID=false
+          - CHROME=true
+          - FIREFOX=false
+
+        ports:
+          - 6080:26080

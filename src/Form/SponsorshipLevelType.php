@@ -44,19 +44,13 @@ final class SponsorshipLevelType extends AbstractType implements DataMapperInter
     {
         $forms = iterator_to_array($forms);
 
-        if (null !== $data) {
-            $data->updateFromForm(
-                $forms['label']->getData(),
-                $forms['price']->getData()
-            );
-
-            return;
+        if (null === $data) {
+            $data = new SponsorshipLevelRequest();
         }
 
-        $data = new SponsorshipLevelRequest(
-            $forms['label']->getData(),
-            $forms['price']->getData()
-        );
+        $data = new SponsorshipLevelRequest();
+        $data->label = $forms['label']->getData();
+        $data->price = $forms['price']->getData();
     }
 
     public function configureOptions(OptionsResolver $resolver): void
