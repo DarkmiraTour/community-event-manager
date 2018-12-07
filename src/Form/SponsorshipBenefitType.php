@@ -33,17 +33,10 @@ final class SponsorshipBenefitType extends AbstractType implements DataMapperInt
     {
         $forms = iterator_to_array($forms);
 
-        if (null !== $data) {
-            $data->updateFromForm(
-                $forms['label']->getData()
-            );
-
-            return;
+        if (null === $data) {
+            $data = new SponsorshipBenefitRequest();
         }
-
-        $data = new SponsorshipBenefitRequest(
-            $forms['label']->getData()
-        );
+        $data->label = $forms['label']->getData();
     }
 
     public function configureOptions(OptionsResolver $resolver): void
