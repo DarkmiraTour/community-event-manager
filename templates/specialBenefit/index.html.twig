@@ -7,11 +7,13 @@
         <div class="col col-6">
             <h1>Special Sponsorship</h1>
         </div>
-        <div class="col col-6">
-            <p class="text-right">
-                <a class="btn btn-primary" href="{{ path('special_benefit_create') }}">Create new</a>
-            </p>
-        </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col col-6">
+                <p class="text-right">
+                    <a class="btn btn-primary" href="{{ path('special_benefit_create') }}">Add new benefit</a>
+                </p>
+            </div>
+        {% endif %}
     </div>
 
     <table class="table table-hover">
@@ -29,12 +31,14 @@
                 <td>{{ specialBenefit.price|localizedcurrency(currency) }}</td>
                 <td class="text-right">
                     <a class="btn btn-info btn-sm" href="{{ path('special_benefit_show', {'id': specialBenefit.id}) }}">Show</a>
-                    <a class="btn btn-secondary btn-sm" href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">edit</a>
-                    <form class="d-inline" method="post" action="{{ path('special_benefit_delete', {'id': specialBenefit.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialBenefit.id) }}">
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-secondary btn-sm" href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">edit</a>
+                        <form class="d-inline" method="post" action="{{ path('special_benefit_delete', {'id': specialBenefit.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialBenefit.id) }}">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

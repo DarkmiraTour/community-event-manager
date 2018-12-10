@@ -9,7 +9,10 @@
         </div>
         <div class="col col-6">
             <p class="text-right">
-                <a class="btn btn-primary" href="{{ path('sponsorship_level_create') }}">Create new</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-primary" href="{{ path('sponsorship_level_create') }}">Create new</a>
+                {% endif %}
+                
                 <a class="btn btn-info" href="{{ path('sponsorship_level_benefit_view') }}">View Sponsorship Level Benefits</a>
             </p>
         </div>
@@ -20,7 +23,9 @@
             <tr>
                 <th>Label</th>
                 <th>Price</th>
-                <th class="text-right">actions</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th class="text-right">actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -28,14 +33,16 @@
             <tr>
                 <td>{{ level.label }}</td>
                 <td>{{ level.price|localizedcurrency(currency) }}</td>
-                <td class="text-right">
-                    <a class="btn btn-secondary btn-sm" href="{{ path('sponsorship_level_edit', {'id': level.id}) }}">edit</a>
-                    <form class="d-inline" method="post" action="{{ path('sponsorship_level_delete', {'id': level.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ level.id) }}">
-                        <button class="btn btn-danger btn-sm">Delete</button>
-                    </form>
-                </td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td class="text-right">
+                        <a class="btn btn-secondary btn-sm" href="{{ path('sponsorship_level_edit', {'id': level.id}) }}">edit</a>
+                        <form class="d-inline" method="post" action="{{ path('sponsorship_level_delete', {'id': level.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ level.id) }}">
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>

@@ -32,3 +32,10 @@ special_benefit:
 talks:
     resource: routes/talks.yaml
     prefix: talks
+    
+app_login:
+    resource: routes/login.yaml
+    prefix: login
+
+app_logout:
+    path: /logout

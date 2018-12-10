@@ -9,15 +9,26 @@
                 <li class="nav-item {{ app.request.get('_route') == 'index' ? 'active' }}">
                     <a class="nav-link" href="{{ path('index') }}">Home</a>
                 </li>
-                <li class="nav-item {{ 'level_' in app.request.attributes.get('_route') ? 'active' }}">
-                    <a class="nav-link" href="{{ path('sponsorship_level_index') }}">Sponsorship Levels</a>
-                </li>
-                <li class="nav-item {{ 'sponsorship_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
-                    <a class="nav-link" href="{{ path('sponsorship_benefit_index') }}">Sponsorship Benefits</a>
-                </li>
-                <li class="nav-item {{ 'special_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
-                    <a class="nav-link" href="{{ path('special_benefit_index') }}">Special Sponsorships</a>
-                </li>
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item {{ 'level_' in app.request.attributes.get('_route') ? 'active' }}">
+                        <a class="nav-link" href="{{ path('sponsorship_level_index') }}">Sponsorship Levels</a>
+                    </li>
+                    <li class="nav-item {{ 'sponsorship_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
+                        <a class="nav-link" href="{{ path('sponsorship_benefit_index') }}">Sponsorship Benefits</a>
+                    </li>
+                    <li class="nav-item {{ 'special_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
+                        <a class="nav-link" href="{{ path('special_benefit_index') }}">Special Sponsorships</a>
+                    </li>
+                {% endif %}
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item 'active'">
+                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item 'active'">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
