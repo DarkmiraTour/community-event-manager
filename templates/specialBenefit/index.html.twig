@@ -28,7 +28,7 @@
         {% for specialBenefit in specialBenefits %}
             <tr>
                 <td>{{ specialBenefit.label }}</td>
-                <td>{{ specialBenefit.price }}</td>
+                <td>{{ specialBenefit.price|localizedcurrency(currency) }}</td>
                 <td class="text-right">
                     <a class="btn btn-info btn-sm" href="{{ path('special_benefit_show', {'id': specialBenefit.id}) }}">Show</a>
                     {% if is_granted('ROLE_ADMIN') %}

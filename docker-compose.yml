@@ -21,8 +21,7 @@ services:
         working_dir: /var/www/symfony
         environment:
             NODE_ENV: development
-        command: sh -c "yarn install && yarn encore dev"
-        restart: "no"
+        command: sh -c "yarn install && yarn encore dev --watch"
     nginx:
         image: nginx:latest
         ports:
@@ -37,7 +36,6 @@ services:
         image: composer:latest
         volumes:
             - .:/app
-        command: 'install'
     storage:
         image: minio/minio:latest
         ports:

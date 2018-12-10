@@ -32,7 +32,7 @@
         {% for level in levels %}
             <tr>
                 <td>{{ level.label }}</td>
-                <td>{{ level.price }}</td>
+                <td>{{ level.price|localizedcurrency(currency) }}</td>
                 {% if is_granted('ROLE_ADMIN') %}
                     <td class="text-right">
                         <a class="btn btn-secondary btn-sm" href="{{ path('sponsorship_level_edit', {'id': level.id}) }}">edit</a>
