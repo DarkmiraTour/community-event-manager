@@ -1,7 +1,13 @@
 Feature: Sponsorship Benefit
   In order to test CRUD on sponsorship benefits
-  As a user
+  As an admin
   I need to be able to list all benefits and fill forms
+
+  Background: I connect as admin
+    Given I am on "login/"
+    When I fill in "login[email]" with "admin@test.com"
+    And I fill in "login[password]" with "adminpass"
+    And I press "Sign in"
 
   Scenario: I add a sponsorship benefit
     Given I am on "sponsorship-benefit/create"

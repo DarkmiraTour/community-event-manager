@@ -1,7 +1,13 @@
 Feature: Sponsorship Level Benefit
   In order to test table of sponsorship level benefits
-  As a user
+  As an admin
   I need to be able to edit this table
+
+  Background: I connect as admin
+    Given I am on "login/"
+    When I fill in "login[email]" with "admin@test.com"
+    And I fill in "login[password]" with "adminpass"
+    And I press "Sign in"
 
   @javascript
   Scenario: I edit position of sponsorship level "Level 1" to the right

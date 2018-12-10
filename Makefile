@@ -7,7 +7,7 @@ initialize: run
 	docker-compose exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
 	docker-compose exec php bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 
-run: .env
+run: .env behat.yml
 	docker-compose up -d
 
 test:
@@ -29,6 +29,17 @@ bash:
 	else\
 		echo cp .env.dist .env;\
 		cp .env.dist .env;\
+	fi
+
+behat.yml: behat.yml.dist
+	@if [ -f behat.yml ]; then \
+		echo '\033[1;41mYour behat.yml file may be outdated because behat.yml.dist has changed.\033[0m';\
+		echo '\033[1;41mCheck your behat.yml file, or run this command again to ignore.\033[0m';\
+		touch behat.yml;\
+		exit 1;\
+	else\
+		echo cp behat.yml.dist behat.yml;\
+		cp behat.yml.dist behat.yml;\
 	fi
 
 book:
