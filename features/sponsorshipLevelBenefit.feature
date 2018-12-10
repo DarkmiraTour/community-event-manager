@@ -7,28 +7,24 @@ Feature: Sponsorship Level Benefit
   Scenario: I edit position of sponsorship level "Level 1" to the right
     Given I am on "sponsorship-level-benefit/edit"
     When I click on right arrow of element "Level 1"
-    And I reload the page
     Then I should have "Level 1" at position 4
 
   @javascript
   Scenario: I edit position of sponsorship level "Level 1" to the left
     Given I am on "sponsorship-level-benefit/edit"
     When I click on left arrow of element "Level 1"
-    And I reload the page
     Then I should have "Level 1" at position 3
 
   @javascript
   Scenario: I edit position of sponsorship benefit "Benefit 1" to the bottom
     Given I am on "sponsorship-level-benefit/edit"
     When I click on down arrow of element "Benefit 1"
-    And I reload the page
     Then I should have "Benefit 1" at position 3
 
   @javascript
   Scenario: I edit position of sponsorship level "Benefit 1" to the top
     Given I am on "sponsorship-level-benefit/edit"
     When I click on up arrow of element "Benefit 1"
-    And I reload the page
     Then I should have "Benefit 1" at position 2
 
   @javascript

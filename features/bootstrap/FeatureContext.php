@@ -88,7 +88,7 @@ class FeatureContext extends RawMinkContext
 
         $element = (!$elementTh) ? $elementTd : $elementTh;
         $element->click();
-        $this->getSession()->wait(500, 'typeof window.jQuery == "function"');
+        $this->getSession()->wait(5000, 'typeof window.jQuery == "function"');
     }
 
     /**
