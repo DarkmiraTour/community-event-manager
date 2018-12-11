@@ -10,9 +10,11 @@ use Doctrine\DBAL\Types\Type;
 
 final class Version20181121130537 extends AbstractMigration
 {
+    private const TABLE_NAME = 'app_user';
+
     public function up(Schema $schema): void
     {
-        $table = $schema->createTable('user');
+        $table = $schema->createTable(self::TABLE_NAME);
         $table->addColumn('id', Type::GUID);
         $table->addColumn('email', Type::STRING, ['length' => 320]);
         $table->addColumn('username', Type::STRING, ['length' => 50]);
@@ -25,6 +27,6 @@ final class Version20181121130537 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('user');
+        $schema->dropTable(self::TABLE_NAME);
     }
 }
