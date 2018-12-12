@@ -1,23 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle" aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle"
+                aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-toggle">
-            <a class="navbar-brand" href="{{ path('index') }}">DarkMira</a>
+            <a class="navbar-brand" href="{{ path('index') }}">Community Event Manager</a>
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item {{ app.request.get('_route') == 'index' ? 'active' }}">
-                    <a class="nav-link" href="{{ path('index') }}">Home</a>
-                </li>
                 {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item {{ 'level_' in app.request.attributes.get('_route') ? 'active' }}">
-                        <a class="nav-link" href="{{ path('sponsorship_level_index') }}">Sponsorship Levels</a>
+                    <li class="nav-item dropdown
+                        {{ app.request.attributes.get('_route') matches '#^(organisation|speaker|talk)#' ? 'active' }}">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Meetup
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('organisation_list') }}">Organisations</a>
+                            <a class="dropdown-item" href="{{ path('speaker_index') }}">Speakers</a>
+                            <a class="dropdown-item" href="{{ path('talk_index') }}">Talks</a>
+                        </div>
                     </li>
-                    <li class="nav-item {{ 'sponsorship_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
-                        <a class="nav-link" href="{{ path('sponsorship_benefit_index') }}">Sponsorship Benefits</a>
-                    </li>
-                    <li class="nav-item {{ 'special_benefit_' in app.request.attributes.get('_route') ? 'active' }}">
-                        <a class="nav-link" href="{{ path('special_benefit_index') }}">Special Sponsorships</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle
+                            {{ app.request.attributes.get('_route') matches '#^(sponsorship_|special_benefit)#' ? 'active' }}"
+                           id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Sponsorships
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('sponsorship_level_index') }}">Levels</a>
+                            <a class="dropdown-item" href="{{ path('sponsorship_benefit_index') }}">Benefits</a>
+                            <a class="dropdown-item" href="{{ path('special_benefit_index') }}">Special</a>
+                        </div>
                     </li>
                 {% endif %}
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
