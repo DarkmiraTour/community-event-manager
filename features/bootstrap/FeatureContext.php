@@ -1,15 +1,19 @@
 <?php
 
+use App\Entity\User;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Testwork\Tester\Result\TestResult;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
+use WebDriver\Exception\NoAlertOpenError;
 
 class FeatureContext extends RawMinkContext
 {
     private $kernel;
+    private $currentUser;
 
     /**
      * @var Response|null
@@ -29,6 +33,7 @@ class FeatureContext extends RawMinkContext
         $this->response = $this->kernel->handle(Request::create($path, 'GET'));
     }
 
+
     /**
      * @Then the response should be received
      */
@@ -37,6 +42,20 @@ class FeatureContext extends RawMinkContext
         if ($this->response === null) {
             throw new \RuntimeException('No response received');
         }
+    }
+
+    /**
+     * @Given I am logged in as an admin
+     */
+    public function iAmLoggedInAsAnAdmin()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $this->currentUser = $em->getRepository(User::class)->findOneBy(['email' => 'admin@test.com']);
+
+        $this->visitPath('/login');
+        $this->getSession()->getPage()->fillField('login[email]', 'admin@test.com');
+        $this->getSession()->getPage()->fillField('login[password]', 'adminpass');
+        $this->getSession()->getPage()->pressButton('Sign in');
     }
 
     /**
@@ -58,6 +77,7 @@ class FeatureContext extends RawMinkContext
      */
     public function iPressOnOnTheRowContaining($buttonName, $rowText, $choice)
     {
+
         /** @var $row \Behat\Mink\Element\NodeElement */
         $row = $this->getSession()->getPage()->find('css', sprintf('table tr:contains("%s")', $rowText));
         if (!$row) {
@@ -66,11 +86,29 @@ class FeatureContext extends RawMinkContext
 
         $row->pressButton($buttonName);
 
-        switch ($choice) {
-            case 'confirm' : $this->getSession()->getDriver()->getWebDriverSession()->accept_alert(); break;
-            case 'cancel' : $this->getSession()->getDriver()->getWebDriverSession()->dismiss_alert(); break;
+        $this->manageAlert($choice);
+    }
+
+    private function manageAlert($type)
+    {
+        $driver = $this->getSession()->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            for ($i = 0; $i < 10; $i++) {
+                try {
+                    switch ($type) {
+                        case 'confirm' : $driver->getWebDriverSession()->accept_alert(); break;
+                        case 'cancel' : $driver->getWebDriverSession()->dismiss_alert(); break;
+                    }
+                    break;
+                }
+                catch (NoAlertOpenError $e) {
+                    sleep(2);
+                    $i++;
+                }
+            }
         }
     }
+
 
     /**
      * @When /^I click on (left|right|up|down) arrow of element "([^"]*)"$/
@@ -127,11 +165,11 @@ class FeatureContext extends RawMinkContext
         $checkbox = $this->getSession()->getPage()->find('css', sprintf('table tr[data-id="%s"] td[data-id="%s"] input[type="checkbox"]', $dataLine, $dataColumn));
         if ($check == "check") {
             $checkbox->check();
-            $this->getSession()->wait(500, 'typeof window.jQuery == "function"');
+            $this->getSession()->wait(1000, 'typeof window.jQuery == "function"');
             return;
         }
         $checkbox->uncheck();
-        $this->getSession()->wait(500, 'typeof window.jQuery == "function"');
+        $this->getSession()->wait(1000, 'typeof window.jQuery == "function"');
     }
 
     /**
@@ -151,13 +189,13 @@ class FeatureContext extends RawMinkContext
         if ($object == "check") {
             $element = $this->getSession()->getPage()->find('css', sprintf('table tr[data-id="%s"] td[data-id="%s"] .fa-check', $dataLine, $dataColumn));
             $element->click();
-            $this->getSession()->wait(500, 'typeof window.jQuery == "function"');
+            $this->getSession()->wait(1000, 'typeof window.jQuery == "function"');
             return;
         }
 
         $element = $this->getSession()->getPage()->find('css', sprintf('table tr[data-id="%s"] td[data-id="%s"] button', $dataLine, $dataColumn));
         $element->click();
-        $this->getSession()->wait(500, 'typeof window.jQuery == "function"');
+        $this->getSession()->wait(1000, 'typeof window.jQuery == "function"');
     }
 
     /**
@@ -250,7 +288,7 @@ class FeatureContext extends RawMinkContext
         if (TestResult::FAILED === $scope->getTestResult()->getResultCode()) {
             $driver = $this->getSession()->getDriver();
 
-            if (!$driver instanceof Behat\Mink\Driver\Selenium2Driver) {
+            if (!$driver instanceof Selenium2Driver) {
                 return;
             }
 

@@ -37,8 +37,8 @@ final class SponsorshipLevelBenefitFixtures extends Fixture implements Dependent
 
     private function createSponsorshipLevelBenefit(ObjectManager $manager, int $sponsorshipLevelNbr): void
     {
-        for ($sponsorshipLevelBenefitNbr = 0; $sponsorshipLevelBenefitNbr < 10; $sponsorshipLevelBenefitNbr++) {
-            $word = ($sponsorshipLevelBenefitNbr === 9) ? $this->faker->word : null;
+        for ($sponsorshipLevelBenefitNbr = 0; $sponsorshipLevelBenefitNbr < 9; $sponsorshipLevelBenefitNbr++) {
+            $word = ($sponsorshipLevelBenefitNbr === 5) ? $this->faker->word : null;
             $sponsorshipLevelBenefit = $this->sponsorshipLevelBenefitManager->createWith(
                 $this->getReference("sponsorship-level-{$sponsorshipLevelNbr}"),
                 $this->getReference("sponsorship-benefit-{$sponsorshipLevelBenefitNbr}"),

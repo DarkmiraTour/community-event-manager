@@ -10,7 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 final class SponsorshipBenefitFixtures extends Fixture
 {
-    public const SPONSORSHIP_BENEFIT_NBR = 14;
+    public const SPONSORSHIP_BENEFIT_NBR = 10;
 
     private $sponsorshipBenefitManager;
 
