@@ -18,7 +18,6 @@ before_script:
     - make install
 
 script:
-    - docker run --rm -v $(pwd):/app phpqa/php-cs-fixer fix --dry-run --diff -vvv
     - docker run --rm -v $(pwd):/app composer vendor/phpmd/phpmd/src/bin/phpmd src text phpmd.xml
     - docker run --rm -v $(pwd):/app composer bin/phpunit
     - docker-compose exec php vendor/bin/behat --format progress --strict
