@@ -3,42 +3,50 @@
 {% block title %}Speakers{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Speakers</h1>
-        <a href="{{ path('speaker_create') }}" class="btn btn-success float-right mb-3">Add speaker</a>
+    <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Speakers</h2>
+        </div>
+        <div class="col-sm-6 text-center text-sm-right">
+            <a href="{{ path('speaker_create') }}" class="btn btn-success">Add speaker</a>
+        </div>
+    </div>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Biography</th>
-                <th>Photo</th>
-                <th>Socials</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for speaker in speakers %}
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <td>{{ speaker.title }}</td>
-                    <td>{{ speaker.name }}</td>
-                    <td>{{ speaker.email }}</td>
-                    <td>{{ speaker.biography }}</td>
-                    <td><img src="{{ speaker.photo|storage_url }}" class="img-fluid"></td>
-                    <td>{{ speaker.twitter }} {{ speaker.facebook }} {{ speaker.linkedin }} {{ speaker.github }}</td>
-                    <td>
-                        <a href="{{ path('speaker_show', {'id': speaker.id}) }}">Show</a>
-                        <a href="{{ path('speaker_edit', {'id': speaker.id}) }}">Edit</a>
-                    </td>
+                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th class="text-center">Actions</th>
                 </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for speaker in speakers %}
+                    <tr>
+                        <td>{{ speaker.title }}</td>
+                        <td>{{ speaker.name }}</td>
+                        <td>{{ speaker.email }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('speaker_show', {'id': speaker.id}) }}"
+                               class="btn btn-info mb-2 mb-md-0">
+                                Show
+                            </a>
+                            <a href="{{ path('speaker_edit', {'id': speaker.id}) }}"
+                               class="btn btn-warning mb-2 mb-md-0">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

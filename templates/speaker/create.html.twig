@@ -3,26 +3,39 @@
 {% block title %}New Speaker{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>New speaker</h1>
-
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
-        <button type="submit" class="btn btn-success float-right">Add speaker</button>
-        {{ form_end(form) }}
-
-        <script>
-            document.querySelector("input[type=file]").addEventListener('change', function (element) {
-                let target = element.target;
-
-                // Change the node's value by removing the fake path (Chrome)
-                const value = target.value.replace("C:\\fakepath\\", "");
-                if (value !== undefined || value !== '') {
-                    document.querySelector(".custom-file-label").dataset.content = value;
-                    document.querySelector(".custom-file-label").textContent = value;
-                }
-            });
-        </script>
+    <div class="row">
+        <div class="col-12">
+            <h1>New speaker</h1>
+        </div>
     </div>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-6 text-right">
+            <button type="submit" class="btn btn-success">Add speaker</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <script>
+        document.querySelector("input[type=file]").addEventListener('change', function (element) {
+            let target = element.target;
+
+            // Change the node's value by removing the fake path (Chrome)
+            const value = target.value.replace("C:\\fakepath\\", "");
+            if (value !== undefined || value !== '') {
+                document.querySelector(".custom-file-label").dataset.content = value;
+                document.querySelector(".custom-file-label").textContent = value;
+            }
+        });
+    </script>
 {% endblock %}
