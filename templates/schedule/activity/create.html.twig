@@ -1,0 +1,124 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <h1>Add Day to Schedule</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        {{ form_start(form) }}
+
+
+                        <div class="row">
+                            <div class="col-8">
+
+                                {{ form_row(form.day) }}
+
+                            </div>
+
+                            <div class="col-4">
+                                <label for="interval">Interval</label>
+                                <select class="form-control" id="interval">
+                                    <option value="5">5 Minutes</option>
+                                    <option value="10">5 Minutes</option>
+                                    <option value="15">5 Minutes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <br>
+                        <div id="activities">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-6">
+                            {{ form_row(form.Slot) }}
+                        </div>
+                        <div class="col-3">
+                            <label for="duration">Duration</label>
+                            <select name="duration" id="duration" class="form-control">
+                                <option value="20">20 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="40">40 minutes</option>
+                                <option value="50">50 minutes</option>
+                                <option value="60">60 minutes (1 hour)</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <label for="start">Start</label>
+                            <input type="time" readonly value="08:00" id="start" name="start" class="form-control">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+
+                        <br>
+                        <div class="text-right">
+                            <a href="#" onclick="addMoreOneSlot()">Add more 1</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <a href="{{ path('schedule_index') }}" class="btn btn-outline-primary">Back to Schedule</a>
+        <button type="submit" class="btn btn-primary float-right">Save Day in Schedule</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
+
+{% block title %}Community event manager - Manage Schedule{% endblock %}
+
+{% block body %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+    <script>
+        function addMoreOneSlot() {
+            document.getElementById('activities').insertAdjacentHTML(
+                'beforeend',  '<br><div class="card">\n' +
+                '                    <div class="card-body">\n' +
+                '                        <div class="row">\n' +
+                '                        <div class="col-6">\n' +
+                '                            <label for="slot">Activity</label>' +
+                '                            <input placeholder="Describe the Activity" id="slot" type="text" class="form-control">' +
+                '                        </div>\n' +
+                '                        <div class="col-3">\n' +
+                '                            <label for="duration">Duration</label>\n' +
+                '                            <select name="duration" id="duration" class="form-control">\n' +
+                '                                <option value="20">20 minutes</option>\n' +
+                '                                <option value="30">30 minutes</option>\n' +
+                '                                <option value="40">40 minutes</option>\n' +
+                '                                <option value="50">50 minutes</option>\n' +
+                '                                <option value="60">60 minutes (1 hour)</option>\n' +
+                '                            </select>\n' +
+                '                        </div>\n' +
+                '                        <div class="col-3">\n' +
+                '                            <label for="start">Start</label>\n' +
+                '                            <input type="time" readonly value="08:00" id="start" name="start" class="form-control">\n' +
+                '                        </div>\n' +
+                '                        </div>\n' +
+                '                    </div>\n' +
+                '                </div>'
+            )
+        }
+    </script>
+{% endblock %}
+
