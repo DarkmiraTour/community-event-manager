@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
-{% endblock %}
-
-{% block title %}Talk{% endblock %}
+{% block title %}{{ talk.title }}{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -12,9 +8,9 @@
             <h1>Talk</h1>
         </div>
     </div>
+
     <div class="row">
         <div class="col-12">
-
             <table class="table">
                 <tbody>
                 <tr>
@@ -35,14 +31,16 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
 
-            <div class="float-right">
+    <div class="row mb-3">
+        <div class="col-5">
+            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('talk_edit', {'id': talk.id}) }}" class="btn btn-warning">Edit</a>
                 {{ include('talks/_delete_form.html.twig', {'talk': talk}) }}
-            </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
