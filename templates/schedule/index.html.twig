@@ -1,0 +1,223 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+{% endblock %}
+
+{% block title %}Community event manager - Manage Schedule{% endblock %}
+
+{% block content %}
+    <h1>Configure Schedule</h1>
+
+    {% for msg in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger">
+            {{ msg }}
+        </div>
+    {% endfor %}
+
+    <hr>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    {% if schedules is empty %}
+                        <div class="alert alert-danger">
+                            There's no day yet
+                        </div>
+                    {% endif %}
+
+                    <ul class="nav nav-tabs" id="tabContent" role="tablist">
+                        {% for key,day in schedules %}
+                            <li class="nav-item">
+                                <a class="nav-link {{ (key == 0) ? 'active show' : '' }}" id="day-{{ key }}-tab" data-toggle="tab" href="#day-{{ key }}" role="tab" aria-controls="day-{{ key }}" aria-selected="false">
+                                    {{ day.day.format('d/m/Y') }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="tab-content">
+                        {% for key,day in schedules %}
+                            <div class="tab-pane {{ (key == 0) ? 'active show' : '' }}" id="day-{{ key }}" role="tabpanel" aria-labelledby="day-{{ key }}-tab">
+
+                                <br>
+                                <form class="d-inline" method="post" action="{{ path('schedule_schedule_delete', {'id': day.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ day.id) }}">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit"><span class="fa fa-remove"></span> Remove day</button>
+                                </form>
+                                <br><br>
+
+                                {% if day.spaces.count() == 0 %}
+                                    <div class="alert alert-danger">
+                                        There's no space yet
+                                    </div>
+                                {% endif %}
+
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th width="12%"><span class="fa fa-clock"></span></th>
+                                        {% for space in day.spaces %}
+                                            <th>
+                                                {% set labelVisible %} <span class="badge badge-primary">Visible</span> {% endset %}
+
+                                                {% if space.visible == false %}
+                                                    {% set labelVisible %} <span class="badge badge-danger">Not Visible</span> {% endset %}
+                                                {% endif %}
+
+                                                {{ space.name }} {{ labelVisible }}
+
+                                                <form class="d-inline" method="post" action="{{ path('schedule_space_delete', {'id': space.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ space.id) }}">
+                                                    <button class="btn btn-sm text-danger btn-link" type="submit"><span class="fa fa-remove"></span></button>
+                                                </form>
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if not timetable[day.day.format('dmY')] %}
+                                        <div class="alert alert-danger">
+                                            There's no slot yet
+                                        </div>
+                                    {% endif %}
+
+                                    {% for hour,slots in timetable[day.day.format('dmY')] %}
+                                        <tr>
+                                            <th>{{ hour }}</th>
+
+                                            {% for keySlot, slot in slots %}
+                                                <td>
+                                                    {% if slot.title is defined %}
+                                                        <a href="{{ path('schedule_slot_edit', {'id': slot.id}) }}">{{ slot.title }}</a>
+                                                        <form class="d-inline" method="post" action="{{ path('schedule_slot_delete', {'id': slot.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ slot.id) }}">
+                                                            <button class="btn btn-sm text-danger btn-link" type="submit"><span class="fa fa-remove"></span></button>
+                                                        </form>
+                                                    {% else %}
+                                                        ---
+                                                    {% endif %}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="text-right">
+                                            {% if day.spaces.count() > 0 %}
+                                                <a href="#" data-toggle="modal" data-target="#modalAddSlot"  class="btn btn-outline-dark">Add Slot</a>
+                                            {% endif %}
+                                            <a href="#" data-toggle="modal" data-target="#modalAddSpace"  class="btn btn-outline-primary">Add Space</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
+            <a href="#" data-toggle="modal" data-target="#modalAddDay"  class="btn btn-outline-primary pull-right">New Day</a>
+        </div>
+    </div>
+
+    <!-- Modal Add Day -->
+    <div class="modal fade" id="modalAddDay" tabindex="-1" role="dialog" aria-labelledby="addDayModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDayModalLabel">New Day?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(formSchedule, {'action': path('schedule_create')}) }}
+                <div class="modal-body">
+                    {{ form_row(formSchedule.day) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save new day</button>
+                </div>
+
+                {{ form_end(formSchedule) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add Space -->
+    <div class="modal fade" id="modalAddSpace" tabindex="-1" role="dialog" aria-labelledby="addSpaceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSpaceModalLabel">New Space?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(formSpace, {'action': path('schedule_space_insert')}) }}
+                <div class="modal-body">
+                    {{ form_row(formSpace.schedule) }}
+
+                    {{ form_row(formSpace.type) }}
+
+                    {{ form_row(formSpace.visible) }}
+
+                    {{ form_row(formSpace.name) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save new space</button>
+                </div>
+                {{ form_end(formSpace) }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add Slot -->
+    <div class="modal fade" id="modalAddSlot" tabindex="-1" role="dialog" aria-labelledby="addSlotModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSpaceModalLabel">Add Slot?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ form_start(formSlot, {'action': path('schedule_slot_insert')}) }}
+                <div class="modal-body">
+                    {{ form_row(formSlot.space) }}
+                    {{ form_errors(formSlot.space) }}
+
+                    {{ form_row(formSlot.type) }}
+                    {{ form_errors(formSlot.type) }}
+
+                    {{ form_row(formSlot.title) }}
+
+                    {{ form_row(formSlot.start) }}
+
+                    {{ form_row(formSlot.end) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save new slot</button>
+                </div>
+
+                {{ form_end(formSlot) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
