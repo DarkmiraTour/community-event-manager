@@ -8,6 +8,7 @@ default:
         - behatch:context:json
         - behatch:context:rest
         - Behatch\Context\BrowserContext
+        - SponsorshipContext
   extensions:
     Behat\Symfony2Extension:
       kernel:
