@@ -1,0 +1,24 @@
+<div class="modal fade" id="modalAddDay" tabindex="-1" role="dialog" aria-labelledby="addDayModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            {{ form_start(form, {'action': path('schedule_create')}) }}
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDayModalLabel">New Day</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                {{ form_row(form.day) }}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary">Save new day</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
