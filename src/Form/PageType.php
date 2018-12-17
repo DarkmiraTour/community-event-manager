@@ -19,10 +19,10 @@ final class PageType extends AbstractType implements DataMapperInterface
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
             ->add('background', FileType::class, [
                 'required' => false,
             ])
+            ->add('content', TextareaType::class)
             ->setDataMapper($this)
         ;
     }

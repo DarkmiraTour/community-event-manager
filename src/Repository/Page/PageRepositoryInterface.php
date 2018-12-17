@@ -10,13 +10,6 @@ interface PageRepositoryInterface
 {
     public function createPage(string $title, string $content, string $background): Page;
 
-    /**
-     * @param mixed    $id
-     * @param int|null $lockMode
-     * @param int|null $lockVersion
-     *
-     * @return Page|null
-     */
     public function find($id, $lockMode = null, $lockVersion = null): ?Page;
 
     public function findAll(): array;

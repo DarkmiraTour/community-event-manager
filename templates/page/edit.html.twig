@@ -8,8 +8,6 @@
 
     {{ include('page/_form.html.twig', {'button_label': 'Update', 'method_value': 'PUT'}) }}
 
-    <a href="{{ path('page_index') }}">back to list</a>
-
     <script>
         document.querySelector("input[type=file]").addEventListener('change', function (element) {
             let target = element.target;

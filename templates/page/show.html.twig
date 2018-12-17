@@ -16,10 +16,12 @@
                     <th>Background</th>
                     <td><img src="{{ page.background|storage_url }}" class="img-fluid"></td>
                 </tr>
+                <tr>
+                    <th>Content</th>
+                    <td>{{ page.content | nl2br}}</td>
+                </tr>
             </tbody>
         </table>
-        <p><b>Content</b></p>
-        <p class="border p-md-2" style="min-height:150px">{{ page.content | nl2br}}</p>
         <a href="{{ path('page_index') }}" class="btn btn-light">Back to list</a>
         <div class="float-right">
             <a class="btn btn-secondary btn-sm" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
