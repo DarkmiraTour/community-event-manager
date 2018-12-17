@@ -3,49 +3,59 @@
 {% block title %}Edit Sponsorship Level Benefits{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/edit_sponsorship_level_benefit.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/edit_sponsorship_level_benefit.css') }}"/>
 {% endblock %}
 
 {% block content %}
-    <h1>Edit Sponsorship Level Benefits</h1>
-    <form id="sponsorshipLevelBenefitForm" method="post">
-        <input type="hidden" name="_token" value="{{ csrf_token('sponsorship-level-benefit') }}">
-        <table class="table table-hover">
-            <thead class="thead-dark text-center">
-            <tr class="list_levels">
-                <th>Opportunities</th>
-                {% for level in levels %}
-                    <th class="level_th" data-id="{{ level.id }}">
-                        {{ level.label }}
-                        <i class="fa fa-caret-left fa-lg ml-sm-2"></i>
-                        <i class="fa fa-caret-right fa-lg"></i>
-                    </th>
-                {% endfor %}
-            </tr>
-            </thead>
-            <tbody class="list_benefits">
-            {% for levelBenefit in levelBenefits %}
-                <tr class="benefit_tr" data-id="{{ levelBenefit.benefit.id }}">
-                    <td>
-                        <span class="mr-sm-2 move-action">
-                            <i class="fa fa-caret-up fa-lg"></i>
-                            <i class="fa fa-caret-down fa-lg"></i>
-                        </span>
-                        <span class="benefit-label">
-                            {{ levelBenefit.benefit.label }}
-                        </span>
-                    </td>
-                    {% for level in levelBenefit.levels %}
-                        <td class="benefit_level" data-id="{{ level.id }}">
-                            <input type="checkbox" {{ level.isChecked ? 'checked' }} title="is Checked" />
-                            <input type="text" value="{{ level.text }}" title="text" /> <i class="fa fa-check text-hide"></i>
-                        </td>
+    <div class="row">
+        <div class="col-12">
+            <h1>Edit Sponsorships Summary</h1>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
+            <form id="sponsorshipLevelBenefitForm" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token('sponsorship-level-benefit') }}">
+                <table class="table table-striped">
+                    <thead class="thead-dark text-center">
+                    <tr class="list_levels">
+                        <th>Opportunities</th>
+                        {% for level in levels %}
+                            <th class="level_th text-nowrap" data-id="{{ level.id }}">
+                                {{ level.label }}
+                                <i class="fa fa-caret-left fa-lg ml-sm-2"></i>
+                                <i class="fa fa-caret-right fa-lg"></i>
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody class="list_benefits">
+                    {% for levelBenefit in levelBenefits %}
+                        <tr class="benefit_tr" data-id="{{ levelBenefit.benefit.id }}">
+                            <td>
+                                <span class="mr-sm-2 move-action">
+                                    <i class="fa fa-caret-up fa-lg"></i>
+                                    <i class="fa fa-caret-down fa-lg"></i>
+                                </span>
+                                <span class="benefit-label">
+                                    {{ levelBenefit.benefit.label }}
+                                </span>
+                            </td>
+                            {% for level in levelBenefit.levels %}
+                                <td class="benefit_level text-nowrap" data-id="{{ level.id }}">
+                                    <input type="checkbox" {{ level.isChecked ? 'checked' }} title="is Checked"/>
+                                    <input type="text" value="{{ level.text }}" title="text"/> <i
+                                            class="fa fa-check text-hide"></i>
+                                </td>
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </form>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
