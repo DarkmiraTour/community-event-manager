@@ -1,5 +1,0 @@
-{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
-    <input type="hidden" name="_method" value="{{ method_value|default('POST') }}">
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
