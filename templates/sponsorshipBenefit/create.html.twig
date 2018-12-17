@@ -1,12 +1,28 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}New Sponsorship Benefit{% endblock %}
 
 {% block content %}
-    <h1>Create new Sponsorship Benefit</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1>New Sponsorship Benefit</h1>
+        </div>
+    </div>
 
-    {{ include('sponsorshipBenefit/_form.html.twig') }}
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
 
-    <a href="{{ path('sponsorship_benefit_index') }}">back to list</a>
+    <div class="row mb-3">
+        <div class="col-5">
+            <a href="{{ path('sponsorship_benefit_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
 {% endblock %}
