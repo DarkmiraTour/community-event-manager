@@ -26,7 +26,7 @@ final class FileUploader implements FileUploaderInterface
         return $filename;
     }
 
-    public function get(string $fileName)
+    public function get(string $fileName): string
     {
         return $this->filesystem->read($fileName);
     }

@@ -8,7 +8,7 @@ use App\Repository\Page\PageManagerInterface;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
-use App\Service\FileUploader;
+use App\Service\FileUploaderInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
 use Twig\Environment as Twig;
@@ -32,7 +32,7 @@ final class GeneratePdf
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         PageManagerInterface $pageManager,
         SpecialBenefitManagerInterface $specialBenefitManager,
-        FileUploader $fileUploader
+        FileUploaderInterface $fileUploader
     ) {
         $this->renderer = $renderer;
         $this->pdfCreator = $pdfCreator;
@@ -60,6 +60,6 @@ final class GeneratePdf
 
         $this->pdfCreator->create('L', 'A4', 'fr', true, 'UTF-8', [10, 15, 10, 15]);
 
-        return $this->pdfCreator->generatePdf($template, 'test');
+        return $this->pdfCreator->generatePdf($template, 'brochure-community-event');
     }
 }

@@ -6,7 +6,7 @@ namespace App\Service;
 
 interface PdfCreatorInterface
 {
-    public function create($orientation = null, $format = null, $lang = null, $unicode = null, $encoding = null, $margin = null): void;
+    public function create(string $orientation = null, string $format = null, string $lang = null, bool $unicode = null, string $encoding = null, array $margin = null): void;
 
-    public function generatePdf($template, $name): string;
+    public function generatePdf(string $template, string $name): string;
 }
