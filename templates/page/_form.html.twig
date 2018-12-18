@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    <input type="hidden" name="_method" value="{{ method_value|default('POST') }}">
+    <a href="{{ path('page_index') }}" class="btn btn-light">Back to list</a>
+    <div class="float-right">
+        <button class="btn btn-secondary">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}
