@@ -7,14 +7,14 @@ Feature: Sponsorship Benefit
     Given I am logged in as an admin
     When I am on the sponsorship benefit creation page
     And I fill the sponsorship benefit "label" field with "Benefit 11"
-    And I press "Save"
+    And I press "Add"
     Then I should be redirected on the sponsorship benefit listing page
     And I should see "Benefit 11"
 
   Scenario: I don't fill all data needed when i add a sponsorship benefit
     Given I am logged in as an admin
     When I am on the sponsorship benefit creation page
-    And I press "Save"
+    And I press "Add"
     Then I should see "This value should not be blank."
 
   Scenario: I don't fill all data needed when i edit a sponsorship benefit "Benefit 11"
@@ -22,7 +22,7 @@ Feature: Sponsorship Benefit
     When I am on the sponsorship benefit listing page
     And I click "Edit" on the row containing "Benefit 11"
     And I fill the sponsorship benefit "label" field with ""
-    And I press "Update"
+    And I press "Save"
     Then I should see "This value should not be blank."
 
   Scenario: I edit the sponsorship benefit "Benefit 11"
@@ -30,7 +30,7 @@ Feature: Sponsorship Benefit
     When I am on the sponsorship benefit listing page
     And I click "Edit" on the row containing "Benefit 11"
     And I fill the sponsorship benefit "label" field with "Benefit 12"
-    And I press "Update"
+    And I press "Save"
     Then I should be redirected on the sponsorship benefit listing page
     And I should see "Benefit 12"
 

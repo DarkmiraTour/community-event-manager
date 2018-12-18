@@ -8,7 +8,7 @@ Feature: Sponsorship Level
     When I am on the sponsorship level creation page
     And I fill the sponsorship level "label" field with "Level 4"
     And I fill the sponsorship level "price" field with "100"
-    And I press "Save"
+    And I press "Add"
     Then I should be redirected on the sponsorship level listing page
     And I should see "Level 4"
 
@@ -17,13 +17,13 @@ Feature: Sponsorship Level
     When I am on the sponsorship level creation page
     And I fill the sponsorship level "label" field with "Level 4"
     And I fill the sponsorship level "price" field with "error"
-    And I press "Save"
+    And I press "Add"
     Then I should see "This value is not valid."
 
   Scenario: I don't fill all data needed when i add a sponsorship level
     Given I am logged in as an admin
     When I am on the sponsorship level creation page
-    And I press "Save"
+    And I press "Add"
     Then I should see "This value should not be blank."
 
   Scenario: I fill a string in price instead of a double when i edit a sponsorship level "Level 4"
@@ -32,7 +32,7 @@ Feature: Sponsorship Level
     And I click "Edit" on the row containing "Level 4"
     And I fill the sponsorship level "label" field with "Level 10"
     And I fill the sponsorship level "price" field with "Level error"
-    And I press "Update"
+    And I press "Save"
     Then I should see "This value is not valid."
 
   Scenario: I don't fill all data needed when i edit a sponsorship level "Level 4"
@@ -41,7 +41,7 @@ Feature: Sponsorship Level
     And I click "Edit" on the row containing "Level 4"
     And I fill the sponsorship level "label" field with ""
     And I fill the sponsorship level "price" field with ""
-    And I press "Update"
+    And I press "Save"
     Then I should see "This value should not be blank."
 
   Scenario: I edit the sponsorship level "Level 4"
@@ -49,7 +49,7 @@ Feature: Sponsorship Level
     When I am on the sponsorship level listing page
     And I click "Edit" on the row containing "Level 4"
     And I fill the sponsorship level "label" field with "Level 10"
-    And I press "Update"
+    And I press "Save"
     Then I should be redirected on the sponsorship level listing page
     And I should see "Level 10"
 
