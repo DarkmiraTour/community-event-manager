@@ -9,6 +9,7 @@ default:
         - behatch:context:rest
         - Behatch\Context\BrowserContext
         - SponsorshipContext
+        - PageContext
   extensions:
     Behat\Symfony2Extension:
       kernel:

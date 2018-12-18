@@ -19,9 +19,7 @@ final class PageType extends AbstractType implements DataMapperInterface
     {
         $builder
             ->add('title', TextType::class)
-            ->add('background', FileType::class, [
-                'required' => false,
-            ])
+            ->add('background', FileType::class)
             ->add('content', TextareaType::class)
             ->setDataMapper($this)
         ;
@@ -41,20 +39,17 @@ final class PageType extends AbstractType implements DataMapperInterface
     {
         $forms = iterator_to_array($forms);
         if (null !== $data) {
-            $data->updateFromForm(
-                $forms['title']->getData(),
-                $forms['content']->getData(),
-                $forms['background']->getData()
-            );
+            $data->title = $forms['title']->getData();
+            $data->content = $forms['content']->getData();
+            $data->background = $forms['background']->getData();
 
             return;
         }
 
-        $data = new PageRequest(
-            $forms['title']->getData(),
-            $forms['content']->getData(),
-            $forms['background']->getData()
-        );
+        $data = new PageRequest();
+        $data->title = $forms['title']->getData();
+        $data->content = $forms['content']->getData();
+        $data->background = $forms['background']->getData();
     }
 
     public function configureOptions(OptionsResolver $resolver): void

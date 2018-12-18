@@ -11,16 +11,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class PageRequest
 {
     /**
+     * @Assert\NotBlank(groups={"addFile"})
      * @Assert\NotBlank()
      */
     public $title;
 
     /**
+     * @Assert\NotBlank(groups={"addFile"})
      * @Assert\NotBlank()
      */
     public $content;
 
     /**
+     * @Assert\NotBlank(groups={"addFile"})
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg"}, groups={"addFile"})
+     * @Assert\File(maxSize="5M", groups={"addFile"})
+     *
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg"})
      * @Assert\File(maxSize="5M")
      */
@@ -31,33 +37,19 @@ final class PageRequest
      */
     public $backgroundPath;
 
-    public function __construct(string $title, string $content, File $background, ?string $backgroundPath = null)
-    {
-        $this->title = $title;
-        $this->content = $content;
-        $this->background = $background;
-        $this->backgroundPath = $backgroundPath;
-    }
-
     public static function createFromEntity(Page $page): PageRequest
     {
-        return new self(
-            $page->getTitle(),
-            $page->getContent(),
-            new File($page->getBackground(), false),
-            $page->getBackground()
-        );
+        $pageRequest = new self();
+        $pageRequest->title = $page->getTitle();
+        $pageRequest->content = $page->getContent();
+        $pageRequest->background = new File($page->getBackground(), false);
+        $pageRequest->backgroundPath = $page->getBackground();
+
+        return $pageRequest;
     }
 
     public function updateEntity(Page $page): void
     {
         $page->updatePage($this->title, $this->content, $this->backgroundPath);
-    }
-
-    public function updateFromForm(string $title, string $content, ?File $background = null): void
-    {
-        $this->title = $title;
-        $this->content = $content;
-        $this->background = $background;
     }
 }
