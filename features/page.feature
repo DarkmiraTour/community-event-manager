@@ -81,13 +81,15 @@ Feature: Page
   Scenario: I cancel the delete of page "Page 5"
     Given I am logged in as an admin
     When I am on the page listing page
-    And I press "Delete" on the row containing "Page 5" and cancel popup
+    And I click "Show" on the row containing "Page 5"
+    And I click "Delete" and cancel popup
     Then I should see "Page 5"
 
   @javascript
   Scenario: I confirm the delete of page "Page 5"
     Given I am logged in as an admin
     When I am on the page listing page
-    And I press "Delete" on the row containing "Page 5" and confirm popup
+    And I click "Show" on the row containing "Page 5"
+    And I click "Delete" and confirm popup
     Then I should not see "Page 5"
 
