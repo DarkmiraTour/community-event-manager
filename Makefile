@@ -2,13 +2,21 @@ all: run book
 
 install: .env run initialize book
 
-initialize: run
+initialize: run bucket
 	docker-compose run composer install
 	docker-compose exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
 	docker-compose exec php bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 
 run: .env behat.yml
 	docker-compose up -d
+
+bucket:
+	docker run --network container:`docker-compose ps -q storage` \
+	           --entrypoint="" \
+	           -v `pwd`:/app \
+	           -w /app \
+	           minio/mc \
+	           /bin/sh -c "chmod +x ./docker/minio/create-bucket.sh && ./docker/minio/create-bucket.sh"
 
 test:
 	docker-compose run composer ./vendor/bin/simple-phpunit
