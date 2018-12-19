@@ -2,16 +2,30 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% endblock %} - Community Event Manager</title>
         <link rel="stylesheet" href="{{ asset('build/base.css') }}" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% include 'layout/header.html.twig' %}
+
         <div class="container">
+            {% for msg in app.session.flashbag.get('error') %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-danger">
+                            {{ msg }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
             {% block content '' %}
         </div>
+
         <div id="snackbar"></div>
+
         <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         <script src="{{ asset('build/base.js') }}"></script>

@@ -1,42 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
-{% endblock %}
-
 {% block title %}Talks{% endblock %}
 
 {% block content %}
     <div class="row">
-        <div class="col-12">
-            <h1>Talks</h1>
-            <a href="{{ path('talk_create') }}" class="btn btn-success float-right mb-3">Add talk</a>
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Talks</h2>
+        </div>
+        <div class="col-sm-6 text-center text-sm-right">
+            <a href="{{ path('talk_create') }}" class="btn btn-success">Add talk</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Description</th>
                     <th>Speaker</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for talk in talks %}
                     <tr>
                         <td>{{ talk.title }}</td>
-                        <td>{{ talk.description }}</td>
                         <td>{{ talk.speaker.name }}</td>
-                        <td>
-                            <a href="{{ path('talk_show', {'id': talk.id}) }}">Show</a>
+                        <td class="text-center">
+                            <a href="{{ path('talk_show', {'id': talk.id}) }}"
+                               class="btn btn-info mb-2 mb-md-0">
+                                Show
+                            </a>
+                            <a href="{{ path('talk_edit', {'id': talk.id}) }}"
+                               class="btn btn-warning mb-2 mb-md-0">
+                                Edit
+                            </a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="8">no records found</td>
+                        <td colspan="3">no records found</td>
                     </tr>
                 {% endfor %}
                 </tbody>

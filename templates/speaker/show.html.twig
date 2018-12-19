@@ -3,66 +3,76 @@
 {% block title %}Speaker{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Speaker</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1>Speaker</h1>
+        </div>
+    </div>
 
-        <table class="table">
-            <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ speaker.title }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ speaker.name }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ speaker.email }}</td>
-            </tr>
-            <tr>
-                <th>Biography</th>
-                <td>{{ speaker.biography }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td><img src="{{ speaker.photo|storage_url }}" alt="Avatar" class="img-fluid"></td>
-            </tr>
-            <tr>
-                <th>Twitter</th>
-                <td>{{ speaker.twitter }}</td>
-            </tr>
-            <tr>
-                <th>Facebook</th>
-                <td>{{ speaker.facebook }}</td>
-            </tr>
-            <tr>
-                <th>Linkedin</th>
-                <td>{{ speaker.linkedin }}</td>
-            </tr>
-            <tr>
-                <th>Github</th>
-                <td>{{ speaker.github }}</td>
-            </tr>
-            <tr>
-                <th>Talks</th>
-                <td>
-                    <ul>
-                        {% for talk in speaker.talks %}
-                            <li><a href="{{ path('talk_show', {'id': talk.id}) }}">{{ talk.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ speaker.title }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ speaker.name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ speaker.email }}</td>
+                </tr>
+                <tr>
+                    <th>Biography</th>
+                    <td>{{ speaker.biography }}</td>
+                </tr>
+                <tr>
+                    <th>Photo</th>
+                    <td><img src="{{ speaker.photo|storage_url }}" alt="Avatar" class="img-fluid"></td>
+                </tr>
+                <tr>
+                    <th>Twitter</th>
+                    <td>{{ speaker.twitter }}</td>
+                </tr>
+                <tr>
+                    <th>Facebook</th>
+                    <td>{{ speaker.facebook }}</td>
+                </tr>
+                <tr>
+                    <th>Linkedin</th>
+                    <td>{{ speaker.linkedin }}</td>
+                </tr>
+                <tr>
+                    <th>Github</th>
+                    <td>{{ speaker.github }}</td>
+                </tr>
+                <tr>
+                    <th>Talks</th>
+                    <td>
+                        <ul>
+                            {% for talk in speaker.talks %}
+                                <li><a href="{{ path('talk_show', {'id': talk.id}) }}">{{ talk.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="float-right">
+    <div class="row mb-3">
+        <div class="col-5">
+            <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('speaker_edit', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
                 {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

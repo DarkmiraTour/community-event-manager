@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    {% if day.spaces.count() == 0 %}
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="alert alert-danger">
+                    There's no space yet
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row mt-3">
+            <div class="col-12 table-responsive-sm">
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th width="12%"><span class="fa fa-clock"></span></th>
+                        {% for space in day.spaces %}
+                            <th>
+                                {% set labelVisible %} <span class="badge badge-primary">Visible</span> {% endset %}
+                                {% if space.visible == false %}
+                                    {% set labelVisible %}
+                                        <span class="badge badge-danger">Not Visible</span>
+                                    {% endset %}
+                                {% endif %}
+
+                                {{ space.name }} {{ labelVisible }}
+                                {{ include('schedule/configure/_delete_space.html.twig', { 'space': space }) }}
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for hour,slots in timetable[day.day.format('dmY')] %}
+                        <tr>
+                            <th>{{ hour }}</th>
+                            {% for slot in slots %}
+                                <td>
+                                    {% if slot.title is defined %}
+                                        <a href="{{ path('schedule_slot_edit', {'id': slot.id}) }}">{{ slot.title }}</a>
+                                        {{ include('schedule/configure/_delete_slot.html.twig', { 'slot': slot}) }}
+                                    {% else %}
+                                        ---
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="{{ day.spaces.count + 1 }}" class="text-center">
+                                There's no slot yet
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="text-right">
+                {{ include('schedule/configure/_delete_day.html.twig', { 'day': day }) }}
+            </div>
+        </div>
+    </div>
+</div>

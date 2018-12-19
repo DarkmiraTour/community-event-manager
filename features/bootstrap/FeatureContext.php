@@ -86,6 +86,15 @@ final class FeatureContext extends RawMinkContext
     }
 
     /**
+     * @When /^I click "([^"]*)" and (confirm|cancel) popup$/
+     */
+    public function iClickOnAndPopup(string $buttonName, string $choice): void
+    {
+        $this->getSession()->getPage()->pressButton($buttonName);
+        $this->manageAlert($choice);
+    }
+
+    /**
      * @Then /^I should have "([^"]*)" at position (\d+)$/
      */
     public function iShouldHaveElementAtPosition(string $rowText, int $position): void

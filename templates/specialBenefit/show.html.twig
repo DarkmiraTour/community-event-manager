@@ -1,13 +1,18 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Special Sponsorship - {{ specialBenefit.label }}{% endblock %}
+{% block title %}{{ specialBenefit.label }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Special Sponsorship - {{ specialBenefit.label }}</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ specialBenefit.label }}</h1>
+        </div>
+    </div>
 
-        <table class="table mt-lg-5">
-            <tbody>
+    <div class="row mt-3">
+        <div class="col-12">
+            <table class="table">
+                <tbody>
                 <tr>
                     <th>Label</th>
                     <td>{{ specialBenefit.label }}</td>
@@ -16,20 +21,27 @@
                     <th>Price</th>
                     <td>{{ specialBenefit.price|localizedcurrency(currency) }}</td>
                 </tr>
-            </tbody>
-        </table>
-        <p><b>Description</b></p>
-        <p class="border p-md-2" style="min-height:150px">{{ specialBenefit.description | nl2br}}</p>
-        <a href="{{ path('special_benefit_index') }}" class="btn btn-light">Back to list</a>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="float-right">
-                <a class="btn btn-secondary btn-sm" href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
-                <form class="d-inline" method="post" action="{{ path('special_benefit_delete', {'id': specialBenefit.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ specialBenefit.id) }}">
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </form>
-            </div>
-        {% endif %}
+                <tr>
+                    <th>Description</th>
+                    <td>{{ specialBenefit.description | nl2br }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-5">
+            <a href="{{ path('special_benefit_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="float-right">
+                    <a class="btn btn-warning"
+                       href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
+                    {{ include('specialBenefit/_delete_form.html.twig', {'specialBenefir': specialBenefit}) }}
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

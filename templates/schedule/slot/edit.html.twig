@@ -1,39 +1,35 @@
 {% extends "base.html.twig" %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-{% endblock %}
-
-{% block title %}Community event manager - Edit Slot{% endblock %}
+{% block title %}Edit {{ slot.title }}{% endblock %}
 
 {% block content %}
-    <h1>Edit Slot</h1>
-
-    <hr>
-
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    {{ form_start(form, {'action': path('schedule_slot_edit', {'id': slot.id})}) }}
-                        {{ form_row(form.space) }}
-
-                        {{ form_row(form.type) }}
-
-                        {{ form_row(form.title) }}
-
-                        {{ form_row(form.start) }}
-
-                        {{ form_row(form.end) }}
-
-                        <a class="btn btn-secondary text-left" href="{{ path('schedule_index') }}">Back to Schedule</a>
-                        <button class="btn btn-primary pull-right">Save Slot</button>   
-                    {{ form_end(form) }}
-                </div>
-            </div>
+            <h1>Edit Slot</h1>
         </div>
     </div>
 
+    {{ form_start(form, {'action': path('schedule_slot_edit', {'id': slot.id})}) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_row(form.space) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.start) }}
+            {{ form_row(form.end) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <a class="btn btn-secondary text-left" href="{{ path('schedule_index') }}">Back to Schedule</a>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary pull-right">Save Slot</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
 {% endblock %}
 
 

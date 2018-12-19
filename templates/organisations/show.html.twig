@@ -1,13 +1,18 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Community event manager - {{ organisation.name }}{% endblock %}
+{% block title %}{{ organisation.name }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Organisations - {{ organisation.name }}</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1>{{ organisation.name }}</h1>
+        </div>
+    </div>
 
-        <table class="table table-striped">
-            <tbody>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped">
+                <tbody>
                 <tr>
                     <th>Name</th>
                     <td>{{ organisation.name }}</td>
@@ -24,14 +29,20 @@
                     <th>Comment</th>
                     <td>{{ organisation.comment | default('N/A') }}</td>
                 </tr>
-            </tbody>
-        </table>
-        <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="float-right">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
                 {{ include('organisations/_delete_form.html.twig', {'organisation': organisation}) }}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

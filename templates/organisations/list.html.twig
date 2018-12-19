@@ -1,34 +1,49 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Community event manager - Organisations{% endblock %}
+{% block title %}Organisations{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>Organisations</h1>
-
-        <a href="{{ path('organisation_create') }}" class="btn btn-success">Add organisation</a>
-
-        <table class="table table-striped">
-            <thead>
+    <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Organisations</h2>
+        </div>
+        <div class="col-sm-6 text-center text-sm-right">
+            <a href="{{ path('organisation_create') }}" class="btn btn-success">Add organisation</a>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Website</th>
-                    <th>Actions</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Website</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
-            </thead>
-            <tbody>
-            {% for organisation in organisations %}
-                <tr>
-                    <td>{{ organisation.name }}</td>
-                    <td><a href="{{ organisation.website }}" target="_blank">{{ organisation.website }}</a></td>
-                    <td>
-                        <a href="{{ path('organisation_show', {'id': organisation.id}) }}" class="btn btn-info">Show</a>
-                        <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
-                        {{ include('organisations/_delete_form.html.twig', {'organisation': organisation}) }}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for organisation in organisations %}
+                    <tr>
+                        <td>
+                            {{ organisation.name }}
+                        </td>
+                        <td>
+                            <a href="{{ organisation.website }}" target="_blank">{{ organisation.website }}</a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('organisation_show', {'id': organisation.id}) }}"
+                               class="btn btn-info mb-2 mb-md-0">
+                                Show
+                            </a>
+                            <a href="{{ path('organisation_edit', {'id': organisation.id}) }}"
+                               class="btn btn-warning mb-2 mb-md-0">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

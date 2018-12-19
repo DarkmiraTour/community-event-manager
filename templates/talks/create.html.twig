@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
-{% endblock %}
-
 {% block title %}New talk{% endblock %}
 
 {% block content %}
@@ -12,13 +8,22 @@
             <h1>New talk</h1>
         </div>
     </div>
+
+    {{ form_start(form) }}
     <div class="row">
         <div class="col-12">
-            {{ form_start(form) }}
             {{ form_widget(form) }}
-            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
-            <button type="submit" class="btn btn-success float-right">Add talk</button>
-            {{ form_end(form) }}
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-6">
+            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-6 text-right">
+            <button type="submit" class="btn btn-success">Add talk</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
 {% endblock %}
