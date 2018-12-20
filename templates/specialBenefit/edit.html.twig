@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
     <div class="row">
         <div class="col-12">
             {{ form_widget(form) }}
