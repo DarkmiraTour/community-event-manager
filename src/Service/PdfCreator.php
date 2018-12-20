@@ -8,12 +8,27 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 final class PdfCreator implements PdfCreatorInterface
 {
-    /** @var Html2Pdf $pdf */
     private $pdf;
+    private $orientation;
+    private $format;
+    private $lang;
+    private $unicode;
+    private $encoding;
+    private $margin;
 
-    public function create(string $orientation = null, string $format = null, string $lang = null, bool $unicode = null, string $encoding = null, array $margin = null): void
+    public function __construct(string $orientation, string $format, string $lang, bool $unicode, string $encoding, array $margin)
     {
-        $this->pdf = new Html2Pdf($orientation, $format, $lang, $unicode, $encoding, $margin);
+        $this->orientation = $orientation;
+        $this->format = $format;
+        $this->lang = $lang;
+        $this->unicode = $unicode;
+        $this->encoding = $encoding;
+        $this->margin = $margin;
+    }
+
+    public function create(): void
+    {
+        $this->pdf = new Html2Pdf($this->orientation, $this->format, $this->lang, $this->unicode, $this->encoding, $this->margin);
         $this->pdf->setTestIsImage(false);
     }
 

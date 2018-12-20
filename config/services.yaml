@@ -7,6 +7,12 @@ parameters:
     locale: 'en'
     currency: 'USD'
     routing.uuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    pdf_orientation: 'L'
+    pdf_format: 'A4'
+    pdf_lang: 'en'
+    pdf_unicode: 'true'
+    pdf_encoding: 'UTF-8'
+    pdf_margin: [10, 15, 10, 15]
 
 services:
     # default configuration for services in *this* file
@@ -38,3 +44,13 @@ services:
     App\Service\FileUploader:
         arguments:
             $filesystem: '@gaufrette.photos_filesystem'
+
+
+    App\Service\PdfCreator:
+        arguments:
+            $orientation: '%pdf_orientation%'
+            $format: '%pdf_format%'
+            $lang: '%pdf_lang%'
+            $unicode: '%pdf_unicode%'
+            $encoding: '%pdf_encoding%'
+            $margin: '%pdf_margin%'

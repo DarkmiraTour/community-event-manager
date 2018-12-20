@@ -58,7 +58,7 @@ final class GeneratePdf
             'specialBenefits' => $this->specialBenefitManager->findAll(),
         ]);
 
-        $this->pdfCreator->create('L', 'A4', 'fr', true, 'UTF-8', [10, 15, 10, 15]);
+        $this->pdfCreator->create();
 
         return $this->pdfCreator->generatePdf($template, 'brochure-community-event');
     }
