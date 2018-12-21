@@ -38,16 +38,12 @@ final class SlotTypeRepository implements SlotTypeRepositoryInterface
 
     public function createFrom(SlotTypeRequest $slotRequest): SlotType
     {
-        $slotType = new SlotType();
-        $slotType->setId($this->nextIdentity()->toString());
-        $slotType->setDescription($slotRequest->description);
-
-        return $slotType;
+        return $this->createSlotType($slotRequest->description);
     }
 
-    public function nextIdentity(): UuidInterface
+    public function createWith(string $description): SlotType
     {
-        return Uuid::uuid4();
+        return $this->createSlotType($description);
     }
 
     public function save(SlotType $slotType): void
@@ -60,5 +56,18 @@ final class SlotTypeRepository implements SlotTypeRepositoryInterface
     {
         $this->entityManager->remove($slotType);
         $this->entityManager->flush();
+    }
+
+    private function createSlotType(string $description): SlotType
+    {
+        return new SlotType(
+            $this->nextIdentity(),
+            $description
+        );
+    }
+
+    private function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
     }
 }

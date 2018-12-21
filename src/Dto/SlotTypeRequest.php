@@ -4,18 +4,26 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
+use App\Entity\SlotType;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class SlotTypeRequest
 {
     /**
-     * @var string
      * @Assert\NotBlank()
      */
     public $description;
 
-    public function __construct(string $description = null)
+    public static function createFromEntity(SlotType $slotType): SlotTypeRequest
     {
-        $this->description = $description;
+        $slotTypeRequest = new self();
+        $slotTypeRequest->description = $slotType->getDescription();
+
+        return $slotTypeRequest;
+    }
+
+    public function updateEntity(SlotType $slotType): void
+    {
+        $slotType->updateSlotType($this->description);
     }
 }

@@ -46,6 +46,30 @@ schedule_slot_delete:
   requirements:
     id: '%routing.uuid%'
 
+schedule_slot_type_index:
+  path: /slot-type/
+  controller: App\Controller\SlotType\Index::handle
+  methods: [GET]
+
+schedule_slot_type_create:
+  path: /slot-type/create
+  controller: App\Controller\SlotType\Create::handle
+  methods: [GET, POST]
+
+schedule_slot_type_edit:
+  path: /slot-type/{id}/edit
+  methods: [GET, PUT]
+  controller: App\Controller\SlotType\Edit::handle
+  requirements:
+    id: '%routing.uuid%'
+
+schedule_slot_type_delete:
+  path: /slot-type/{id}/delete
+  methods: [DELETE]
+  controller: App\Controller\SlotType\Delete::handle
+  requirements:
+    id: '%routing.uuid%'
+
 schedule_confirm_delete:
     path: /{id}/confirm_delete
     controller: App\Controller\Schedule\DeleteConfirmation:handle

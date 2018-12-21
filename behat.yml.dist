@@ -10,6 +10,7 @@ default:
         - Behatch\Context\BrowserContext
         - SponsorshipContext
         - PageContext
+        - ScheduleContext
         - InterviewQuestionContext
   extensions:
     Behat\Symfony2Extension:
