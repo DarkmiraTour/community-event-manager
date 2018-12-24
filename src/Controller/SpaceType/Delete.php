@@ -6,6 +6,7 @@ namespace App\Controller\SpaceType;
 
 use App\Repository\Schedule\SpaceTypeRepositoryInterface;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,9 @@ final class Delete
         $this->spaceTypeRepository = $spaceTypeRepository;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $id = Uuid::fromString($request->attributes->get('id'))->toString();
