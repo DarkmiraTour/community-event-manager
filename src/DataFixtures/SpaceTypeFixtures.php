@@ -27,13 +27,7 @@ final class SpaceTypeFixtures extends Fixture
         ];
 
         for ($i = 0; $i <= 2; $i++) {
-            $spaceType = new SpaceType();
-            $spaceType->setId(
-                $this->spaceTypeRepository->nextIdentity()->toString()
-            );
-            $spaceType->setName($types[$i]['name']);
-            $spaceType->setDescription($types[$i]['description']);
-
+            $spaceType = new SpaceType($this->spaceTypeRepository->nextIdentity(), $types[$i]['name'], $types[$i]['description']);
             $manager->persist($spaceType);
         }
 

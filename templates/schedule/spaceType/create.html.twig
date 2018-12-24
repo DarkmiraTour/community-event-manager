@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit {{ talk.title }}{% endblock %}
+{% block title %}New space type{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-12">
-            <h1>Edit talk</h1>
+            <h1>New space type</h1>
         </div>
     </div>
 
@@ -16,12 +16,12 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-6">
-            <a href="{{ path('talk_index') }}" class="btn btn-light">Back to list</a>
+    <div class="row mt-3">
+        <div class="col-5">
+            <a href="{{ path('schedule_space_type_index') }}" class="btn btn-light">Back to list</a>
         </div>
-        <div class="col-6 text-right">
-            <button type="submit" class="btn btn-success">Edit talk</button>
+        <div class="col-7 text-right">
+            <button class="btn btn-success">Add</button>
         </div>
     </div>
     {{ form_end(form) }}

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository\Schedule;
 
+use App\Dto\SpaceTypeRequest;
 use App\Entity\SpaceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -45,5 +46,14 @@ final class SpaceTypeRepository implements SpaceTypeRepositoryInterface
     {
         $this->entityManager->remove($spaceType);
         $this->entityManager->flush();
+    }
+
+    public function createFromRequest(SpaceTypeRequest $spaceTypeRequest): SpaceType
+    {
+        return new SpaceType(
+            $this->nextIdentity(),
+            $spaceTypeRequest->name,
+            $spaceTypeRequest->description
+        );
     }
 }
