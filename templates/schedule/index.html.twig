@@ -28,11 +28,13 @@
                                     </a>
                                 </li>
                             {% endfor %}
-                            <li class="nav-item">
-                                <a href="" class="nav-link" data-toggle="modal" data-target="#modalAddDay">
-                                    <span class="fa fa-plus"></span>
-                                </a>
-                            </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    <a href="" class="nav-link" data-toggle="modal" data-target="#modalAddDay">
+                                        <span class="fa fa-plus"></span>
+                                    </a>
+                                </li>
+                            {% endif %}
                         </ul>
 
                         <div class="tab-content">
@@ -49,17 +51,22 @@
         </div>
     </div>
 
-    <div class="row mt-3">
-        <div class="col-12 text-right">
-            <a href="#" data-toggle="modal" data-target="#modalAddDay" class="btn btn-outline-primary">Add day</a>
-            {% if schedules|length > 0 %}
-                <a href="#" data-toggle="modal" data-target="#modalAddSpace" class="btn btn-outline-primary">Add space</a>
-                <a href="#" data-toggle="modal" data-target="#modalAddSlot" class="btn btn-outline-primary">Add Slot</a>
-            {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="row mt-3">
+            <div class="col-12 text-right">
+                <a href="#" data-toggle="modal" data-target="#modalAddDay" class="btn btn-outline-primary">Add day</a>
+                {% if schedules|length > 0 %}
+                    <a href="#" data-toggle="modal" data-target="#modalAddSpace" class="btn btn-outline-primary">Add
+                        space</a>
+                    <a href="#" data-toggle="modal" data-target="#modalAddSlot" class="btn btn-outline-primary">Add
+                        Slot</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
 
-    {{ include('schedule/modal/_add_day.html.twig', { 'form': formSchedule }) }}
-    {{ include('schedule/modal/_add_space.html.twig', { 'form': formSpace }) }}
-    {{ include('schedule/modal/_add_slot.html.twig', { 'form': formSlot }) }}
+        {{ include('schedule/modal/_add_day.html.twig', { 'form': formSchedule }) }}
+        {{ include('schedule/modal/_add_space.html.twig', { 'form': formSpace }) }}
+        {{ include('schedule/modal/_add_slot.html.twig', { 'form': formSlot }) }}
+    {% endif %}
+
 {% endblock %}

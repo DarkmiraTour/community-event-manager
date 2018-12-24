@@ -12,8 +12,8 @@ use App\Form\SlotType;
 use App\Form\SpaceType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
 use App\Service\Schedule\CreateDailySchedule;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
@@ -36,7 +36,10 @@ final class Index
         $this->scheduleService = $scheduleService;
     }
 
-    public function handle(Request $request): Response
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function handle(): Response
     {
         $schedules = $this->repository->findAll();
 

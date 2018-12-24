@@ -7,6 +7,7 @@ namespace App\Controller\Organisation;
 use App\Dto\OrganisationRequest;
 use App\Form\OrganisationType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,9 @@ final class Edit
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request, string $id): Response
     {
         $organisation = $this->repository->find($id);

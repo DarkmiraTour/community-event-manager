@@ -7,6 +7,7 @@ namespace App\Controller\Slot;
 use App\Dto\SlotRequest;
 use App\Form\SlotType;
 use App\Repository\Schedule\SlotRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,9 @@ final class Create
         $this->flashBag = $flashBag;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $slotRequest = new SlotRequest();

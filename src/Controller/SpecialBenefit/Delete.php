@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\SpecialBenefit;
 
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,6 +28,9 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): RedirectResponse
     {
         $specialBenefit = $this->specialBenefitManager->find($request->attributes->get('id'));

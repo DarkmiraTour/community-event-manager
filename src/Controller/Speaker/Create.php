@@ -8,6 +8,7 @@ use App\Dto\SpeakerRequest;
 use App\Form\SpeakerType;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,6 +38,9 @@ final class Create
         $this->fileUploader = $fileUploader;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $speakerRequest = new SpeakerRequest();

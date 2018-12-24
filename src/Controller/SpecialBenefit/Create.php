@@ -6,6 +6,7 @@ namespace App\Controller\SpecialBenefit;
 
 use App\Form\SpecialBenefitType;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,9 @@ final class Create
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $form = $this->formFactory->create(SpecialBenefitType::class);

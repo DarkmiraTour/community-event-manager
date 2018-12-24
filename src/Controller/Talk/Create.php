@@ -6,6 +6,7 @@ namespace App\Controller\Talk;
 
 use App\Form\TalkType;
 use App\Repository\TalkRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,6 +33,9 @@ final class Create
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $form = $this->formFactory->create(TalkType::class);

@@ -7,6 +7,7 @@ namespace App\Controller\SponsorshipLevel;
 use App\Dto\SponsorshipLevelRequest;
 use App\Form\SponsorshipLevelType;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,9 @@ final class Edit
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $sponsorshipLevel = $this->sponsorshipLevelManager->find($request->attributes->get('id'));

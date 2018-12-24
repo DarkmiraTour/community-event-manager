@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Organisation;
 
 use App\Repository\Organisation\OrganisationRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +31,9 @@ final class Delete
         $this->csrfManager = $csrfManager;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request, string $id): Response
     {
         $organisation = $this->repository->find($id);

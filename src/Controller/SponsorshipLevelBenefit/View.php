@@ -7,6 +7,7 @@ namespace App\Controller\SponsorshipLevelBenefit;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
@@ -24,14 +25,7 @@ final class View
     }
 
     /**
-     * @param FormatSponsorshipLevelBenefit    $formatSponsorshipLevelBenefit
-     * @param SponsorshipLevelManagerInterface $sponsorshipLevelManager
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @Security("is_granted('ROLE_USER')")
      */
     public function handle(FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit, SponsorshipLevelManagerInterface $sponsorshipLevelManager): Response
     {

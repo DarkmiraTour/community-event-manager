@@ -7,6 +7,7 @@ namespace App\Controller\Space;
 use App\Dto\SpaceRequest;
 use App\Form\SpaceType;
 use App\Repository\Schedule\SpaceRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,9 @@ final class Create
         $this->repository = $repository;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $spaceRequest = new SpaceRequest();

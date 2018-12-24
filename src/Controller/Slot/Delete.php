@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Slot;
 
 use App\Repository\Schedule\SlotRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,6 +29,9 @@ final class Delete
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request, string $id): RedirectResponse
     {
         $slot = $this->slotRepository->find($id);

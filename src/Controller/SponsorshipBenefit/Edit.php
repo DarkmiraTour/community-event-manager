@@ -7,6 +7,7 @@ namespace App\Controller\SponsorshipBenefit;
 use App\Dto\SponsorshipBenefitRequest;
 use App\Form\SponsorshipBenefitType;
 use App\Repository\SponsorshipBenefit\SponsorshipBenefitManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,9 @@ final class Edit
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $sponsorshipBenefit = $this->sponsorshipBenefitManager->find($request->attributes->get('id'));

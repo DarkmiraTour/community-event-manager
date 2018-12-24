@@ -17,17 +17,7 @@ security:
             logout:
                 path:   app_logout
 
-    access_control:
-        - { path: /create, roles: ROLE_ADMIN }
-        - { path: /%routing.uuid%/edit, roles: ROLE_ADMIN }
-        - { path: /%routing.uuid%/delete, roles: ROLE_ADMIN }
-        - { path: ^/sponsorship-level-benefit/edit, roles: ROLE_ADMIN }
-        - { path: ^/organisations, roles: ROLE_USER }
-        - { path: ^/sponsorship-level, roles: ROLE_USER }
-        - { path: ^/sponsorship-level-benefit, roles: ROLE_USER }
-        - { path: ^/speakers, roles: ROLE_USER }
-        - { path: ^/special-benefit, roles: ROLE_USER }
-        - { path: ^/sponsorship-benefit, roles: ROLE_USER }
+    access_control: ~
 
     encoders:
         App\Entity\User:

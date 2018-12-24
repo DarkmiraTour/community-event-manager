@@ -8,7 +8,9 @@
             <h2>Organisations</h2>
         </div>
         <div class="col-sm-6 text-center text-sm-right">
-            <a href="{{ path('organisation_create') }}" class="btn btn-success">Add organisation</a>
+            {% if is_granted('USER_ADMIN') %}
+                <a href="{{ path('organisation_create') }}" class="btn btn-success">Add organisation</a>
+            {% endif %}
         </div>
     </div>
     <div class="row mt-3">
@@ -35,10 +37,12 @@
                                class="btn btn-info mb-2 mb-md-0">
                                 Show
                             </a>
-                            <a href="{{ path('organisation_edit', {'id': organisation.id}) }}"
-                               class="btn btn-warning mb-2 mb-md-0">
-                                Edit
-                            </a>
+                            {% if is_granted('USER_ADMIN') %}
+                                <a href="{{ path('organisation_edit', {'id': organisation.id}) }}"
+                                   class="btn btn-warning mb-2 mb-md-0">
+                                    Edit
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
