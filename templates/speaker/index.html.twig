@@ -8,7 +8,9 @@
             <h2>Speakers</h2>
         </div>
         <div class="col-sm-6 text-center text-sm-right">
-            <a href="{{ path('speaker_create') }}" class="btn btn-success">Add speaker</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('speaker_create') }}" class="btn btn-success">Add speaker</a>
+            {% endif %}
         </div>
     </div>
 
@@ -34,10 +36,12 @@
                                class="btn btn-info mb-2 mb-md-0">
                                 Show
                             </a>
-                            <a href="{{ path('speaker_edit', {'id': speaker.id}) }}"
-                               class="btn btn-warning mb-2 mb-md-0">
-                                Edit
-                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('speaker_edit', {'id': speaker.id}) }}"
+                                   class="btn btn-warning mb-2 mb-md-0">
+                                    Edit
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

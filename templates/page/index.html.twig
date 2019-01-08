@@ -8,7 +8,9 @@
             <h2>Pages</h2>
         </div>
         <div class="col col-6 text-center text-sm-right">
-            <a class="btn btn-primary" href="{{ path('page_create') }}">Create new</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ path('page_create') }}">Create new</a>
+            {% endif %}
         </div>
     </div>
 
@@ -30,9 +32,11 @@
                             <a class="btn btn-info mb-2 mb-md-0" href="{{ path('page_show', {'id': page.id}) }}">
                                 Show
                             </a>
-                            <a class="btn btn-warning mb-2 mb-md-0" href="{{ path('page_edit', {'id': page.id}) }}">
-                                Edit
-                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-warning mb-2 mb-md-0" href="{{ path('page_edit', {'id': page.id}) }}">
+                                    Edit
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

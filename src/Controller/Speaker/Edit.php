@@ -9,6 +9,7 @@ use App\Form\SpeakerType;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +40,9 @@ final class Edit
         $this->fileUploader = $fileUploader;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $id = Uuid::fromString($request->attributes->get('id'))->toString();

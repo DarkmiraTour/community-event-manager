@@ -35,8 +35,10 @@
             <a href="{{ path('page_index') }}" class="btn btn-light">Back to list</a>
         </div>
         <div class="col-7 text-right">
-            <a class="btn btn-warning" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
-            {{ include('page/_delete_form.html.twig', { 'page': page }) }}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-warning" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
+                {{ include('page/_delete_form.html.twig', { 'page': page }) }}
+            {% endif %}
         </div>
     </div>
 {% endblock %}

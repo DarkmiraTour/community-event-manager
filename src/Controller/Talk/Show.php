@@ -6,6 +6,7 @@ namespace App\Controller\Talk;
 
 use App\Repository\TalkRepositoryInterface;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,6 +23,9 @@ final class Show
         $this->talkRepository = $talkRepository;
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function handle(Request $request): Response
     {
         $id = Uuid::fromString($request->attributes->get('id'))->toString();

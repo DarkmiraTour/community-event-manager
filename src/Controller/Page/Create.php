@@ -7,6 +7,7 @@ namespace App\Controller\Page;
 use App\Form\PageType;
 use App\Repository\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,9 @@ final class Create
         $this->fileUploader = $fileUploader;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $form = $this->formFactory->create(PageType::class, null, [

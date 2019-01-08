@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Speaker;
 
 use App\Repository\SpeakerRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
@@ -19,6 +20,9 @@ final class Index
         $this->speakerRepository = $speakerRepository;
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function handle(): Response
     {
         $speakers = $this->speakerRepository->findAll();

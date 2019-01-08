@@ -57,11 +57,13 @@
         </div>
     {% endif %}
 
-    <div class="row">
-        <div class="col-12">
-            <div class="text-right">
-                {{ include('schedule/configure/_delete_day.html.twig', { 'day': day }) }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    {{ include('schedule/configure/_delete_day.html.twig', { 'day': day }) }}
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>

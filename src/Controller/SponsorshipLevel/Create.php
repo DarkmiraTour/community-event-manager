@@ -6,6 +6,7 @@ namespace App\Controller\SponsorshipLevel;
 
 use App\Form\SponsorshipLevelType;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,13 +34,7 @@ final class Create
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function handle(Request $request): Response
     {

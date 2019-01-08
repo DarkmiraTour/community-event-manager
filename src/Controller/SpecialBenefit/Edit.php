@@ -7,6 +7,7 @@ namespace App\Controller\SpecialBenefit;
 use App\Dto\SpecialBenefitRequest;
 use App\Form\SpecialBenefitType;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,9 @@ final class Edit
         $this->router = $router;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(Request $request): Response
     {
         $specialBenefit = $this->specialBenefitManager->find($request->attributes->get('id'));

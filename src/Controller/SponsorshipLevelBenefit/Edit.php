@@ -12,6 +12,7 @@ use App\Repository\SponsorshipBenefit\SponsorshipBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,14 +37,7 @@ final class Edit
     }
 
     /**
-     * @param FormatSponsorshipLevelBenefit    $formatSponsorshipLevelBenefit
-     * @param SponsorshipLevelManagerInterface $sponsorshipLevelManager
-     *
-     * @return Response
-     *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function handle(FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit, SponsorshipLevelManagerInterface $sponsorshipLevelManager): Response
     {
