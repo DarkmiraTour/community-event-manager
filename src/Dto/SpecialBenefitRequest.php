@@ -26,20 +26,14 @@ final class SpecialBenefitRequest
      */
     public $description;
 
-    public function __construct(string $label, float $price, string $description)
-    {
-        $this->label = $label;
-        $this->price = $price;
-        $this->description = $description;
-    }
-
     public static function createFromEntity(SpecialBenefit $specialBenefit): SpecialBenefitRequest
     {
-        return new self(
-            $specialBenefit->getLabel(),
-            $specialBenefit->getPrice(),
-            $specialBenefit->getDescription()
-        );
+        $specialBenefitRequest = new self();
+        $specialBenefitRequest->label = $specialBenefit->getLabel();
+        $specialBenefitRequest->price = $specialBenefit->getPrice();
+        $specialBenefitRequest->description = $specialBenefit->getDescription();
+
+        return $specialBenefitRequest;
     }
 
     public function updateEntity(SpecialBenefit $specialBenefit): void

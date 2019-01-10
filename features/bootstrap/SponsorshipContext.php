@@ -2,14 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Entity\User;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Testwork\Tester\Result\TestResult;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\KernelInterface;
-use WebDriver\Exception\NoAlertOpenError;
 
 final class SponsorshipContext extends RawMinkContext
 {
@@ -46,6 +39,14 @@ final class SponsorshipContext extends RawMinkContext
     }
 
     /**
+     * @When /^I am on the special benefit listing page$/
+     */
+    public function iAmOnTheSpecialbenefitListingPage(): void
+    {
+        $this->visitPath('special-benefit/');
+    }
+
+    /**
      * @When /^I am on the sponsorship benefit creation page$/
      */
     public function iAmOnTheSponsorshipBenefitCreationPage(): void
@@ -59,6 +60,14 @@ final class SponsorshipContext extends RawMinkContext
     public function iAmOnTheSponsorshipLevelCreationPage(): void
     {
         $this->visitPath('sponsorship-level/create');
+    }
+
+    /**
+     * @When /^I am on the special benefit creation page$/
+     */
+    public function iAmOnTheSpecialbenefitCreationPage(): void
+    {
+        $this->visitPath('special-benefit/create');
     }
 
     /**
@@ -86,6 +95,14 @@ final class SponsorshipContext extends RawMinkContext
     }
 
     /**
+     * @Then /^I should be redirected on the special benefit listing page$/
+     */
+    public function iShouldBeRedirectedOnTheSpecialbenefitListPage(): void
+    {
+        $this->visitPath('special-benefit/');
+    }
+
+    /**
      * @When /^I fill the sponsorship benefit "([^"]*)" field with "([^"]*)"$/
      */
     public function iFillTheSponsorshipBenefitFieldWith(string $field, string $value): void
@@ -101,6 +118,16 @@ final class SponsorshipContext extends RawMinkContext
     public function iFillTheSponsorshipLevelFieldWith(string $field, string $value): void
     {
         $field = $this->fixStepArgument('sponsorship_level['.$field.']');
+        $value = $this->fixStepArgument($value);
+        $this->getSession()->getPage()->fillField($field, $value);
+    }
+
+    /**
+     * @When /^I fill the special benefit "([^"]*)" field with "([^"]*)"$/
+     */
+    public function iFillTheSpecialbenefitFieldWith(string $field, string $value): void
+    {
+        $field = $this->fixStepArgument('special_benefit['.$field.']');
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }
