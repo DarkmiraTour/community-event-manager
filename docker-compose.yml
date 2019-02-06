@@ -22,7 +22,8 @@ services:
         working_dir: /var/www/symfony
         environment:
             NODE_ENV: development
-        command: sh -c "yarn install && yarn encore dev --watch"
+#        command: sh -c "yarn install && yarn encore dev --watch"
+        command: sh -c "tail -f /var/www/symfony/yarn-error.log"
     nginx:
         image: nginx:latest
         ports:
