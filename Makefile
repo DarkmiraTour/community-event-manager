@@ -1,6 +1,6 @@
 all: run book
 
-install: .env run initialize book
+install: .env run initialize yarn book
 
 initialize: run bucket
 	docker-compose run composer install
@@ -9,6 +9,9 @@ initialize: run bucket
 
 run: .env behat.yml
 	docker-compose up -d
+
+stop:
+	docker-compose down
 
 bucket:
 	docker run --network container:`docker-compose ps -q storage` \
@@ -51,9 +54,24 @@ behat.yml: behat.yml.dist
 	fi
 
 book:
-	#
-	# Darkmira Community Event Manager
-	#
-	# Application: http://0.0.0.0:8080
-	# Minio:       http://0.0.0.0:9001
-	#
+
+	 Darkmira Community Event Manager
+
+	 Application: http://0.0.0.0:8080
+	 Minio:       http://0.0.0.0:9001
+
+
+yarn:  ## Run yarn process
+yarn:  yarn-install yarn-upgrade yarn-dev
+
+yarn-install: ## Run yarn install
+	docker-compose exec node yarn install
+
+yarn-upgrade: ## Run yarn upgrade
+	docker-compose exec node yarn upgrade
+
+yarn-dev: ## Run yarn run dev
+	docker-compose exec node yarn run dev
+
+yarn-prod: ## Run yarn run dev
+	docker-compose exec node yarn run build
