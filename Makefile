@@ -1,5 +1,7 @@
 all: run book
 
+travis: .env run initialize
+
 install: .env run initialize yarn book
 
 initialize: run bucket
