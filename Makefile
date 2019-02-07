@@ -1,6 +1,48 @@
-all: run book
+.DEFAULT_GOAL := help
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+.PHONY: help
 
-install: .env run initialize book
+
+##
+##Community Event Manager "MEC"
+##
+##Setup
+##-----
+##
+install:  .env run initialize book ## Install and start the project
+
+book:
+	#
+	# Darkmira Community Event Manager
+	#
+	# Application: http://0.0.0.0:8080
+	# Minio:       http://0.0.0.0:9001
+	#
+
+##
+##Project
+##-------
+##
+
+reset: kill install ## Stop and start a fresh install of the project
+
+start: ## Start the project
+	docker-compose up -d --remove-orphans --no-recreate
+
+stop: ## Stop the project
+	docker-compose down
+
+clean: kill ## Stop the project and remove generated files
+	rm -rf .env vendor node_modules
+
+kill:
+	docker-compose kill
+	docker-compose down --volumes --remove-orphans
+
+.PHONY: kill install reset start stop clean
+
+all: run book
 
 initialize: run bucket
 	docker-compose run composer install
@@ -18,8 +60,7 @@ bucket:
 	           minio/mc \
 	           /bin/sh -c "chmod +x ./docker/minio/create-bucket.sh && ./docker/minio/create-bucket.sh"
 
-test:
-	docker-compose run composer ./vendor/bin/simple-phpunit
+
 
 logs:
 	docker-compose logs -ft
@@ -50,10 +91,50 @@ behat.yml: behat.yml.dist
 		cp behat.yml.dist behat.yml;\
 	fi
 
-book:
-	#
-	# Darkmira Community Event Manager
-	#
-	# Application: http://0.0.0.0:8080
-	# Minio:       http://0.0.0.0:9001
-	#
+
+
+
+##
+##Tests
+##-----
+##
+
+coverage: vendor ## Run coverage unit tests
+	docker-compose exec php vendor/bin/phpunit --coverage-html --coverage-text
+
+test: tu tf ## Run unit and functional tests
+
+tu: vendor ## Run unit tests
+	docker-compose exec php vendor/bin/simple-phpunit --exclude-group functional
+
+tf: vendor ## Run functional tests
+	docker-compose exec php vendor/bin/behat
+
+.PHONY: tests tu tf
+
+##
+##Quality assurance
+##-----------------
+##
+
+phpmd: ## PHP Mess Detector (https://phpmd.org)
+	docker-compose exec php vendor/bin/phpmd src text phpmd.xml
+
+
+phpcpd: ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
+	docker-compose exec php vendor/bin/phpcpd src
+
+pdepend: ## PHP_Depend (https://pdepend.org)
+	docker-compose exec php vendor/bin/pdepend \
+		--summary-xml=$(ARTEFACTS)/pdepend_summary.xml \
+		--jdepend-chart=$(ARTEFACTS)/pdepend_jdepend.svg \
+		--overview-pyramid=$(ARTEFACTS)/pdepend_pyramid.svg \
+		src/
+
+pretty: ## PHP CS (https://github.com/squizlabs/PHP_CodeSniffer)
+	docker-compose exec php vendor/bin/php-cs-fixer fix
+
+.PHONY: pdepend phpmd pretty phpcpd
+
+##
+##
