@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('src')
+    ->notPath('Kernel.php');
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        '@PHP71Migration' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'declare_strict_types' => true,
+        'void_return' => true,
+        'yoda_style' => false,
+        'increment_style' => ['style' => 'post'],
+    ])
+    ->setUsingCache(false)
+    ->setRiskyAllowed(true)
+    ->setFinder($finder);
