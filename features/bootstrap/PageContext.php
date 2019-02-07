@@ -45,8 +45,8 @@ final class PageContext extends RawMinkContext
     public function iFillPageFileFieldWithFileTest(string $dimension, string $type): void
     {
         switch ($type) {
-            case 'image' : $testFile = $dimension === 'simple' ? 'test.jpg' : 'huge_test.jpg'; break;
-            case 'text' : $testFile = 'test.txt'; break;
+            case 'image': $testFile = $dimension === 'simple' ? 'test.jpg' : 'huge_test.jpg'; break;
+            case 'text': $testFile = 'test.txt'; break;
         }
 
         $file = new File(dirname(__DIR__).'/testFiles/'.$testFile);

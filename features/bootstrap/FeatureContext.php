@@ -267,12 +267,11 @@ final class FeatureContext extends RawMinkContext
             for ($i = 0; $i < 10; $i++) {
                 try {
                     switch ($type) {
-                        case 'confirm' : $driver->getWebDriverSession()->accept_alert(); break;
-                        case 'cancel' : $driver->getWebDriverSession()->dismiss_alert(); break;
+                        case 'confirm': $driver->getWebDriverSession()->accept_alert(); break;
+                        case 'cancel': $driver->getWebDriverSession()->dismiss_alert(); break;
                     }
                     break;
-                }
-                catch (NoAlertOpenError $e) {
+                } catch (NoAlertOpenError $e) {
                     sleep(2);
                     $i++;
                 }
