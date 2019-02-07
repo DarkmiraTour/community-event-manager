@@ -37,6 +37,7 @@ services:
         image: composer:latest
         volumes:
             - .:/app
+        command: sh -c "tail -f /dev/null"
     storage:
         image: minio/minio:latest
         ports:

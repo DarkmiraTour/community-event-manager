@@ -91,8 +91,8 @@ behat.yml: behat.yml.dist
 		cp behat.yml.dist behat.yml;\
 	fi
 
-
-
+vendor: composer.lock
+	docker-compose exec composer composer install
 
 ##
 ##Tests
@@ -117,21 +117,21 @@ tf: vendor ## Run functional tests
 ##-----------------
 ##
 
-phpmd: ## PHP Mess Detector (https://phpmd.org)
+phpmd: vendor ## PHP Mess Detector (https://phpmd.org)
 	docker-compose exec php vendor/bin/phpmd src text phpmd.xml
 
 
-phpcpd: ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
+phpcpd: vendor ## PHP Copy/Paste Detector (https://github.com/sebastianbergmann/phpcpd)
 	docker-compose exec php vendor/bin/phpcpd src
 
-pdepend: ## PHP_Depend (https://pdepend.org)
+pdepend: vendor ## PHP_Depend (https://pdepend.org)
 	docker-compose exec php vendor/bin/pdepend \
 		--summary-xml=$(ARTEFACTS)/pdepend_summary.xml \
 		--jdepend-chart=$(ARTEFACTS)/pdepend_jdepend.svg \
 		--overview-pyramid=$(ARTEFACTS)/pdepend_pyramid.svg \
 		src/
 
-pretty: ## PHP CS (https://github.com/squizlabs/PHP_CodeSniffer)
+pretty: vendor ## PHP CS (https://github.com/squizlabs/PHP_CodeSniffer)
 	docker-compose exec php vendor/bin/php-cs-fixer fix
 
 .PHONY: pdepend phpmd pretty phpcpd
