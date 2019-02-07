@@ -1,6 +1,6 @@
 all: run book
 
-travis: .env run initialize
+travis: .env run initialize yarn
 
 install: .env run initialize yarn book
 
