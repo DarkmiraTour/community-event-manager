@@ -33,11 +33,6 @@ services:
             - ./:/var/www/symfony:cached
             - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
             - ./var/logs/nginx/:/var/log/nginx:cached
-    composer:
-        image: composer:latest
-        volumes:
-            - .:/app
-        command: sh -c "tail -f /dev/null"
     storage:
         image: minio/minio:latest
         ports:

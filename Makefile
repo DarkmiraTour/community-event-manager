@@ -44,8 +44,7 @@ kill:
 
 all: run book
 
-initialize: run bucket
-	docker-compose run composer install
+initialize: run bucket vendor
 	docker-compose exec php bash -c "php bin/console doctrine:migrations:migrate --no-interaction"
 	docker-compose exec php bash -c "php bin/console doctrine:fixtures:load --no-interaction"
 
@@ -92,7 +91,7 @@ behat.yml: behat.yml.dist
 	fi
 
 vendor: composer.lock
-	docker-compose exec composer composer install
+	docker run -v $(shell pwd):/app -w /app composer:latest composer install
 
 ##
 ##Tests
