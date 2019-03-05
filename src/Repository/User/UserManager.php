@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository\User;
 
 use App\Entity\User;
+use App\ValueObject\Username;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UserManager implements UserManagerInterface
@@ -42,7 +43,18 @@ final class UserManager implements UserManagerInterface
     {
         $user = $this->userRepository->createWith($email, $username);
         $user->setPassword($this->passwordEncoder->encodePassword($user, $plainPassword));
+        $this->userRepository->save($user);
 
         return $user;
+    }
+
+    public function updateUserInformation(User $user, string $emailAddress = null, Username $username = null): void
+    {
+        $this->userRepository->updateUserInformation($user, $emailAddress, $username);
+    }
+
+    public function findAll(): array
+    {
+        return $this->userRepository->findAll();
     }
 }
