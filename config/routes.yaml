@@ -47,3 +47,8 @@ schedule:
 page:
     resource: routes/page.yaml
     prefix: page
+
+sponsorships_pdf:
+    path: /sponsorships/pdf
+    methods: [GET]
+    controller: App\Controller\GeneratePdf::handle

@@ -233,6 +233,9 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
+    "spipu/html2pdf": {
+        "version": "v5.2.1"
+    },
     "symfony/asset": {
         "version": "v4.1.6"
     },
@@ -466,6 +469,9 @@
     },
     "symfony/yaml": {
         "version": "v4.1.6"
+    },
+    "tecnickcom/tcpdf": {
+        "version": "6.2.26"
     },
     "twbs/bootstrap": {
         "version": "v4.1.3"

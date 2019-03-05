@@ -14,6 +14,7 @@
         "ninsuo/symfony-collection": "^2.1",
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
+        "spipu/html2pdf": "^5.2",
         "symfony/asset": "*",
         "symfony/console": "*",
         "symfony/expression-language": "4.1.*",
