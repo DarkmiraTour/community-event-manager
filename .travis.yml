@@ -18,6 +18,6 @@ before_script:
     - make install
 
 script:
-    - docker-compose run composer vendor/phpmd/phpmd/src/bin/phpmd src text phpmd.xml
-    - docker-compose run composer bin/phpunit
+    - docker-compose exec php vendor/bin/phpmd src text phpmd.xml
+    - docker run -v $(shell pwd):/app -w /app composer:latest bin/phpunit
     - docker-compose exec php vendor/bin/behat --format progress --strict
