@@ -99,12 +99,12 @@ vendor: composer.lock
 ##
 
 coverage: vendor ## Run coverage unit tests
-	docker-compose exec php vendor/bin/phpunit --coverage-html --coverage-text
+	docker-compose exec php bin/phpunit --coverage-html --coverage-text
 
 test: tu tf ## Run unit and functional tests
 
 tu: vendor ## Run unit tests
-	docker-compose exec php vendor/bin/simple-phpunit --exclude-group functional
+	docker-compose exec php bin/phpunit --exclude-group functional
 
 tf: vendor ## Run functional tests
 	docker-compose exec php vendor/bin/behat
