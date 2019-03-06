@@ -45,6 +45,18 @@ Run tests suite:
 make test
 ```
 
+## Code Quality
+
+Rules:
+
+ ######need to be define 
+
+Run quality cleanner:
+
+``` bash
+make pretty
+```
+
 ## License
 
 This application is under [GPL-3.0 License](LICENSE).
