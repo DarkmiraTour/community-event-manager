@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: btaralle
- * Date: 2019-02-07
- * Time: 17:41
- */
+
+declare(strict_types=1);
 
 namespace App\Tests\Service;
 
@@ -15,14 +11,14 @@ use App\Service\FormatSponsorshipLevelBenefit;
 use Prophecy\Argument;
 use PHPUnit\Framework\TestCase;
 
-class FormatSponsorshipLevelBenefitTest extends TestCase
+final class FormatSponsorshipLevelBenefitTest extends TestCase
 {
     private $sponsorshipBenefitManagerProphecy;
     private $sponsorshipLevelManagerProphecy;
     private $sponsorshipLevelBenefitManagerProphecy;
     private $formatSponsorshipLevelBenefit;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->sponsorshipBenefitManagerProphecy = $this->prophesize(SponsorshipBenefitManagerInterface::class);
         $this->sponsorshipLevelManagerProphecy = $this->prophesize(SponsorshipLevelManagerInterface::class);
@@ -35,7 +31,7 @@ class FormatSponsorshipLevelBenefitTest extends TestCase
         );
     }
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $this->sponsorshipLevelManagerProphecy->getOrderedList()->shouldBeCalled()->willReturn([]);
         $this->sponsorshipBenefitManagerProphecy->getOrderedList()->shouldBeCalled()->willReturn([]);
@@ -43,5 +39,7 @@ class FormatSponsorshipLevelBenefitTest extends TestCase
         $this->sponsorshipLevelBenefitManagerProphecy->getByBenefitAndLevel(Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->formatSponsorshipLevelBenefit->format();
+
+        $this->assertEquals([], $this->formatSponsorshipLevelBenefit->format());
     }
 }
