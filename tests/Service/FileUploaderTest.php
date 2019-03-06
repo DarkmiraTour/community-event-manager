@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Service;
 
 use App\Service\FileUploader;
@@ -8,12 +10,12 @@ use Symfony\Component\HttpFoundation\File\File;
 use Prophecy\Argument;
 use PHPUnit\Framework\TestCase;
 
-class FileUploaderTest extends TestCase
+final class FileUploaderTest extends TestCase
 {
     private $filesystemProphecy;
     private $fileUploader;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->filesystemProphecy = $this->prophesize(FilesystemInterface::class);
 
@@ -22,12 +24,10 @@ class FileUploaderTest extends TestCase
         );
     }
 
-    public function testFileIsUploaded()
+    public function testFileIsUploaded(): void
     {
         $this->filesystemProphecy->write(Argument::any(), Argument::any())->shouldBeCalled();
 
         $this->fileUploader->upload(new File(__DIR__.'/../file/testFile', false));
     }
-
-
 }
