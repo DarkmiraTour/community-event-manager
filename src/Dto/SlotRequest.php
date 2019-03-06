@@ -7,6 +7,7 @@ namespace App\Dto;
 use App\Entity\Slot;
 use App\Entity\SlotType;
 use App\Entity\Space;
+use App\ValueObject\Title;
 use App\Entity\Talk;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -77,7 +78,7 @@ final class SlotRequest
         $slot->setType($this->type);
         $slot->setStart($this->start);
         $slot->setEnd($this->end);
-        $slot->setTitle($this->title);
+        $slot->setTitle(new Title($this->title));
         $slot->setTalk($this->talk);
 
         return $slot;

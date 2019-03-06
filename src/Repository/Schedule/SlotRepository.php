@@ -8,6 +8,7 @@ use App\Dto\SlotRequest;
 use App\Entity\Schedule;
 use App\Entity\Slot;
 use App\Entity\Space;
+use App\ValueObject\Title;
 use App\Entity\Talk;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -51,14 +52,13 @@ final class SlotRepository implements SlotRepositoryInterface
 
         $duration = ($diff->h * 60) + $diff->i;
 
-        $slot = new Slot();
-        $slot->setId($this->nextIdentity()->toString());
-        $slot->setDuration($duration);
-        $slot->setTitle($slotRequest->title);
-        $slot->setType($slotRequest->type);
-        $slot->setStart($slotRequest->start);
-        $slot->setEnd($slotRequest->end);
-        $slot->setSpace(
+        $slot = new Slot(
+            $this->nextIdentity(),
+            new Title($slotRequest->title),
+            $duration,
+            $slotRequest->start,
+            $slotRequest->end,
+            $slotRequest->type,
             $this->spaceRepository->find($slotRequest->space)
         );
         $slot->setTalk($slotRequest->talk ? $this->talkRepository->find($slotRequest->talk) : null);
