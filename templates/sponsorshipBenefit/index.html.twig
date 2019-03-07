@@ -31,7 +31,7 @@
                         <td>{{ benefit.label }}</td>
                         {% if is_granted('ROLE_ADMIN') %}
                             <td class="text-right">
-                                <a class="btn btn-warning"
+                                <a class="btn btn-secondary"
                                    href="{{ path('sponsorship_benefit_edit', {'id': benefit.id}) }}">Edit</a>
                                 <a class="btn btn-danger"
                                    href="{{ path('sponsorship_benefit_confirm_delete', {'id': benefit.id}) }}">Delete</a>

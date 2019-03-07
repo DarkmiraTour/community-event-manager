@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6 text-center text-sm-right">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('organisation_create') }}" class="btn btn-success">Add organisation</a>
+                <a href="{{ path('organisation_create') }}" class="btn btn-primary">Add organisation</a>
             {% endif %}
         </div>
     </div>
@@ -27,19 +27,17 @@
                 {% for organisation in organisations %}
                     <tr>
                         <td>
-                            {{ organisation.name }}
+                            <a href="{{ path('organisation_show', {'id': organisation.id}) }}">
+                                {{ organisation.name }}
+                            </a>
                         </td>
                         <td>
                             <a href="{{ organisation.website }}" target="_blank">{{ organisation.website }}</a>
                         </td>
                         <td class="text-center">
-                            <a href="{{ path('organisation_show', {'id': organisation.id}) }}"
-                               class="btn btn-info mb-2 mb-md-0">
-                                Show
-                            </a>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('organisation_edit', {'id': organisation.id}) }}"
-                                   class="btn btn-warning mb-2 mb-md-0">
+                                   class="btn btn-secondary mb-2 mb-md-0">
                                     Edit
                                 </a>
                                 <a href="{{ path('organization_confirm_delete', {'id': organisation.id}) }}"

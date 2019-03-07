@@ -27,13 +27,14 @@
                 <tbody>
                 {% for page in pages %}
                     <tr>
-                        <td>{{ page.title }}</td>
-                        <td class="text-right">
-                            <a class="btn btn-info mb-2 mb-md-0" href="{{ path('page_show', {'id': page.id}) }}">
-                                Show
+                        <td>
+                            <a href="{{ path('page_show', {'id': page.id}) }}">
+                                {{ page.title }}
                             </a>
+                        </td>
+                        <td class="text-right">
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="btn btn-warning mb-2 mb-md-0" href="{{ path('page_edit', {'id': page.id}) }}">
+                                <a class="btn btn-secondary mb-2 mb-md-0" href="{{ path('page_edit', {'id': page.id}) }}">
                                     Edit
                                 </a>
                                 <a href="{{ path('page_confirm_delete', {'id': page.id}) }}"

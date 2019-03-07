@@ -37,7 +37,7 @@
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="float-right">
-                    <a class="btn btn-warning"
+                    <a class="btn btn-secondary"
                        href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
                     <a class="btn btn-danger"
                        href="{{ path('special_benefit_confirm_delete', {'id': specialBenefit.id}) }}">

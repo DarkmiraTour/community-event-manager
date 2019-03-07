@@ -36,7 +36,7 @@
         </div>
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btn-warning" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
+                <a class="btn btn-secondary" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
                 <a href="{{ path('page_confirm_delete', {'id': page.id}) }}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>

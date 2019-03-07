@@ -40,7 +40,7 @@
         </div>
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-warning">Edit</a>
+                <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-secondary">Edit</a>
                 <a href="{{ path('organization_confirm_delete', {'id': organisation.id}) }}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>
