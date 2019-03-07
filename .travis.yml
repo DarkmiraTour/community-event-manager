@@ -20,4 +20,5 @@ before_script:
 script:
     - docker-compose run composer vendor/phpmd/phpmd/src/bin/phpmd src text phpmd.xml
     - docker-compose run composer bin/phpunit
+    - docker-compose up -d
     - docker-compose exec php vendor/bin/behat --format progress --strict
