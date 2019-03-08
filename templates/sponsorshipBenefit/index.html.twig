@@ -33,7 +33,8 @@
                             <td class="text-right">
                                 <a class="btn btn-warning"
                                    href="{{ path('sponsorship_benefit_edit', {'id': benefit.id}) }}">Edit</a>
-                                {{ include('sponsorshipBenefit/_delete_form.html.twig', { 'benefit': benefit }) }}
+                                <a class="btn btn-danger"
+                                   href="{{ path('sponsorship_benefit_confirm_delete', {'id': benefit.id}) }}">Delete</a>
                             </td>
                         {% endif %}
                     </tr>

@@ -34,16 +34,20 @@ Feature: Sponsorship Benefit
     Then I should be redirected on the sponsorship benefit listing page
     And I should see "Benefit 12"
 
-  @javascript
   Scenario: I cancel the delete of sponsorship benefit "Benefit 12"
     Given I am logged in as an admin
     When I am on the sponsorship benefit listing page
-    And I press "Delete" on the row containing "Benefit 12" and cancel popup
-    Then I should see "Benefit 12"
+    And I click "Delete" on the row containing "Benefit 12"
+    And I should see "Do you wish to confirm \"Benefit 12\" sponsorship benefit deletion?"
+    And I click "Back to list" link
+    Then I should be redirected on the sponsorship benefit listing page
+    And I should see "Benefit 12"
 
-  @javascript
   Scenario: I confirm the delete of sponsorship benefit "Benefit 12"
     Given I am logged in as an admin
     When I am on the sponsorship benefit listing page
-    And I press "Delete" on the row containing "Benefit 12" and confirm popup
-    Then I should not see "Benefit 12"
+    And I click "Delete" on the row containing "Benefit 12"
+    And I should see "Do you wish to confirm \"Benefit 12\" sponsorship benefit deletion?"
+    And I press "Delete"
+    Then I should be redirected on the sponsorship benefit listing page
+    And I should not see "Benefit 12"
