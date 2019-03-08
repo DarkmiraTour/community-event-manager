@@ -8,6 +8,7 @@ use App\Dto\SlotRequest;
 use App\Entity\Schedule;
 use App\Entity\Slot;
 use App\Entity\Space;
+use App\Entity\Talk;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -18,6 +19,7 @@ final class SlotRepository implements SlotRepositoryInterface
     private $repository;
     private $spaceRepository;
     private $scheduleRepository;
+    private $talkRepository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -25,6 +27,7 @@ final class SlotRepository implements SlotRepositoryInterface
         $this->repository = $entityManager->getRepository(Slot::class);
         $this->spaceRepository = $entityManager->getRepository(Space::class);
         $this->scheduleRepository = $entityManager->getRepository(Schedule::class);
+        $this->talkRepository = $entityManager->getRepository(Talk::class);
     }
 
     public function find(string $id): ?Slot
@@ -58,6 +61,7 @@ final class SlotRepository implements SlotRepositoryInterface
         $slot->setSpace(
             $this->spaceRepository->find($slotRequest->space)
         );
+        $slot->setTalk($slotRequest->talk ? $this->talkRepository->find($slotRequest->talk) : null);
 
         return $slot;
     }
