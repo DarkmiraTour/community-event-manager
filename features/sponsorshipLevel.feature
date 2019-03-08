@@ -53,16 +53,20 @@ Feature: Sponsorship Level
     Then I should be redirected on the sponsorship level listing page
     And I should see "Level 10"
 
-  @javascript
   Scenario: I cancel the delete of sponsorship level "Level 10"
     Given I am logged in as an admin
     When I am on the sponsorship level listing page
-    And I press "Delete" on the row containing "Level 10" and cancel popup
-    Then I should see "Level 10"
+    And I click "Delete" on the row containing "Level 10"
+    And I should see "Do you wish to confirm \"Level 10\" sponsorship level deletion?"
+    And I click "Back to list" link
+    Then I should be redirected on the sponsorship level listing page
+    And I should see "Level 10"
 
-  @javascript
   Scenario: I confirm the delete of sponsorship level "Level 10"
     Given I am logged in as an admin
     When I am on the sponsorship level listing page
-    And I press "Delete" on the row containing "Level 10" and confirm popup
-    Then I should not see "Level 10"
+    And I click "Delete" on the row containing "Level 10"
+    And I should see "Do you wish to confirm \"Level 10\" sponsorship level deletion?"
+    And I press "Delete"
+    Then I should be redirected on the sponsorship level listing page
+    And I should not see "Level 10"

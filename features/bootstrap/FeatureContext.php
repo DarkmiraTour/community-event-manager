@@ -246,6 +246,15 @@ final class FeatureContext extends RawMinkContext
     }
 
     /**
+     * @When /^I click "([^"]*)" link$/
+     */
+    public function iClickLink(string $linkText): void
+    {
+        $link = $this->getSession()->getPage()->findLink($linkText);
+        $link->click();
+    }
+
+    /**
      * @AfterStep
      */
     public function takeScreenshotAfterFailedStep(AfterStepScope $scope): void
