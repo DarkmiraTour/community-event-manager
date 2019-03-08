@@ -1,7 +1,6 @@
 <form
         method="post"
         action="{{ path('organisation_delete', {'id': organisation.id}) }}"
-        onsubmit="return confirm('Are you sure you want to delete this organisation?');"
         class="d-inline-block"
 >
     <input type="hidden" name="_method" value="DELETE">
