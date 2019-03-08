@@ -37,7 +37,7 @@
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-warning" href="{{ path('page_edit', {'id': page.id}) }}">Edit</a>
-                {{ include('page/_delete_form.html.twig', { 'page': page }) }}
+                <a href="{{ path('page_confirm_delete', {'id': page.id}) }}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>
     </div>
