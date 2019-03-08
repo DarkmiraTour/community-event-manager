@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Delete day{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col text-center">
+            <h1 class="mb-lg-4 mt-lg-4">Delete day</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Do you wish to confirm "{{ schedule.day.format('d/m/Y') }}" day deletion?</h5>
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <a href="{{ path('schedule_index') }}" class="btn btn-light">Back to schedule</a>
+                        </div>
+                        <div class="col-6">
+                            {{ include('schedule/configure/_delete_day.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
