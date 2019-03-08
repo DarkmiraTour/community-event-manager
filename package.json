@@ -6,6 +6,7 @@
         "jquery": "^3.3.1",
         "node-sass": "^4.9.4",
         "popper.js": "^1.14.6",
+        "prettier": "1.16.4",
         "sass-loader": "^7.1.0",
         "webpack-notifier": "^1.6.0"
     },
@@ -15,7 +16,8 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "build": "encore production"
+        "build": "encore production",
+        "pretty": "prettier --write \"./assets/*.{js,css,scss}\""
     },
     "dependencies": {}
 }
