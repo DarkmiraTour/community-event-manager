@@ -28,3 +28,10 @@ talk_delete:
     controller: App\Controller\Talk\Delete::handle
     requirements:
         id: '%routing.uuid%'
+
+talk_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Talk\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'

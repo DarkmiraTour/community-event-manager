@@ -38,6 +38,10 @@
                                    class="btn btn-warning mb-2 mb-md-0">
                                     Edit
                                 </a>
+                                <a href="{{ path('talk_confirm_delete', {'id': talk.id}) }}"
+                                   class="btn btn-danger mb-2 mb-md-0">
+                                    Delete
+                                </a>
                             {% endif %}
                         </td>
                     </tr>

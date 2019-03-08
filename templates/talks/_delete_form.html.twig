@@ -1,6 +1,4 @@
-<form method="post" action="{{ path('talk_delete', {'id': talk.id}) }}"
-      onsubmit="return confirm('Are you sure you want to delete this talk?');"
-      class="d-inline-block">
+<form method="post" action="{{ path('talk_delete', {'id': talk.id}) }}" class="d-inline-block">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('talk-' ~ talk.id) }}">
     <button type="submit" class="btn btn-danger">Delete</button>
