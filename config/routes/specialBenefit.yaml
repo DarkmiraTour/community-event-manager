@@ -28,3 +28,10 @@ special_benefit_show:
     methods: [GET]
     requirements:
         id: '%routing.uuid%'
+
+special_benefit_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\SpecialBenefit\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'

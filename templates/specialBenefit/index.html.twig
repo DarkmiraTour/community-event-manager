@@ -35,7 +35,10 @@
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a class="btn btn-warning mb-2 mb-md-0"
                                    href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
-                                {{ include('specialBenefit/_delete_form.html.twig', {'specialBenefit': specialBenefit}) }}
+                                <a class="btn btn-danger mb-2 mb-md-0"
+                                   href="{{ path('special_benefit_confirm_delete', {'id': specialBenefit.id}) }}">
+                                    Delete
+                                </a>
                             {% endif %}
                         </td>
                     </tr>
