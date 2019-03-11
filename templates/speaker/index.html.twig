@@ -9,6 +9,10 @@
         </div>
         <div class="col-sm-6 text-center text-sm-right">
             {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('speaker_upload_from_openCFP') }}" class="btn btn-success">Import speakers and Talks from OpenCFP</a>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('speaker_create') }}" class="btn btn-primary">Add speaker</a>
             {% endif %}
         </div>

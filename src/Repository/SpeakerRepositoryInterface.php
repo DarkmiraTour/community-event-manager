@@ -21,4 +21,6 @@ interface SpeakerRepositoryInterface
     public function nextIdentity(): UuidInterface;
 
     public function createFromRequest(SpeakerRequest $speakerRequest): Speaker;
+
+    public function createWith(string $name, string $email, string $title, string $biography, string $photoPath): Speaker;
 }
