@@ -1,1 +1,1 @@
-module.exports = window.Routing;
+module.exports = window.Routing
