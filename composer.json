@@ -43,11 +43,12 @@
         "behatch/contexts": "^3.2",
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "phpmd/phpmd": "^2.6",
+        "phpspec/prophecy": "^1.8",
         "roave/security-advisories": "dev-master",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.8",
-        "symfony/phpunit-bridge": "4.1.*",
+        "symfony/test-pack": "^1.0",
         "symfony/var-dumper": "*"
     },
     "config": {

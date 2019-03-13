@@ -131,6 +131,9 @@
     "fabpot/goutte": {
         "version": "v3.2.3"
     },
+    "facebook/webdriver": {
+        "version": "1.6.0"
+    },
     "friendsofsymfony/jsrouting-bundle": {
         "version": "2.0",
         "recipe": {
@@ -197,8 +200,20 @@
     "pdepend/pdepend": {
         "version": "2.5.2"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
+    },
     "phpmd/phpmd": {
         "version": "2.6.0"
+    },
+    "phpspec/prophecy": {
+        "version": "1.8.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -223,6 +238,18 @@
     },
     "roave/security-advisories": {
         "version": "dev-master"
+    },
+    "sebastian/comparator": {
+        "version": "3.0.2"
+    },
+    "sebastian/diff": {
+        "version": "3.0.2"
+    },
+    "sebastian/exporter": {
+        "version": "3.1.0"
+    },
+    "sebastian/recursion-context": {
+        "version": "3.0.0"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -362,13 +389,16 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/panther": {
+        "version": "v0.2.0"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.1",
-            "ref": "b4c7d939cac9a67e02366fa7971746e9cbf1dad0"
+            "ref": "0e548dd90adba18fabd4ef419b14d361fe4d6c74"
         }
     },
     "symfony/polyfill-intl-icu": {
@@ -379,6 +409,9 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.9.0"
+    },
+    "symfony/process": {
+        "version": "v4.1.11"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.3"
@@ -415,6 +448,9 @@
     },
     "symfony/stopwatch": {
         "version": "v4.1.6"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.5"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -487,6 +523,9 @@
     },
     "twig/twig": {
         "version": "v2.5.0"
+    },
+    "webmozart/assert": {
+        "version": "1.4.0"
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
