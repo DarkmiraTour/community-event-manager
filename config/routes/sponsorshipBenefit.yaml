@@ -21,3 +21,10 @@ sponsorship_benefit_delete:
     controller: App\Controller\SponsorshipBenefit\Delete::handle
     requirements:
         id: '%routing.uuid%'
+
+sponsorship_benefit_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\SponsorshipBenefit\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
