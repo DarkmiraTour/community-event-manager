@@ -28,3 +28,10 @@ page_show:
     methods: [GET]
     requirements:
         id: '%routing.uuid%'
+
+page_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Page\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
