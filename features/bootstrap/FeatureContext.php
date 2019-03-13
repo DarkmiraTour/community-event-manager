@@ -251,7 +251,6 @@ final class FeatureContext extends RawMinkContext
     public function iClickLink(string $linkText): void
     {
         $link = $this->getSession()->getPage()->findLink($linkText);
-
         $link->click();
     }
 
