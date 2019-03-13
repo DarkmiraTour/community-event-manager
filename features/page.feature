@@ -77,19 +77,21 @@ Feature: Page
     Then I should be redirected on the page listing page
     And I should see "Page 5"
 
-  @javascript
   Scenario: I cancel the delete of page "Page 5"
     Given I am logged in as an admin
     When I am on the page listing page
     And I click "Show" on the row containing "Page 5"
-    And I click "Delete" and cancel popup
-    Then I should see "Page 5"
+    And I click "Delete" link
+    And I should see "Do you wish to confirm \"Page 5\" page deletion?"
+    And I click "Back to list" link
+    Then I should be redirected on the page listing page
+    And I should see "Page 5"
 
-  @javascript
   Scenario: I confirm the delete of page "Page 5"
     Given I am logged in as an admin
     When I am on the page listing page
-    And I click "Show" on the row containing "Page 5"
-    And I click "Delete" and confirm popup
-    Then I should not see "Page 5"
-
+    And I click "Delete" on the row containing "Page 5"
+    And I should see "Do you wish to confirm \"Page 5\" page deletion?"
+    And I press "Delete"
+    Then I should be redirected on the page listing page
+    And I should not see "Page 5"

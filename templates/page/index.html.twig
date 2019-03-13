@@ -36,6 +36,10 @@
                                 <a class="btn btn-warning mb-2 mb-md-0" href="{{ path('page_edit', {'id': page.id}) }}">
                                     Edit
                                 </a>
+                                <a href="{{ path('page_confirm_delete', {'id': page.id}) }}"
+                                   class="btn btn-danger mb-2 mb-md-0">
+                                    Delete
+                                </a>
                             {% endif %}
                         </td>
                     </tr>

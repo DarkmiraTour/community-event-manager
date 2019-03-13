@@ -71,7 +71,7 @@
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('speaker_edit', {'id': speaker.id}) }}" class="btn btn-warning">Edit</a>
-                {{ include('speaker/_delete_form.html.twig', {'speaker': speaker}) }}
+                <a href="{{ path('speaker_confirm_delete', {'id': speaker.id}) }}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>
     </div>

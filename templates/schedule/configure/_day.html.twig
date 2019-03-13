@@ -61,7 +61,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="text-right">
-                    {{ include('schedule/configure/_delete_day.html.twig', { 'day': day }) }}
+                    <a href="{{ path('schedule_confirm_delete', {'id': day.id}) }}"
+                       class="btn btn-danger mb-2 mb-md-0">
+                        Remove day
+                    </a>
                 </div>
             </div>
         </div>

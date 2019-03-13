@@ -28,3 +28,10 @@ organisation_delete:
     methods: [DELETE]
     requirements:
         id: '%routing.uuid%'
+
+organization_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Organisation\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
