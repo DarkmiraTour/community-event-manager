@@ -49,8 +49,7 @@
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.8",
-        "symfony/var-dumper": "*",
-        "symfony/phpunit-bridge": "4.1.*"
+        "symfony/var-dumper": "*"
     },
     "config": {
         "platform": {
