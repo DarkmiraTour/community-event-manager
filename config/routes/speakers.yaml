@@ -28,3 +28,10 @@ speaker_delete:
     controller: App\Controller\Speaker\Delete::handle
     requirements:
         id: '%routing.uuid%'
+
+speaker_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Speaker\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
