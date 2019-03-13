@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity()
@@ -62,5 +64,27 @@ class Schedule
     public function setSpaces(ArrayCollection $spaces): void
     {
         $this->spaces = $spaces;
+    }
+
+    public function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
+    }
+
+    public function __clone()
+    {
+        if (!$this->id) {
+            return;
+        }
+        $this->setId($this->nextIdentity()->toString());
+        $this->spaces = $this->getSpaces();
+        $spaceClone = new ArrayCollection();
+        foreach ($this->spaces as $item) {
+            $itemClone = clone $item;
+            $itemClone->setId($this->nextIdentity()->toString());
+            $itemClone->setSchedule($this);
+            $spaceClone->add($itemClone);
+        }
+        $this->spaces = $spaceClone;
     }
 }

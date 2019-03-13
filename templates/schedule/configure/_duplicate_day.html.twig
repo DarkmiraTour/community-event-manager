@@ -1,0 +1,16 @@
+{{ form_start(form,{'action': path('schedule_duplicate_item',{'id': schedule.id})}) }}
+
+{{ form_widget(form.day, {'attr': {'class': 'justify-content-center'}}) }}
+<input type="hidden" name="_method" value="post">
+<div class="row mt-5">
+    <div class="col-6">
+        <a href="{{ path('schedule_index') }}" class="btn btn-light">Back to schedule</a>
+    </div>
+    <div class="col-6">
+        <button class="btn btn-success" type="submit">
+            Duplicate day
+        </button>
+    </div>
+</div>
+{{ form_end(form) }}
+
