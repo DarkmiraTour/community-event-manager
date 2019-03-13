@@ -45,3 +45,10 @@ schedule_slot_delete:
   controller: App\Controller\Slot\Delete::handle
   requirements:
     id: '%routing.uuid%'
+
+schedule_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Schedule\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
