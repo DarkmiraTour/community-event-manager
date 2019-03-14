@@ -12,6 +12,7 @@
         "gaufrette/extras": "^0.1.0",
         "knplabs/knp-gaufrette-bundle": "^0.5.3",
         "ninsuo/symfony-collection": "^2.1",
+        "phpspec/prophecy": "^1.8",
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
         "spipu/html2pdf": "^5.2",
@@ -24,6 +25,7 @@
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "*",
         "symfony/security-csrf": "*",
+        "symfony/test-pack": "^1.0",
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-profiler-bundle": "*",
@@ -47,7 +49,6 @@
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.8",
-        "symfony/phpunit-bridge": "4.1.*",
         "symfony/var-dumper": "*"
     },
     "config": {
