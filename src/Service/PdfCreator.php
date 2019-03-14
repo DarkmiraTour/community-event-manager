@@ -4,38 +4,32 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Spipu\Html2Pdf\Html2Pdf;
+use App\ValueObject\PdfFormat;
+use App\ValueObject\PdfOrientation;
+use Dompdf\Dompdf;
 
 final class PdfCreator implements PdfCreatorInterface
 {
-    private $pdf;
     private $orientation;
     private $format;
-    private $lang;
-    private $unicode;
-    private $encoding;
-    private $margin;
+    private $pdf;
 
-    public function __construct(string $orientation, string $format, string $lang, bool $unicode, string $encoding, array $margin)
-    {
+    public function __construct(
+        PdfOrientation $orientation,
+        PdfFormat $format,
+        array $pdfOptions
+    ) {
         $this->orientation = $orientation;
         $this->format = $format;
-        $this->lang = $lang;
-        $this->unicode = $unicode;
-        $this->encoding = $encoding;
-        $this->margin = $margin;
+        $this->pdf = new Dompdf($pdfOptions);
     }
 
-    public function create(): void
+    public function generatePdf(string $template): string
     {
-        $this->pdf = new Html2Pdf($this->orientation, $this->format, $this->lang, $this->unicode, $this->encoding, $this->margin);
-        $this->pdf->setTestIsImage(false);
-    }
+        $this->pdf->setPaper($this->format->getValue(), $this->orientation->getValue());
+        $this->pdf->loadHtml($template);
+        $this->pdf->render();
 
-    public function generatePdf(string $template, string $name): string
-    {
-        $this->pdf->writeHTML($template);
-
-        return $this->pdf->Output($name.'.pdf');
+        return $this->pdf->output();
     }
 }
