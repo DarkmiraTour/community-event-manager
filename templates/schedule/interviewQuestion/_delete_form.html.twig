@@ -1,0 +1,5 @@
+<form class="d-inline" method="post" action="{{ path('interview_question_delete', {'id': interviewQuestion.id}) }}">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ interviewQuestion.id) }}">
+    <button class="btn btn-danger">Delete</button>
+</form>

@@ -1,0 +1,30 @@
+interview_question_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\InterviewQuestion\Index::handle
+
+interview_question_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Controller\InterviewQuestion\Create::handle
+
+interview_question_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Controller\InterviewQuestion\Edit::handle
+    requirements:
+        id: '%routing.uuid%'
+
+interview_question_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Controller\InterviewQuestion\Delete::handle
+    requirements:
+        id: '%routing.uuid%'
+
+interview_question_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\InterviewQuestion\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
