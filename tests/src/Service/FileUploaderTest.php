@@ -28,6 +28,6 @@ final class FileUploaderTest extends TestCase
     {
         $this->filesystemProphecy->write(Argument::any(), Argument::any())->shouldBeCalled();
 
-        $this->fileUploader->upload(new File(__DIR__.'/../file/testFile', false));
+        $this->fileUploader->upload(new File(__DIR__.'/../../resources/emptyFile', false));
     }
 }
