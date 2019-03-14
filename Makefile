@@ -1,6 +1,31 @@
-all: run book
+.DEFAULT_GOAL := help
 
-install: .env run initialize book
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+.PHONY: help
+
+##
+## Darkmira Community Event Manager
+## --------------------------------
+##
+
+##
+## Setup
+## -----
+##
+
+install: .env run initialize info ## Install and start the project
+
+.env: .env.dist
+	@if [ -f .env ]; then \
+		echo '\033[1;41mYour .env file may be outdated because .env.dist has changed.\033[0m';\
+		echo '\033[1;41mCheck your .env file, or run this command again to ignore.\033[0m';\
+		touch .env;\
+		exit 1;\
+	else\
+		echo cp .env.dist .env;\
+		cp .env.dist .env;\
+	fi
 
 initialize: run bucket
 	docker-compose run composer install
@@ -18,26 +43,16 @@ bucket:
 	           minio/mc \
 	           /bin/sh -c "chmod +x ./docker/minio/create-bucket.sh && ./docker/minio/create-bucket.sh"
 
-test:
-	docker-compose run composer ./vendor/bin/simple-phpunit
+##
+## Tests
+## -----
+##
 
-logs:
-	docker-compose logs -ft
+test: ## Run unit tests
+	docker-compose run php bin/phpunit
 
-bash:
-	docker-compose up -d php
-	docker-compose exec php bash
-
-.env: .env.dist
-	@if [ -f .env ]; then \
-		echo '\033[1;41mYour .env file may be outdated because .env.dist has changed.\033[0m';\
-		echo '\033[1;41mCheck your .env file, or run this command again to ignore.\033[0m';\
-		touch .env;\
-		exit 1;\
-	else\
-		echo cp .env.dist .env;\
-		cp .env.dist .env;\
-	fi
+behat: ## Run functional tests
+	docker-compose run php vendor/bin/behat
 
 behat.yml: behat.yml.dist
 	@if [ -f behat.yml ]; then \
@@ -50,10 +65,23 @@ behat.yml: behat.yml.dist
 		cp behat.yml.dist behat.yml;\
 	fi
 
-book:
-	#
-	# Darkmira Community Event Manager
-	#
-	# Application: http://0.0.0.0:8080
-	# Minio:       http://0.0.0.0:9001
-	#
+##
+## Tools
+## -----
+##
+
+logs: ## Show logs
+	docker-compose logs -ft
+
+bash: ## Bash into php container
+	docker-compose up -d php
+	docker-compose exec php bash
+
+info:
+	@echo ""
+	@echo "\033[92m[OK] Application running on http://$(HOST):8080\033[0m"
+	@echo "\033[92m[OK] Minio running on http://$(HOST):9001\033[0m"
+	@echo ""
+
+##
+##
