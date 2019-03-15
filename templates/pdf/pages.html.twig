@@ -1,7 +1,7 @@
 {% for page in pages %}
     <div style="position: absolute; left: 50%; margin-left: -420px; top: 15%; width: 841px; height: 595px; overflow: hidden;">
         <div style="position:absolute; left: 0px; top: 0px;">
-            <img src="/tmp/{{ page.background }}" width="60%"></div>
+            <img src="{{ base64_image_from_storage(page.background) }}" width="60%"></div>
         <div style="width: 400px; height: 400px; margin-left: 40%; padding-left: 10px; padding-top: 80px; padding-bottom: 25px; float: right; background-color: white; text-align: justify; border-left: 5px solid #6AA84F;">
             <h3 style="color: #6AA84F; margin-bottom: 0px;">{{ page.title }}</h3>
             <p style="font-size: 14pt;">{{ page.content|nl2br }}</p>
