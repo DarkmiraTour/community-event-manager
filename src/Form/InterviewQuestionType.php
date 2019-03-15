@@ -32,10 +32,6 @@ final class InterviewQuestionType extends AbstractType implements DataMapperInte
     {
         $forms = iterator_to_array($forms);
 
-        if (null === $data) {
-            $data = new InterviewQuestionRequest();
-        }
-
         $data = new InterviewQuestionRequest();
         $data->question = $forms['question']->getData();
     }

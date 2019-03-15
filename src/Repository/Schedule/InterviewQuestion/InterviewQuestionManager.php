@@ -6,7 +6,7 @@ namespace App\Repository\Schedule\InterviewQuestion;
 
 use App\Entity\InterviewQuestion;
 use App\Dto\InterviewQuestionRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Exceptions\InterviewQuestionNotFoundException;
 
 final class InterviewQuestionManager implements InterviewQuestionManagerInterface
 {
@@ -50,7 +50,7 @@ final class InterviewQuestionManager implements InterviewQuestionManagerInterfac
     private function checkEntity(?InterviewQuestion $interviewQuestion): InterviewQuestion
     {
         if (!$interviewQuestion) {
-            throw new NotFoundHttpException();
+            throw new InterviewQuestionNotFoundException();
         }
 
         return $interviewQuestion;

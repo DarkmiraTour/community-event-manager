@@ -17,11 +17,11 @@ final class InterviewQuestionRepository extends ServiceEntityRepository implemen
         parent::__construct($registry, InterviewQuestion::class);
     }
 
-    public function createInterviewQuestion(string $position): InterviewQuestion
+    public function createInterviewQuestion(string $question): InterviewQuestion
     {
         return new InterviewQuestion(
             $this->nextIdentity(),
-            $position
+            $question
         );
     }
 

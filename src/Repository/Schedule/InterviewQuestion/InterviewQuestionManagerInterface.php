@@ -15,7 +15,7 @@ interface InterviewQuestionManagerInterface
 
     public function createFrom(InterviewQuestionRequest $interviewQuestionRequest): InterviewQuestion;
 
-    public function createWith(string $position): InterviewQuestion;
+    public function createWith(string $question): InterviewQuestion;
 
     public function save(InterviewQuestion $interviewQuestion): void;
 
