@@ -48,7 +48,9 @@ bucket:
 ## -----
 ##
 
-test: ## Run unit tests
+test: phpunit behat ## Run all tests stack
+
+phpunit: ## Run unit tests
 	docker-compose run php bin/phpunit
 
 behat: ## Run functional tests
@@ -72,10 +74,6 @@ behat.yml: behat.yml.dist
 
 logs: ## Show logs
 	docker-compose logs -ft
-
-bash: ## Bash into php container
-	docker-compose up -d php
-	docker-compose exec php bash
 
 info:
 	@echo ""
