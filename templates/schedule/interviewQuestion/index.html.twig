@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Interview questions{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Interview Questions</h2>
+        </div>
+        <div class="col-sm-6 text-center text-sm-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ path('interview_question_create') }}">Add a question</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Question</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th class="text-right">Actions</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for interviewQuestion in interviewQuestions %}
+                    <tr>
+                        <td>{{ interviewQuestion.question }}</td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td class="text-right">
+                                <a class="btn btn-secondary mb-2 mb-md-0"
+                                   href="{{ path('interview_question_edit', {'id': interviewQuestion.id}) }}">Edit</a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('interview_question_confirm_delete', {'id': interviewQuestion.id}) }}">
+                                    Delete
+                                </a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="2">No records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

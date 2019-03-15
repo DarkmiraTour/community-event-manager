@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit {{ interviewQuestion.question }}{% endblock %}
+
+{% block content %}
+    <h1>Edit Interview Question</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+            <input type="hidden" name="_method" value="PUT">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-5">
+            <a href="{{ path('interview_question_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-7 text-right">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

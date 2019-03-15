@@ -52,3 +52,7 @@ sponsorships_pdf:
     path: /sponsorships/pdf
     methods: [GET]
     controller: App\Controller\GeneratePdf::handle
+
+interview_question:
+    resource: routes/interviewQuestion.yaml
+    prefix: interview-question
