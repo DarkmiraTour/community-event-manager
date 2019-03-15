@@ -93,6 +93,11 @@ class Speaker
      */
     private $talks;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $interviewSent = false;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -209,5 +214,20 @@ class Speaker
     public function getTalks(): Collection
     {
         return $this->talks;
+    }
+
+    public function isInterviewSent(): bool
+    {
+        return $this->interviewSent;
+    }
+
+    public function confirmInterviewIsSent(): void
+    {
+        $this->interviewSent = true;
+    }
+
+    public function confirmInterviewNotSent(): void
+    {
+        $this->interviewSent = false;
     }
 }

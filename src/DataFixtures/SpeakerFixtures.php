@@ -10,6 +10,7 @@ use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 
 final class SpeakerFixtures extends Fixture
@@ -45,6 +46,17 @@ final class SpeakerFixtures extends Fixture
 
             $manager->persist($speaker);
         }
+
+        // add one fixed Speaker to Behat test
+        $speaker = new  Speaker(
+            Uuid::fromString('82e7325c-36b3-4c33-a0e8-743c6013e008'),
+            'Behat',
+            'Mr',
+            'test@gmail.com',
+            'Behat is awesome',
+            $this->fileUploader->upload(new File($faker->image('/tmp', 240, 240)))
+        );
+        $manager->persist($speaker);
 
         $manager->flush();
     }

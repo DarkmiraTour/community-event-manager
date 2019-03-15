@@ -50,6 +50,11 @@
                     <td>{{ speaker.github }}</td>
                 </tr>
                 <tr>
+                    <th>Interview sent</th>
+                    <td>{% if speaker.interviewSent %} Yes
+                        {% else %} No {% endif %}</td>
+                </tr>
+                <tr>
                     <th>Talks</th>
                     <td>
                         <ul>
@@ -67,6 +72,9 @@
     <div class="row mb-3">
         <div class="col-5">
             <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+            {% if is_granted('ROLE_ADMIN') and not speaker.interviewSent %}
+                <a href="{{ path('speaker_send_interview', {'id': speaker.id}) }}" class="btn btn-warning">Send an Interview</a>
+            {% endif %}
         </div>
         <div class="col-7 text-right">
             {% if is_granted('ROLE_ADMIN') %}

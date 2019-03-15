@@ -68,6 +68,11 @@ final class SpeakerRequest
      */
     public $github;
 
+    /**
+     * @Assert\Type("boolean")
+     */
+    public $isInterviewSent;
+
     public static function createFromEntity(Speaker $speaker): self
     {
         $request = new self();
@@ -81,6 +86,7 @@ final class SpeakerRequest
         $request->facebook = $speaker->getFacebook();
         $request->linkedin = $speaker->getLinkedin();
         $request->github = $speaker->getGithub();
+        $request->isInterviewSent = $speaker->isInterviewSent();
 
         return $request;
     }
@@ -99,6 +105,8 @@ final class SpeakerRequest
         if ($this->photoPath) {
             $speaker->setPhoto($this->photoPath);
         }
+
+        $this->isInterviewSent ? $speaker->confirmInterviewIsSent() : $speaker->confirmInterviewNotSent();
 
         return $speaker;
     }

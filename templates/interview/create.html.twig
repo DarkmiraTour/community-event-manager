@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Send the Interview{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Send the interview</h1>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to speaker list</a>
+        </div>
+        <div class="col-6 text-right">
+            <button type="submit" class="btn btn-success">Send</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

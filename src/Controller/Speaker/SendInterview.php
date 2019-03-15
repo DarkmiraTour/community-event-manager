@@ -4,40 +4,40 @@ declare(strict_types=1);
 
 namespace App\Controller\Speaker;
 
-use App\Dto\SpeakerRequest;
-use App\Form\SpeakerType;
+use App\Dto\InterviewRequest;
+use App\Form\InterviewType;
 use App\Repository\SpeakerRepositoryInterface;
-use App\Service\FileUploaderInterface;
+use App\Service\Interview\InterviewService;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Edit
+final class SendInterview
 {
+    private const SEND_MAIL_SUCCESSFUL = 1;
     private $renderer;
-    private $router;
-    private $formFactory;
     private $speakerRepository;
-    private $fileUploader;
+    private $formFactory;
+    private $router;
+    private $interviewService;
 
     public function __construct(
         Twig $renderer,
         SpeakerRepositoryInterface $speakerRepository,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        FileUploaderInterface $fileUploader
+        InterviewService $interviewService
     ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->formFactory = $formFactory;
         $this->router = $router;
-        $this->fileUploader = $fileUploader;
+        $this->interviewService = $interviewService;
     }
 
     /**
@@ -46,32 +46,30 @@ final class Edit
     public function handle(Request $request): Response
     {
         $id = Uuid::fromString($request->attributes->get('id'))->toString();
-
         $speaker = $this->speakerRepository->find($id);
-        if (!$speaker) {
-            throw new NotFoundHttpException();
-        }
 
-        $speakerRequest = SpeakerRequest::createFromEntity($speaker);
-        $form = $this->formFactory->create(SpeakerType::class, $speakerRequest);
+        $interviewRequest = new InterviewRequest();
+
+        $form = $this->formFactory->create(InterviewType::class, $interviewRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!empty($speakerRequest->photo)) {
-                $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
-            }
+            $questionList = $this->interviewService->filterQuestions($interviewRequest);
+            $mailerSuccess = $this->interviewService->sendInterviewEmail($speaker, $questionList);
 
-            $speaker = $speakerRequest->updateEntity($speaker);
-            $this->speakerRepository->save($speaker);
+            if (self::SEND_MAIL_SUCCESSFUL === $mailerSuccess) {
+                $speaker->confirmInterviewIsSent();
+                $this->speakerRepository->save($speaker);
+            }
 
             return new RedirectResponse($this->router->generate('speaker_show', [
                 'id' => $speaker->getId(),
             ]));
         }
 
-        return new Response($this->renderer->render('speaker/edit.html.twig', [
-            'speaker' => $speaker,
+        return new Response($this->renderer->render('interview/create.html.twig', [
             'form' => $form->createView(),
+            'speaker' => $speaker,
         ]));
     }
 }
