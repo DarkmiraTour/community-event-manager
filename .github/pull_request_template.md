@@ -1,11 +1,12 @@
-#PR informations
+# PR information
+
 | Q             | A
 | ------------- | ---
 | Branch?       | Develop <!-- to be replaced if the merge is not on develop, if so, explain why -->
 | Bug fix?      | yes/no <!-- don't forget to update the CHANGELOG.md files -->
 | New feature?  | yes/no <!-- don't forget to update the CHANGELOG.md files -->
 | Tests pass?   | yes    <!-- please add some, will be required by reviewers, follow the contributing.md file for more informations -->
-| Related issue | #{issue number}   <!-- #-prefixed issue number(s), if any -->
+| Related issue | #   <!-- #-prefixed issue number(s), if any -->
 
 # Description
 
