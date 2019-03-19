@@ -43,6 +43,8 @@ final class SlotType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Example: PHP in 2019',
+                    'minlength' => '5',
+                    'maxlength' => '50',
                 ],
             ])
             ->add('start', TimeType::class, [
