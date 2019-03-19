@@ -44,7 +44,13 @@ Run tests suite:
 ``` bash
 make test
 ```
+## Code Quality
 
+Code style fixer:
+
+``` bash
+make cs
+```
 ## License
 
 This application is under [GPL-3.0 License](LICENSE).
