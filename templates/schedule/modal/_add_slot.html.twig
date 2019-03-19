@@ -17,6 +17,8 @@
                 {{ form_row(form.type) }}
                 {{ form_errors(form.type) }}
 
+                {{ form_row(form.talk) }}
+
                 {{ form_row(form.title) }}
 
                 {{ form_row(form.start) }}
@@ -29,6 +31,8 @@
                 <button class="btn btn-primary">Save new slot</button>
             </div>
             {{ form_end(form) }}
+
+            <script src="{{ asset('build/add_slot.js') }}"></script>
         </div>
     </div>
 </div>

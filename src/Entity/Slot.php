@@ -57,6 +57,11 @@ class Slot
     private $space;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Talk", cascade={"persist"})
+     */
+    private $talk;
+
+    /**
      * @return string
      */
     public function getId(): ?string
@@ -166,5 +171,17 @@ class Slot
     public function setSpace(Space $space): void
     {
         $this->space = $space;
+    }
+
+    public function getTalk(): ?Talk
+    {
+        return $this->talk;
+    }
+
+    public function setTalk(?Talk $talk): self
+    {
+        $this->talk = $talk;
+
+        return $this;
     }
 }

@@ -14,6 +14,7 @@
         <div class="col-12">
             {{ form_row(form.space) }}
             {{ form_row(form.type) }}
+            {{ form_row(form.talk) }}
             {{ form_row(form.title) }}
             {{ form_row(form.start) }}
             {{ form_row(form.end) }}
@@ -32,4 +33,6 @@
     {{ form_end(form) }}
 {% endblock %}
 
-
+{% block javascripts %}
+    <script src="{{ asset('build/edit_slot.js') }}"></script>
+{% endblock %}

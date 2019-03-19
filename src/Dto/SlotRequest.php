@@ -7,6 +7,7 @@ namespace App\Dto;
 use App\Entity\Slot;
 use App\Entity\SlotType;
 use App\Entity\Space;
+use App\Entity\Talk;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class SlotRequest
@@ -40,18 +41,22 @@ final class SlotRequest
      */
     public $end;
 
+    public $talk;
+
     public function __construct(
         Space $space = null,
         SlotType $type = null,
         string $title = null,
         \DateTime $start = null,
-        \DateTime $end = null
+        \DateTime $end = null,
+        ?Talk $talk = null
     ) {
         $this->space = $space;
         $this->type = $type;
         $this->title = $title;
         $this->start = $start;
         $this->end = $end;
+        $this->talk = $talk;
     }
 
     public static function createFromEntity(Slot $slot): slotRequest
@@ -61,7 +66,8 @@ final class SlotRequest
             $slot->getType(),
             $slot->getTitle(),
             $slot->getStart(),
-            $slot->getEnd()
+            $slot->getEnd(),
+            $slot->getTalk()
         );
     }
 
@@ -72,6 +78,7 @@ final class SlotRequest
         $slot->setStart($this->start);
         $slot->setEnd($this->end);
         $slot->setTitle($this->title);
+        $slot->setTalk($this->talk);
 
         return $slot;
     }
