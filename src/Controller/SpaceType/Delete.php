@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
@@ -21,15 +22,18 @@ final class Delete
     private $router;
     private $csrfTokenManager;
     private $spaceTypeRepository;
+    private $flashBag;
 
     public function __construct(
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
-        SpaceTypeRepositoryInterface $spaceTypeRepository
+        SpaceTypeRepositoryInterface $spaceTypeRepository,
+        FlashBagInterface $flashBag
     ) {
         $this->router = $router;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->spaceTypeRepository = $spaceTypeRepository;
+        $this->flashBag = $flashBag;
     }
 
     /**
@@ -40,6 +44,15 @@ final class Delete
         $id = Uuid::fromString($request->attributes->get('id'))->toString();
 
         $spaceType = $this->spaceTypeRepository->find($id);
+        if ($spaceType->getSpaces()->count() > 0) {
+            $this->flashBag->add(
+                'error',
+                sprintf('%s is currently used in schedule and cannot be deleted', $spaceType->getName())
+            );
+
+            return new RedirectResponse($this->router->generate('schedule_space_type_index'));
+        }
+
         if (!$spaceType) {
             throw new NotFoundHttpException();
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 
@@ -76,12 +77,12 @@ class SpaceType
         return $this;
     }
 
-    public function getSpaces(): array
+    public function getSpaces(): Collection
     {
         return $this->spaces;
     }
 
-    public function setSpaces(array $spaces): self
+    public function setSpaces(Collection $spaces): self
     {
         $this->spaces = $spaces;
 
