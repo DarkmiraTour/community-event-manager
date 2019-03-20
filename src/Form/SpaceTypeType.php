@@ -23,10 +23,10 @@ final class SpaceTypeType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => SpaceTypeRequest::class
+            'data_class' => SpaceTypeRequest::class,
         ]);
     }
 }

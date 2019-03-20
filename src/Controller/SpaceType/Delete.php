@@ -18,7 +18,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 final class Delete
 {
-
     private $router;
     private $csrfTokenManager;
     private $spaceTypeRepository;
