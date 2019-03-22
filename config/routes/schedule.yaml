@@ -2,6 +2,8 @@ schedule_index:
     path: /
     controller: App\Controller\Schedule\Index::handle
     methods: [GET]
+    options:
+        expose: true
 
 schedule_create:
     path: /create
@@ -34,7 +36,7 @@ schedule_slot_insert:
 
 schedule_slot_edit:
     path: /slot/{id}/edit
-    methods: [GET, POST, PUT]
+    methods: [GET, PUT]
     controller: App\Controller\Slot\Edit::handle
     requirements:
         id: '%routing.uuid%'

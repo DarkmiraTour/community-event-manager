@@ -19,8 +19,8 @@ Encore
      */
     .addEntry('base', './assets/js/base.js')
     .addEntry('edit_sponsorship_level_benefit', './assets/js/sponsorshipLevelBenefit/edit.js')
-    .addEntry("add_slot", "./assets/js/schedule/slot/add_slot.js")
-    .addEntry("edit_slot", "./assets/js/schedule/slot/edit_slot.js")
+    .addEntry("add_slot", "./assets/js/schedule/slot/add.js")
+    .addEntry("edit_slot", "./assets/js/schedule/slot/edit.js")
     .addEntry('contact_edit', './assets/js/contact/edit.js')
 
     /*

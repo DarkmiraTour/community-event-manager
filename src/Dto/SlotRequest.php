@@ -5,82 +5,60 @@ declare(strict_types=1);
 namespace App\Dto;
 
 use App\Entity\Slot;
-use App\Entity\SlotType;
-use App\Entity\Space;
+use App\Validator\Constraints as CustomAssert;
 use App\ValueObject\Title;
-use App\Entity\Talk;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class SlotRequest
 {
     /**
-     * @var string
      * @Assert\NotBlank()
-     */
-    public $space;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     */
-    public $type;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(max="50")
      */
     public $title;
 
     /**
-     * @var string
+     * @Assert\NotNull()
+     */
+    public $type;
+
+    /**
      * @Assert\NotBlank()
+     * @Assert\Time()
      */
     public $start;
+
     /**
-     * @var string
      * @Assert\NotBlank()
+     * @Assert\Time()
+     * @CustomAssert\EventCanStartSlot()
+     * @CustomAssert\EventLongerThan10MinutesSlot()
      */
     public $end;
 
+    /**
+     * @Assert\NotNull()
+     */
+    public $space;
+
     public $talk;
 
-    public function __construct(
-        Space $space = null,
-        SlotType $type = null,
-        string $title = null,
-        \DateTime $start = null,
-        \DateTime $end = null,
-        ?Talk $talk = null
-    ) {
-        $this->space = $space;
-        $this->type = $type;
-        $this->title = $title;
-        $this->start = $start;
-        $this->end = $end;
-        $this->talk = $talk;
+    public static function createFromSlot(Slot $slot): slotRequest
+    {
+        $slotRequest = new self();
+        $slotRequest->title = $slot->getTitle();
+        $slotRequest->type = $slot->getType();
+        $slotRequest->start = $slot->getStart();
+        $slotRequest->end = $slot->getEnd();
+        $slotRequest->space = $slot->getSpace();
+        $slotRequest->talk = $slot->getTalk();
+
+        return $slotRequest;
     }
 
-    public static function createFromEntity(Slot $slot): slotRequest
+    public function updateSlot(Slot $slot): void
     {
-        return new SlotRequest(
-            $slot->getSpace(),
-            $slot->getType(),
-            $slot->getTitle(),
-            $slot->getStart(),
-            $slot->getEnd(),
-            $slot->getTalk()
-        );
-    }
-
-    public function updateSlot(Slot $slot): Slot
-    {
-        $slot->setSpace($this->space);
-        $slot->setType($this->type);
-        $slot->setStart($this->start);
-        $slot->setEnd($this->end);
-        $slot->setTitle(new Title($this->title));
-        $slot->setTalk($this->talk);
-
-        return $slot;
+        $slot->updateSlot(new Title($this->title), $this->type, $this->start, $this->end, $this->space, $this->talk);
     }
 }

@@ -1,0 +1,34 @@
+<div class="form-group">
+    {{ form_label(form.space) }} <span class="text-danger">*</span>
+    {{ form_widget(form.space) }}
+    {{ form_errors(form.space) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.type) }} <span class="text-danger">*</span>
+    {{ form_widget(form.type) }}
+    {{ form_errors(form.type) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.talk) }}
+    {{ form_widget(form.talk) }}
+    {{ form_errors(form.talk) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.title) }} <span class="text-danger">*</span>
+    {{ form_widget(form.title) }}
+</div>
+
+<div class="form-group">
+    <label for="form.start.vars.id" class="required">Start</label> <span class="text-danger">*</span>
+    {{ form_widget(form.start, {'attr': {'class': 'form-inline'}}) }}
+    {{ form_errors(form.start) }}
+</div>
+
+<div class="form-group">
+    <label for="form.end.vars.id" class="required">End</label> <span class="text-danger">*</span>
+    {{ form_widget(form.end, {'attr': {'class': 'form-inline'}}) }}
+    {{ form_errors(form.end) }}
+</div>
