@@ -2,29 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Repository\Schedule\Slot;
 
-use App\Dto\SlotRequest;
 use App\Entity\Slot;
-use Ramsey\Uuid\UuidInterface;
+use App\Dto\SlotRequest;
+use App\Entity\SlotType;
+use App\Entity\Space;
+use App\Entity\Talk;
 
-interface SlotRepositoryInterface
+interface SlotManagerInterface
 {
-    public function find(string $id): ?Slot;
+    public function find(string $id): Slot;
 
-    /**
-     * @return Slot[]
-     */
     public function findAll(): array;
 
-    /**
-     * @return Slot[]
-     */
     public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array;
 
     public function createFrom(SlotRequest $slotRequest): Slot;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $title, SlotType $slotType, \DateTimeInterface $start, \DateTimeInterface $end, Space $space, Talk $talk): Slot;
 
     public function save(Slot $slot): void;
 
