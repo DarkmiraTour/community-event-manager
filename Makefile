@@ -20,6 +20,7 @@ bucket:
 
 test:
 	docker-compose run composer ./vendor/bin/simple-phpunit
+	docker-compose run php vendor/bin/behat
 
 logs:
 	docker-compose logs -ft
