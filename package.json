@@ -17,7 +17,7 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production",
-        "pretty": "prettier --write \"./assets/*.{js,css,scss}\""
+        "pretty": "prettier --write \"./assets/**/*.{js,css,scss}\""
     },
     "dependencies": {}
 }
