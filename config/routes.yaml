@@ -56,3 +56,7 @@ sponsorships_pdf:
 interview_question:
     resource: routes/interviewQuestion.yaml
     prefix: interview-question
+
+events:
+    resource: routes/events.yaml
+    prefix: events

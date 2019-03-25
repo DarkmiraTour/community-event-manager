@@ -57,6 +57,22 @@ final class FeatureContext extends RawMinkContext
     }
 
     /**
+     * @Given I am logged in as a user
+     */
+    public function iAmLoggedInAsAUser(): void
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $this->currentUser = $em->getRepository(User::class)->findOneBy([
+            'email' => 'user@test.com',
+        ]);
+
+        $this->visitPath('/login');
+        $this->getSession()->getPage()->fillField('login[email]', 'user@test.com');
+        $this->getSession()->getPage()->fillField('login[password]', 'userpass');
+        $this->getSession()->getPage()->pressButton('Sign in');
+    }
+
+    /**
      * @When /^I click "([^"]*)" on the row containing "([^"]*)"$/
      */
     public function iClickOnOnTheRowContaining(string $linkName, string $rowText): void

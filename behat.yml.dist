@@ -13,6 +13,7 @@ default:
         - ScheduleContext
         - InterviewQuestionContext
         - SendInterviewContext
+        - EventContext
   extensions:
     Behat\Symfony2Extension:
       kernel:

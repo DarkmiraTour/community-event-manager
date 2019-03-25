@@ -64,6 +64,17 @@
                         </ul>
                     </td>
                 </tr>
+
+                <tr>
+                    <th>Attending Events</th>
+                    <td>
+                        <ul>
+                            {% for event in speaker.events %}
+                                <li>{{ event.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

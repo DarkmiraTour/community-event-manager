@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Event</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ event.name }}</td>
+                </tr>
+                <tr>
+                    <th>Address</th>
+                    <td>
+                    {{ event.address.streetAddress }}<br />
+                    {{ event.address.streetAddressComplementary }}<br />
+                    {{ event.address.postalCode }} {{ event.address.city }} </td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ event.description }}</td>
+                </tr>
+                <tr>
+                    <th>Start At</th>
+                    <td>{{ event.startAt|date('j F Y') }}</td>
+                </tr>
+                <tr>
+                    <th>End At</th>
+                    <td>{{ event.endAt|date('j F Y') }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-5">
+            <a href="{{ path('index') }}" class="btn btn-light">Back to home</a>
+        </div>
+        <div class="col-7 text-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if not app.session.has('event-id') %}
+                    <a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
+                    <a href="{{ path('event_confirm_delete', {'id': event.id}) }}" class="btn btn-danger">Delete</a>
+                {% else %}
+                    <p style="color: red">To edit or delete this event, you need to <a href="{{ path('event_unselect') }}">finish management</a> first.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

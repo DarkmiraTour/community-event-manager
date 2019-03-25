@@ -24,4 +24,6 @@ interface SpaceRepositoryInterface
     public function save(Space $space): void;
 
     public function remove(Space $space): void;
+
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array;
 }

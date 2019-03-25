@@ -1,0 +1,49 @@
+event_index:
+    path: /
+    methods: [GET]
+    controller: App\Controller\Event\Index::handle
+
+event_select:
+    path: /select/{id}
+    methods: [GET]
+    controller: App\Controller\Event\Select::handle
+    requirements:
+        id: '%routing.uuid%'
+
+event_unselect:
+    path: /unselect
+    methods: [GET]
+    controller: App\Controller\Event\Unselect::handle
+
+event_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Controller\Event\Create::handle
+
+event_show:
+    path: /{id}
+    methods: [GET]
+    controller: App\Controller\Event\Show::handle
+    requirements:
+        id: '%routing.uuid%'
+
+event_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Controller\Event\Edit::handle
+    requirements:
+        id: '%routing.uuid%'
+
+event_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Controller\Event\Delete::handle
+    requirements:
+        id: '%routing.uuid%'
+
+event_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Controller\Event\DeleteConfirmation:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
