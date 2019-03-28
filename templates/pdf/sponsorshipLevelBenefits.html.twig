@@ -3,15 +3,15 @@
     table.tableLevelBenefit th, table.tableLevelBenefit td {
         padding: 5px;
     }
-    tr.lineBenefit
-    {
+
+    tr.lineBenefit {
         background-color: #B6D7A8;
     }
     -->
 </style>
-<page backtop="20mm" backright="10mm" backbottom="20mm" backleft="10mm">
-    <table class="tableLevelBenefit">
-        <col width="430">
+<div style="margin-top: 2cm; margin-left: 0cm">
+    <table class="tableLevelBenefit" border='1'; width='100%';>
+        <col width="400">
         <tr style="background-color: #6AA84F; color: white; font-size: 12pt">
             <th>Benefits</th>
             {% for level in levels %}
@@ -43,6 +43,7 @@
             {% endfor %}
         </tr>
         </tfoot>
-    </col>
+        </col>
     </table>
-</page>
+    <div style="page-break-before: always;"></div>
+</div>

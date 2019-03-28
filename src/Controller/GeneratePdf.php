@@ -12,6 +12,7 @@ use App\Service\FileUploaderInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
 use Twig\Environment as Twig;
+use Symfony\Component\HttpFoundation\Response;
 
 final class GeneratePdf
 {
@@ -44,7 +45,7 @@ final class GeneratePdf
         $this->fileUploader = $fileUploader;
     }
 
-    public function handle(): string
+    public function handle(): Response
     {
         $pages = $this->pageManager->findAll();
         foreach ($pages as $page) {
@@ -58,8 +59,16 @@ final class GeneratePdf
             'specialBenefits' => $this->specialBenefitManager->findAll(),
         ]);
 
-        $this->pdfCreator->create();
+        $pdf = $this->pdfCreator->generatePdf($template);
+        $dateAtom = (new \DateTime())->format(\DateTime::ATOM);
 
-        return $this->pdfCreator->generatePdf($template, 'brochure-community-event');
+        return new Response(
+            $pdf,
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => sprintf('inline; filename="brochure-community-event-%s.pdf"', $dateAtom),
+            ]
+        );
     }
 }
