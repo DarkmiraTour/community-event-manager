@@ -9,6 +9,7 @@ php:
 cache:
     directories:
         - $HOME/.composer/cache
+        - $HOME/.php-cs-fixer
 
 before_script:
     - sudo rm /usr/local/bin/docker-compose
@@ -21,3 +22,4 @@ script:
     - docker-compose run composer vendor/phpmd/phpmd/src/bin/phpmd src text phpmd.xml
     - docker-compose run composer bin/phpunit
     - docker-compose exec php vendor/bin/behat --format progress --strict
+    - docker-compose exec php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run

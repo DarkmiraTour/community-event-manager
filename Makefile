@@ -58,3 +58,6 @@ book:
 	# Application: http://0.0.0.0:8080
 	# Minio:       http://0.0.0.0:9001
 	#
+
+cs: ## executes php cs fixer
+	docker-compose exec php vendor/bin/php-cs-fixer --no-interaction --diff -v fix
