@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\ValueObject\Title;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity()
@@ -56,6 +58,24 @@ class Slot
      */
     private $space;
 
+    public function __construct(
+        UuidInterface $id,
+        Title $titleObject,
+        int $duration,
+        \DateTimeInterface $start,
+        \DateTimeInterface $end,
+        SlotType $slotType = null,
+        Space $space = null
+    ) {
+        $this->id = $id->toString();
+        $this->title = $titleObject->__toString();
+        $this->duration = $duration;
+        $this->start = $start;
+        $this->end = $end;
+        $this->type = $slotType;
+        $this->space = $space;
+    }
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Talk", cascade={"persist"})
      */
@@ -86,11 +106,11 @@ class Slot
     }
 
     /**
-     * @param string $title
+     * @param Title $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(Title $title): void
     {
-        $this->title = $title;
+        $this->title = $title->__toString();
     }
 
     /**
