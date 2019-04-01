@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('schedule_space_type_delete', {'id': spaceType.id}) }}"
+      onsubmit="return confirm('Are you sure you want to delete this space type?');"
+      class="d-inline-block">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('space-type-' ~ spaceType.id) }}">
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
