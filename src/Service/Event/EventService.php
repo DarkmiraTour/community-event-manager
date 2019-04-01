@@ -68,7 +68,14 @@ final class EventService implements EventServiceInterface
             throw new NoEventSelectedException();
         }
 
-        return $this->eventRepository->findById($this->session->get(self::EVENT_ID));
+        $event = $this->eventRepository->findById($this->session->get(self::EVENT_ID));
+
+        if (null === $event) {
+            $this->unselectEvent();
+            throw new \RuntimeException('An inexisting event was in session. Session cleared.');
+        }
+
+        return $event;
     }
 
     public function checkIsEventDateExist(\DateTimeInterface $dateTime): bool
