@@ -12,7 +12,7 @@ interface EventServiceInterface
 
     public function getSelectedEventId(): ?string;
 
-    public function getSelectedEvent(): ?Event;
+    public function getSelectedEvent(): Event;
 
     public function selectEvent(Event $event): void;
 

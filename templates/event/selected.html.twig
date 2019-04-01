@@ -7,11 +7,94 @@
 {% block title %}Event selected{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <p>You have selected the {{ event.name }} event, you can now start to manage it.</p>
-        <p>If you want to end the management of this event,
-            go to your home page by clicking at "{{ event.name }} management in progress"
-            and choose "Finish management".</p>
-        <p>After this action you will be able to choose or create another event.</p>
+    <h1 class="h2">Dashboard</h1>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        Event schedule
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        {{ schedules|length }} days
+                    </h6>
+                </div>
+                {% for schedule in schedules %}
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fa fa-calendar-day"></i>
+                            {{ schedule.day|localizeddate('full', 'none') }}
+                        </h6>
+                        <p class="card-text">
+                            <ul>
+                                {% for slotDescription, count in slotsTypes[schedule.id] %}
+                                    <li>
+                                        {{ count }} {{ slotDescription }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </p>
+                    </div>
+                {% endfor %}
+                <div class="card-footer">
+                    <a href="{{ path('schedule_index') }}" class="card-link">
+                        <i class="fa fa-calendar-alt"></i>
+                        Edit schedules
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Sponsorships</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ sponsorshipLevels|length }} levels</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for sponsorshipLevel in sponsorshipLevels %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <i class="fa fa-award"></i>
+                            {{ sponsorshipLevel.label }}
+                            <span class="badge badge-primary badge-pill">
+                                {{ sponsorshipLevel.sponsorshipLevelBenefits|length }} benefits
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('sponsorship_level_index') }}" class="card-link">
+                        <i class="fa fa-award"></i>
+                        Manage levels
+                    </a>
+                    <a href="{{ path('sponsorship_level_benefit_view') }}" class="card-link">
+                        <i class="fa fa-tasks"></i>
+                        Display all
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Brochure</h5>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{{ path('sponsorships_pdf') }}" class="card-link">
+                        <i class="fa fa-file-pdf fa-7x"></i>
+                        <br>
+                        Generate PDF
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('page_index') }}" class="card-link">
+                        <i class="fa fa-map"></i>
+                        Edit pages
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

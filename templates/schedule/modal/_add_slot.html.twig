@@ -14,7 +14,12 @@
                 {{ form_row(form.space) }}
                 {{ form_errors(form.space) }}
 
-                {{ form_row(form.type) }}
+                <div class="form-group">
+                    {{ form_label(form.type) }}
+                    {{ form_widget(form.type) }}
+                    <a href="{{ path('schedule_slot_type_index') }}">Manage slot types</a>
+                    {{ form_help(form.type) }}
+                </div>
                 {{ form_errors(form.type) }}
 
                 {{ form_row(form.talk) }}

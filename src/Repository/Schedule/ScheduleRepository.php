@@ -63,6 +63,25 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $schedule;
     }
 
+    public function findScheduleAndSlots(Event $event): array
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder()
+            ->from('App:Schedule', 'schedule')
+            ->select('schedule, space, slot, slotType')
+            ->leftJoin('schedule.spaces', 'space')
+            ->leftJoin('space.slots', 'slot')
+            ->leftJoin('slot.type', 'slotType')
+            ->where('schedule.event = :event')
+            ->orderBy('schedule.day')
+            ->setParameter(':event', $event)
+        ;
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function nextIdentity(): UuidInterface
     {
         return Uuid::uuid4();
