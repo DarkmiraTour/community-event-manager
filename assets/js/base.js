@@ -1,4 +1,7 @@
+import '../css/variables.scss'
+import '@fortawesome/fontawesome-free/scss/fontawesome.scss'
+import '@fortawesome/fontawesome-free/scss/solid.scss'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../css/base.scss'
-import 'font-awesome/css/font-awesome.css'
+import '../css/dashboard.scss'

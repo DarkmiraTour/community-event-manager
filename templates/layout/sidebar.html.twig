@@ -1,0 +1,94 @@
+<div class="sidebar-sticky">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(index)$#' ? 'active' }}" href="{{ path('index') }}">
+                <i class="feather fa fa-home"></i>
+                Dashboard
+            </a>
+        </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>CRM</span>
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(speaker)#' ? 'active' }}" href="{{ path('speaker_index') }}">
+                <i class="feather fa fa-chalkboard-teacher"></i>
+                Speakers
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(organisation)#' ? 'active' }}" href="{{ path('organisation_list') }}">
+                <i class="feather fa fa-building"></i>
+                Organisations
+            </a>
+        </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Schedule</span>
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(schedule)#' ? 'active' }}" href="{{ path('schedule_index') }}">
+                <i class="feather fa fa-calendar-alt"></i>
+                Schedule
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(talk)#' ? 'active' }}" href="{{ path('talk_index') }}">
+                <i class="feather fa fa-podcast"></i>
+                Talks
+            </a>
+        </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Sponsorships</span>
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_level_(create|index|edit))#' ? 'active' }}" href="{{ path('sponsorship_level_index') }}">
+                <i class="feather fa fa-award"></i>
+                Levels
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_benefit)#' ? 'active' }}" href="{{ path('sponsorship_benefit_index') }}">
+                <i class="feather fa fa-check"></i>
+                Benefits
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(special_benefit)#' ? 'active' }}" href="{{ path('special_benefit_index') }}">
+                <i class="feather fa fa-check-double"></i>
+                Special packages
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_level_benefit)#' ? 'active' }}" href="{{ path('sponsorship_level_benefit_view') }}">
+                <i class="feather fa fa-tasks"></i>
+                Summary
+            </a>
+        </li>
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+        <span>Brochure</span>
+    </h6>
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(page)#' ? 'active' }}" href="{{ path('page_index') }}">
+                <i class="feather fa fa-map"></i>
+                Pages
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('sponsorships_pdf') }}">
+                <i class="feather fa fa-file-pdf"></i>
+                Generate PDF
+            </a>
+        </li>
+    </ul>
+</div>

@@ -5,23 +5,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}{% endblock %} - Community Event Manager</title>
         <link rel="stylesheet" href="{{ asset('build/base.css') }}" />
+        <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% include 'layout/header.html.twig' %}
+        <div class="container-fluid">
+            <div class="row">
+                {% if selectedEvent %}
+                    <nav id="sidebar-toggle" class="sidebar col-5 col-md-3 col-lg-2 bg-light collapse show">
+                        {% include 'layout/sidebar.html.twig' %}
+                    </nav>
+                {% endif %}
 
-        <div class="container">
-            {% for msg in app.session.flashbag.get('error') %}
-                <div class="row">
-                    <div class="col-12">
-                        <div class="alert alert-danger">
-                            {{ msg }}
+                <div class="{{ selectedEvent ? 'offset-lg-2 col-lg-10' : 'col' }}">
+                    {% for msg in app.session.flashbag.get('error') %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger">
+                                    {{ msg }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            {% endfor %}
+                    {% endfor %}
 
-            {% block content '' %}
+                    <main role="main">
+                        <div class="pt-3">
+                            {% block content '' %}
+                        </div>
+                    </main>
+                </div>
+            </div>
         </div>
 
         <div id="snackbar"></div>

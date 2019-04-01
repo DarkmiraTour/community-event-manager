@@ -1,76 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-toggle"
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 fixed-top flex-md-nowrap p-0 shadow">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-toggle"
                 aria-controls="navbar-toggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar-toggle">
-            {% if app.session.has('event-id') and is_granted('ROLE_USER') %}
-                <a class="navbar-brand" href="{{ path('index') }}">{{ app.session.get('event-name') }} management in progress</a>
-                <a class="btn btn-info mb-2 mb-md-0"
-                   href="{{ path('event_show', {'id': app.session.get('event-id')}) }}">Details</a>
+        <a class="navbar-brand" href="{{ path('index') }}">
+            {{ selectedEvent.name | default('Community Event Manager') }}
+        </a>
+        <ul class="navbar-nav mh-auto mt-2">
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item 'active'">
+                    <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                </li>
             {% else %}
-                <a class="navbar-brand" href="{{ path('index') }}">Community Event Manager</a>
+                <li class="nav-item 'active'">
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        <i class="fa fa-power-off"></i>
+                    </a>
+                </li>
             {% endif %}
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item dropdown
-                        {{ app.request.attributes.get('_route') matches '#^(organisation|speaker|talk)#' ? 'active' }}">
-                        <a class="nav-link dropdown-toggle" id="crm-dropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            CRM
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="crm-dropdown">
-                            <a class="dropdown-item" href="{{ path('organisation_list') }}">Organisations</a>
-                            <a class="dropdown-item" href="{{ path('speaker_index') }}">Speakers</a>
-                            <a class="dropdown-item" href="{{ path('talk_index') }}">Talks</a>
-                            <a class="dropdown-item" href="{{ path('schedule_space_type_index') }}">Space types</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('schedule_index') }}">Schedule</a>
-                            <a class="dropdown-item" href="{{ path('schedule_slot_type_index') }}">Slot Types</a>
-                            <a class="dropdown-item" href="{{ path('interview_question_index') }}">Interview questions</a>
-                        </div>
-                    </li>
-                    {% if app.session.has('event-id') %}
-                        <li class="nav-item dropdown
-                            {{ app.request.attributes.get('_route') matches '#^(schedule)#' ? 'active' }}">
-                            <a class="nav-link dropdown-toggle" id="schedule-dropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Schedule
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="schedule-dropdown">
-                                <a class="dropdown-item" href="{{ path('schedule_index') }}">Schedule</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle
-                               {{ app.request.attributes.get('_route') matches '#^(sponsorship_|special_benefit)#' ? 'active' }}"
-                               id="sponsorship-dropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Sponsorships
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="sponsorship-dropdown">
-                                <a class="dropdown-item" href="{{ path('sponsorship_level_index') }}">Levels</a>
-                                <a class="dropdown-item" href="{{ path('sponsorship_benefit_index') }}">Benefits</a>
-                                <a class="dropdown-item" href="{{ path('sponsorship_level_benefit_view') }}">Summary</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('special_benefit_index') }}">Special</a>
-                                <a class="dropdown-item" href="{{ path('page_index') }}">Pages</a>
-                                <a class="dropdown-item" href="{{ path('sponsorships_pdf') }}">Brochure PDF</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                {% endif %}
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li class="nav-item 'active'">
-                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item 'active'">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
+        </ul>
     </div>
 </nav>
