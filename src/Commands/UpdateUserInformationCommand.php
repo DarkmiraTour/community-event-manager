@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Exceptions\User\UnableToSaveUserException;
-use App\Exceptions\ValueObject\Username\InvalidUsernameException;
 use App\Repository\User\UserManagerInterface;
 use App\ValueObject\Username;
 use Symfony\Component\Console\Command\Command;
@@ -14,6 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Validator\Exception\InvalidOptionsException;
 
 final class UpdateUserInformationCommand extends Command
 {
@@ -60,7 +60,7 @@ HELP
         if (null !== $newUsername) {
             try {
                 $usernameValue = new Username($newUsername);
-            } catch (InvalidUsernameException $exception) {
+            } catch (InvalidOptionsException $exception) {
                 $messageStyle->error(sprintf('The username "%s" is not valid, %s. The user creation has been stopped.', $newUsername, Username::getCreationConstraint()));
 
                 return;

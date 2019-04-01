@@ -4,19 +4,23 @@ declare(strict_types=1);
 
 namespace App\ValueObject;
 
-use App\Exceptions\ValueObject\Username\InvalidUsernameException;
+use Symfony\Component\Validator\Constraints;
 
 final class Username
 {
-    private const CONSTRAINT = 'The username must be all alphanumeric with `_`, `-`, `.`, without spaces and be at least 5 characters long.';
-    private const CONSTRAINT_REGEX = '/^[a-zA-Z0-9\._-]{5,}$/';
+    private const CONSTRAINT = 'The username must be maximum 50 characters long.';
+
+    /**
+     * @Constraints\NotBlank()
+     * @Constraints\Length(
+     *     max="50",
+     *     maxMessage="The username must be maximum 50 characters long."
+     * )
+     */
     private $username;
 
     public function __construct(string $username)
     {
-        if (!preg_match(self::CONSTRAINT_REGEX, $username)) {
-            throw new InvalidUsernameException(self::CONSTRAINT);
-        }
         $this->username = $username;
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Exceptions\User\UnableToCreateUserException;
-use App\Exceptions\ValueObject\Username\InvalidUsernameException;
 use App\Repository\User\UserManagerInterface;
 use App\ValueObject\Username;
 use Symfony\Component\Console\Command\Command;
@@ -13,6 +12,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Validator\Exception\InvalidOptionsException;
 
 final class CreateUserCommand extends Command
 {
@@ -60,13 +60,13 @@ HELP
 
         try {
             $usernameValue = new Username($username);
-        } catch (InvalidUsernameException $exception) {
+        } catch (InvalidOptionsException $exception) {
             $messageStyle->error(sprintf('The username "%s" is not valid, %s. The user creation has been stopped.', $username, Username::getCreationConstraint()));
 
             return;
         }
 
-        $defaultPassword = substr(password_hash(uniqid(), 'sha256'), 0, 12);
+        $defaultPassword = substr(hash('sha256', uniqid()), 0, 12);
 
         $messageStyle->listing([
             'Launching the User Creation',
@@ -85,6 +85,6 @@ HELP
 
         $messageStyle->success(sprintf('The user has been created with the email address "%s" and the username "%s".', $newUser->getEmailAddress(), $newUser->getUsername()));
 
-        $messageStyle->caution(sprintf("Don't forget to communicate the password \"%s\" to the new user", $defaultPassword));
+        $messageStyle->caution(sprintf('Don\'t forget to communicate the password "%s" to the new user', $defaultPassword));
     }
 }
