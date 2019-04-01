@@ -8,7 +8,6 @@ use App\Repository\Page\PageManagerInterface;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
-use App\Service\FileUploaderInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
 use Twig\Environment as Twig;
@@ -23,7 +22,6 @@ final class GeneratePdf
     private $sponsorshipLevelManager;
     private $pageManager;
     private $specialBenefitManager;
-    private $fileUploader;
 
     public function __construct(
         Twig $renderer,
@@ -32,8 +30,7 @@ final class GeneratePdf
         FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         PageManagerInterface $pageManager,
-        SpecialBenefitManagerInterface $specialBenefitManager,
-        FileUploaderInterface $fileUploader
+        SpecialBenefitManagerInterface $specialBenefitManager
     ) {
         $this->renderer = $renderer;
         $this->pdfCreator = $pdfCreator;
@@ -42,15 +39,11 @@ final class GeneratePdf
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->pageManager = $pageManager;
         $this->specialBenefitManager = $specialBenefitManager;
-        $this->fileUploader = $fileUploader;
     }
 
     public function handle(): Response
     {
         $pages = $this->pageManager->findAll();
-        foreach ($pages as $page) {
-            $this->fileUploader->makeTempFile($page->getBackground());
-        }
 
         $template = $this->renderer->render('pdf/index.html.twig', [
             'pages' => $pages,

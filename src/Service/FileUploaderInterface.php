@@ -12,5 +12,5 @@ interface FileUploaderInterface
 
     public function get(string $fileName): string;
 
-    public function makeTempFile(string $fileName): void;
+    public function getOriginalFileExtension(string $file): string;
 }
