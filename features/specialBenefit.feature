@@ -62,7 +62,7 @@ Feature: Special benefit
   Scenario: I cancel the delete of special benefit "Special Package 12"
     Given I am logged in as an admin
     When I am on the special benefit listing page
-    And I click "Show" on the row containing "Special Package 12"
+    And I click "Special Package 12" link
     And I click "Delete" link
     And I should see "Do you wish to confirm \"Special Package 12\" special benefit deletion?"
     And I click "Back to list" link
