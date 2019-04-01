@@ -6,7 +6,6 @@ namespace App\Repository\Schedule;
 
 use App\Dto\SlotTypeRequest;
 use App\Entity\SlotType;
-use Ramsey\Uuid\UuidInterface;
 
 interface SlotTypeRepositoryInterface
 {
@@ -24,7 +23,7 @@ interface SlotTypeRepositoryInterface
 
     public function createFrom(SlotTypeRequest $slotRequest): SlotType;
 
-    public function nextIdentity(): UuidInterface;
+    public function createWith(string $description): SlotType;
 
     public function save(SlotType $slotType): void;
 

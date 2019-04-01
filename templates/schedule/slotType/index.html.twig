@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Slot Types{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Slot Types</h2>
+        </div>
+        <div class="col-sm-6 text-center text-sm-right">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-primary" href="{{ path('schedule_slot_type_create') }}">Add slot type</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Label</th>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <th class="text-right">Actions</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for slotType in slotTypes %}
+                    <tr>
+                        <td>{{ slotType.description }}</td>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <td class="text-right">
+                                <a class="btn btn-warning"
+                                   href="{{ path('schedule_slot_type_edit', {'id': slotType.id}) }}">Edit</a>
+                                {{ include('schedule/slotType/_delete_form.html.twig', { 'slotType': slotType }) }}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

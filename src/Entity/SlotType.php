@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity()
@@ -24,20 +25,18 @@ class SlotType
      */
     private $description;
 
+    public function __construct(UuidInterface $id, string $description)
+    {
+        $this->id = $id->toString();
+        $this->description = $description;
+    }
+
     /**
      * @return string
      */
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId(string $id): void
-    {
-        $this->id = $id;
     }
 
     /**
@@ -48,10 +47,7 @@ class SlotType
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
+    public function updateSlotType(string $description): void
     {
         $this->description = $description;
     }
