@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6 text-center text-sm-right">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('speaker_create') }}" class="btn btn-success">Add speaker</a>
+                <a href="{{ path('speaker_create') }}" class="btn btn-primary">Add speaker</a>
             {% endif %}
         </div>
     </div>
@@ -28,17 +28,17 @@
                 <tbody>
                 {% for speaker in speakers %}
                     <tr>
-                        <td>{{ speaker.title }}</td>
+                        <td>
+                            <a href="{{ path('speaker_show', {'id': speaker.id}) }}">
+                                {{ speaker.title }}
+                            </a>
+                        </td>
                         <td>{{ speaker.name }}</td>
                         <td>{{ speaker.email }}</td>
                         <td class="text-center">
-                            <a href="{{ path('speaker_show', {'id': speaker.id}) }}"
-                               class="btn btn-info mb-2 mb-md-0">
-                                Show
-                            </a>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('speaker_edit', {'id': speaker.id}) }}"
-                                   class="btn btn-warning mb-2 mb-md-0">
+                                   class="btn btn-secondary mb-2 mb-md-0">
                                     Edit
                                 </a>
                                 <a href="{{ path('speaker_confirm_delete', {'id': speaker.id}) }}"

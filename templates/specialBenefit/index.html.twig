@@ -27,13 +27,15 @@
                 <tbody>
                 {% for specialBenefit in specialBenefits %}
                     <tr>
-                        <td>{{ specialBenefit.label }}</td>
+                        <td>
+                            <a href="{{ path('special_benefit_show', {'id': specialBenefit.id}) }}">
+                                {{ specialBenefit.label }}
+                            </a>
+                        </td>
                         <td>{{ specialBenefit.price|localizedcurrency(currency) }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info mb-2 mb-md-0"
-                               href="{{ path('special_benefit_show', {'id': specialBenefit.id}) }}">Show</a>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="btn btn-warning mb-2 mb-md-0"
+                                <a class="btn btn-secondary mb-2 mb-md-0"
                                    href="{{ path('special_benefit_edit', {'id': specialBenefit.id}) }}">Edit</a>
                                 <a class="btn btn-danger mb-2 mb-md-0"
                                    href="{{ path('special_benefit_confirm_delete', {'id': specialBenefit.id}) }}">

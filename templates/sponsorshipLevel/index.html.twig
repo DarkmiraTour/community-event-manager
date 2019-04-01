@@ -33,7 +33,7 @@
                         <td>{{ level.price|localizedcurrency(currency) }}</td>
                         {% if is_granted('ROLE_ADMIN') %}
                             <td class="text-right">
-                                <a class="btn btn-warning mb-2 mb-md-0"
+                                <a class="btn btn-secondary mb-2 mb-md-0"
                                    href="{{ path('sponsorship_level_edit', {'id': level.id}) }}">Edit</a>
                                 <a class="btn btn-danger"
                                    href="{{ path('sponsorship_level_confirm_delete', {'id': level.id}) }}">

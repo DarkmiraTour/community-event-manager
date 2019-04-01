@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6 text-center text-sm-right">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('talk_create') }}" class="btn btn-success">Add talk</a>
+                <a href="{{ path('talk_create') }}" class="btn btn-primary">Add talk</a>
             {% endif %}
         </div>
     </div>
@@ -26,16 +26,16 @@
                 <tbody>
                 {% for talk in talks %}
                     <tr>
-                        <td>{{ talk.title }}</td>
+                        <td>
+                            <a href="{{ path('talk_show', {'id': talk.id}) }}">
+                                {{ talk.title }}
+                            </a>
+                        </td>
                         <td>{{ talk.speaker.name }}</td>
                         <td class="text-center">
-                            <a href="{{ path('talk_show', {'id': talk.id}) }}"
-                               class="btn btn-info mb-2 mb-md-0">
-                                Show
-                            </a>
                             {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('talk_edit', {'id': talk.id}) }}"
-                                   class="btn btn-warning mb-2 mb-md-0">
+                                   class="btn btn-secondary mb-2 mb-md-0">
                                     Edit
                                 </a>
                                 <a href="{{ path('talk_confirm_delete', {'id': talk.id}) }}"
