@@ -9,6 +9,7 @@ use App\Entity\Talk;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Repository\TalkRepositoryInterface;
 use Symfony\Component\Process\Exception\LogicException;
+use SplFileObject;
 
 final class UploadedCsvCreateSpeakerTalk
 {
@@ -45,7 +46,7 @@ final class UploadedCsvCreateSpeakerTalk
         $this->talkRepository = $talkRepository;
     }
 
-    public function createWithContent(\SplFileObject $emailExportCsvFile, \SplFileObject $talkExportCsvFile): void
+    public function createWithContent(SplFileObject $emailExportCsvFile, SplFileObject $talkExportCsvFile): void
     {
         if (false === $emailExportCsvFile->isReadable()
             || false === $talkExportCsvFile->isReadable()) {
@@ -56,7 +57,7 @@ final class UploadedCsvCreateSpeakerTalk
         $this->associateTalkExportColumns($talkExportCsvFile->fgetcsv(self::CSV_DELIMITER));
 
         $talkList = [];
-        while (!empty($talkLine = $talkExportCsvFile->fgetcsv(self::CSV_DELIMITER))) {
+        while (!empty($talkLine = array_filter($talkExportCsvFile->fgetcsv(self::CSV_DELIMITER)))) {
             $talkList[] = $this->associateTalkData($talkLine);
         }
 
