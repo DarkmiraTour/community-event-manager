@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Repository\Page\PageManagerInterface;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
@@ -41,6 +42,9 @@ final class GeneratePdf
         $this->specialBenefitManager = $specialBenefitManager;
     }
 
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function handle(): Response
     {
         $pages = $this->pageManager->findAll();
