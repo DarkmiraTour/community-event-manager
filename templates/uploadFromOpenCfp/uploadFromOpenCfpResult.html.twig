@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upload from OpenCfp Result{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 text-center text-sm-left">
+            <h2>Upload from OpenCfp Result</h2>
+        </div>
+    </div>
+
+    <h3>Added Speakers</h3>
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for speaker in addedSpeakers %}
+                    <tr>
+                        <td>{{ speaker.name }}</td>
+                        <td>{{ speaker.email }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('speaker_show', {'id': speaker.id}) }}"
+                               class="btn btn-info mb-2 mb-md-0">
+                                Show
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('speaker_edit', {'id': speaker.id}) }}"
+                                   class="btn btn-warning mb-2 mb-md-0">
+                                    Edit
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h3>Added Talks</h3>
+    <div class="row mt-3">
+        <div class="col-12 table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Speaker</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for talk in addedTalks %}
+                    <tr>
+                        <td>{{ talk.title }}</td>
+                        <td>{{ talk.speaker.name }}</td>
+                        <td class="text-center">
+                            <a href="{{ path('talk_show', {'id': talk.id}) }}"
+                               class="btn btn-info mb-2 mb-md-0">
+                                Show
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('talk_edit', {'id': talk.id}) }}"
+                                   class="btn btn-warning mb-2 mb-md-0">
+                                    Edit
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <a href="{{ path('speaker_index') }}" class="btn btn-dark">Back to speakers list</a>
+        </div>
+    </div>
+{% endblock %}

@@ -29,7 +29,7 @@ class Talk
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="talks")
+     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="talks", cascade={"persist"})
      */
     private $speaker;
 

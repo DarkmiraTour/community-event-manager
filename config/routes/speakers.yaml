@@ -35,3 +35,8 @@ speaker_confirm_delete:
     methods: [GET]
     requirements:
         id: '%routing.uuid%'
+
+speaker_upload_from_openCFP:
+    path: /uploadFromOpenCFP
+    methods: [GET, POST]
+    controller: App\Controller\Speaker\UploadFromOpenCfp::handle

@@ -63,4 +63,16 @@ final class SpeakerRepository implements SpeakerRepositoryInterface
             $speakerRequest->github
         );
     }
+
+    public function createWith(string $name, string $email, string $title, string $biography, string $photoPath): Speaker
+    {
+        return new Speaker(
+            $this->nextIdentity(),
+            $name,
+            $title,
+            $email,
+            $biography,
+            $photoPath
+        );
+    }
 }
