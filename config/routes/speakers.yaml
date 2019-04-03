@@ -40,3 +40,10 @@ speaker_upload_from_openCFP:
     path: /uploadFromOpenCFP
     methods: [GET, POST]
     controller: App\Controller\Speaker\UploadFromOpenCfp::handle
+
+speaker_send_interview:
+    path: /{id}/send_interview
+    methods: [GET, POST]
+    controller: App\Controller\Speaker\SendInterview::handle
+    requirements:
+        id: '%routing.uuid%'

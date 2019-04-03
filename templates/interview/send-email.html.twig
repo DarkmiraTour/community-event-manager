@@ -1,0 +1,15 @@
+{% block title %}Interview for {{ speaker.name }}{% endblock %}
+
+{% block content %}
+
+    <p>Hello, {{ speaker.name }}, you have been chosen to make a talk during our event, and we wanted to make an interview about you that will be publish on our website.</p>
+    <p>If you accept, could you answer those questions below and send your response by email at community-event-manager@gmail.com?</p>
+
+    {% for question in questionList %}
+        <h3>{{ question }}</h3>
+    {% endfor %}
+
+    <p>Thank you for your time!</p>
+    <p>Best Regards,</p>
+    <p>The Community Event Manager Team.</p>
+{% endblock %}

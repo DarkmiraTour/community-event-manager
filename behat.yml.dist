@@ -12,6 +12,7 @@ default:
         - PageContext
         - ScheduleContext
         - InterviewQuestionContext
+        - SendInterviewContext
   extensions:
     Behat\Symfony2Extension:
       kernel:

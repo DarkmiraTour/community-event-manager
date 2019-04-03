@@ -57,6 +57,7 @@ book:
 	#
 	# Application: http://0.0.0.0:8080
 	# Minio:       http://0.0.0.0:9001
+	# Mailhog:     http://0.0.0.0:8025
 	#
 
 cs: ## executes php cs fixer

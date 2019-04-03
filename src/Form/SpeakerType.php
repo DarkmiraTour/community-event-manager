@@ -66,6 +66,17 @@ final class SpeakerType extends AbstractType
                 'github',
                 TextType::class,
                 ['required' => false]
+            )
+            ->add(
+                'isInterviewSent',
+                ChoiceType::class,
+                [
+                    'expanded' => true,
+                    'choices' => [
+                        'Yes' => true,
+                        'No' => false,
+                    ],
+                ]
             );
     }
 

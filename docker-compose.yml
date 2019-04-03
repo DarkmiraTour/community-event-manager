@@ -15,6 +15,10 @@ services:
             - ./docker/php-fpm/php-limit.ini:/usr/local/etc/php/conf.d/php-limit.ini
         depends_on:
             - postgres
+    mailhog:
+       image: mailhog/mailhog:v1.0.0
+       ports:
+         - "${REP_ENT_MAILHOG_PORT:-8025}:8025"
     node:
         image: node:11
         volumes:
