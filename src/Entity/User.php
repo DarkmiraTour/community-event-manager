@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\ValueObject\Username;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Ramsey\Uuid\UuidInterface;
@@ -46,11 +47,11 @@ class User implements UserInterface
     public function __construct(
         UuidInterface $id,
         string $email,
-        string $username
+        Username $username
     ) {
         $this->id = $id->toString();
         $this->email = $email;
-        $this->username = $username;
+        $this->username = $username->__toString();
         $this->roles = [self::ROLE_USER];
     }
 
@@ -96,5 +97,31 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public function getEmailAddress(): string
+    {
+        return $this->email;
+    }
+
+    public function updateEmailAddress(string $emailAddress): void
+    {
+        if (filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+            $this->email = $emailAddress;
+        }
+    }
+
+    public function updateUsername(Username $username): void
+    {
+        $this->username = $username->__toString();
+    }
+
+    public function toArray(): array
+    {
+        return [
+            $this->getEmailAddress(),
+            $this->getUsername(),
+            implode('|', $this->getRoles()),
+        ];
     }
 }

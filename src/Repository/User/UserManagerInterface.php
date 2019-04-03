@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository\User;
 
 use App\Entity\User;
+use App\ValueObject\Username;
 
 interface UserManagerInterface
 {
@@ -17,4 +18,9 @@ interface UserManagerInterface
     public function remove(User $userEntity): void;
 
     public function create(string $email, string $username, string $plainPassword): User;
+
+    public function updateUserInformation(User $user, string $emailAddress = null, Username $username = null): void;
+
+    /** @return User[] */
+    public function findAll(): array;
 }
