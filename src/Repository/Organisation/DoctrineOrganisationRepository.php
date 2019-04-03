@@ -37,7 +37,7 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
             $this->nextIdentity(),
             $organisationRequest->name,
             $organisationRequest->website,
-            $organisationRequest->address,
+            $organisationRequest->contact,
             $organisationRequest->comment
         );
     }

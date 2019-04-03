@@ -9,22 +9,9 @@
         </div>
     </div>
 
-    {{ form_start(form) }}
-    <div class="row">
-        <div class="col-12">
-            {{ form_row(form.name) }}
-            {{ form_row(form.website) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.comment) }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
-        </div>
-        <div class="col-6">
-            <button type="submit" class="btn btn-success float-right">Edit organisation</button>
-        </div>
-    </div>
-    {{ form_end(form) }}
+    {% include 'organisations/_edit_form.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/contact_edit.js') }}"></script>
 {% endblock %}

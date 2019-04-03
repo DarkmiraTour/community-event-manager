@@ -7,10 +7,11 @@ namespace App\DataFixtures;
 use App\Entity\Organisation;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
 
-final class OrganisationFixtures extends Fixture
+final class OrganisationFixtures extends Fixture implements DependentFixtureInterface
 {
     private $repository;
 
@@ -27,12 +28,10 @@ final class OrganisationFixtures extends Fixture
             $organisation = new Organisation(
                 $this->repository->nextIdentity(),
                 $faker->company,
-                "http://{$faker->domainName}"
+                "http://{$faker->domainName}",
+                $this->getReference("contact-$i")
             );
 
-            if ($faker->boolean) {
-                $organisation->setAddress($faker->address);
-            }
             if ($faker->boolean) {
                 $organisation->setComment($faker->sentence);
             }
@@ -41,5 +40,12 @@ final class OrganisationFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            ContactFixtures::class,
+        ];
     }
 }

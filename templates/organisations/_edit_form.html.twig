@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+
+{{ form_row(form.name) }}
+{{ form_row(form.website) }}
+
+{% set addressPrototype = form_widget(form.contact.addresses.vars.prototype) %}
+
+{{ form_label(form.contact) }}
+
+{{ form_row(form.contact.firstName) }}
+{{ form_row(form.contact.lastName) }}
+{{ form_row(form.contact.email) }}
+{{ form_row(form.contact.phoneNumber) }}
+
+{{ form_label(form.contact.addresses) }}
+
+<div class="contact-addresses" data-prototype="{{ addressPrototype|e('html_attr') }}">
+    {% for address in form.contact.addresses %}
+        <div>{{ form_row(address) }}</div>
+    {% endfor %}
+</div>
+
+{% do form.contact.setRendered %}
+{{ form_rest(form) }}
+
+<a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
+<button type="submit" class="btn btn-success float-right">Submit organisation</button>
+{{ form_end(form) }}
