@@ -1,6 +1,6 @@
 {{ form_start(form,{'action': path('schedule_duplicate_item',{'id': schedule.id})}) }}
 
-{{ form_widget(form.day, {'attr': {'class': 'justify-content-center'}}) }}
+{{ form_widget(form.day,{ 'value' : schedule.day|date_modify("+1 day")|date('Y-m-d')}) }}
 <input type="hidden" name="_method" value="post">
 <div class="row mt-5">
     <div class="col-6">

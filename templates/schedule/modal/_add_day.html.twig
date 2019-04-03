@@ -11,7 +11,7 @@
             </div>
 
             <div class="modal-body">
-                {{ form_row(form.day) }}
+                {{ form_widget(form.day,{ 'value' : "now"|date('Y-m-d')}) }}
             </div>
 
             <div class="modal-footer">
