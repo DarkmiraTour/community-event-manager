@@ -18,6 +18,7 @@ final class ScheduleType extends AbstractType
             ->add('day', DateType::class, [
                 'required' => true,
                 'attr' => [],
+                'data' => new \DateTime('+ 1 day'),
             ])
         ;
     }

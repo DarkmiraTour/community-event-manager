@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity()
@@ -108,5 +110,28 @@ class Space
     public function setSlots(ArrayCollection $slots): void
     {
         $this->slots = $slots;
+    }
+
+    public function nextIdentity(): UuidInterface
+    {
+        return Uuid::uuid4();
+    }
+
+    public function __clone()
+    {
+        if (!$this->id) {
+            return;
+        }
+        $this->setId($this->nextIdentity()->toString());
+        $this->slots = $this->getSlots();
+        $slotClone = new ArrayCollection();
+
+        foreach ($this->slots as $item) {
+            $itemClone = clone $item;
+            $itemClone->setId($this->nextIdentity()->toString());
+            $itemClone->setSpace($this);
+            $slotClone->add($itemClone);
+        }
+        $this->slots = $slotClone;
     }
 }

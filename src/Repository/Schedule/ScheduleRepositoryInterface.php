@@ -29,4 +29,6 @@ interface ScheduleRepositoryInterface
     public function save(Schedule $schedule): void;
 
     public function remove(Schedule $schedule): void;
+
+    public function duplicate(Schedule $schedule): void;
 }

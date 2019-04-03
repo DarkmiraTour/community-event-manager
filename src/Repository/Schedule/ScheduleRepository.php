@@ -61,4 +61,12 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         $this->entityManager->remove($schedule);
         $this->entityManager->flush();
     }
+
+    public function duplicate(Schedule $schedule): void
+    {
+        $scheduleClone = clone $schedule;
+        $this->entityManager->persist($scheduleClone);
+        $this->entityManager->detach($schedule);
+        $this->entityManager->flush();
+    }
 }

@@ -70,6 +70,13 @@ schedule_slot_type_delete:
   requirements:
     id: '%routing.uuid%'
 
+schedule_duplicate_item:
+  path: /{id}/confirm_duplicate
+  methods: [GET, POST]
+  controller: App\Controller\Schedule\Duplicate::handle
+  requirements:
+    id: '%routing.uuid%'
+
 schedule_confirm_delete:
     path: /{id}/confirm_delete
     controller: App\Controller\Schedule\DeleteConfirmation:handle
