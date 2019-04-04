@@ -17,8 +17,8 @@ final class ScheduleType extends AbstractType
         $builder
             ->add('day', DateType::class, [
                 'required' => true,
-                'attr' => [],
-                'data' => new \DateTime('+ 1 day'),
+                'widget' => 'single_text',
+                'html5' => true,
             ])
         ;
     }
