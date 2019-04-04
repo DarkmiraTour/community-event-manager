@@ -23,3 +23,4 @@ script:
     - docker-compose run composer bin/phpunit
     - docker-compose exec php vendor/bin/behat --format progress --strict
     - docker-compose exec php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run
+    - make check_migrations_updated

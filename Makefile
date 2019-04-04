@@ -22,6 +22,9 @@ test:
 	docker-compose run composer ./vendor/bin/simple-phpunit
 	docker-compose run php vendor/bin/behat
 
+check_migrations_updated:
+	docker-compose exec php bin/console doctrine:schema:update --dump-sql | grep "Nothing to update"
+
 logs:
 	docker-compose logs -ft
 
