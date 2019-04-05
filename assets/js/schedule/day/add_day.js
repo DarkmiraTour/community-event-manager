@@ -11,5 +11,8 @@ TinyDatePicker('.js-datepicker', {
         return dateString;
     },
     mode: 'dp-below',
+    hilightedDate: document.querySelector('input[name="eventStart"]').value,
+    min: document.querySelector('input[name="eventStart"]').value,
+    max: document.querySelector('input[name="eventEnd"]').value,
     }
 );

@@ -1,7 +1,13 @@
 {{ form_start(form,{'action': path('schedule_duplicate_item',{'id': schedule.id})}) }}
 
-{{ form_widget(form.day,{ 'value' : schedule.day|date_modify("+1 day")|date('Y-m-d')}) }}
+{% if schedule.day|date_modify("+1 day")|date('Y-m-d') >= event.endAt()|date('Y-m-d') %}
+    {{ form_widget(form.day,{ 'value' : schedule.day|date('Y-m-d')}) }}
+{% endif %}
+
+{{ form_widget(form.day,{ 'value' : schedule.day|date_modify("+1 day")|date('Y-m-d')})  }}
 <input type="hidden" name="_method" value="post">
+<input type="hidden" name="eventStart" value="{{ event.startAt()|date('m/d/Y') }}">
+<input type="hidden" name="eventEnd" value="{{ event.endAt()|date('m/d/Y') }}">
 <div class="row mt-5">
     <div class="col-6">
         <a href="{{ path('schedule_index') }}" class="btn btn-light">Back to schedule</a>
