@@ -5,29 +5,35 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Speaker;
+use App\Repository\Event\EventRepository;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\File\File;
 
-final class SpeakerFixtures extends Fixture
+final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
 {
     private $speakerRepository;
+    private $eventRepository;
     private $fileUploader;
 
     public function __construct(
         SpeakerRepositoryInterface $speakerRepository,
+        EventRepository $eventRepository,
         FileUploaderInterface $fileUploader
     ) {
         $this->speakerRepository = $speakerRepository;
+        $this->eventRepository = $eventRepository;
         $this->fileUploader = $fileUploader;
     }
 
     public function load(ObjectManager $manager): void
     {
+        $events = $this->eventRepository->findAll();
         $faker = Faker::create();
 
         for ($i = 0; $i < 10; $i++) {
@@ -43,7 +49,7 @@ final class SpeakerFixtures extends Fixture
                 $faker->boolean ? $faker->url : null,
                 $faker->boolean ? $faker->url : null
             );
-
+            $speaker->addAttendingEvent($events[$faker->numberBetween(0, count($events) - 1)]);
             $manager->persist($speaker);
         }
 
@@ -59,5 +65,12 @@ final class SpeakerFixtures extends Fixture
         $manager->persist($speaker);
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            EventFixture::class,
+        ];
     }
 }

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Controller\Space;
 
 use App\Dto\SpaceRequest;
+use App\Exceptions\NoEventSelectedException;
 use App\Form\SpaceType;
+use App\Repository\Schedule\ScheduleRepositoryInterface;
 use App\Repository\Schedule\SpaceRepositoryInterface;
+use App\Service\Event\EventServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,17 +24,23 @@ final class Create
     private $renderer;
     private $formFactory;
     private $repository;
+    private $scheduleRepository;
+    private $eventService;
 
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        SpaceRepositoryInterface $repository
+        SpaceRepositoryInterface $repository,
+        ScheduleRepositoryInterface $scheduleRepository,
+        EventServiceInterface $eventService
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->repository = $repository;
+        $this->scheduleRepository = $scheduleRepository;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -39,6 +48,10 @@ final class Create
      */
     public function handle(Request $request): Response
     {
+        if (!$this->eventService->isEventSelected()) {
+            throw new NoEventSelectedException();
+        }
+
         $spaceRequest = new SpaceRequest();
 
         $form = $this->formFactory->create(SpaceType::class, $spaceRequest);

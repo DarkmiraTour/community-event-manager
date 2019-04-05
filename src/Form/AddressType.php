@@ -30,6 +30,7 @@ class AddressType extends AbstractType
                 ],
             ])
             ->add('streetAddressComplementary', TextType::class, [
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                     'maxlength' => '127',

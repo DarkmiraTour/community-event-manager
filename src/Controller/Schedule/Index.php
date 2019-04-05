@@ -7,10 +7,12 @@ namespace App\Controller\Schedule;
 use App\Dto\ScheduleRequest;
 use App\Dto\SlotRequest;
 use App\Dto\SpaceRequest;
+use App\Exceptions\NoEventSelectedException;
 use App\Form\ScheduleType;
 use App\Form\SlotType;
 use App\Form\SpaceType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Service\Event\EventServiceInterface;
 use App\Service\Schedule\CreateDailySchedule;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -23,17 +25,20 @@ final class Index
     private $repository;
     private $formFactory;
     private $scheduleService;
+    private $eventService;
 
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
         ScheduleRepositoryInterface $repository,
+        EventServiceInterface $eventService,
         CreateDailySchedule $scheduleService
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->repository = $repository;
         $this->scheduleService = $scheduleService;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -41,7 +46,11 @@ final class Index
      */
     public function handle(): Response
     {
-        $schedules = $this->repository->findAll();
+        if (!$this->eventService->isUserLoggedIn() || !$this->eventService->isEventSelected()) {
+            throw new NoEventSelectedException('No event has been selected');
+        }
+
+        $schedules = $this->repository->findBy(['event' => $this->eventService->getSelectedEvent()]);
 
         $form = $this->formFactory->create(SpaceType::class, new SpaceRequest());
 

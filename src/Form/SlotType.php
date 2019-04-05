@@ -8,6 +8,8 @@ use App\Dto\SlotRequest;
 use App\Entity\Space;
 use App\Entity\SlotType as SlotTypeEntity;
 use App\Entity\Talk;
+use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Repository\Schedule\SpaceRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +19,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SlotType extends AbstractType
 {
+    private $spaceRepository;
+    private $scheduleRepository;
+
+    public function __construct(SpaceRepositoryInterface $spaceRepository, ScheduleRepositoryInterface $scheduleRepository)
+    {
+        $this->spaceRepository = $spaceRepository;
+        $this->scheduleRepository = $scheduleRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -31,6 +42,7 @@ final class SlotType extends AbstractType
             ->add('space', EntityType::class, [
                 'required' => true,
                 'class' => Space::class,
+                'choices' => $this->getSpacesForSlotForm(),
                 'choice_label' => 'name',
                 'group_by' => function (Space $space) {
                     return $space->getSchedule()
@@ -68,5 +80,16 @@ final class SlotType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SlotRequest::class,
         ]);
+    }
+
+    private function getSpacesForSlotForm(): array
+    {
+        $schedules = $this->scheduleRepository->findAllForSelectedEvent();
+        $spaces = [];
+        foreach ($schedules as $schedule) {
+            $spaces = array_merge($spaces, $this->spaceRepository->findBy(['schedule' => $schedule]));
+        }
+
+        return $spaces;
     }
 }

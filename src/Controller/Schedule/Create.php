@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\Schedule;
 
 use App\Dto\ScheduleRequest;
+use App\Exceptions\NoEventSelectedException;
 use App\Form\ScheduleType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Service\Event\EventServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,19 +25,22 @@ final class Create
     private $formFactory;
     private $repository;
     private $flashBag;
+    private $eventService;
 
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         ScheduleRepositoryInterface $repository,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        EventServiceInterface $eventService
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->repository = $repository;
         $this->flashBag = $flashBag;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -43,12 +48,19 @@ final class Create
      */
     public function handle(Request $request): Response
     {
+        if (!$this->eventService->isEventSelected()) {
+            throw new NoEventSelectedException();
+        }
+
         $scheduleRequest = new ScheduleRequest();
 
         $form = $this->formFactory->create(ScheduleType::class, $scheduleRequest);
         $form->handleRequest($request);
 
-        $schedule = $this->repository->createFrom($scheduleRequest);
+        $schedule = $this->repository->createFrom(
+            $this->eventService->getSelectedEvent(),
+            $scheduleRequest
+        );
 
         $scheduleExists = $this->repository->findBy(['day' => $schedule->getDay()]);
 

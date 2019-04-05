@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+{% endblock %}
+
+{% block title %}Event selected{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <p>You have selected the {{ event.name }} event, you can now start to manage it.</p>
+        <p>If you want to end the management of this event,
+            go to your home page by clicking at "{{ event.name }} management in progress"
+            and choose "Finish management".</p>
+        <p>After this action you will be able to choose or create another event.</p>
+    </div>
+{% endblock %}

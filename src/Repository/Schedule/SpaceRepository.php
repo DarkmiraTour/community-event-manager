@@ -37,6 +37,11 @@ final class SpaceRepository implements SpaceRepositoryInterface
         return $this->repository->findAll();
     }
 
+    public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     public function createFrom(SpaceRequest $spaceRequest): Space
     {
         $space = new Space();

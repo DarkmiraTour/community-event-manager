@@ -7,6 +7,7 @@ namespace App\Form;
 use App\Entity\Schedule;
 use App\Entity\SpaceType as SpaceTypeEntity;
 use App\Dto\SpaceRequest;
+use App\Repository\Schedule\ScheduleRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -16,6 +17,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SpaceType extends AbstractType
 {
+    private $scheduleRepository;
+
+    public function __construct(ScheduleRepositoryInterface $scheduleRepository)
+    {
+        $this->scheduleRepository = $scheduleRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -44,6 +52,7 @@ class SpaceType extends AbstractType
             ])
             ->add('schedule', EntityType::class, [
                 'class' => Schedule::class,
+                'choices' => $this->scheduleRepository->findAllForSelectedEvent(),
                 'choice_label' => function (Schedule $schedule) {
                     return $schedule->getDay()->format('d/m/Y');
                 },

@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% if action is defined and action == constant('App\\Controller\\Event\\Edit::FORM_ACTION') %}
+    {% set titlePage = 'Edit event' %}
+    {% set submitButton = 'Save changes' %}
+{% else %}
+    {% set titlePage = 'New event' %}
+    {% set submitButton = 'Create Event' %}
+{% endif %}
+
+{% block title %}{{ titlePage }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 text-center text-sm-left">
+            <h1>{{ titlePage }}</h1>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a href="{{ path('index') }}" class="btn btn-light">Back to home</a>
+        </div>
+        <div class="col-6 text-right">
+            <button type="submit" class="btn btn-success float-right">{{ submitButton }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+

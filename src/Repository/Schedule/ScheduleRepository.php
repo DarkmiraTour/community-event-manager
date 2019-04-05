@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Repository\Schedule;
 
 use App\Dto\ScheduleRequest;
+use App\Entity\Event;
 use App\Entity\Schedule;
+use App\Exceptions\NoEventSelectedException;
+use App\Service\Event\EventServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -14,16 +17,31 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
 {
     private $entityManager;
     private $repository;
+    private $eventService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, EventServiceInterface $eventService)
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository(Schedule::class);
+        $this->eventService = $eventService;
     }
 
     public function find(string $id): ?Schedule
     {
-        return $this->repository->find($id);
+        if (!$this->eventService->isEventSelected()) {
+            throw new NoEventSelectedException();
+        }
+
+        return $this->repository->findOneBy(['id' => $id, 'event' => $this->eventService->getSelectedEvent()]);
+    }
+
+    public function findAllForSelectedEvent(): array
+    {
+        if (!$this->eventService->isEventSelected()) {
+            throw new NoEventSelectedException();
+        }
+
+        return $this->repository->findBy(['event' => $this->eventService->getSelectedEvent()]);
     }
 
     public function findAll(): array
@@ -36,9 +54,9 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
-    public function createFrom(ScheduleRequest $scheduleRequest): Schedule
+    public function createFrom(Event $event, ScheduleRequest $scheduleRequest): Schedule
     {
-        $schedule = new Schedule();
+        $schedule = new Schedule($event);
         $schedule->setId($this->nextIdentity()->toString());
         $schedule->setDay($scheduleRequest->day);
 

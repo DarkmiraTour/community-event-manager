@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -31,8 +32,15 @@ class Schedule
      */
     private $spaces;
 
-    public function __construct()
+    /**
+     * @ORM\OneToOne(targetEntity=Event::class)
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+
+    public function __construct(Event $event)
     {
+        $this->event = $event;
         $this->spaces = new ArrayCollection();
     }
 
@@ -56,7 +64,7 @@ class Schedule
         $this->day = $day;
     }
 
-    public function getSpaces()
+    public function getSpaces(): Collection
     {
         return $this->spaces;
     }
@@ -64,6 +72,11 @@ class Schedule
     public function setSpaces(ArrayCollection $spaces): void
     {
         $this->spaces = $spaces;
+    }
+
+    public function getEvent(): Event
+    {
+        return $this->event;
     }
 
     public function nextIdentity(): UuidInterface

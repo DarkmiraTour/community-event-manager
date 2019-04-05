@@ -5,27 +5,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar-toggle">
-            <a class="navbar-brand" href="{{ path('index') }}">Community Event Manager</a>
+            {% if app.session.has('event-id') and is_granted('ROLE_USER') %}
+                <a class="navbar-brand" href="{{ path('index') }}">{{ app.session.get('event-name') }} management in progress</a>
+                <a class="btn btn-info mb-2 mb-md-0"
+                   href="{{ path('event_show', {'id': app.session.get('event-id')}) }}">Details</a>
+            {% else %}
+                <a class="navbar-brand" href="{{ path('index') }}">Community Event Manager</a>
+            {% endif %}
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item dropdown
-                        {{ app.request.attributes.get('_route') matches '#^(organisation)#' ? 'active' }}">
+                        {{ app.request.attributes.get('_route') matches '#^(organisation|speaker|talk)#' ? 'active' }}">
                         <a class="nav-link dropdown-toggle" id="crm-dropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             CRM
                         </a>
                         <div class="dropdown-menu" aria-labelledby="crm-dropdown">
                             <a class="dropdown-item" href="{{ path('organisation_list') }}">Organisations</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown
-                        {{ app.request.attributes.get('_route') matches '#^(speaker|talk)#' ? 'active' }}">
-                        <a class="nav-link dropdown-toggle" id="schedule-dropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Schedule
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="schedule-dropdown">
-                            <a class="dropdown-item" href="{{ path('schedule_index') }}">Schedule</a>
                             <a class="dropdown-item" href="{{ path('speaker_index') }}">Speakers</a>
                             <a class="dropdown-item" href="{{ path('talk_index') }}">Talks</a>
                             <a class="dropdown-item" href="{{ path('schedule_space_type_index') }}">Space types</a>
@@ -35,23 +31,35 @@
                             <a class="dropdown-item" href="{{ path('interview_question_index') }}">Interview questions</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle
-                           {{ app.request.attributes.get('_route') matches '#^(sponsorship_|special_benefit)#' ? 'active' }}"
-                           id="sponsorship-dropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Sponsorships
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="sponsorship-dropdown">
-                            <a class="dropdown-item" href="{{ path('sponsorship_level_index') }}">Levels</a>
-                            <a class="dropdown-item" href="{{ path('sponsorship_benefit_index') }}">Benefits</a>
-                            <a class="dropdown-item" href="{{ path('sponsorship_level_benefit_view') }}">Summary</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ path('special_benefit_index') }}">Special</a>
-                            <a class="dropdown-item" href="{{ path('page_index') }}">Pages</a>
-                            <a class="dropdown-item" href="{{ path('sponsorships_pdf') }}">Brochure PDF</a>
-                        </div>
-                    </li>
+                    {% if app.session.has('event-id') %}
+                        <li class="nav-item dropdown
+                            {{ app.request.attributes.get('_route') matches '#^(schedule)#' ? 'active' }}">
+                            <a class="nav-link dropdown-toggle" id="schedule-dropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Schedule
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="schedule-dropdown">
+                                <a class="dropdown-item" href="{{ path('schedule_index') }}">Schedule</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle
+                               {{ app.request.attributes.get('_route') matches '#^(sponsorship_|special_benefit)#' ? 'active' }}"
+                               id="sponsorship-dropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                Sponsorships
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="sponsorship-dropdown">
+                                <a class="dropdown-item" href="{{ path('sponsorship_level_index') }}">Levels</a>
+                                <a class="dropdown-item" href="{{ path('sponsorship_benefit_index') }}">Benefits</a>
+                                <a class="dropdown-item" href="{{ path('sponsorship_level_benefit_view') }}">Summary</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('special_benefit_index') }}">Special</a>
+                                <a class="dropdown-item" href="{{ path('page_index') }}">Pages</a>
+                                <a class="dropdown-item" href="{{ path('sponsorships_pdf') }}">Brochure PDF</a>
+                            </div>
+                        </li>
+                    {% endif %}
                 {% endif %}
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item 'active'">
