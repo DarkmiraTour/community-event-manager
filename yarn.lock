@@ -5804,6 +5804,11 @@ timers-browserify@^2.0.4:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-date-picker@^3.2.8:
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/tiny-date-picker/-/tiny-date-picker-3.2.8.tgz#e060567476d7d38860eb50d82a7ccddede8290b2"
+  integrity sha512-XrZ2ujRDZLom3DtquzjtEh+kBLbivErqfbqbNG8sVA7ZCUxerIiorxfM87akQNbBnKttBaiXAZwZi46e2mFX7Q==
+
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"

@@ -22,6 +22,8 @@ Encore
     .addEntry("add_slot", "./assets/js/schedule/slot/add_slot.js")
     .addEntry("edit_slot", "./assets/js/schedule/slot/edit_slot.js")
     .addEntry('contact_edit', './assets/js/contact/edit.js')
+    .addEntry("duplicate_day", "./assets/js/schedule/day/duplicate_day.js")
+    .addEntry("add_day", "./assets/js/schedule/day/add_day.js")
 
     /*
      * FEATURE CONFIG
