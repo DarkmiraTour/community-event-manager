@@ -9,9 +9,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Service\Event\EventServiceInterface;
 
 final class ScheduleType extends AbstractType
 {
+    private $eventService;
+
+    public function __construct(EventServiceInterface $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -20,7 +30,21 @@ final class ScheduleType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker'],
+                'constraints' => [
+                    new Callback([
+                        'callback' => [$this, 'checkIsEventDateExist'],
+                    ]),
+                    ],
                 ]);
+    }
+
+    public function checkIsEventDateExist($data, ExecutionContextInterface $context): void
+    {
+        if (!$this->eventService->checkIsEventDateExist($data)) {
+            $context->buildViolation('this date is not part of the event')
+                ->atPath('day')
+                ->addViolation();
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

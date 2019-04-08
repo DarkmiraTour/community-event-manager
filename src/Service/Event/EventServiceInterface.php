@@ -21,4 +21,6 @@ interface EventServiceInterface
     public function isUserLoggedIn(): bool;
 
     public function isEventSelected(): bool;
+
+    public function checkIsEventDateExist(\DateTimeInterface $dateTime): bool;
 }

@@ -2,6 +2,13 @@
 
 import TinyDatePicker from 'tiny-date-picker'
 
+$(document).ready(function() {
+    setDefaultDate();
+});
+
+function setDefaultDate(){
+    document.getElementById("schedule_day").defaultValue = document.querySelector('input[name="eventStart"]').value;
+}
 TinyDatePicker('.js-datepicker', {
     format(date) {
         var mm = date.getMonth() + 1;
@@ -11,7 +18,6 @@ TinyDatePicker('.js-datepicker', {
         return dateString;
     },
     mode: 'dp-below',
-    hilightedDate: document.querySelector('input[name="eventStart"]').value,
     min: document.querySelector('input[name="eventStart"]').value,
     max: document.querySelector('input[name="eventEnd"]').value,
     }

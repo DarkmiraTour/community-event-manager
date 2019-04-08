@@ -70,4 +70,25 @@ final class EventService implements EventServiceInterface
 
         return $this->eventRepository->findById($this->session->get(self::EVENT_ID));
     }
+
+    public function checkIsEventDateExist(\DateTimeInterface $dateTime): bool
+    {
+        $event = $this->getSelectedEvent();
+        $period = new \DatePeriod(
+            $event->getStartAt(),
+            new \DateInterval('P1D'),
+            $event->getEndAt()
+        );
+        $availableDays = [];
+        foreach ($period as $oneDay) {
+            $availableDays[$oneDay->format('Y-m-d')] = $oneDay->format('Y-m-d');
+        }
+        $availableDays[$event->getEndAt()->format('Y-m-d')] = $event->getEndAt()->format('Y-m-d');
+
+        if (in_array($dateTime->format('Y-m-d'), $availableDays)) {
+            return true;
+        }
+
+        return false;
+    }
 }

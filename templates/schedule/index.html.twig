@@ -64,8 +64,8 @@
             </div>
         </div>
 
-        <input type="hidden" name="eventStart" value="{{ event.startAt()|date('m/d/Y') }}">
-        <input type="hidden" name="eventEnd" value="{{ event.endAt()|date('m/d/Y') }}">
+        <input type="hidden" name="eventStart" value="{{ event.startAt()|date('Y-m-d') }}">
+        <input type="hidden" name="eventEnd" value="{{ event.endAt()|date('Y-m-d') }}">
 
         {{ include('schedule/modal/_add_day.html.twig', { 'form': formSchedule }) }}
         {{ include('schedule/modal/_add_space.html.twig', { 'form': formSpace }) }}
