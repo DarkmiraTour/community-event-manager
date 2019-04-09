@@ -41,24 +41,6 @@ final class EventContext extends RawMinkContext
     }
 
     /**
-     * @When /^I fill the event "([^"]*)" field with date "([^"]*)"$/
-     */
-    public function iFillTheEventDateFieldWith(string $field, string $value): void
-    {
-        $field = $this->fixStepArgument('event['.$field.']');
-        $this->getSession()->getPage()->fillField($field, new \DateTime($value));
-    }
-
-    /**
-     * @When /^I fill the event "([^"]*)" "([^"]*)" date field with "([^"]*)"$/
-     */
-    public function iFillTheEventDatePeriodFieldWith(string $field, string $period, string $value): void
-    {
-        $field = $this->fixStepArgument("event[$field][$period]");
-        $this->getSession()->getPage()->fillField($field, $value);
-    }
-
-    /**
      * @When /^I fill the event "([^"]*)" "([^"]*)" address field with "([^"]*)"$/
      */
     public function iFillTheEventAddressFieldWith(string $field, string $period, string $value): void

@@ -24,6 +24,7 @@ Encore
     .addEntry('contact_edit', './assets/js/contact/edit.js')
     .addEntry("duplicate_day", "./assets/js/schedule/day/duplicate_day.js")
     .addEntry("add_day", "./assets/js/schedule/day/add_day.js")
+    .addEntry("add_event", "./assets/js/event/add_event.js")
 
     /*
      * FEATURE CONFIG

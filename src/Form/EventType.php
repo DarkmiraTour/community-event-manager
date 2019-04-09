@@ -18,7 +18,17 @@ class EventType extends AbstractType
             ->add('name', TextType::class, ['required' => true])
             ->add('description', TextareaType::class, ['required' => false])
             ->add('address', AddressType::class)
-            ->add('startAt', DateType::class, ['required' => true])
-            ->add('endAt', DateType::class, ['required' => true]);
+            ->add('startAt', DateType::class, [
+                'required' => true,
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'start-at'],
+            ])
+            ->add('endAt', DateType::class, [
+                'required' => true,
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'end-at'],
+            ]);
     }
 }

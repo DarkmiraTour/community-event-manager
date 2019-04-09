@@ -17,9 +17,12 @@
     </div>
 
     {{ form_start(form) }}
-    <div class="row">
-        <div class="col-12">
+    <div class="col-12">
+        <div class="inputs-event">
             {{ form_widget(form) }}
+            <div class="row">
+                <div class="inputs-picker-event"></div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -31,6 +34,10 @@
         </div>
     </div>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/add_event.js') }}"></script>
 {% endblock %}
 
 
