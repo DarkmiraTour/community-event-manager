@@ -18,7 +18,7 @@ final class Version20190325160923 extends AbstractTableNameMigration
         $tableEventSpeaker->addColumn(self::FIELD_EVENT_ID, Type::GUID);
         $tableEventSpeaker->addColumn('speaker_id', Type::GUID);
 
-        $tableEventSpeaker->setPrimaryKey([self::FIELD_EVENT_ID, 'speaker_id']);
+        $tableEventSpeaker->setPrimaryKey(['speaker_id', self::FIELD_EVENT_ID]);
         $tableEventSpeaker->addForeignKeyConstraint(self::EVENT, [self::FIELD_EVENT_ID], ['id'], ['onDelete' => 'CASCADE']);
         $tableEventSpeaker->addForeignKeyConstraint(self::SPEAKER, ['speaker_id'], ['id'], ['onDelete' => 'CASCADE']);
 
@@ -26,12 +26,13 @@ final class Version20190325160923 extends AbstractTableNameMigration
         $tableEventOrganization->addColumn(self::FIELD_EVENT_ID, Type::GUID);
         $tableEventOrganization->addColumn('organisation_id', Type::GUID);
 
-        $tableEventOrganization->setPrimaryKey([self::FIELD_EVENT_ID, 'organisation_id']);
+        $tableEventOrganization->setPrimaryKey(['organisation_id', self::FIELD_EVENT_ID]);
         $tableEventOrganization->addForeignKeyConstraint(self::EVENT, [self::FIELD_EVENT_ID], ['id'], ['onDelete' => 'CASCADE']);
         $tableEventOrganization->addForeignKeyConstraint(self::ORGANIZATION, ['organisation_id'], ['id'], ['onDelete' => 'CASCADE']);
 
         $tableSchedule = $schema->getTable(self::SCHEDULE);
         $tableSchedule->addColumn(self::FIELD_EVENT_ID, Type::GUID, ['notnull' => false]);
+        $tableSchedule->addForeignKeyConstraint(self::EVENT, [self::FIELD_EVENT_ID], ['id']);
     }
 
     public function down(Schema $schema): void

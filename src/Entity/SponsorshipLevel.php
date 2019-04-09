@@ -41,7 +41,7 @@ class SponsorshipLevel
     private $sponsorshipLevelBenefits;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $position;
 

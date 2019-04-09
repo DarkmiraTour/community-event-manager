@@ -22,6 +22,16 @@ test:
 	docker-compose run composer ./vendor/bin/simple-phpunit
 	docker-compose run php vendor/bin/behat
 
+check_migrations_updated:
+	@if docker-compose exec php bin/console doctrine:schema:update --dump-sql | grep "Nothing to update"; then \
+		echo "OK, Schema is up to date with schema mapping."; \
+	else \
+		echo "Migrations are not up to date with schema mapping."; \
+		echo "Here are SQL missing in migrations:"; \
+		docker-compose exec php bin/console doctrine:schema:update --dump-sql; \
+		return false; \
+	fi
+
 logs:
 	docker-compose logs -ft
 

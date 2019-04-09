@@ -33,7 +33,7 @@ class Schedule
     private $spaces;
 
     /**
-     * @ORM\OneToOne(targetEntity=Event::class)
+     * @ORM\ManyToOne(targetEntity=Event::class)
      * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
      */
     private $event;
