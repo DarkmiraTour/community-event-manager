@@ -8,6 +8,7 @@
         "popper.js": "^1.14.6",
         "prettier": "1.16.4",
         "sass-loader": "^7.1.0",
+        "tiny-date-picker": "^3.2.8",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",

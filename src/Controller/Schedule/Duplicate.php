@@ -6,6 +6,7 @@ namespace App\Controller\Schedule;
 
 use App\Dto\ScheduleRequest;
 use App\Form\ScheduleType;
+use App\Service\Event\EventServiceInterface;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -24,19 +25,22 @@ final class Duplicate
     private $renderer;
     private $formFactory;
     private $flashBag;
+    private $eventService;
 
     public function __construct(
         RouterInterface $router,
         ScheduleRepositoryInterface $repository,
         FormFactoryInterface $formFactory,
         Twig $renderer,
-        FlashBagInterface $flashBag
+        FlashBagInterface $flashBag,
+        EventServiceInterface $eventService
     ) {
         $this->router = $router;
         $this->repository = $repository;
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->flashBag = $flashBag;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -69,6 +73,7 @@ final class Duplicate
         return new Response($this->renderer->render('schedule/configure/confirm_duplicate_day.html.twig', [
             'schedule' => $schedule,
             'form' => $form->createView(),
+            'event' => $this->eventService->getSelectedEvent(),
         ]));
     }
 }

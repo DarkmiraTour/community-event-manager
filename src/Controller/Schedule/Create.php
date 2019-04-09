@@ -70,6 +70,14 @@ final class Create
             return new RedirectResponse($this->router->generate('schedule_index'));
         }
 
+        $dayEventExist = $this->eventService->checkIsEventDateExist($scheduleRequest->day);
+
+        if (!$dayEventExist) {
+            $this->flashBag->add('error', 'this date is not part of the event');
+
+            return new RedirectResponse($this->router->generate('schedule_index'));
+        }
+
         $this->repository->save($schedule);
 
         return new RedirectResponse($this->router->generate('schedule_index'));

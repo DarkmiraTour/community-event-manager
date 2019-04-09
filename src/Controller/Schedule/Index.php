@@ -64,6 +64,7 @@ final class Index
             'formSpace' => $form->createView(),
             'formSlot' => $formSlot->createView(),
             'timetable' => $this->scheduleService->mountTimetable($schedules),
+            'event' => $this->eventService->getSelectedEvent(),
         ]));
     }
 }
