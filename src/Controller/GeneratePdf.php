@@ -13,6 +13,7 @@ use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
 use Twig\Environment as Twig;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\Event\EventServiceInterface;
 
 final class GeneratePdf
 {
@@ -23,6 +24,7 @@ final class GeneratePdf
     private $sponsorshipLevelManager;
     private $pageManager;
     private $specialBenefitManager;
+    private $eventService;
 
     public function __construct(
         Twig $renderer,
@@ -31,7 +33,8 @@ final class GeneratePdf
         FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         PageManagerInterface $pageManager,
-        SpecialBenefitManagerInterface $specialBenefitManager
+        SpecialBenefitManagerInterface $specialBenefitManager,
+        EventServiceInterface $eventService
     ) {
         $this->renderer = $renderer;
         $this->pdfCreator = $pdfCreator;
@@ -40,6 +43,7 @@ final class GeneratePdf
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->pageManager = $pageManager;
         $this->specialBenefitManager = $specialBenefitManager;
+        $this->eventService = $eventService;
     }
 
     /**
@@ -58,13 +62,14 @@ final class GeneratePdf
 
         $pdf = $this->pdfCreator->generatePdf($template);
         $dateAtom = (new \DateTime())->format(\DateTime::ATOM);
+        $eventName = $this->eventService->getSelectedEventName();
 
         return new Response(
             $pdf,
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => sprintf('inline; filename="brochure-community-event-%s.pdf"', $dateAtom),
+                'Content-Disposition' => sprintf('inline; filename="%s-%s.pdf"', $eventName, $dateAtom),
             ]
         );
     }
