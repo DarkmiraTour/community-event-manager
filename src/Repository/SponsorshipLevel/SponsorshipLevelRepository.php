@@ -57,7 +57,7 @@ final class SponsorshipLevelRepository extends ServiceEntityRepository implement
         return parent::findAll();
     }
 
-    public function findAllWithBenefits()
+    public function findAllWithBenefits(): array
     {
         return $this->createQueryBuilder('level')
             ->select('level, levelBenefit, benefit')
