@@ -1,0 +1,4 @@
+organisation_sponsor_create:
+    path: /create
+    controller: App\Controller\OrganisationSponsor\Create::handle
+    methods: [GET, POST]

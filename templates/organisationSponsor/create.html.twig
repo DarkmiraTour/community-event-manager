@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Organisation become sponsor of the event {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 text-center text-sm-left">
+            <h1> Choose a sponsorship level or a special package for the sponsor</h1>
+        </div>
+    </div>
+
+    {% include 'organisationSponsor/_edit_form.html.twig' %}
+{% endblock %}

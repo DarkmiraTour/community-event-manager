@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,12 +41,18 @@ class SpecialBenefit
      */
     private $description;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganisationSponsor", mappedBy="specialBenefit")
+     */
+    private $organisationSponsors;
+
     public function __construct(UuidInterface $id, string $label, float $price, string $description)
     {
         $this->id = $id->toString();
         $this->label = $label;
         $this->price = $price;
         $this->description = $description;
+        $this->organisationSponsors = new ArrayCollection();
     }
 
     public function getId(): string
@@ -72,5 +80,15 @@ class SpecialBenefit
         $this->label = $label;
         $this->price = $price;
         $this->description = $description;
+    }
+
+    public function getOrganisationSponsors(): Collection
+    {
+        return $this->organisationSponsors;
+    }
+
+    public function addOrganisationSponsor(OrganisationSponsor $organisationSponsor): void
+    {
+        $this->organisationSponsors->add($organisationSponsor);
     }
 }

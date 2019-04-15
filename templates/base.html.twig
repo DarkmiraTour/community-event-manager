@@ -9,17 +9,18 @@
     </head>
     <body>
         {% include 'layout/header.html.twig' %}
-
         <div class="container">
-            {% for msg in app.session.flashbag.get('error') %}
-                <div class="row">
-                    <div class="col-12">
-                        <div class="alert alert-danger">
-                            {{ msg }}
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-{{ label }}" role="alert">
+                                    {{ message | raw }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            {% endfor %}
+                    {% endfor %}
+                {% endfor %}
 
             {% block content '' %}
         </div>

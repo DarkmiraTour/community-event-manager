@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+
+{{ form_row(form.sponsorshipLevel) }}
+{{ form_row(form.specialBenefit) }}
+
+<a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
+<button type="submit" class="btn btn-success float-right">Submit sponsor organisation </button>
+{{ form_end(form) }}

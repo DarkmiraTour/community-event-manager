@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\ValueObject\DateRangeInFuture;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -47,6 +49,11 @@ class Event
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganisationSponsor", mappedBy="event")
+     */
+    private $organisationSponsors;
+
     public function __construct(
         UuidInterface $id,
         string $name,
@@ -60,6 +67,7 @@ class Event
         $this->description = $description;
         $this->startAt = $dateRange->getStartAt();
         $this->endAt = $dateRange->getEndAt();
+        $this->organisationSponsors = new ArrayCollection();
     }
 
     public function getId(): string
@@ -103,5 +111,15 @@ class Event
         $this->description = $description;
         $this->startAt = $dateRange->getStartAt();
         $this->endAt = $dateRange->getEndAt();
+    }
+
+    public function getOrganisationSponsors(): Collection
+    {
+        return $this->organisationSponsors;
+    }
+
+    public function addOrganisationSponsor(OrganisationSponsor $organisationSponsor): void
+    {
+        $this->organisationSponsors->add($organisationSponsor);
     }
 }

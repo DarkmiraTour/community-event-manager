@@ -49,6 +49,11 @@ class Organisation
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganisationSponsor", mappedBy="organisation")
+     */
+    private $organisationSponsors;
+
     public function __construct(UuidInterface $id, string $name, string $website, Contact $contact = null, string $comment = null)
     {
         $this->id = $id->toString();
@@ -57,6 +62,7 @@ class Organisation
         $this->contact = $contact;
         $this->comment = $comment;
         $this->events = new ArrayCollection();
+        $this->organisationSponsors = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -120,5 +126,15 @@ class Organisation
     public function addSponsoredEvent(Event $event): void
     {
         $this->events->add($event);
+    }
+
+    public function getOrganisationSponsors(): Collection
+    {
+        return $this->organisationSponsors;
+    }
+
+    public function addOrganisationSponsor(OrganisationSponsor $organisationSponsor): void
+    {
+        $this->organisationSponsors->add($organisationSponsor);
     }
 }

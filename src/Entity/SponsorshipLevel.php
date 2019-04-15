@@ -45,6 +45,11 @@ class SponsorshipLevel
      */
     private $position;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OrganisationSponsor", mappedBy="sponsorshipLevel")
+     */
+    private $organisationSponsors;
+
     public function __construct(UuidInterface $id, string $label, float $price, int $position)
     {
         $this->id = $id->toString();
@@ -52,6 +57,7 @@ class SponsorshipLevel
         $this->price = $price;
         $this->position = $position;
         $this->sponsorshipLevelBenefits = new ArrayCollection();
+        $this->organisationSponsors = new ArrayCollection();
     }
 
     public function getId(): string
@@ -118,5 +124,15 @@ class SponsorshipLevel
         $this->label = $label;
         $this->price = $price;
         $this->position = $position;
+    }
+
+    public function getOrganisationSponsors(): Collection
+    {
+        return $this->organisationSponsors;
+    }
+
+    public function addOrganisationSponsor(OrganisationSponsor $organisationSponsor): void
+    {
+        $this->organisationSponsors->add($organisationSponsor);
     }
 }

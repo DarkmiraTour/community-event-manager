@@ -52,8 +52,32 @@
                     <th>Sponsored Events</th>
                     <td>
                         <ul>
-                            {% for event in organisation.events %}
-                                <li>{{ event.name }}</a></li>
+                            {% for sponsor in organisationSponsor %}
+                                <li>{{ sponsor.event.name }}</a></li>
+                                    Detail(s) :
+                                <ul>
+                                    {% if sponsor.specialBenefit is not empty %}
+                                        <li>
+                                            {{ sponsor.specialBenefit.label }} :
+                                            <ul>
+                                                <li>
+                                                    {{ sponsor.specialBenefit.price | number_format(2, '.', ',')  }} €
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if sponsor.sponsorshipLevel is not empty %}
+                                        <li>
+                                            {{ sponsor.sponsorshipLevel.label }} :
+                                            <ul>
+                                                <li>
+                                                    {{ sponsor.sponsorshipLevel.price | number_format(2, '.', ',')  }} €
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                </ul>
                             {% endfor %}
                         </ul>
                     </td>
@@ -68,6 +92,9 @@
             <a href="{{ path('organisation_list') }}" class="btn btn-light">Back to list</a>
         </div>
         <div class="col-7 text-right">
+            {% if is_granted('ROLE_USER') %}
+                <a href="{{ path('organisation_sponsor_create', {'id': organisation.id}) }}" class="btn btn-success">Become sponsor of the event</a>
+            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('organisation_edit', {'id': organisation.id}) }}" class="btn btn-secondary">Edit</a>
                 <a href="{{ path('organization_confirm_delete', {'id': organisation.id}) }}" class="btn btn-danger">Delete</a>
