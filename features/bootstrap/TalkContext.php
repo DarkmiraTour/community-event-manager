@@ -7,7 +7,7 @@ use App\DataFixtures\SpeakerFixtures;
 
 final class TalkContext extends RawMinkContext
 {
-    private const PATH_TALK = '/talks/';
+    private const PATH_TALK = 'talks/';
     
     /**
      * @When /^I am on the talk listing page$/

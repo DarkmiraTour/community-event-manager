@@ -8,9 +8,9 @@ use App\Entity\Event;
 
 interface EventServiceInterface
 {
-    public function getSelectedEventName(): ?string;
+    public function getSelectedEventName(): string;
 
-    public function getSelectedEventId(): ?string;
+    public function getSelectedEventId(): string;
 
     public function getSelectedEvent(): Event;
 

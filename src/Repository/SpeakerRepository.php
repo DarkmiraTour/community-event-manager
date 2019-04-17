@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Dto\SpeakerRequest;
 use App\Entity\Speaker;
+use App\Service\Event\EventServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -14,11 +15,13 @@ final class SpeakerRepository implements SpeakerRepositoryInterface
 {
     private $repository;
     private $entityManager;
+    private $eventService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, EventServiceInterface $eventService)
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository(Speaker::class);
+        $this->eventService = $eventService;
     }
 
     public function nextIdentity(): UuidInterface

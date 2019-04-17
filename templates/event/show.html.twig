@@ -36,6 +36,15 @@
             <p class="lead">
                 {{ event.description }}
             </p>
+
+            <h4>Attending Speakers</h4>
+            <p class="lead">
+                <ul>
+                    {% for speaker in attendingSpeakers %}
+                        <li>{{ speaker.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </p>
         </div>
     </div>
 {% endblock %}

@@ -28,7 +28,6 @@ final class Version20190405145553 extends AbstractMigration
         $this->addSql('ALTER TABLE events ALTER address_id DROP NOT NULL');
         $this->addSql('ALTER TABLE events ADD CONSTRAINT FK_5387574AF5B7AF75 FOREIGN KEY (address_id) REFERENCES address (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE INDEX IDX_5387574AF5B7AF75 ON events (address_id)');
-        $this->addSql('ALTER TABLE speaker ALTER interview_sent DROP DEFAULT');
         $this->addSql('ALTER TABLE sponsorship_level_benefit ALTER content TYPE VARCHAR(255)');
         $this->addSql('ALTER TABLE sponsorship_level_benefit ALTER content DROP DEFAULT');
         $this->addSql('DROP INDEX idx_ac0e20676f0601d5');
@@ -50,7 +49,6 @@ final class Version20190405145553 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE speaker_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE address_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE contact_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('ALTER TABLE speaker ALTER interview_sent SET DEFAULT \'false\'');
         $this->addSql('ALTER TABLE talk DROP CONSTRAINT FK_9F24D5BBD04A0F27');
         $this->addSql('DROP INDEX IDX_9F24D5BBD04A0F27');
         $this->addSql('ALTER TABLE talk ALTER speaker_id SET NOT NULL');

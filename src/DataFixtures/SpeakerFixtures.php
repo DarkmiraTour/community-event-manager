@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Speaker;
 use App\Repository\Event\EventRepository;
+use App\Repository\SpeakerEventInterviewSent\SpeakerEventRepositoryInterface;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\File;
 final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
 {
     private $speakerRepository;
+    private $speakerEventRepository;
     private $eventRepository;
     private $fileUploader;
     public const DEFAULT_SPEAKER = [
@@ -26,10 +28,12 @@ final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
 
     public function __construct(
         SpeakerRepositoryInterface $speakerRepository,
+        SpeakerEventRepositoryInterface $speakerEventRepository,
         EventRepository $eventRepository,
         FileUploaderInterface $fileUploader
     ) {
         $this->speakerRepository = $speakerRepository;
+        $this->speakerEventRepository = $speakerEventRepository;
         $this->eventRepository = $eventRepository;
         $this->fileUploader = $fileUploader;
     }
@@ -40,7 +44,7 @@ final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
         $faker = Faker::create();
 
         for ($i = 0; $i < 10; $i++) {
-            $speaker = new  Speaker(
+            $speaker = new Speaker(
                 $this->speakerRepository->nextIdentity(),
                 $faker->name,
                 $faker->title,
@@ -52,8 +56,10 @@ final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
                 $faker->boolean ? $faker->url : null,
                 $faker->boolean ? $faker->url : null
             );
-            $speaker->addAttendingEvent($events[$faker->numberBetween(0, count($events) - 1)]);
+
+            // $speaker->addAttendingEvent($events[$faker->numberBetween(0, count($events) - 1)]);
             $manager->persist($speaker);
+            $this->speakerEventRepository->addAttendingEvent($speaker, $events[$faker->numberBetween(0, count($events) - 1)]);
         }
 
         // add one fixed Speaker to Behat test

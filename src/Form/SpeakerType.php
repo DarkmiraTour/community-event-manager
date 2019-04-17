@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Dto\SpeakerRequest;
+use App\Service\Event\EventServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -16,6 +17,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SpeakerType extends AbstractType
 {
+    private $eventService;
+
+    public function __construct(EventServiceInterface $eventService)
+    {
+        $this->eventService = $eventService;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
