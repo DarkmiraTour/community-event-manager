@@ -1,0 +1,41 @@
+{% extends "base.html.twig" %}
+
+{% block title %}organisation file to import{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Select an organisation file to import</h1>
+        </div>
+    </div>
+
+    {{ form_start(form, {'action': path('organisation_csv_upload')}) }}
+    <div class="row">
+        <div class="col-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-6">
+            <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
+        </div>
+        <div class="col-6 text-right">
+            <button class="btn btn-success">Import</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <script>
+        document.querySelector("input[id=organisation_csv_upload_name]").addEventListener('change', function (element) {
+            let target = element.target;
+
+            const value = target.value.replace("C:\\fakepath\\", "");
+            if (value !== undefined || value !== '') {
+                document.querySelector('label.custom-file-label[for="organisation_csv_upload_name"]').dataset.content = value;
+                document.querySelector('label.custom-file-label[for="organisation_csv_upload_name"]').textContent = value;
+            }
+        });
+    </script>
+
+{% endblock %}

@@ -35,3 +35,8 @@ organization_confirm_delete:
     methods: [GET]
     requirements:
         id: '%routing.uuid%'
+
+organisation_csv_upload:
+    path: /upload
+    controller: App\Controller\Organisation\Upload::handle
+    methods: [GET, POST]
