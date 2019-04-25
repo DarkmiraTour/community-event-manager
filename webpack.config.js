@@ -25,6 +25,7 @@ Encore
     .addEntry("duplicate_day", "./assets/js/schedule/day/duplicate_day.js")
     .addEntry("add_day", "./assets/js/schedule/day/add_day.js")
     .addEntry("add_event", "./assets/js/event/add_event.js")
+    .addEntry("upload_organisation", "./assets/js/organisation/upload_organisation.js")
 
     /*
      * FEATURE CONFIG

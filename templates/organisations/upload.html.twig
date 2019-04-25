@@ -26,16 +26,8 @@
     </div>
     {{ form_end(form) }}
 
-    <script>
-        document.querySelector("input[id=organisation_csv_upload_name]").addEventListener('change', function (element) {
-            let target = element.target;
+{% endblock %}
 
-            const value = target.value.replace("C:\\fakepath\\", "");
-            if (value !== undefined || value !== '') {
-                document.querySelector('label.custom-file-label[for="organisation_csv_upload_name"]').dataset.content = value;
-                document.querySelector('label.custom-file-label[for="organisation_csv_upload_name"]').textContent = value;
-            }
-        });
-    </script>
-
+{% block javascripts %}
+    <script src="{{ asset('build/upload_organisation.js') }}"></script>
 {% endblock %}
