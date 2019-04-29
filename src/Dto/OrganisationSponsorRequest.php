@@ -28,12 +28,4 @@ final class OrganisationSponsorRequest
             $organisationSponsor->getSponsorshipLevel()
         );
     }
-
-    public function updateOrganisationSponsor(OrganisationSponsor $organisationSponsor): OrganisationSponsor
-    {
-        $organisationSponsor->setSpecialBenefit($this->specialBenefit);
-        $organisationSponsor->setSponsorshipLevel($this->sponsorshipLevel);
-
-        return $organisationSponsor;
-    }
 }

@@ -61,7 +61,7 @@
                                             {{ sponsor.specialBenefit.label }} :
                                             <ul>
                                                 <li>
-                                                    {{ sponsor.specialBenefit.price | number_format(2, '.', ',')  }} €
+                                                    {{ sponsor.specialBenefit.price | localizedcurrency(currency) }}
                                                 </li>
                                             </ul>
                                         </li>
@@ -72,7 +72,7 @@
                                             {{ sponsor.sponsorshipLevel.label }} :
                                             <ul>
                                                 <li>
-                                                    {{ sponsor.sponsorshipLevel.price | number_format(2, '.', ',')  }} €
+                                                    {{ sponsor.sponsorshipLevel.price | localizedcurrency(currency) }}
                                                 </li>
                                             </ul>
                                         </li>
