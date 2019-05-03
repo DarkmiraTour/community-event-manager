@@ -13,6 +13,7 @@ parameters:
     pdf_options:
         isHtml5ParserEnabled: true
         isRemoteEnabled: true
+    csvHeaderFormatOrganisation: ['name', 'website', 'contact', 'comment']
 
 services:
     # default configuration for services in *this* file
@@ -52,6 +53,9 @@ services:
     App\Service\PdfCreator:
         arguments:
             $pdfOptions: '%pdf_options%'
+    App\Service\Organisation\FileCsvUploader:
+        arguments:
+            $csvHeaderFormat: '%csvHeaderFormatOrganisation%'
 
     App\ValueObject\PdfFormat:
         arguments:

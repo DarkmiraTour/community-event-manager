@@ -13,10 +13,12 @@ use Symfony\Component\Process\Exception\LogicException;
 final class FileCsvUploader implements FileCsvUploaderInterface
 {
     private $repository;
+    private $csvHeaderFormat;
 
-    public function __construct(OrganisationRepositoryInterface $repository)
+    public function __construct(OrganisationRepositoryInterface $repository, array $csvHeaderFormat)
     {
         $this->repository = $repository;
+        $this->csvHeaderFormat = $csvHeaderFormat;
     }
 
     public function read(string $pathName): Reader
@@ -25,6 +27,10 @@ final class FileCsvUploader implements FileCsvUploaderInterface
         $records = (new Statement())->process($reader);
         if (0 === count($records)) {
             throw new LogicException('An empty file is not allowed');
+        }
+
+        if ($this->csvHeaderFormat !== $reader->fetchOne()) {
+            throw new LogicException('Headers do not match: '.implode(', ', array_diff($this->csvHeaderFormat,$reader->fetchOne())));
         }
 
         return $reader->setHeaderOffset(0);
