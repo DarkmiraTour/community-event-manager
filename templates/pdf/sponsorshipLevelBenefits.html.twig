@@ -39,7 +39,7 @@
         <tr style="background-color: #6AA84F; color: white; font-size: 12pt;">
             <th>Price</th>
             {% for level in levels %}
-                <th>{{ level.price|number_format(2, ',', ' ')~'€' }}</th>
+                <th>{{ level.price | localizedcurrency(currency) }}</th>
             {% endfor %}
         </tr>
         </tfoot>
