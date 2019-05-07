@@ -9,6 +9,7 @@ use App\Form\OrganisationCsvUploadType;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use App\Service\Organisation\FileCsvUploaderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,19 +24,22 @@ final class Upload
     private $repository;
     private $router;
     private $fileCsvUploader;
+    private $eventDispatcher;
 
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
         OrganisationRepositoryInterface $repository,
         RouterInterface $router,
-        FileCsvUploaderInterface $fileCsvUploader
+        FileCsvUploaderInterface $fileCsvUploader,
+        EventDispatcherInterface $eventDispatcher
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->repository = $repository;
         $this->router = $router;
         $this->fileCsvUploader = $fileCsvUploader;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

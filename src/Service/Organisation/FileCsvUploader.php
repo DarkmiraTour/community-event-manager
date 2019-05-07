@@ -5,20 +5,24 @@ declare(strict_types=1);
 namespace App\Service\Organisation;
 
 use App\Entity\Organisation;
+use App\Event\Organisation\OrganisationImportEvent;
 use App\Repository\Organisation\OrganisationRepositoryInterface;
 use League\Csv\Reader;
 use League\Csv\Statement;
 use Symfony\Component\Process\Exception\LogicException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class FileCsvUploader implements FileCsvUploaderInterface
 {
     private $repository;
     private $csvHeaderFormat;
+    private $eventDispatcher;
 
-    public function __construct(OrganisationRepositoryInterface $repository, array $csvHeaderFormat)
+    public function __construct(OrganisationRepositoryInterface $repository, array $csvHeaderFormat, EventDispatcherInterface $eventDispatcher)
     {
         $this->repository = $repository;
         $this->csvHeaderFormat = $csvHeaderFormat;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function read(string $pathName): Reader
@@ -30,7 +34,7 @@ final class FileCsvUploader implements FileCsvUploaderInterface
         }
 
         if ($this->csvHeaderFormat !== $reader->fetchOne()) {
-            throw new LogicException('Headers do not match: '.implode(', ', array_diff($this->csvHeaderFormat,$reader->fetchOne())));
+            throw new LogicException('Headers do not match: '.implode(', ', array_diff($this->csvHeaderFormat, $reader->fetchOne())));
         }
 
         return $reader->setHeaderOffset(0);
@@ -46,8 +50,7 @@ final class FileCsvUploader implements FileCsvUploaderInterface
                 null,
                 $record['comment']
             );
-
-            $this->repository->save($organisation);
+            $this->eventDispatcher->dispatch(OrganisationImportEvent::ORGANISATION_IMPORTED, new OrganisationImportEvent($organisation));
         }
     }
 }

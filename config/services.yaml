@@ -53,6 +53,7 @@ services:
     App\Service\PdfCreator:
         arguments:
             $pdfOptions: '%pdf_options%'
+
     App\Service\Organisation\FileCsvUploader:
         arguments:
             $csvHeaderFormat: '%csvHeaderFormatOrganisation%'
@@ -64,3 +65,8 @@ services:
     App\ValueObject\PdfOrientation:
         arguments:
             $orientation: '%pdf_orientation%'
+
+    organisation.import.listener:
+        class: App\EventListener\OrganisationImportListener
+        tags:
+            - { name: kernel.event_listener, event: 'organisation.imported', method: onOrganisationImported }
