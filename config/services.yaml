@@ -7,6 +7,7 @@ parameters:
     locale: 'en'
     currency: 'USD'
     routing.uuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    max.list.organisation.entries: 10
     pdf_orientation: 'landscape'
     pdf_format: 'A4'
     pdf_options:
@@ -40,6 +41,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Config\Organisation:
+        arguments:
+            $maxListOrganisationEntries: '%max.list.organisation.entries%'
+    
     App\Service\FileUploader:
         arguments:
             $filesystem: '@gaufrette.photos_filesystem'
