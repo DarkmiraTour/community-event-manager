@@ -22,7 +22,7 @@ final class OrganisationType extends AbstractType
                 'required' => true,
                 'help' => 'Must start with http:// or https://',
             ])
-            ->add('contact', ContactType::class, ['required' => false])
+            ->add('contact', ContactType::class, ['required' => true])
             ->add('comment', TextareaType::class, ['required' => false])
         ;
     }
