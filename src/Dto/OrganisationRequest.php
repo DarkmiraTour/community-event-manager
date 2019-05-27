@@ -21,6 +21,9 @@ final class OrganisationRequest
      */
     public $website;
 
+    /**
+     * @Assert\NotBlank()
+     */
     public $contact;
 
     public $comment;
