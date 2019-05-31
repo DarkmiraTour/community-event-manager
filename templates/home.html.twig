@@ -13,7 +13,11 @@
                          <a class="btn btn-primary" href="{{ path('event_create') }}">Create a new Event</a>
                     </div>
                {% elseif is_granted('ROLE_USER') and app.session.has('event-id') %}
-                    <div class="col-sm-6 text-center text-sm-right">
+                    <div class="col-sm-1 text-center text-sm-right">
+                         <a class="btn btn-info mb-2 mb-md-0"
+                            href="{{ path('event_show', {'id': app.session.get('event-id')}) }}">Details</a>
+                    </div>
+                    <div class="col-sm-5 text-center text-sm-right">
                          <a class="btn btn-primary" href="{{ path('event_unselect') }}">Finish management on {{ app.session.get('event-name') }}</a>
                     </div>
                {% endif %}
