@@ -49,6 +49,7 @@ final class Edit
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sponsorshipLevelRequest = $form->getData();
+            $sponsorshipLevelRequest->position = $sponsorshipLevel->getPosition();
             $sponsorshipLevelRequest->updateEntity($sponsorshipLevel);
             $this->sponsorshipLevelManager->save($sponsorshipLevel);
 

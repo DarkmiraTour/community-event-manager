@@ -54,7 +54,7 @@ final class SponsorshipLevelRepository extends ServiceEntityRepository implement
 
     public function findAll(): array
     {
-        return parent::findAll();
+        return parent::findBy([], ['position' => 'ASC']);
     }
 
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
