@@ -21,7 +21,7 @@ final class Home
     }
 
     /**
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function handle(): Response
     {

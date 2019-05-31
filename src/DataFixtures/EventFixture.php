@@ -39,6 +39,17 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             $manager->persist($event);
         }
 
+        $eventRequest = new EventRequest();
+        $eventRequest->name = 'DarkmiraTour Behat';
+        $eventRequest->address = $this->getReference('address-'.($nextAddress));
+        $eventRequest->description = $faker->text(50);
+        $eventRequest->startAt = $faker->dateTimeBetween('2020-01-01', '2020-12-31');
+        $eventRequest->endAt = new \DateTime($eventRequest->startAt->format('Y-m-d'));
+        $eventRequest->endAt->add(new \DateInterval('P3D'));
+
+        $event = $this->eventRepository->createFromRequest($eventRequest);
+        $manager->persist($event);
+
         $manager->flush();
     }
 
