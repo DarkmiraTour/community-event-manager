@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
-use Twig\Environment as Twig;
+use App\Service\renderPageInterface;
 
 final class Create
 {
@@ -31,7 +31,7 @@ final class Create
     private $flashBag;
 
     public function __construct(
-        Twig $renderer,
+        renderPageInterface $renderer,
         FormFactoryInterface $formFactory,
         OrganisationSponsorRepositoryInterface $repository,
         OrganisationRepositoryInterface $organisationRepository,
@@ -89,6 +89,6 @@ final class Create
             return new RedirectResponse($this->router->generate('organisation_list'));
         }
 
-        return new Response($this->renderer->render('organisationSponsor/create.html.twig', ['form' => $form->createView()]));
+        return $this->renderer->render('organisationSponsor/create.html.twig', ['form' => $form->createView()]);
     }
 }
