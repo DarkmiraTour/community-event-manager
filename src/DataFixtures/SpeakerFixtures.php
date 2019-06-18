@@ -20,6 +20,9 @@ final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
     private $speakerRepository;
     private $eventRepository;
     private $fileUploader;
+    public const DEFAULT_SPEAKER = [
+        'Behat' => '82e7325c-36b3-4c33-a0e8-743c6013e008',
+    ];
 
     public function __construct(
         SpeakerRepositoryInterface $speakerRepository,
