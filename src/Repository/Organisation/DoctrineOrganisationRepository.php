@@ -31,6 +31,12 @@ final class DoctrineOrganisationRepository implements OrganisationRepositoryInte
         return $this->repository->findAll();
     }
 
+    public function findAllPagination()
+    {
+        return $this->repository->createQueryBuilder('o')->getQuery();
+    }
+
+
     public function createFrom(OrganisationRequest $organisationRequest): Organisation
     {
         return new Organisation(

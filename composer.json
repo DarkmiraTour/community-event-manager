@@ -12,6 +12,7 @@
         "fzaninotto/faker": "^1.8",
         "gaufrette/extras": "^0.1.0",
         "knplabs/knp-gaufrette-bundle": "^0.5.3",
+        "knplabs/knp-paginator-bundle": "^3.0",
         "ninsuo/symfony-collection": "^2.1",
         "phpspec/prophecy": "^1.8",
         "ramsey/uuid": "^3.8",
