@@ -52,7 +52,7 @@ services:
             - ./var/s3:/data
         command: 'server /data'
     hub:
-        image: elgalu/selenium
+        image: elgalu/selenium:3.141.59-p14
         volumes:
           - /dev/shm:/dev/shm
         privileged: true
@@ -65,7 +65,7 @@ services:
         depends_on:
           - php
     chrome:
-        image: elgalu/selenium
+        image: elgalu/selenium:3.141.59-p14
         depends_on:
           - hub
         volumes:
@@ -82,6 +82,5 @@ services:
           - GRID=false
           - CHROME=true
           - FIREFOX=false
-
         ports:
           - 6080:26080
