@@ -48,17 +48,20 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
             if (!empty($speakerRequest->photo)) {
                 $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
-            }  
+            }
+
+            if (empty($speakerRequest->photoPath)) {
+                $speakerRequest->photoPath = 'http://'.$_SERVER['HTTP_HOST'].'/images/default_speaker.svg';
+            }
 
             $speaker = $this->speakerRepository->createFromRequest($speakerRequest);
             $this->speakerRepository->save($speaker);
 
             return new RedirectResponse($this->router->generate('speaker_index'));
         }
-        
+
         return new Response($this->renderer->render('speaker/create.html.twig', [
             'form' => $form->createView(),
         ]));
