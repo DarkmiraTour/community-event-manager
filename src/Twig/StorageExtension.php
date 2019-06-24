@@ -10,6 +10,8 @@ use Twig\TwigFilter;
 
 final class StorageExtension extends AbstractExtension
 {
+    private const AUTHORIZED_SCHEMA_REGEX = '/^(https?:\/\/)/';
+
     private $awsS3PublicUrlResolver;
 
     public function __construct(ResolverInterface $awsS3PublicUrlResolver)
@@ -26,6 +28,10 @@ final class StorageExtension extends AbstractExtension
 
     public function formatUrl(string $path): string
     {
+        if (preg_match(self::AUTHORIZED_SCHEMA_REGEX, $path)) {
+            return $path;
+        }
+
         return $this->awsS3PublicUrlResolver->resolve($path);
     }
 }

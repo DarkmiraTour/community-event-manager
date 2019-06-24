@@ -16,6 +16,7 @@ final class FeatureContext extends RawMinkContext
     private $kernel;
     private $currentUser;
     private $response;
+    
 
     public function __construct(KernelInterface $kernel)
     {
@@ -304,4 +305,18 @@ final class FeatureContext extends RawMinkContext
             }
         }
     }
+
+
+     /**
+     * @BeforeScenario
+     */
+    public function clearData()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+        $em->createQuery('DELETE FROM App:Talk')->execute();
+        $em->createQuery('DELETE FROM App:Speaker')->execute();
+    }
+
+
+
 }
