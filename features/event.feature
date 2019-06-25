@@ -38,26 +38,22 @@ Feature: Event Selection
     And I should see "DarkmiraTour 2020"
 
   Scenario: I select the event "DarkmiraTour 2020"
-    Given I am logged in as a user
+    Given I am logged in as an admin
     When I am on the event listing page
-    And I should see "Select DarkmiraTour 2020"
     And I click "Select DarkmiraTour 2020" link
-    Then I should see "You have selected the DarkmiraTour 2020 event, you can now start to manage it."
-    And I should see "DarkmiraTour 2020 management in progress"
-    
+    Then I should see "DarkmiraTour 2020"
+    And I should see "Dashboard"
+
   Scenario: I unselect the event "DarkmiraTour 2020" after selecting it
-    Given I am logged in as a user
+    Given I am logged in as an admin
     When I am on the event listing page
-    And I should see "Select DarkmiraTour 2020"
     And I click "Select DarkmiraTour 2020" link
-    Then I should see "You have selected the DarkmiraTour 2020 event, you can now start to manage it."
-    And I should see "DarkmiraTour 2020 management in progress"
-    And I click "DarkmiraTour 2020 management in progress" link
+    And I click "DarkmiraTour 2020" link
     Then I should be redirected on the event listing page
     And I should see "Finish management on DarkmiraTour 2020"
     And I click "Finish management on DarkmiraTour 2020" link
-    Then I should see "Select DarkmiraTour 2020"
-    
+    And I should see "Select DarkmiraTour 2020"
+
   Scenario: I don't fill all data needed when I add an event
     Given I am logged in as an admin
     When I am on the event creation page
