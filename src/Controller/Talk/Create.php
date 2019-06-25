@@ -34,7 +34,7 @@ final class Create
     }
 
     /**
-     * @Security("is_granted('ROROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function handle(Request $request): Response
     {
