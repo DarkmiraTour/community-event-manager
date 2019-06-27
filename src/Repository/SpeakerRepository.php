@@ -50,6 +50,11 @@ final class SpeakerRepository implements SpeakerRepositoryInterface
 
     public function createFromRequest(SpeakerRequest $speakerRequest): Speaker
     {
+        if (empty($speakerRequest->photoPath)) {
+            $speakerRequest->photoPath = '../../../../public/images/default_speaker.svg';
+            // $speakerRequest->photoPath = 'http://localhost:8080/images/default_speaker.svg';
+        }
+        
         return new Speaker(
             $this->nextIdentity(),
             $speakerRequest->name,
