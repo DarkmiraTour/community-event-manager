@@ -8,6 +8,8 @@ use App\Dto\SpeakerRequest;
 use App\Form\SpeakerType;
 use App\Repository\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Create
+final class Create  extends AbstractController
 {
     private $renderer;
     private $speakerRepository;
@@ -48,12 +50,10 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $speakerRequest->photoPath = $this->generateUrl('index', [], UrlGeneratorInterface::ABSOLUTE_URL).'/images/default_speaker.svg';
             if (!empty($speakerRequest->photo)) {
                 $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
-            }
-
-            if (empty($speakerRequest->photoPath)) {
-                $speakerRequest->photoPath = $_SERVER['HTTP_ORIGIN'].'/images/default_speaker.svg';
             }
 
             $speaker = $this->speakerRepository->createFromRequest($speakerRequest);

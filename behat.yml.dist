@@ -15,12 +15,14 @@ default:
         - SendInterviewContext
         - EventContext
         - TalkContext
+        - SpeakerContext
   extensions:
     Behat\Symfony2Extension:
       kernel:
         bootstrap: features/bootstrap/bootstrap.php
         class: App\Kernel
     Behat\MinkExtension:
+        files_path: "http://localhost:8080/public/images/"
         base_url: http://nginx
         goutte: ~
         default_session: goutte

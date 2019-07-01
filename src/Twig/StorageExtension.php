@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use Gaufrette\Extras\Resolvable\ResolverInterface;
+use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Symfony\Component\Asset\Packages;
+
 
 final class StorageExtension extends AbstractExtension
 {
