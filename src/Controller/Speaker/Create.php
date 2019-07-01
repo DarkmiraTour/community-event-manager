@@ -53,7 +53,7 @@ final class Create
             }
 
             if (empty($speakerRequest->photoPath)) {
-                $speakerRequest->photoPath = 'http://'.$_SERVER['HTTP_HOST'].'/images/default_speaker.svg';
+                $speakerRequest->photoPath = $_SERVER['HTTP_ORIGIN'].'/images/default_speaker.svg';
             }
 
             $speaker = $this->speakerRepository->createFromRequest($speakerRequest);
