@@ -22,8 +22,8 @@ default:
         bootstrap: features/bootstrap/bootstrap.php
         class: App\Kernel
     Behat\MinkExtension:
-        files_path: "http://localhost:8080/public/images/"
         base_url: http://nginx
+        files_path: base_url"/public/images/"
         goutte: ~
         default_session: goutte
         javascript_session: selenium2

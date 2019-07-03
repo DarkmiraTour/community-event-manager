@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Behat\MinkExtension\Context\RawMinkContext;
 use App\DataFixtures\SpeakerFixtures;
+use Behat\MinkExtension\Context\RawMinkContext;
 
 final class SpeakerContext extends RawMinkContext
 {
@@ -12,7 +12,7 @@ final class SpeakerContext extends RawMinkContext
     /**
      * @When /^I am on the speaker listing page$/
      */
-    public function iAmOnTheSpaekerListingPage(): void
+    public function iAmOnTheSpeakerListingPage(): void
     {
         $this->visitPath(self::PATH_SPEAKER);
     }
@@ -38,12 +38,11 @@ final class SpeakerContext extends RawMinkContext
      */
     public function iFillTheSpeakerFieldWith(string $field, string $value): void
     {
-        if ("speaker" === $field) {
-            if (isset(SpeakerFixtures::DEFAULT_SPEAKER[$value])) {
-                $value = SpeakerFixtures::DEFAULT_SPEAKER[$value];
-            } else {
-                throw new Exception('Value don\'t exist');
-            }
+        if ('speaker' === $field) { 
+            if (!isset(SpeakerFixtures::DEFAULT_SPEAKER[$value])) {
+                throw new Exception("The user {$value} does not exist");
+            } 
+            $value = SpeakerFixtures::DEFAULT_SPEAKER[$value];
         }
         
         $field = $this->fixStepArgument(sprintf('speaker[%s]', $field));

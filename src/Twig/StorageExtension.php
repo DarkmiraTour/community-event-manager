@@ -5,21 +5,18 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use Gaufrette\Extras\Resolvable\ResolverInterface;
-use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-
 final class StorageExtension extends AbstractExtension
 {
-    private $awsS3PublicUrlResolver;
     private const AUTHORIZED_SCHEMA_REGEX = '/^(https?:\/\/)/';
-    private $assetsHelper;
 
-    public function __construct(ResolverInterface $awsS3PublicUrlResolver, Packages $assetsHelper)
+    private $awsS3PublicUrlResolver;
+
+    public function __construct(ResolverInterface $awsS3PublicUrlResolver)
     {
         $this->awsS3PublicUrlResolver = $awsS3PublicUrlResolver;
-        $this->assetsHelper = $assetsHelper;
     }
 
     public function getFilters(): array
@@ -32,9 +29,9 @@ final class StorageExtension extends AbstractExtension
     public function formatUrl(string $path): string
     {
         if (preg_match(self::AUTHORIZED_SCHEMA_REGEX, $path)) {
-            return $this->assetsHelper->getUrl('/images/default_speaker.svg');
-        } else {
-            return $this->awsS3PublicUrlResolver->resolve($path);
+            return $path;
         }
+
+        return $this->awsS3PublicUrlResolver->resolve($path);
     }
 }
