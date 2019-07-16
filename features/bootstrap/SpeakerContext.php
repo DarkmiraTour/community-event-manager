@@ -9,6 +9,7 @@ final class SpeakerContext extends RawMinkContext
 {
     private const PATH_SPEAKER = '/speakers/';
     
+    
     /**
      * @When /^I am on the speaker listing page$/
      */
@@ -63,4 +64,21 @@ final class SpeakerContext extends RawMinkContext
     {
         return str_replace('\\"', '"', $argument);
     }
+
+    /**
+     * @Then /^(?:|I )should see img "(?P<text>(?:[^"]|\\")*)"$/
+     */
+    public function iShouldTestImg(string $argument)
+    {
+        $imageElements = $this->getSession()->getPage()->findAll('css','img');
+        foreach($imageElements as $image){
+            $imgUrl = $image->getAttribute('src');
+            $this->visitPath($imgUrl);
+            //Here should be assertion of valid img,
+            //F.e. if you are using goutte driver check that server response is not 500 or 404
+            $this->assertResponseStatusIsNot(404);
+        }
+    }
+
+    
 }

@@ -25,7 +25,7 @@ final class Create
     private $formFactory;
     private $router;
     private $fileUploader;
-    private $urlGeneratorInterface;
+    private $urlGenerator;
     private $assetPackage;
 
     public function __construct(
@@ -34,7 +34,7 @@ final class Create
         FormFactoryInterface $formFactory,
         RouterInterface $router,
         FileUploaderInterface $fileUploader,
-        UrlGeneratorInterface $urlGeneratorInterface,
+        UrlGeneratorInterface $urlGenerator,
         Packages $assetPackage
     ) {
         $this->renderer = $renderer;
@@ -42,7 +42,7 @@ final class Create
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->fileUploader = $fileUploader;
-        $this->urlGeneratorInterface = $urlGeneratorInterface;
+        $this->urlGenerator = $urlGenerator;
         $this->assetPackage = $assetPackage;
     }
 
@@ -56,7 +56,7 @@ final class Create
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $speakerRequest->photoPath = $this->urlGeneratorInterface->generate('index', [], UrlGeneratorInterface::ABSOLUTE_URL).$this->assetPackage->getUrl('/images/default_speaker.svg');
+            $speakerRequest->photoPath = $this->urlGenerator->generate('index', [], UrlGeneratorInterface::ABSOLUTE_URL).$this->assetPackage->getUrl(DIRECTORY_SEPARATOR.'images/default_speaker.svg');
             if (!empty($speakerRequest->photo)) {
                 $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
             }
