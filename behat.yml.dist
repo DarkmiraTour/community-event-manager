@@ -23,7 +23,7 @@ default:
         class: App\Kernel
     Behat\MinkExtension:
         base_url: http://nginx
-        files_path: base_url"/public/images/"
+        files_path: "./public/images/"
         goutte: ~
         default_session: goutte
         javascript_session: selenium2
