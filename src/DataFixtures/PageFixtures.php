@@ -8,8 +8,8 @@ use App\Repository\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
 use Symfony\Component\HttpFoundation\File\File;
+use Faker\Factory as Faker;
 
 final class PageFixtures extends Fixture
 {

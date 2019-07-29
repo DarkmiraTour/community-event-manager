@@ -8,8 +8,7 @@ use Behat\MinkExtension\Context\RawMinkContext;
 final class SpeakerContext extends RawMinkContext
 {
     private const PATH_SPEAKER = '/speakers/';
-    
-    
+
     /**
      * @When /^I am on the speaker listing page$/
      */
@@ -39,13 +38,13 @@ final class SpeakerContext extends RawMinkContext
      */
     public function iFillTheSpeakerFieldWith(string $field, string $value): void
     {
-        if ('speaker' === $field) { 
+        if ('speaker' === $field) {
             if (!isset(SpeakerFixtures::DEFAULT_SPEAKER[$value])) {
                 throw new Exception("The user {$value} does not exist");
-            } 
+            }
             $value = SpeakerFixtures::DEFAULT_SPEAKER[$value];
         }
-        
+
         $field = $this->fixStepArgument(sprintf('speaker[%s]', $field));
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
@@ -66,19 +65,15 @@ final class SpeakerContext extends RawMinkContext
     }
 
     /**
-     * @Then /^(?:|I )should see img "(?P<text>(?:[^"]|\\")*)"$/
+     * @Then /^(?:|I )should see images "(?P<text>(?:[^"]|\\")*)"$/
      */
-    public function iShouldTestImg(string $argument)
+    public function iShouldSeeImages(string $argument)
     {
-        $imageElements = $this->getSession()->getPage()->findAll('css','img');
+        $imageElements = $this->getSession()->getPage()->findAll('css', 'img');
         foreach($imageElements as $image){
             $imgUrl = $image->getAttribute('src');
             $this->visitPath($imgUrl);
-            //Here should be assertion of valid img,
-            //F.e. if you are using goutte driver check that server response is not 500 or 404
-            $this->assertResponseStatusIsNot(404);
+            $this->assertSession()->statusCodeNotEquals(404);
         }
     }
-
-    
 }

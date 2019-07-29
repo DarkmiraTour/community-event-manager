@@ -13,7 +13,8 @@ Feature: Speaker Selection
     And I attach the file "default_speaker.svg" to "speaker[photo]"
     And I select "0" from "speaker[isInterviewSent]"
     And I click "Back to list" link
-    
+    Then I should not see "Gael"
+
   Scenario: I add a speaker
     Given I am logged in as an admin
     When I am on the speaker creation page
@@ -28,11 +29,10 @@ Feature: Speaker Selection
     And I should see "Yohan"
     And I should see "site@test.com"
     When I click "Show" on the row containing "Yohan"
-    And I should see "Speaker"
+    Then I should see "Speaker"
     And I should see "Yohan"
 
-
-  Scenario: I add a speaker without specifying a photo
+  Scenario: I add a speaker without specifying a photo, so I should see default avatar
     Given I am logged in as an admin
     When I am on the speaker creation page
     And I fill the speaker "name" field with "Mathieu"
@@ -45,10 +45,6 @@ Feature: Speaker Selection
     And I should see "Mathieu"
     And I should see "site@test.com"
     When I click "Show" on the row containing "Mathieu"
-    And I should see "Speaker"
+    Then I should see "Speaker"
     And I should see "Mathieu"
-    Then the "Content" HTML field should contain "images/default_speaker.svg"
-    And I should see img "Tartine"
-    When I request "POST images/default_speaker.svg"
-    Then the response status code should be 201
-    
+    And I should see images "images/default_speaker.svg"
