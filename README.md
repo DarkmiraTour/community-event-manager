@@ -1,5 +1,7 @@
 # Community Event Manager
 
+[![Build Status](https://travis-ci.org/DarkmiraTour/community-event-manager.svg?branch=develop)](https://travis-ci.org/DarkmiraTour/community-event-manager)
+
 This is a web application with a collection of tools helping people organising community events such as multi-days
 conference with reminders, CRM and such
 
