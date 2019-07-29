@@ -10,19 +10,28 @@ use App\Entity\SlotType;
 use App\Entity\Space;
 use App\Entity\Talk;
 use App\Exceptions\SlotNotFoundException;
+use App\Service\Slot\SlotTimeCalculator;
 
 final class SlotManager implements SlotManagerInterface
 {
     private $repository;
+    private $slotTimeCalculator;
 
-    public function __construct(SlotRepositoryInterface $repository)
+    public function __construct(SlotRepositoryInterface $repository, SlotTimeCalculator $slotTimeCalculator)
     {
         $this->repository = $repository;
+        $this->slotTimeCalculator = $slotTimeCalculator;
     }
 
     public function find(string $id): Slot
     {
-        return $this->checkEntity($this->repository->find($id));
+        $slot = $this->repository->find($id);
+
+        if (null === $slot) {
+            throw new SlotNotFoundException();
+        }
+
+        return $slot;
     }
 
     public function findAll(): array
@@ -37,16 +46,32 @@ final class SlotManager implements SlotManagerInterface
 
     public function createFrom(SlotRequest $slotRequest): Slot
     {
-        $duration = $this->calculatesDuration($slotRequest->start, $slotRequest->end);
+        $duration = $this->slotTimeCalculator->calculatesDuration($slotRequest->start, $slotRequest->end);
 
-        return $this->repository->createSlot($slotRequest->title, $slotRequest->type, $duration, $slotRequest->start, $slotRequest->end, $slotRequest->space, $slotRequest->talk);
+        return $this->repository->createSlot(
+            $slotRequest->title,
+            $slotRequest->type,
+            $duration,
+            $slotRequest->start,
+            $slotRequest->end,
+            $slotRequest->space,
+            $slotRequest->talk
+        );
     }
 
     public function createWith(string $title, SlotType $slotType, \DateTimeInterface $start, \DateTimeInterface $end, Space $space, Talk $talk): Slot
     {
-        $duration = $this->calculatesDuration($start, $end);
+        $duration = $this->slotTimeCalculator->calculatesDuration($start, $end);
 
-        return $this->repository->createSlot($title, $slotType, $duration, $start, $end, $space, $talk);
+        return $this->repository->createSlot(
+            $title,
+            $slotType,
+            $duration,
+            $start,
+            $end,
+            $space,
+            $talk
+        );
     }
 
     public function save(Slot $slot): void
@@ -57,22 +82,5 @@ final class SlotManager implements SlotManagerInterface
     public function remove(Slot $slot): void
     {
         $this->repository->remove($slot);
-    }
-
-    private function checkEntity(?Slot $slot): Slot
-    {
-        if (!$slot) {
-            throw new SlotNotFoundException();
-        }
-
-        return $slot;
-    }
-
-    private function calculatesDuration(\DateTimeInterface $start, \DateTimeInterface $end): int
-    {
-        $diff = $end->diff($start);
-        $duration = ($diff->h * 60) + $diff->i;
-
-        return $duration;
     }
 }

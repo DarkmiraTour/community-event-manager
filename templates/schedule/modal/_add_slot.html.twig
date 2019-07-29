@@ -4,7 +4,7 @@
         <div class="modal-content">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}, 'action': path('schedule_slot_insert')}) }}
             <div class="modal-header">
-                <h5 class="modal-title" id="addSlotModalLabel">Add Slot?</h5>
+                <h5 class="modal-title" id="addSlotModalLabel">Add new slot</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,8 +20,6 @@
                 <button class="btn btn-success">Save new slot</button>
             </div>
             {{ form_end(form) }}
-
-            <script src="{{ asset('build/add_slot.js') }}"></script>
         </div>
     </div>
 </div>

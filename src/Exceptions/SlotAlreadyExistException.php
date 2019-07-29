@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-class SlotAlreadyExistException extends \LogicException
+final class SlotAlreadyExistException extends \LogicException
 {
-    protected $message = 'A slot already exists for this space and time';
+    public function __construct()
+    {
+        parent::__construct('A slot already exists for this space and time');
+    }
 }

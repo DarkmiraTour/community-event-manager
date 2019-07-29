@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Entity\User;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Testwork\Tester\Result\TestResult;
@@ -180,6 +181,71 @@ final class FeatureContext extends RawMinkContext
     }
 
     /**
+     * Wait for an element appears.
+     * Useful to wait before modal opens.
+     *
+     * @Then /^(?:|I ) wait until I see "(?P<text>(?:[^"]|\\")*)"$/
+     */
+    public function iWaitForText($text)
+    {
+        $text = $this->fixStepArgument($text);
+
+        $this->waitForCallback(5, function () use ($text) {
+            $this->assertSession()->pageTextContains($text);
+        });
+    }
+
+    /**
+     * Wait for an element appears.
+     * Useful to wait before modal opens.
+     *
+     * @Then I wait until I dont see :text
+     */
+    public function iWaitUntilIDontSee($text)
+    {
+        $text = $this->fixStepArgument($text);
+
+        $this->waitForCallback(5, function () use ($text) {
+            $this->assertSession()->pageTextNotContains($text);
+        });
+    }
+
+    /**
+     * @param int $timeout in seconds
+     * @throws ExpectationException If callback still fails after timeout
+     * @throws InvalidArgumentException
+     */
+    private function waitForCallback($timeout, $callback)
+    {
+        if (!is_callable($callback)) {
+            throw new \InvalidArgumentException('Given callback is not a valid callable');
+        }
+
+        $start = time();
+        $end = $start + $timeout;
+        $lastException = null;
+
+        do {
+            try {
+                $result = call_user_func($callback, $this);
+
+                if ($result) {
+                    break;
+                }
+            } catch (ExpectationException $exception) {
+                $lastException = $exception;
+            }
+
+        } while (time() < $end);
+
+        if (null !== $lastException) {
+            throw $lastException;
+        }
+
+        return $result;
+    }
+
+    /**
      * @Then /^I fill element on line (\d+) and column (\d+) with "([^"]*)"$/
      */
     public function iFillElementOnLineAndColumn(int $positionLine, int $positionColumn, string $text): void
@@ -303,5 +369,10 @@ final class FeatureContext extends RawMinkContext
                 }
             }
         }
+    }
+
+    private function fixStepArgument(string $argument): string
+    {
+        return str_replace('\\"', '"', $argument);
     }
 }

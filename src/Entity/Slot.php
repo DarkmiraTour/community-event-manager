@@ -31,6 +31,10 @@ class Slot
     private $type;
 
     /**
+     * In minutes.
+     * Used to optionnaly specify a duration
+     * different than $end - $start for displaying or statistic purposes.
+     *
      * @ORM\Column(type="integer")
      */
     private $duration;

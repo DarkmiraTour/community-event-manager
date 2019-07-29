@@ -16,17 +16,17 @@ function displayTalk() {
 }
 
 function initSlotForm() {
-    $('#modalAddSlot').on('submit', 'form', function(e) {
-        e.preventDefault()
+    $('#modalAddSlot').on('submit', 'form', function (event) {
+        event.preventDefault()
         $.ajax({
             type: 'POST',
             url: $(this).attr('action'),
             data: $(this).serialize(),
         })
-            .done(function(data) {
+            .done(function () {
                 location.href = Routing.generate('schedule_index');
             })
-            .fail(function(data) {
+            .fail(function (data) {
                 $('#modalAddSlot')
                     .find('.modal-body')
                     .html(data.responseJSON.form)
@@ -36,11 +36,11 @@ function initSlotForm() {
     })
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     displayTalk();
     initSlotForm();
 });
 
-$("#slot_type").change(function() {
+$("#slot_type").change(function () {
     displayTalk();
 });

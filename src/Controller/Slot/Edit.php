@@ -23,34 +23,34 @@ final class Edit
     private $renderer;
     private $router;
     private $formFactory;
-    private $manager;
+    private $slotManager;
 
     public function __construct(
         Twig $renderer,
-        SlotManagerInterface $manager,
+        SlotManagerInterface $slotManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
     ) {
         $this->renderer = $renderer;
-        $this->manager = $manager;
+        $this->slotManager = $slotManager;
         $this->formFactory = $formFactory;
         $this->router = $router;
     }
 
     public function handle(Request $request): Response
     {
-        $slot = $this->manager->find($request->attributes->get('id'));
+        $slot = $this->slotManager->find($request->attributes->get('id'));
         $slotRequest = SlotRequest::createFromSlot($slot);
 
         $form = $this->formFactory->create(SlotType::class, $slotRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slotRequest = $form->getData();
             $slotRequest->updateSlot($slot);
-            $this->manager->save($slot);
+            $this->slotManager->save($slot);
 
             return new RedirectResponse($this->router->generate('schedule_index'));
         }
