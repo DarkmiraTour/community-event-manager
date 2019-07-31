@@ -38,6 +38,12 @@
     "behatch/contexts": {
         "version": "3.2.0"
     },
+    "bex/behat-extension-driver-locator": {
+        "version": "1.0.2"
+    },
+    "bex/behat-screenshot": {
+        "version": "1.2.8"
+    },
     "composer/semver": {
         "version": "1.4.2"
     },

@@ -47,4 +47,4 @@ Feature: Speaker Selection
     When I click "Show" on the row containing "Mathieu"
     Then I should see "Speaker"
     And I should see "Mathieu"
-    And I should see images "images/default_speaker.svg"
+    And I should see the image "images/default_speaker.svg" in the "[alt='Avatar']" element
