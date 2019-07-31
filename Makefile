@@ -1,6 +1,33 @@
-all: run book
+.DEFAULT_GOAL := help
 
-install: .env run initialize book
+HOST ?= 0.0.0.0
+
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+.PHONY: help
+
+##
+## Darkmira Community Event Manager
+## --------------------------------
+##
+
+##
+## Setup
+## -----
+##
+
+install: .env run initialize info ## Install and start the project
+
+.env: .env.dist
+	@if [ -f .env ]; then \
+		echo '\033[1;41mYour .env file may be outdated because .env.dist has changed.\033[0m';\
+		echo '\033[1;41mCheck your .env file, or run this command again to ignore.\033[0m';\
+		touch .env;\
+		exit 1;\
+	else\
+		echo cp .env.dist .env;\
+		cp .env.dist .env;\
+	fi
 
 initialize: run bucket
 	docker-compose run composer install
@@ -18,9 +45,21 @@ bucket:
 	           minio/mc \
 	           /bin/sh -c "chmod +x ./docker/minio/create-bucket.sh && ./docker/minio/create-bucket.sh"
 
-test:
+##
+## Tests
+## -----
+##
+
+test: phpunit behat check_migrations_updated ## Run all tests stack
+
+phpunit: ## Run unit tests
 	docker-compose run composer ./vendor/bin/simple-phpunit
+
+behat: ## Run functional tests
 	docker-compose run php vendor/bin/behat
+
+cs: ## Executes php cs fixer
+	docker-compose exec php vendor/bin/php-cs-fixer --no-interaction --diff -v fix
 
 check_migrations_updated:
 	@if docker-compose exec php bin/console doctrine:schema:update --dump-sql | grep "Nothing to update"; then \
@@ -30,24 +69,6 @@ check_migrations_updated:
 		echo "Here are SQL missing in migrations:"; \
 		docker-compose exec php bin/console doctrine:schema:update --dump-sql; \
 		return false; \
-	fi
-
-logs:
-	docker-compose logs -ft
-
-bash:
-	docker-compose up -d php
-	docker-compose exec php bash
-
-.env: .env.dist
-	@if [ -f .env ]; then \
-		echo '\033[1;41mYour .env file may be outdated because .env.dist has changed.\033[0m';\
-		echo '\033[1;41mCheck your .env file, or run this command again to ignore.\033[0m';\
-		touch .env;\
-		exit 1;\
-	else\
-		echo cp .env.dist .env;\
-		cp .env.dist .env;\
 	fi
 
 behat.yml: behat.yml.dist
@@ -61,14 +82,29 @@ behat.yml: behat.yml.dist
 		cp behat.yml.dist behat.yml;\
 	fi
 
-book:
-	#
-	# Darkmira Community Event Manager
-	#
-	# Application: http://0.0.0.0:8080
-	# Minio:       http://0.0.0.0:9001
-	# Mailhog:     http://0.0.0.0:8025
-	#
+##
+## Tools
+## -----
+##
 
-cs: ## executes php cs fixer
-	docker-compose exec php vendor/bin/php-cs-fixer --no-interaction --diff -v fix
+logs: ## Show logs
+	docker-compose logs -ft
+
+bash: ## Bash into php container
+	docker-compose up -d php
+	docker-compose exec php bash
+
+info: ## Show useful urls
+	@echo ""
+	@echo "\033[92m[OK] Application running on http://$(HOST):8080\033[0m"
+	@echo "\033[92m[OK] Minio running on http://$(HOST):9001\033[0m"
+	@echo "\033[92m[OK] Mailhog running on http://$(HOST):8025\033[0m"
+	@echo ""
+	@echo "Development users:"
+	@echo ""
+	@echo "  admin: admin@test.com / adminpass"
+	@echo "  user:  user@test.com  / userpass"
+	@echo ""
+
+##
+##
