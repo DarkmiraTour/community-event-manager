@@ -15,6 +15,7 @@ default:
         - SendInterviewContext
         - EventContext
         - TalkContext
+        - SpeakerContext
   extensions:
     Behat\Symfony2Extension:
       kernel:
@@ -22,6 +23,7 @@ default:
         class: App\Kernel
     Behat\MinkExtension:
         base_url: http://nginx
+        files_path: "./public/images/"
         goutte: ~
         default_session: goutte
         javascript_session: selenium2
