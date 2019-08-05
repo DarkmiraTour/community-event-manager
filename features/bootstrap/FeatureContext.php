@@ -75,12 +75,27 @@ final class FeatureContext extends RawMinkContext
     /**
      * @When /^I click "([^"]*)" on the row containing "([^"]*)"$/
      */
-    public function iClickOnOnTheRowContaining(string $linkName, string $rowText): void
+    public function iClickOnTheRowContaining(string $linkName, string $rowText): void
     {
         /** @var $row \Behat\Mink\Element\NodeElement */
         $row = $this->getSession()->getPage()->find('css', sprintf('table tr:contains("%s")', $rowText));
         if (!$row) {
             throw new \Exception(sprintf('Cannot find any row on the page containing the text "%s"', $rowText));
+        }
+
+        $row->clickLink($linkName);
+    }
+
+    /**
+     * @When /^I click "([^"]*)" on the card containing "([^"]*)"$/
+     */
+    public function iClickOnTheCardContaining(string $linkName, string $rowText): void
+    {
+        /** @var $row \Behat\Mink\Element\NodeElement */
+        $row = $this->getSession()->getPage()->find('css', sprintf('.card:contains("%s")', $rowText));
+
+        if (!$row) {
+            throw new \Exception(sprintf('Cannot find any card on the page containing the text "%s"', $rowText));
         }
 
         $row->clickLink($linkName);

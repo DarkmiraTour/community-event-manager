@@ -40,19 +40,19 @@ Feature: Event Selection
   Scenario: I select the event "DarkmiraTour 2020"
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Select DarkmiraTour 2020" link
+    And I click "Manage" on the card containing "DarkmiraTour 2020"
     Then I should see "DarkmiraTour 2020"
     And I should see "Dashboard"
 
   Scenario: I unselect the event "DarkmiraTour 2020" after selecting it
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Select DarkmiraTour 2020" link
+    And I click "Manage" on the card containing "DarkmiraTour 2020"
     And I click "DarkmiraTour 2020" link
-    Then I should be redirected on the event listing page
-    And I should see "Finish management on DarkmiraTour 2020"
-    And I click "Finish management on DarkmiraTour 2020" link
-    And I should see "Select DarkmiraTour 2020"
+    And I should see "Leave and go back to events"
+    And I click "Leave and go back to events" link
+    And I should see "Events management"
+    And I should see "DarkmiraTour 2020"
 
   Scenario: I don't fill all data needed when I add an event
     Given I am logged in as an admin
@@ -93,7 +93,7 @@ Feature: Event Selection
   Scenario: I don't fill all data needed when i edit a event "DarkmiraTour 2020"
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Edit" on the row containing "DarkmiraTour 2020"
+    And I click "Edit" on the card containing "DarkmiraTour 2020"
     And I fill the event "name" field with ""
     And I press "Save changes"
     Then I should see "This value should not be blank."
@@ -101,7 +101,7 @@ Feature: Event Selection
   Scenario: I edit the event "DarkmiraTour 2020"
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Edit" on the row containing "DarkmiraTour 2020"
+    And I click "Edit" on the card containing "DarkmiraTour 2020"
     And I fill the event "name" field with "Darkmira-Tour 2020"
     And I press "Save changes"
     Then I should see "Darkmira-Tour 2020"
@@ -110,7 +110,7 @@ Feature: Event Selection
   Scenario: I cancel the delete of event "Darkmira-Tour 2020"
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Delete" on the row containing "Darkmira-Tour 2020"
+    And I click "Delete" on the card containing "Darkmira-Tour 2020"
     And I should see "Do you wish to confirm \"Darkmira-Tour 2020\" event deletion?"
     And I click "Back to list" link
     Then I should be redirected on the event listing page
@@ -119,7 +119,7 @@ Feature: Event Selection
   Scenario: I confirm the delete of event "Darkmira-Tour 2020"
     Given I am logged in as an admin
     When I am on the event listing page
-    And I click "Delete" on the row containing "Darkmira-Tour 2020"
+    And I click "Delete" on the card containing "Darkmira-Tour 2020"
     And I should see "Do you wish to confirm \"Darkmira-Tour 2020\" event deletion?"
     And I press "Delete"
     Then I should be redirected on the event listing page

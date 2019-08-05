@@ -4,56 +4,38 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <h1>Event</h1>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-warning" href="{{ path('event_unselect') }}">
+                Leave and go back to events
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12">
-            <table class="table">
-                <tbody>
-                <tr>
-                    <th>Name</th>
-                    <td>{{ event.name }}</td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>
-                    {{ event.address.streetAddress }}<br />
-                    {{ event.address.streetAddressComplementary }}<br />
-                    {{ event.address.postalCode }} {{ event.address.city }} </td>
-                </tr>
-                <tr>
-                    <th>Description</th>
-                    <td>{{ event.description }}</td>
-                </tr>
-                <tr>
-                    <th>Start At</th>
-                    <td>{{ event.startAt|date('j F Y') }}</td>
-                </tr>
-                <tr>
-                    <th>End At</th>
-                    <td>{{ event.endAt|date('j F Y') }}</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
+                    {% include 'event/_card-body.html.twig' %}
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="col-sm-6">
+            <h4>Address</h4>
+            <address>
+                {{ event.address.streetAddress }}<br />
+                {{ event.address.streetAddressComplementary }}<br />
+                {{ event.address.postalCode }} {{ event.address.city }}
+            </address>
 
-    <div class="row mb-3">
-        <div class="col-5">
-            <a href="{{ path('index') }}" class="btn btn-light">Back to home</a>
-        </div>
-        <div class="col-7 text-right">
-            {% if is_granted('ROLE_ADMIN') %}
-                {% if not app.session.has('event-id') %}
-                    <a href="{{ path('event_edit', {'id': event.id}) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ path('event_confirm_delete', {'id': event.id}) }}" class="btn btn-danger">Delete</a>
-                {% else %}
-                    <p style="color: red">To edit or delete this event, you need to <a href="{{ path('event_unselect') }}">finish management</a> first.</p>
-                {% endif %}
-            {% endif %}
+            <h4>Description</h4>
+            <p class="lead">
+                {{ event.description }}
+            </p>
         </div>
     </div>
 {% endblock %}

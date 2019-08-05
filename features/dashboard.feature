@@ -11,14 +11,14 @@ Feature: Dashboard
   Scenario: Event schedule widget
     Given I am logged in as an admin
     When I am on "/"
-    And I follow "Select"
+    And I follow "Manage"
     Then I should see "Event schedule"
     And I should see "Edit schedules"
 
   Scenario: Sponsorships widget
     Given I am logged in as an admin
     When I am on "/"
-    And I follow "Select"
+    And I follow "Manage"
     Then I should see "Sponsorships"
     And I should see "4 levels"
     And I should see "Level 0"
@@ -28,7 +28,7 @@ Feature: Dashboard
   Scenario: Brochure widget
     Given I am logged in as an admin
     When I am on "/"
-    And I follow "Select"
+    And I follow "Manage"
     Then I should see "Brochure"
     And I should see "Generate PDF"
     And I should see "Edit pages"

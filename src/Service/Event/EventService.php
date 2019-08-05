@@ -98,4 +98,50 @@ final class EventService implements EventServiceInterface
 
         return false;
     }
+
+    public function groupEventByTimeInterval(array $events, \DateTimeInterface $today = null): array
+    {
+        if (null === $today) {
+            $today = new \DateTime('today');
+        }
+
+        return [
+            'active' => \array_filter($events, function (Event $event) use ($today) {
+                return $this->isEventActive($event, $today);
+            }),
+            'future' => \array_filter($events, function (Event $event) use ($today) {
+                return $this->isEventFuture($event, $today);
+            }),
+            'finished' => \array_filter($events, function (Event $event) use ($today) {
+                return $this->isEventFinished($event, $today);
+            }),
+        ];
+    }
+
+    public function isEventActive(Event $event, \DateTimeInterface $today = null): bool
+    {
+        if (null === $today) {
+            $today = new \DateTime('today');
+        }
+
+        return $event->getStartAt() <= $today && $today <= $event->getEndAt();
+    }
+
+    public function isEventFuture(Event $event, \DateTimeInterface $today = null): bool
+    {
+        if (null === $today) {
+            $today = new \DateTime('today');
+        }
+
+        return $today < $event->getStartAt();
+    }
+
+    public function isEventFinished(Event $event, \DateTimeInterface $today = null): bool
+    {
+        if (null === $today) {
+            $today = new \DateTime('today');
+        }
+
+        return $event->getEndAt() < $today;
+    }
 }
