@@ -1,0 +1,31 @@
+<div class="event-info">
+    <h4>{{ event.name }}</h4>
+
+    <time datetime="{{ event.startAt|date('c') }}">
+        {{ event.startAt|date('j F Y') }}
+        -
+        {{ event.endAt|date('j F Y') }}
+    </time>
+</div>
+
+<a class="btn btn-block btn-link" href="{{ path('event_show', {'id': event.id}) }}">
+    More info
+</a>
+<a class="btn btn-block btn-lg btn-primary" href="{{ path('event_select', {'id': event.id}) }}">
+    Manage
+</a>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="row mt-3">
+        <div class="col-6">
+            <a class="btn btn-block btn-outline-warning" href="{{ path('event_edit', {'id': event.id}) }}">
+                Edit
+            </a>
+        </div>
+        <div class="col-6">
+            <a class="btn btn-block btn-outline-danger" href="{{ path('event_confirm_delete', {'id': event.id}) }}">
+                Delete
+            </a>
+        </div>
+    </div>
+{% endif %}

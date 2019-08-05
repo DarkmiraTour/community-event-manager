@@ -17,14 +17,19 @@
     </div>
 
     {{ form_start(form) }}
-    <div class="col-12">
-        <div class="inputs-event">
-            {{ form_widget(form) }}
-            <div class="row">
-                <div class="inputs-picker-event"></div>
-            </div>
+    <div class="row inputs-event">
+        <div class="col-md-6">
+            {{ form_row(form.name, {'attr': {'class': 'form-control-lg'}}) }}
+            {{ form_row(form.startAt) }}
+            {{ form_row(form.endAt) }}
+            <div class="inputs-picker-event"></div>
+            {{ form_row(form.description) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.address) }}
         </div>
     </div>
+
     <div class="row">
         <div class="col-6">
             <a href="{{ path('index') }}" class="btn btn-light">Back to home</a>

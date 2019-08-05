@@ -46,7 +46,7 @@ final class EventRepository implements EventRepositoryInterface
 
     public function findAll(): array
     {
-        return $this->repository->findAll();
+        return $this->repository->findBy([], ['startAt' => 'asc']);
     }
 
     public function findById(string $id): ?Event

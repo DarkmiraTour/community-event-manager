@@ -3,67 +3,69 @@
 {% block title %}Community event manager{% endblock %}
 
 {% block content %}
-     {% if is_granted('ROLE_USER') %}
-          <div class="row">
-               <div class="col-sm-6 text-center text-sm-left">
-                    <h2>Events management</h2>
+     <div class="row">
+          <div class="col-sm-6 text-center text-sm-left">
+               <h2>Events management</h2>
+          </div>
+
+          {% if is_granted('ROLE_ADMIN') %}
+               <div class="col-sm-6 text-center text-sm-right">
+                    <a class="btn btn-primary" href="{{ path('event_create') }}">
+                         <i class="fas fa-calendar-plus"></i>
+                         Create a new Event
+                    </a>
                </div>
-               {% if is_granted('ROLE_ADMIN') and not app.session.has('event-id') %}
-                    <div class="col-sm-6 text-center text-sm-right">
-                         <a class="btn btn-primary" href="{{ path('event_create') }}">Create a new Event</a>
+          {% endif %}
+     </div>
+
+     {% if events.active|length > 0 %}
+          <h3>Active events</h3>
+
+          <div class="row">
+               {% for event in events.active %}
+                    <div class="col-sm-6">
+                         <div class="card">
+                              <div class="card-body text-center">
+                                   <i class="fas fa-calendar fa-5x mb-3 text-success"></i>
+                                   {% include 'event/_card-body.html.twig' %}
+                              </div>
+                         </div>
                     </div>
-               {% elseif is_granted('ROLE_USER') and app.session.has('event-id') %}
-                    <div class="col-sm-1 text-center text-sm-right">
-                         <a class="btn btn-info mb-2 mb-md-0"
-                            href="{{ path('event_show', {'id': app.session.get('event-id')}) }}">Details</a>
-                    </div>
-                    <div class="col-sm-5 text-center text-sm-right">
-                         <a class="btn btn-primary" href="{{ path('event_unselect') }}">Finish management on {{ app.session.get('event-name') }}</a>
-                    </div>
-               {% endif %}
+               {% endfor %}
           </div>
      {% endif %}
 
-     {% if events|default(false) and is_granted('ROLE_USER') and not app.session.has('event-id') %}
-          <div class="row mt-3">
-               <div class="col-12 table-responsive-sm">
-                    <table class="table table-striped">
-                         <thead>
-                              <tr>
-                                   <th>Name</th>
-                                   <th>Start Date</th>
-                                   <th>End Date</th>
-                                   <th class="text-center">Actions</th>
-                              </tr>
-                         </thead>
-                         <tbody>
-                              {% for event in events %}
-                                   <tr>
-                                        <td><a class="btn btn-info mb-2 mb-md-0" href="{{ path('event_select', {'id': event.id}) }}">Select {{ event.name }}</a></td>
-                                        <td>{{ event.startAt|date('j F Y') }}</td>
-                                        <td>{{ event.endAt|date('j F Y') }}</td>
-                                        <td class="text-center">
-                                             <a class="btn btn-info mb-2 mb-md-0"
-                                                href="{{ path('event_show', {'id': event.id}) }}">Details</a>
-                                             {% if is_granted('ROLE_ADMIN') %}
-                                                  <a class="btn btn-warning mb-2 mb-md-0"
-                                                     href="{{ path('event_edit', {'id': event.id}) }}">Edit</a>
-                                                  <a class="btn btn-danger mb-2 mb-md-0"
-                                                     href="{{ path('event_confirm_delete', {'id': event.id}) }}">
-                                                       Delete
-                                                  </a>
-                                             {% endif %}
-                                        </td>
-                                   </tr>
-                              {% else %}
-                                   <tr>
-                                        <td colspan="3">no events are created yet</td>
-                                   </tr>
-                              {% endfor %}
-                         </tbody>
-                    </table>
-               </div>
-          </div>
+     {% if events.future|length > 0 %}
+          <h3>Incoming events</h3>
 
+          <div class="row">
+               {% for event in events.future %}
+                    <div class="col-sm-6 col-md-4">
+                         <div class="card">
+                              <div class="card-body text-center">
+                                   <i class="fas fa-calendar-alt fa-4x mb-3 text-primary"></i>
+                                   {% include 'event/_card-body.html.twig' %}
+                              </div>
+                         </div>
+                    </div>
+               {% endfor %}
+          </div>
+     {% endif %}
+
+     {% if events.finished|length > 0 %}
+          <h3>Past events</h3>
+
+          <div class="row">
+               {% for event in events.finished %}
+                    <div class="col-sm-6 col-md-4">
+                         <div class="card">
+                              <div class="card-body text-center">
+                                   <i class="fas fa-calendar-check fa-3x mb-3 text-muted"></i>
+                                   {% include 'event/_card-body.html.twig' %}
+                              </div>
+                         </div>
+                    </div>
+               {% endfor %}
+          </div>
      {% endif %}
 {% endblock %}
