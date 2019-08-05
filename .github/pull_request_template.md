@@ -6,7 +6,7 @@
 | Bug fix?      | yes/no <!-- don't forget to update the CHANGELOG.md files -->
 | New feature?  | yes/no <!-- don't forget to update the CHANGELOG.md files -->
 | Tests pass?   | yes    <!-- please add some, will be required by reviewers, follow the contributing.md file for more informations -->
-| Related issue | #   <!-- #-prefixed issue number(s), if any -->
+| Related issue | Fixes #   <!-- #-prefixed issue number(s), if any -->
 
 # Description
 
