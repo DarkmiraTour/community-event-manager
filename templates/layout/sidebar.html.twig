@@ -3,7 +3,7 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(event_select)$#' ? 'active' }}" href="{{ path('event_select', {'id': selectedEvent.id}) }}">
-                    <i class="feather fa fa-home"></i>
+                    <i class="fas fa-home feather"></i>
                     Dashboard
                 </a>
             </li>
@@ -16,19 +16,19 @@
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(speaker)#' ? 'active' }}" href="{{ path('speaker_index') }}">
-                <i class="feather fa fa-chalkboard-teacher"></i>
+                <i class="fas fa-chalkboard-teacher feather"></i>
                 Speakers
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(organisation)#' ? 'active' }}" href="{{ path('organisation_list') }}">
-                <i class="feather fa fa-building"></i>
+                <i class="fas fa-building feather"></i>
                 Organisations
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(interview_question_)#' ? 'active' }}" href="{{ path('interview_question_index') }}">
-                <i class="feather fa"></i>
+                <i class="fas fa-feather feather"></i>
                 Interview questions
             </a>
         </li>
@@ -41,13 +41,13 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(schedule)#' ? 'active' }}" href="{{ path('schedule_index') }}">
-                    <i class="feather fa fa-calendar-alt"></i>
+                    <i class="feather fas fa-calendar-alt"></i>
                     Schedule
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(talk)#' ? 'active' }}" href="{{ path('talk_index') }}">
-                    <i class="feather fa fa-podcast"></i>
+                    <i class="feather fas fa-podcast"></i>
                     Talks
                 </a>
             </li>
@@ -59,25 +59,25 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_level_(create|index|edit))#' ? 'active' }}" href="{{ path('sponsorship_level_index') }}">
-                    <i class="feather fa fa-award"></i>
+                    <i class="feather fas fa-award"></i>
                     Levels
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_benefit)#' ? 'active' }}" href="{{ path('sponsorship_benefit_index') }}">
-                    <i class="feather fa fa-check"></i>
+                    <i class="feather fas fa-check"></i>
                     Benefits
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(special_benefit)#' ? 'active' }}" href="{{ path('special_benefit_index') }}">
-                    <i class="feather fa"></i>
+                    <i class="feather fas"></i>
                     Special packages
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(sponsorship_level_benefit)#' ? 'active' }}" href="{{ path('sponsorship_level_benefit_view') }}">
-                    <i class="feather fa fa-tasks"></i>
+                    <i class="feather fas fa-tasks"></i>
                     Summary
                 </a>
             </li>
@@ -89,13 +89,13 @@
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link {{ app.request.attributes.get('_route') matches '#^(page)#' ? 'active' }}" href="{{ path('page_index') }}">
-                    <i class="feather fa fa-map"></i>
+                    <i class="feather fas fa-map"></i>
                     Pages
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('sponsorships_pdf') }}">
-                    <i class="feather fa fa-file-pdf"></i>
+                    <i class="feather fas fa-file-pdf"></i>
                     Generate PDF
                 </a>
             </li>

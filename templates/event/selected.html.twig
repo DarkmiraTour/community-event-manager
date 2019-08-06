@@ -23,7 +23,7 @@
                 {% for schedule in schedules %}
                     <div class="card-body">
                         <h6 class="card-title">
-                            <i class="fa fa-calendar-day"></i>
+                            <i class="fas fa-calendar-day"></i>
                             {{ schedule.day|localizeddate('full', 'none') }}
                         </h6>
                         <p class="card-text">
@@ -39,7 +39,7 @@
                 {% endfor %}
                 <div class="card-footer">
                     <a href="{{ path('schedule_index') }}" class="card-link">
-                        <i class="fa fa-calendar-alt"></i>
+                        <i class="fas fa-calendar-alt"></i>
                         Edit schedules
                     </a>
                 </div>
@@ -55,7 +55,7 @@
                 <ul class="list-group list-group-flush">
                     {% for sponsorshipLevel in sponsorshipLevels %}
                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <i class="fa fa-award"></i>
+                            <i class="fas fa-award"></i>
                             {{ sponsorshipLevel.label }}
                             <span class="badge badge-primary badge-pill">
                                 {{ sponsorshipLevel.sponsorshipLevelBenefits|length }} benefits
@@ -65,11 +65,11 @@
                 </ul>
                 <div class="card-body">
                     <a href="{{ path('sponsorship_level_index') }}" class="card-link">
-                        <i class="fa fa-award"></i>
+                        <i class="fas fa-award"></i>
                         Manage levels
                     </a>
                     <a href="{{ path('sponsorship_level_benefit_view') }}" class="card-link">
-                        <i class="fa fa-tasks"></i>
+                        <i class="fas fa-tasks"></i>
                         Display all
                     </a>
                 </div>
@@ -83,14 +83,14 @@
                 </div>
                 <div class="card-body text-center">
                     <a href="{{ path('sponsorships_pdf') }}" class="card-link">
-                        <i class="fa fa-file-pdf fa-7x"></i>
+                        <i class="fas fa-file-pdf fa-7x"></i>
                         <br>
                         Generate PDF
                     </a>
                 </div>
                 <div class="card-footer">
                     <a href="{{ path('page_index') }}" class="card-link">
-                        <i class="fa fa-map"></i>
+                        <i class="fas fa-map"></i>
                         Edit pages
                     </a>
                 </div>
