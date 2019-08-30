@@ -2,35 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Talk;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Speaker;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity()
- */
 class Talk
 {
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="guid")
-     */
+    /** @var string */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** @var string */
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    /** @var string */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Speaker::class, inversedBy="talks", cascade={"persist"})
-     */
+    /** @var Speaker */
     private $speaker;
 
     public function __construct(UuidInterface $id, string $title, string $description, Speaker $speaker)
@@ -51,7 +39,7 @@ class Talk
         return $this->title;
     }
 
-    public function setTitle($title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -63,7 +51,7 @@ class Talk
         return $this->description;
     }
 
-    public function setDescription($description): self
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
@@ -75,7 +63,7 @@ class Talk
         return $this->speaker;
     }
 
-    public function setSpeaker($speaker): self
+    public function setSpeaker(Speaker $speaker): self
     {
         $this->speaker = $speaker;
 

@@ -91,7 +91,7 @@ class Speaker
     private $github;
 
     /**
-     * @ORM\OneToMany(targetEntity=Talk::class, mappedBy="speaker")
+     * @ORM\OneToMany(targetEntity="App\Talk\Talk", mappedBy="speaker")
      */
     private $talks;
 

@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Talk;
+namespace App\Talk\Create;
 
-use App\Dto\TalkRequest;
-use App\Form\TalkType;
-use App\Repository\TalkRepositoryInterface;
-use Ramsey\Uuid\Uuid;
+use App\Action;
+use App\Talk\TalkRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Edit
+final class CreateTalkAction implements Action
 {
     private $renderer;
     private $formFactory;
     private $talkRepository;
+    private $talkFactory;
     private $router;
 
     public function __construct(
         Twig $renderer,
         FormFactoryInterface $formFactory,
         TalkRepositoryInterface $talkRepository,
+        TalkFactory $talkFactory,
         RouterInterface $router
     ) {
         $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->talkRepository = $talkRepository;
+        $this->talkFactory = $talkFactory;
         $this->router = $router;
     }
 
@@ -41,28 +41,18 @@ final class Edit
      */
     public function handle(Request $request): Response
     {
-        $id = Uuid::fromString($request->attributes->get('id'))->toString();
-
-        $talk = $this->talkRepository->find($id);
-        if (!$talk) {
-            throw new NotFoundHttpException();
-        }
-
-        $talkRequest = TalkRequest::createFromEntity($talk);
-        $form = $this->formFactory->create(TalkType::class, $talkRequest);
+        $form = $this->formFactory->create(CreateTalkFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $talk = $talkRequest->updateEntity($talk);
+            $talkRequest = $form->getData();
+            $talk = $this->talkFactory->createFromRequest($talkRequest);
             $this->talkRepository->save($talk);
 
-            return new RedirectResponse($this->router->generate('talk_show', [
-                'id' => $talk->getId(),
-            ]));
+            return new RedirectResponse($this->router->generate('talk_index'));
         }
 
-        return new Response($this->renderer->render('talks/edit.html.twig', [
-            'talk' => $talk,
+        return new Response($this->renderer->render('talks/create.html.twig', [
             'form' => $form->createView(),
         ]));
     }

@@ -1,0 +1,37 @@
+talk_index:
+  path: /
+  methods: [GET]
+  controller: App\Talk\Index\IndexAction::handle
+
+talk_create:
+  path: /create
+  methods: [GET, POST]
+  controller: App\Talk\Create\CreateTalkAction::handle
+
+talk_show:
+  path: /{id}
+  methods: [GET]
+  controller: App\Talk\Show\ShowTalkAction::handle
+  requirements:
+    id: '%routing.uuid%'
+
+talk_edit:
+  path: /{id}/edit
+  methods: [GET, POST, PUT]
+  controller: App\Talk\Edit\EditTalkAction::handle
+  requirements:
+    id: '%routing.uuid%'
+
+talk_delete:
+  path: /{id}/delete
+  methods: [DELETE]
+  controller: App\Talk\Delete\DeleteTalkAction::handle
+  requirements:
+    id: '%routing.uuid%'
+
+talk_confirm_delete:
+  path: /{id}/confirm_delete
+  controller: App\Talk\Delete\DeleteTalkConfirmationAction:handle
+  methods: [GET]
+  requirements:
+    id: '%routing.uuid%'

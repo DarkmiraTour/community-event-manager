@@ -8,7 +8,7 @@ use App\Entity\Slot;
 use App\Entity\SlotType;
 use App\Entity\Space;
 use App\ValueObject\Title;
-use App\Entity\Talk;
+use App\Talk\Talk;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class SlotRequest

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Talk;
+namespace App\Talk\Show;
 
-use App\Repository\TalkRepositoryInterface;
+use App\Action;
+use App\Talk\TalkRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment as Twig;
 
-final class Show
+final class ShowTalkAction implements Action
 {
     private $renderer;
     private $talkRepository;

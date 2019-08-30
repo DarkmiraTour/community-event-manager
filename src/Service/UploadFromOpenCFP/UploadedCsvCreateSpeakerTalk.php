@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Service\UploadFromOpenCFP;
 
 use App\Entity\Speaker;
-use App\Entity\Talk;
 use App\Repository\SpeakerRepositoryInterface;
-use App\Repository\TalkRepositoryInterface;
-use Symfony\Component\Process\Exception\LogicException;
+use App\Talk\Talk;
+use App\Talk\Create\TalkFactory;
+use App\Talk\TalkRepositoryInterface;
 use SplFileObject;
+use Symfony\Component\Process\Exception\LogicException;
 
 final class UploadedCsvCreateSpeakerTalk
 {
@@ -31,6 +32,7 @@ final class UploadedCsvCreateSpeakerTalk
     private $speakerEmailColumnNumber;
     private $speakerRepository;
     private $talkRepository;
+    private $talkFactory;
     /**
      * @var Speaker[]
      */
@@ -40,10 +42,14 @@ final class UploadedCsvCreateSpeakerTalk
      */
     private $addedTalksList = [];
 
-    public function __construct(SpeakerRepositoryInterface $speakerRepository, TalkRepositoryInterface $talkRepository)
-    {
+    public function __construct(
+        SpeakerRepositoryInterface $speakerRepository,
+        TalkRepositoryInterface $talkRepository,
+        TalkFactory $talkFactory
+    ) {
         $this->speakerRepository = $speakerRepository;
         $this->talkRepository = $talkRepository;
+        $this->talkFactory = $talkFactory;
     }
 
     public function createWithContent(SplFileObject $emailExportCsvFile, SplFileObject $talkExportCsvFile): void
@@ -225,7 +231,7 @@ final class UploadedCsvCreateSpeakerTalk
         $key = $this->findTalkKeyWithTitle($talkList, $talkTitle);
         if (null !== $key) {
             if (null !== $talkList[$key][self::TALK_DESCRIPTION]) {
-                return $this->talkRepository->createWith($talkTitle, $talkList[$key][self::TALK_DESCRIPTION], $speaker);
+                return $this->talkFactory->createWith($talkTitle, $talkList[$key][self::TALK_DESCRIPTION], $speaker);
             }
         }
 

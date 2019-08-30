@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Talk\Talk;
 use App\ValueObject\Title;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
@@ -77,7 +78,7 @@ class Slot
     }
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Talk", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="App\Talk\Talk", cascade={"persist"})
      */
     private $talk;
 

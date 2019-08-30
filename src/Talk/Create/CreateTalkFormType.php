@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Talk\Create;
 
-use App\Dto\TalkRequest;
 use App\Entity\Speaker;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -13,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class TalkType extends AbstractType
+class CreateTalkFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -41,7 +40,7 @@ final class TalkType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TalkRequest::class,
+            'data_class' => CreateTalkRequest::class,
         ]);
     }
 }

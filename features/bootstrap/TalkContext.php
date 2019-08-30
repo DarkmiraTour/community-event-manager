@@ -46,7 +46,7 @@ final class TalkContext extends RawMinkContext
             }
         }
         
-        $field = $this->fixStepArgument(sprintf('talk[%s]', $field));
+        $field = $this->fixStepArgument(sprintf('create_talk_form[%s]', $field));
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }

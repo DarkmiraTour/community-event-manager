@@ -2,43 +2,37 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Talk\Create;
 
-use App\Entity\Talk;
+use App\Entity\Speaker;
+use App\Talk\Talk;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class TalkRequest
+class CreateTalkRequest
 {
     /**
+     * @var string|null
      * @Assert\Length(max=255)
      * @Assert\NotBlank()
      */
     public $title;
 
     /**
+     * @var string|null
      * @Assert\NotBlank()
      */
     public $description;
 
+    /** @var Speaker|null */
     public $speaker;
 
-    public static function createFromEntity(Talk $talk): TalkRequest
+    public static function createFromEntity(Talk $talk): self
     {
-        $request = new self();
-
+        $request = new static();
         $request->title = $talk->getTitle();
         $request->description = $talk->getDescription();
         $request->speaker = $talk->getSpeaker();
 
         return $request;
-    }
-
-    public function updateEntity(Talk $talk): Talk
-    {
-        $talk->setTitle($this->title)
-            ->setDescription($this->description)
-            ->setSpeaker($this->speaker);
-
-        return $talk;
     }
 }

@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Talk:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Talk/Resources/config/doctrine'
+        prefix: 'App\Talk'
+        alias: App\Talk
