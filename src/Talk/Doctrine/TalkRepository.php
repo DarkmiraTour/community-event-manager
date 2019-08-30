@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Talk\Doctrine;
 
-use App\Dto\TalkRequest;
-use App\Entity\Speaker;
-use App\Entity\Talk;
+use App\Talk\Talk;
+use App\Talk\TalkRepositoryInterface;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 final class TalkRepository implements TalkRepositoryInterface
 {
     private $entityManager;
+    /** @var ObjectRepository */
     private $repository;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -42,30 +41,5 @@ final class TalkRepository implements TalkRepositoryInterface
     public function findAll(): array
     {
         return $this->repository->findAll();
-    }
-
-    public function createFromRequest(TalkRequest $talkRequest): Talk
-    {
-        return new Talk(
-            $this->nextIdentity(),
-            $talkRequest->title,
-            $talkRequest->description,
-            $talkRequest->speaker
-        );
-    }
-
-    public function createWith(string $title, string $description, Speaker $speaker): Talk
-    {
-        return new Talk(
-            $this->nextIdentity(),
-            $title,
-            $description,
-            $speaker
-        );
-    }
-
-    private function nextIdentity(): UuidInterface
-    {
-        return Uuid::uuid4();
     }
 }

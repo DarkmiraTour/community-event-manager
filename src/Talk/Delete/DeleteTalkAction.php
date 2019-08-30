@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Talk;
+namespace App\Talk\Delete;
 
-use App\Repository\TalkRepositoryInterface;
+use App\Action;
+use App\Talk\TalkRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class Delete
+final class DeleteTalkAction implements Action
 {
     private $talkRepository;
     private $csrfTokenManager;

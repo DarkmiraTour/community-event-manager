@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Talk;
+namespace App\Talk\Delete;
 
-use App\Repository\TalkRepositoryInterface;
+use App\Action;
+use App\Talk\TalkRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment as Twig;
@@ -13,9 +15,10 @@ use Twig\Environment as Twig;
 /**
  * @Security("is_granted('ROLE_ADMIN')")
  */
-final class DeleteConfirmation
+final class DeleteTalkConfirmationAction implements Action
 {
     private $repository;
+
     private $renderer;
 
     public function __construct(
@@ -26,9 +29,9 @@ final class DeleteConfirmation
         $this->renderer = $renderer;
     }
 
-    public function handle(string $id): Response
+    public function handle(Request $request): Response
     {
-        $talk = $this->repository->find($id);
+        $talk = $this->repository->find($request->get('id'));
         if (null === $talk) {
             throw new NotFoundHttpException();
         }

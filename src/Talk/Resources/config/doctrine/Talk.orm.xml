@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Talk\Talk">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="title" length="255"/>
+        <field name="description" type="text"/>
+        <many-to-one field="speaker" target-entity="App\Entity\Speaker" inversed-by="talks">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

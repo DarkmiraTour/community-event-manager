@@ -48,6 +48,13 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+
+        // Load config from each domain
+        $domainConfDir = $this->getProjectDir().'/src/**/Resources/config';
+        $loader->load($domainConfDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($domainConfDir.'/{packages}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, 'glob');
+        $loader->load($domainConfDir.'/{services}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($domainConfDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes)
@@ -57,5 +64,11 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+
+        // Load routes from each domain
+        $domainConfDir = $this->getProjectDir().'/src/**/Resources/config';
+        $routes->import($domainConfDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($domainConfDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import($domainConfDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 }

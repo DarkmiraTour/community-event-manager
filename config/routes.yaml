@@ -29,10 +29,6 @@ special_benefit:
     resource: routes/specialBenefit.yaml
     prefix: special-benefit
 
-talks:
-    resource: routes/talks.yaml
-    prefix: talks
-
 app_login:
     resource: routes/login.yaml
     prefix: login

@@ -9,7 +9,7 @@ use App\Entity\Schedule;
 use App\Entity\Slot;
 use App\Entity\Space;
 use App\ValueObject\Title;
-use App\Entity\Talk;
+use App\Talk\Talk;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

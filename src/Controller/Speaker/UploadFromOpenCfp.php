@@ -7,7 +7,7 @@ namespace App\Controller\Speaker;
 use App\Dto\SpeakerTalkCsvUploadRequest;
 use App\Form\UploadSpeakerFromCsvType;
 use App\Repository\SpeakerRepositoryInterface;
-use App\Repository\TalkRepositoryInterface;
+use App\Talk\TalkRepositoryInterface;
 use App\Service\FileUploaderInterface;
 use App\Service\UploadFromOpenCFP\UploadedCsvCreateSpeakerTalk;
 use Symfony\Component\Form\FormFactoryInterface;

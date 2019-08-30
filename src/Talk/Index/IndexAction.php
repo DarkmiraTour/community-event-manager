@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Talk;
+namespace App\Talk\Index;
 
-use App\Repository\TalkRepositoryInterface;
+use App\Action;
+use App\Talk\TalkRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
-final class Index
+final class IndexAction implements Action
 {
     private $renderer;
     private $talkRepository;
@@ -23,7 +25,7 @@ final class Index
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    public function handle(): Response
+    public function handle(Request $request): Response
     {
         $talks = $this->talkRepository->findAll();
 
