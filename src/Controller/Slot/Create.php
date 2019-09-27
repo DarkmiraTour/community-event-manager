@@ -4,71 +4,55 @@ declare(strict_types=1);
 
 namespace App\Controller\Slot;
 
-use App\Dto\SlotRequest;
 use App\Form\SlotType;
-use App\Repository\Schedule\SlotRepositoryInterface;
+use App\Repository\Schedule\Slot\SlotManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
+/**
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 final class Create
 {
     private $router;
-    private $renderer;
     private $formFactory;
-    private $repository;
-    private $flashBag;
+    private $manager;
+    private $renderer;
 
     public function __construct(
-        Twig $renderer,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        SlotRepositoryInterface $repository,
-        FlashBagInterface $flashBag
+        SlotManagerInterface $manager,
+        Twig $renderer
     ) {
-        $this->renderer = $renderer;
         $this->formFactory = $formFactory;
         $this->router = $router;
-        $this->repository = $repository;
-        $this->flashBag = $flashBag;
+        $this->manager = $manager;
+        $this->renderer = $renderer;
     }
 
-    /**
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function handle(Request $request): Response
+    public function handle(Request $request): JsonResponse
     {
-        $slotRequest = new SlotRequest();
-
-        $form = $this->formFactory->create(SlotType::class, $slotRequest);
+        $form = $this->formFactory->create(SlotType::class);
         $form->handleRequest($request);
 
-        if ($slotRequest->end <= $slotRequest->start) {
-            $this->flashBag->add('error', 'The event cannot start after it ends');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $slotRequest = $form->getData();
+            $slot = $this->manager->createFrom($slotRequest);
+            $this->manager->save($slot);
 
-            return new RedirectResponse($this->router->generate('schedule_index'));
+            return new JsonResponse(null, Response::HTTP_CREATED);
         }
 
-        $diff = $slotRequest->end->diff($slotRequest->start);
-        if ($diff->i < 10 && $diff->h == 0) {
-            $this->flashBag->add('error', 'The event should be longer than 10 minutes');
-
-            return new RedirectResponse($this->router->generate('schedule_index'));
-        }
-
-        $slot = $this->repository->createFrom($slotRequest);
-
-        try {
-            $this->repository->save($slot);
-        } catch (\LogicException $exception) {
-            $this->flashBag->add('error', $exception->getMessage());
-        }
-
-        return new RedirectResponse($this->router->generate('schedule_index'));
+        return new JsonResponse([
+            'form' => $this->renderer->render('schedule/modal/_body_add_slot.html.twig', [
+                'form' => $form->createView(),
+            ]),
+        ], Response::HTTP_BAD_REQUEST);
     }
 }

@@ -6,55 +6,51 @@ namespace App\Controller\Slot;
 
 use App\Dto\SlotRequest;
 use App\Form\SlotType;
-use App\Repository\Schedule\SlotRepositoryInterface;
-use Ramsey\Uuid\Uuid;
+use App\Repository\Schedule\Slot\SlotManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
+/**
+ * @Security("is_granted('ROLE_ADMIN')")
+ */
 final class Edit
 {
     private $renderer;
     private $router;
     private $formFactory;
-    private $slotRepository;
+    private $slotManager;
 
     public function __construct(
         Twig $renderer,
-        SlotRepositoryInterface $slotRepository,
+        SlotManagerInterface $slotManager,
         FormFactoryInterface $formFactory,
         RouterInterface $router
     ) {
         $this->renderer = $renderer;
-        $this->slotRepository = $slotRepository;
+        $this->slotManager = $slotManager;
         $this->formFactory = $formFactory;
         $this->router = $router;
     }
 
-    /**
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
     public function handle(Request $request): Response
     {
-        $id = Uuid::fromString($request->attributes->get('id'))->toString();
+        $slot = $this->slotManager->find($request->attributes->get('id'));
+        $slotRequest = SlotRequest::createFromSlot($slot);
 
-        $slot = $this->slotRepository->find($id);
-        if (!$slot) {
-            throw new NotFoundHttpException();
-        }
-
-        $slotRequest = SlotRequest::createFromEntity($slot);
-        $form = $this->formFactory->create(SlotType::class, $slotRequest);
+        $form = $this->formFactory->create(SlotType::class, $slotRequest, [
+            'method' => Request::METHOD_PUT,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $slot = $slotRequest->updateSlot($slot);
-            $this->slotRepository->save($slot);
+            $slotRequest = $form->getData();
+            $slotRequest->updateSlot($slot);
+            $this->slotManager->save($slot);
 
             return new RedirectResponse($this->router->generate('schedule_index'));
         }

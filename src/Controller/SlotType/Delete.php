@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\SlotType;
 
-use App\Repository\Schedule\SlotRepository;
+use App\Repository\Schedule\Slot\SlotRepositoryInterface;
 use App\Repository\Schedule\SlotTypeRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ final class Delete
         RouterInterface $router,
         CsrfTokenManagerInterface $csrfTokenManager,
         FlashBagInterface $flashBag,
-        SlotRepository $slotRepository
+        SlotRepositoryInterface $slotRepository
     ) {
         $this->slotTypeRepository = $slotTypeRepository;
         $this->router = $router;

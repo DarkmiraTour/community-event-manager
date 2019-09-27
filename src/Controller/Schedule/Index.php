@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller\Schedule;
 
 use App\Dto\ScheduleRequest;
-use App\Dto\SlotRequest;
 use App\Dto\SpaceRequest;
 use App\Exceptions\NoEventSelectedException;
 use App\Form\ScheduleType;
@@ -54,7 +53,7 @@ final class Index
 
         $form = $this->formFactory->create(SpaceType::class, new SpaceRequest());
 
-        $formSlot = $this->formFactory->create(SlotType::class, new SlotRequest());
+        $formSlot = $this->formFactory->create(SlotType::class);
 
         $formSchedule = $this->formFactory->create(ScheduleType::class, new ScheduleRequest());
 

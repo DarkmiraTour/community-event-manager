@@ -299,9 +299,6 @@
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
     },
-    "spipu/html2pdf": {
-        "version": "v5.2.1"
-    },
     "swiftmailer/swiftmailer": {
         "version": "v6.2.0"
     },
