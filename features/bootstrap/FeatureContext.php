@@ -146,6 +146,42 @@ final class FeatureContext extends RawMinkContext
     }
 
     /**
+     * @Then the element :elementCss should have :value in the :attribute attribute
+     */
+    public function theElementShouldHaveAttribute(string $elementCss, string $value, string $attribute): void
+    {
+        $element = $this->getSession()->getPage()->find('css', $elementCss);
+        $actualAttribute = $element->getAttribute($attribute);
+
+        if (!strpos($actualAttribute, $value)) {
+            throw new \Exception(sprintf(
+                'Expected the element "%s" has %s="%s", found %s="%s"',
+                $elementCss,
+                $attribute,
+                $value,
+                $attribute,
+                $actualAttribute
+            ));
+        }
+    }
+
+    /**
+     * @Then I should see the image :imagePath in the :elementCss element
+     */
+    public function iShouldSeeTheImage(string $imagePath, string $elementCss): void
+    {
+        $this->theElementShouldHaveAttribute($elementCss, $imagePath, 'src');
+
+        $imageSrc = $this->getSession()->getPage()->find('css', $elementCss)->getAttribute('src');
+        $this->visitPath($imageSrc);
+        $statusCode = $this->getSession()->getStatusCode();
+
+        if ($statusCode < 200 || $statusCode >= 400) {
+            throw new \Exception(sprintf('Image "%s" cannot be loaded, status code is %d.', $imageSrc, $statusCode));
+        }
+    }
+
+    /**
      * @Then /^I (check|uncheck) element on line (\d+) and column (\d+)$/
      */
     public function iCheckElementOnLineAndColumn(string $check, int $positionLine, int $positionColumn): void

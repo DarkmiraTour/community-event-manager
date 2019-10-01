@@ -17,6 +17,11 @@ default:
         - TalkContext
         - SpeakerContext
   extensions:
+    Bex\Behat\ScreenshotExtension:
+      image_drivers:
+        local:
+          screenshot_directory: ./var/behat/fail-screenshots
+          clear_screenshot_directory: true
     Behat\Symfony2Extension:
       kernel:
         bootstrap: features/bootstrap/bootstrap.php

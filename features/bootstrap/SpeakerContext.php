@@ -63,17 +63,4 @@ final class SpeakerContext extends RawMinkContext
     {
         return str_replace('\\"', '"', $argument);
     }
-
-    /**
-     * @Then /^(?:|I )should see images "(?P<text>(?:[^"]|\\")*)"$/
-     */
-    public function iShouldSeeImages(string $argument)
-    {
-        $imageElements = $this->getSession()->getPage()->findAll('css', 'img');
-        foreach($imageElements as $image){
-            $imgUrl = $image->getAttribute('src');
-            $this->visitPath($imgUrl);
-            $this->assertSession()->statusCodeNotEquals(404);
-        }
-    }
 }
