@@ -13,6 +13,7 @@ parameters:
     pdf_options:
         isHtml5ParserEnabled: true
         isRemoteEnabled: true
+    csvHeaderFormatOrganisation: ['name', 'website', 'contact', 'comment']
 
 services:
     # default configuration for services in *this* file
@@ -53,6 +54,10 @@ services:
         arguments:
             $pdfOptions: '%pdf_options%'
 
+    App\Service\Organisation\FileCsvUploader:
+        arguments:
+            $csvHeaderFormat: '%csvHeaderFormatOrganisation%'
+
     App\ValueObject\PdfFormat:
         arguments:
             $format: '%pdf_format%'
@@ -60,3 +65,8 @@ services:
     App\ValueObject\PdfOrientation:
         arguments:
             $orientation: '%pdf_orientation%'
+
+    organisation.import.listener:
+        class: App\EventListener\OrganisationImportListener
+        tags:
+            - { name: kernel.event_listener, event: 'organisation.imported', method: onOrganisationImported }

@@ -9,6 +9,7 @@
         </div>
         <div class="col-sm-6 text-center text-sm-right">
             {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('organisation_csv_upload') }}" class="btn btn-success">Import CSV file</a>
                 <a href="{{ path('organisation_create') }}" class="btn btn-primary">Add organisation</a>
             {% endif %}
         </div>
