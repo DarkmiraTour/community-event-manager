@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Organisation\Upload;
 
-use App\Entity\OrganisationCsvUpload;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,11 +20,4 @@ class OrganisationCsvUploadRequest
      * )
      */
     public $name;
-
-    public static function createFromEntity(OrganisationCsvUpload $organisationCsvUpload): OrganisationCsvUploadRequest
-    {
-        return new OrganisationCsvUploadRequest(
-            $organisationCsvUpload->getName()
-        );
-    }
 }

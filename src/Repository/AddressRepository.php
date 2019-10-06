@@ -6,6 +6,7 @@ namespace App\Repository;
 
 use App\Dto\AddressRequest;
 use App\Entity\Address;
+use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -56,6 +57,7 @@ class AddressRepository implements AddressRepositoryInterface
     }
 
     public function createWith(
+        string $name,
         string $streetAddress,
         string $streetAddressComplementary,
         string $postalCode,
@@ -64,7 +66,7 @@ class AddressRepository implements AddressRepositoryInterface
         $address = new Address();
 
         return $address
-            ->setId($this->nextIdentity()->toString())
+            ->setName($name)
             ->setStreetAddress($streetAddress)
             ->setStreetAddressComplementary($streetAddressComplementary)
             ->setPostalCode($postalCode)

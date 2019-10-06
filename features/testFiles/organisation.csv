@@ -1,0 +1,2 @@
+name,website,contact_first_name,contact_last_name,contact_email,contact_phone_number,address_name,street_address,street_address_complementary,postal_code,city,comment
+Test Behat,http://www.test.fr,Jhon,Doe,j.doe@gmail.com,620142596,eum,4851 Bridgette Lane Suite 859,Apt. 826,53041,East Aaliyahport, test
