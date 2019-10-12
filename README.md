@@ -7,7 +7,7 @@ conference with reminders, CRM and such
 
 ## Pre-requirements
 
-You will need Docker to build the application, find more informations on [the docker installation documentation](https://docs.docker.com/install/)
+You will need Docker to build the application, find more information on [the docker installation documentation](https://docs.docker.com/install/)
 
 ## Installation
 
@@ -26,19 +26,19 @@ make install
 
 ## Access
 
-Once you already `make install` the project, run it with:
+Once you are ready `make install` the project, and run it with:
 
 ``` bash
 make
 ```
 
-Then you should access to:
+Then you should be able to access:
 
 * Application : [http://127.0.0.1:8080](http://127.0.0.1:8080)
 * Minio : [http://127.0.0.1:9001](http://127.0.0.1:9001)
 * Mailhog : [http://127.0.0.1:8025](http://127.0.0.1:8025)
 
-(NOTE: If you’re using Docker Toolbox, change 127.0.0.1 by the ip of your virtual machine, ie 192.168.99.100)
+(NOTE: If you’re using Docker Toolbox, change 127.0.0.1 to the IP of your virtual machine, ie 192.168.99.100)
 
 ## Test
 
