@@ -49,9 +49,20 @@ class Address
      */
     private $city;
 
-    public function __construct()
+    public function __construct(
+        string $name,
+        string $streetAddress,
+        string $streetAddressComplementary,
+        string $postalCode,
+        string $city
+    )
     {
         $this->id = Uuid::uuid4()->toString();
+        $this->name = $name;
+        $this->streetAddress = $streetAddress;
+        $this->streetAddressComplementary = $streetAddressComplementary;
+        $this->postalCode = $postalCode;
+        $this->city = $city;
     }
 
     public function getId(): ?int
@@ -64,23 +75,9 @@ class Address
         return $this->name;
     }
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getStreetAddress(): ?string
     {
         return $this->streetAddress;
-    }
-
-    public function setStreetAddress(string $streetAddress): self
-    {
-        $this->streetAddress = $streetAddress;
-
-        return $this;
     }
 
     public function getStreetAddressComplementary(): ?string
@@ -88,34 +85,13 @@ class Address
         return $this->streetAddressComplementary;
     }
 
-    public function setStreetAddressComplementary(?string $streetAddressComplementary): self
-    {
-        $this->streetAddressComplementary = $streetAddressComplementary;
-
-        return $this;
-    }
-
     public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
 
-    public function setPostalCode(string $postalCode): self
-    {
-        $this->postalCode = $postalCode;
-
-        return $this;
-    }
-
     public function getCity(): ?string
     {
         return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
     }
 }
