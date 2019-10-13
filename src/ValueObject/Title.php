@@ -9,12 +9,13 @@ use App\Exceptions\ValueObject\Title\UnableToCreateTitleException;
 final class Title
 {
     public const MIN_LENGTH = 5;
-    public const MAX_LENGTH = 5;
+    public const MAX_LENGTH = 50;
+
     private $title;
 
     public function __construct(string $title)
     {
-        if (5 >= strlen($title) && 50 <= strlen($title)) {
+        if (self::MIN_LENGTH >= strlen($title) && self::MAX_LENGTH <= strlen($title)) {
             throw new UnableToCreateTitleException(
                 sprintf('Title length is %d and does not match the requested range from %d to %d.', strlen($title), self::MIN_LENGTH, self::MAX_LENGTH)
             );
