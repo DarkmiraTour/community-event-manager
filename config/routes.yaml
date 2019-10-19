@@ -29,10 +29,6 @@ special_benefit:
     resource: routes/specialBenefit.yaml
     prefix: special-benefit
 
-app_login:
-    resource: routes/login.yaml
-    prefix: login
-
 app_logout:
     path: /logout
 

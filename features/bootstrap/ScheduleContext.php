@@ -2,14 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Entity\User;
-use Behat\Behat\Hook\Scope\AfterStepScope;
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Testwork\Tester\Result\TestResult;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\KernelInterface;
-use WebDriver\Exception\NoAlertOpenError;
 
 final class ScheduleContext extends RawMinkContext
 {
