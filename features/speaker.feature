@@ -7,11 +7,11 @@ Feature: Speaker Selection
     Given I am logged in as an admin
     When I am on the speaker creation page
     And I fill the speaker "name" field with "Gael"
-    And I select "Mr" from "speaker[title]"
+    And I select "Mr" from "speaker_form[title]"
     And I fill the speaker "email" field with "site@test.com"
     And I fill the speaker "biography" field with "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lacus pellentesque, ullamcorper odio nec, maximus augue."
-    And I attach the file "default_speaker.svg" to "speaker[photo]"
-    And I select "0" from "speaker[isInterviewSent]"
+    And I attach the file "default_speaker.svg" to "speaker_form[photo]"
+    And I select "0" from "speaker_form[isInterviewSent]"
     And I click "Back to list" link
     Then I should not see "Gael"
 
@@ -19,11 +19,11 @@ Feature: Speaker Selection
     Given I am logged in as an admin
     When I am on the speaker creation page
     And I fill the speaker "name" field with "Yohan"
-    And I select "Mr" from "speaker[title]"
+    And I select "Mr" from "speaker_form[title]"
     And I fill the speaker "email" field with "site@test.com"
     And I fill the speaker "biography" field with "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lacus pellentesque, ullamcorper odio nec, maximus augue."
-    And I attach the file "/images/test.jpg" to "speaker[photo]"
-    And I select "0" from "speaker[isInterviewSent]"
+    And I attach the file "/images/test.jpg" to "speaker_form[photo]"
+    And I select "0" from "speaker_form[isInterviewSent]"
     And I press "Add speaker"
     Then I should be redirected on the speaker listing page
     And I should see "Yohan"
@@ -36,10 +36,10 @@ Feature: Speaker Selection
     Given I am logged in as an admin
     When I am on the speaker creation page
     And I fill the speaker "name" field with "Mathieu"
-    And I select "Mr" from "speaker[title]"
+    And I select "Mr" from "speaker_form[title]"
     And I fill the speaker "email" field with "site@test.com"
     And I fill the speaker "biography" field with "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis lacus pellentesque, ullamcorper odio nec, maximus augue."
-    And I select "0" from "speaker[isInterviewSent]"
+    And I select "0" from "speaker_form[isInterviewSent]"
     And I press "Add speaker"
     Then I should be redirected on the speaker listing page
     And I should see "Mathieu"

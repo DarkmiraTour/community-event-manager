@@ -1,0 +1,3 @@
+speakers:
+  resource: routes/speakers.yaml
+  prefix: speakers

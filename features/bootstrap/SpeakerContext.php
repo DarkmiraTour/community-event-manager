@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\DataFixtures\SpeakerFixtures;
+use App\Speaker\Doctrine\SpeakerFixtures;
 use Behat\MinkExtension\Context\RawMinkContext;
 
 final class SpeakerContext extends RawMinkContext
@@ -45,7 +45,7 @@ final class SpeakerContext extends RawMinkContext
             $value = SpeakerFixtures::DEFAULT_SPEAKER[$value];
         }
 
-        $field = $this->fixStepArgument(sprintf('speaker[%s]', $field));
+        $field = $this->fixStepArgument(sprintf('speaker_form[%s]', $field));
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }

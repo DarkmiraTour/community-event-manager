@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Speaker:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Speaker/Resources/config/doctrine'
+        prefix: 'App\Speaker'
+        alias: App\Speaker

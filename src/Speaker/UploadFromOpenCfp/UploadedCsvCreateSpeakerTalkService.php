@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Service\UploadFromOpenCFP;
+namespace App\Speaker\UploadFromOpenCfp;
 
-use App\Entity\Speaker;
-use App\Repository\SpeakerRepositoryInterface;
+use App\Speaker\Speaker;
+use App\Speaker\SpeakerRepositoryInterface;
 use App\Talk\Talk;
 use App\Talk\Create\TalkFactory;
 use App\Talk\TalkRepositoryInterface;
 use SplFileObject;
 use Symfony\Component\Process\Exception\LogicException;
 
-final class UploadedCsvCreateSpeakerTalk
+final class UploadedCsvCreateSpeakerTalkService
 {
     private const CSV_DELIMITER = ',';
     private const DEFAULT_SPEAKER_TITLE = 'Mr/Ms';

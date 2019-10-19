@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Behat\MinkExtension\Context\RawMinkContext;
-use App\DataFixtures\SpeakerFixtures;
+use App\Speaker\Doctrine\SpeakerFixtures;
 
 final class TalkContext extends RawMinkContext
 {

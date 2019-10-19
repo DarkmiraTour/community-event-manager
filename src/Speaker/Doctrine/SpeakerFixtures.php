@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace App\Speaker\Doctrine;
 
-use App\Entity\Speaker;
+use App\DataFixtures\EventFixture;
+use App\Speaker\Speaker;
 use App\Repository\Event\EventRepository;
-use App\Repository\SpeakerRepositoryInterface;
+use App\Speaker\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

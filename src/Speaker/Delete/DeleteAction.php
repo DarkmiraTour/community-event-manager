@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Speaker;
+namespace App\Speaker\Delete;
 
-use App\Repository\SpeakerRepositoryInterface;
+use App\Action;
+use App\Speaker\SpeakerRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,22 +15,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Twig\Environment as Twig;
 
-final class Delete
+final class DeleteAction implements Action
 {
-    private $renderer;
     private $speakerRepository;
     private $csrfTokenManager;
     private $router;
 
     public function __construct(
-        Twig $renderer,
         SpeakerRepositoryInterface $speakerRepository,
         CsrfTokenManagerInterface $csrfTokenManager,
         RouterInterface $router
     ) {
-        $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->router = $router;

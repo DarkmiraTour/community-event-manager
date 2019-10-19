@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Talk;
 
-use App\Entity\Speaker;
+use App\Speaker\Speaker;
 use Ramsey\Uuid\UuidInterface;
 
 class Talk
