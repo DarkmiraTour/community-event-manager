@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Entity\User;
+use App\User\User;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -51,8 +51,8 @@ final class FeatureContext extends RawMinkContext
         ]);
 
         $this->visitPath('/login');
-        $this->getSession()->getPage()->fillField('login[email]', 'admin@test.com');
-        $this->getSession()->getPage()->fillField('login[password]', 'adminpass');
+        $this->getSession()->getPage()->fillField('login_form[email]', 'admin@test.com');
+        $this->getSession()->getPage()->fillField('login_form[password]', 'adminpass');
         $this->getSession()->getPage()->pressButton('Sign in');
     }
 
@@ -67,8 +67,8 @@ final class FeatureContext extends RawMinkContext
         ]);
 
         $this->visitPath('/login');
-        $this->getSession()->getPage()->fillField('login[email]', 'user@test.com');
-        $this->getSession()->getPage()->fillField('login[password]', 'userpass');
+        $this->getSession()->getPage()->fillField('login_form[email]', 'user@test.com');
+        $this->getSession()->getPage()->fillField('login_form[password]', 'userpass');
         $this->getSession()->getPage()->pressButton('Sign in');
     }
 

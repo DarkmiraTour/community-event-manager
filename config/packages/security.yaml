@@ -2,7 +2,7 @@ security:
     providers:
         app_user_provider:
             entity:
-                class: App\Entity\User
+                class: App\User\User
                 property: email
 
     firewalls:
@@ -13,16 +13,15 @@ security:
             anonymous: ~
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - App\User\Login\LoginFormAuthenticator
             logout:
                 path:   app_logout
 
     access_control: ~
 
     encoders:
-        App\Entity\User:
+        App\User\User:
             algorithm: argon2i
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
-    

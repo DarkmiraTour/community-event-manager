@@ -1,0 +1,3 @@
+app_login:
+  resource: routes/login.yaml
+  prefix: login

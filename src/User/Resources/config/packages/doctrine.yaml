@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\User:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/User/Resources/config/doctrine'
+        prefix: 'App\User'
+        alias: App\User

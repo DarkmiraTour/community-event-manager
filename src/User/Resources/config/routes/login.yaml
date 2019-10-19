@@ -1,0 +1,9 @@
+app_login:
+    path: /
+    controller: App\User\Login\SecurityAction::handle
+    methods: [GET, POST]
+
+login_success:
+    path: /success
+    controller: App\User\Login\SignInSuccessfulAction::handle
+    methods: [GET]
