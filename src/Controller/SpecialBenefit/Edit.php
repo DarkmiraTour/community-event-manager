@@ -43,7 +43,7 @@ final class Edit
         $specialBenefitRequest = SpecialBenefitRequest::createFromEntity($specialBenefit);
 
         $form = $this->formFactory->create(SpecialBenefitType::class, $specialBenefitRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 

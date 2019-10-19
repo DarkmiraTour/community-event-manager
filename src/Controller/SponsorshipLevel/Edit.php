@@ -43,7 +43,7 @@ final class Edit
         $sponsorshipLevelRequest = SponsorshipLevelRequest::createFromEntity($sponsorshipLevel);
 
         $form = $this->formFactory->create(SponsorshipLevelType::class, $sponsorshipLevelRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 

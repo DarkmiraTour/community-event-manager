@@ -49,7 +49,7 @@ final class Edit
         $backgroundPath = $pageRequest->backgroundPath;
 
         $form = $this->formFactory->create(PageType::class, $pageRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 
