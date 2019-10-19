@@ -203,9 +203,6 @@
     "league/csv": {
         "version": "9.2.0"
     },
-    "knplabs/knp-paginator-bundle": {
-        "version": "v3.0.0"
-    },
     "league/flysystem": {
         "version": "1.0.48"
     },
