@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Speaker\Doctrine;
 
-use App\Dto\SpeakerRequest;
-use App\Entity\Speaker;
+use App\Speaker\SpeakerRepositoryInterface;
+use App\Speaker\SpeakerRequest;
+use App\Speaker\Speaker;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

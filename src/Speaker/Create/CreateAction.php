@@ -2,42 +2,49 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Speaker;
+namespace App\Speaker\Create;
 
-use App\Dto\SpeakerRequest;
-use App\Form\SpeakerType;
-use App\Repository\SpeakerRepositoryInterface;
+use App\Action;
+use App\Speaker\SpeakerRequest;
+use App\Speaker\SpeakerFormType;
+use App\Speaker\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
-use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Edit
+final class CreateAction implements Action
 {
     private $renderer;
-    private $router;
-    private $formFactory;
     private $speakerRepository;
+    private $formFactory;
+    private $router;
     private $fileUploader;
+    private $urlGenerator;
+    private $assetPackage;
 
     public function __construct(
         Twig $renderer,
         SpeakerRepositoryInterface $speakerRepository,
         FormFactoryInterface $formFactory,
         RouterInterface $router,
-        FileUploaderInterface $fileUploader
+        FileUploaderInterface $fileUploader,
+        UrlGeneratorInterface $urlGenerator,
+        Packages $assetPackage
     ) {
         $this->renderer = $renderer;
         $this->speakerRepository = $speakerRepository;
         $this->formFactory = $formFactory;
         $this->router = $router;
         $this->fileUploader = $fileUploader;
+        $this->urlGenerator = $urlGenerator;
+        $this->assetPackage = $assetPackage;
     }
 
     /**
@@ -45,32 +52,23 @@ final class Edit
      */
     public function handle(Request $request): Response
     {
-        $id = Uuid::fromString($request->attributes->get('id'))->toString();
-
-        $speaker = $this->speakerRepository->find($id);
-        if (!$speaker) {
-            throw new NotFoundHttpException();
-        }
-
-        $speakerRequest = SpeakerRequest::createFromEntity($speaker);
-        $form = $this->formFactory->create(SpeakerType::class, $speakerRequest);
+        $speakerRequest = new SpeakerRequest();
+        $form = $this->formFactory->create(SpeakerFormType::class, $speakerRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $speakerRequest->photoPath = $this->urlGenerator->generate('index', [], UrlGeneratorInterface::ABSOLUTE_URL).$this->assetPackage->getUrl(DIRECTORY_SEPARATOR.'images/default_speaker.svg');
             if (!empty($speakerRequest->photo)) {
                 $speakerRequest->photoPath = $this->fileUploader->upload($speakerRequest->photo);
             }
 
-            $speaker = $speakerRequest->updateEntity($speaker);
+            $speaker = $this->speakerRepository->createFromRequest($speakerRequest);
             $this->speakerRepository->save($speaker);
 
-            return new RedirectResponse($this->router->generate('speaker_show', [
-                'id' => $speaker->getId(),
-            ]));
+            return new RedirectResponse($this->router->generate('speaker_index'));
         }
 
-        return new Response($this->renderer->render('speaker/edit.html.twig', [
-            'speaker' => $speaker,
+        return new Response($this->renderer->render('speaker/create.html.twig', [
             'form' => $form->createView(),
         ]));
     }

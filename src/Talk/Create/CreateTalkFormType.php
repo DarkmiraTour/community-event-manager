@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Talk\Create;
 
-use App\Entity\Speaker;
+use App\Speaker\Speaker;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

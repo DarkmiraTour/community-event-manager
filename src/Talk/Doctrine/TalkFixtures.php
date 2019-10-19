@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Talk\Doctrine;
 
-use App\DataFixtures\SpeakerFixtures;
-use App\Repository\SpeakerRepositoryInterface;
+use App\Speaker\Doctrine\SpeakerFixtures;
+use App\Speaker\SpeakerRepositoryInterface;
 use App\Talk\Create\TalkFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

@@ -10,7 +10,7 @@
         </id>
         <field name="title" length="255"/>
         <field name="description" type="text"/>
-        <many-to-one field="speaker" target-entity="App\Entity\Speaker" inversed-by="talks">
+        <many-to-one field="speaker" target-entity="App\Speaker\Speaker" inversed-by="talks">
             <cascade>
                 <cascade-persist/>
             </cascade>

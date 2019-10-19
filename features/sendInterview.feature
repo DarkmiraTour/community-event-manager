@@ -7,7 +7,7 @@ Feature: Send an Interview
     Given I am logged in as an admin
     And I am on "/speakers"
     When I click "Edit" on the row containing "Behat"
-    And I select "0" from "speaker[isInterviewSent]"
+    And I select "0" from "speaker_form[isInterviewSent]"
     And I press "Save speaker"
     Then I should see "Speaker"
     And I should see "Behat"

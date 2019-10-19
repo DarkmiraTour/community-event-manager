@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Service\Interview;
+namespace App\Speaker\Interview;
 
-use App\Dto\InterviewRequest;
-use App\Entity\Speaker;
+use App\Speaker\Speaker;
 use Twig\Environment as Twig;
 
 final class InterviewService

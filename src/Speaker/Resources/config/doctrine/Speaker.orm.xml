@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Speaker\Speaker">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="name" length="255"/>
+        <field name="title" length="5"/>
+        <field name="email" length="255"/>
+        <field name="biography" type="text"/>
+        <field name="photo" length="255"/>
+        <field name="twitter" length="255" nullable="true"/>
+        <field name="facebook" length="255" nullable="true"/>
+        <field name="linkedin" length="255" nullable="true"/>
+        <field name="github" length="255" nullable="true"/>
+        <one-to-many field="talks" target-entity="App\Talk\Talk" mapped-by="speaker"/>
+        <many-to-many field="events" target-entity="App\Entity\Event">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </many-to-many>
+        <field name="interviewSent" type="boolean"/>
+    </entity>
+</doctrine-mapping>

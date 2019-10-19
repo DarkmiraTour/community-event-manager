@@ -27,22 +27,22 @@
     {{ form_end(form) }}
 
     <script>
-        document.querySelector("input[id=upload_speaker_from_csv_emailExportCsvFile]").addEventListener('change', function (element) {
+        document.querySelector("input[id=upload_speaker_from_csv_form_emailExportCsvFile]").addEventListener('change', function (element) {
             let target = element.target;
 
             const value = target.value.replace("C:\\fakepath\\", "");
             if (value !== undefined || value !== '') {
-                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_emailExportCsvFile"]').dataset.content = value;
-                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_emailExportCsvFile"]').textContent = value;
+                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_form_emailExportCsvFile"]').dataset.content = value;
+                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_form_emailExportCsvFile"]').textContent = value;
             }
         });
 
-        document.querySelector("input[id=upload_speaker_from_csv_talkExportCsvFile]").addEventListener('change', function (element) {
+        document.querySelector("input[id=upload_speaker_from_csv_form_talkExportCsvFile]").addEventListener('change', function (element) {
             let target = element.target;
             const value = target.value.replace("C:\\fakepath\\", "");
             if (value !== undefined || value !== '') {
-                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_talkExportCsvFile"]').dataset.content = value;
-                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_talkExportCsvFile"]').textContent = value;
+                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_form_talkExportCsvFile"]').dataset.content = value;
+                document.querySelector('label.custom-file-label[for="upload_speaker_from_csv_form_talkExportCsvFile"]').textContent = value;
             }
         });
     </script>

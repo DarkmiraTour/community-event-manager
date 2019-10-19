@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Speaker;
+namespace App\Speaker\Interview;
 
-use App\Dto\InterviewRequest;
-use App\Form\InterviewType;
-use App\Repository\SpeakerRepositoryInterface;
-use App\Service\Interview\InterviewService;
+use App\Action;
+use App\Speaker\SpeakerRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class SendInterview
+final class SendInterviewAction implements Action
 {
     private const SEND_MAIL_SUCCESSFUL = 1;
     private $renderer;
@@ -50,7 +48,7 @@ final class SendInterview
 
         $interviewRequest = new InterviewRequest();
 
-        $form = $this->formFactory->create(InterviewType::class, $interviewRequest);
+        $form = $this->formFactory->create(InterviewFormType::class, $interviewRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

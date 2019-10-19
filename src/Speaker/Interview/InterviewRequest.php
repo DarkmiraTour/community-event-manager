@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Speaker\Interview;
 
 use Symfony\Component\Validator\Constraints as Assert;
 

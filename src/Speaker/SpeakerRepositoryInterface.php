@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Speaker;
 
-use App\Dto\SpeakerRequest;
-use App\Entity\Speaker;
 use Ramsey\Uuid\UuidInterface;
 
 interface SpeakerRepositoryInterface

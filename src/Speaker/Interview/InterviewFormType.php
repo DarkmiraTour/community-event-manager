@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Speaker\Interview;
 
-use App\Dto\InterviewRequest;
 use App\Entity\InterviewQuestion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -12,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class InterviewType extends AbstractType
+final class InterviewFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

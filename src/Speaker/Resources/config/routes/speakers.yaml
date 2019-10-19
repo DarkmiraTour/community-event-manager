@@ -1,37 +1,37 @@
 speaker_index:
     path: /
     methods: [GET]
-    controller: App\Controller\Speaker\Index::handle
+    controller: App\Speaker\Index\IndexAction::handle
 
 speaker_create:
     path: /create
     methods: [GET, POST]
-    controller: App\Controller\Speaker\Create::handle
+    controller: App\Speaker\Create\CreateAction::handle
 
 speaker_show:
     path: /{id}
     methods: [GET]
-    controller: App\Controller\Speaker\Show::handle
+    controller: App\Speaker\Show\ShowAction::handle
     requirements:
         id: '%routing.uuid%'
 
 speaker_edit:
     path: /{id}/edit
     methods: [GET, POST, PUT]
-    controller: App\Controller\Speaker\Edit::handle
+    controller: App\Speaker\Edit\EditAction::handle
     requirements:
         id: '%routing.uuid%'
 
 speaker_delete:
     path: /{id}/delete
     methods: [DELETE]
-    controller: App\Controller\Speaker\Delete::handle
+    controller: App\Speaker\Delete\DeleteAction::handle
     requirements:
         id: '%routing.uuid%'
 
 speaker_confirm_delete:
     path: /{id}/confirm_delete
-    controller: App\Controller\Speaker\DeleteConfirmation:handle
+    controller: App\Speaker\Delete\DeleteConfirmationAction:handle
     methods: [GET]
     requirements:
         id: '%routing.uuid%'
@@ -39,11 +39,11 @@ speaker_confirm_delete:
 speaker_upload_from_openCFP:
     path: /uploadFromOpenCFP
     methods: [GET, POST]
-    controller: App\Controller\Speaker\UploadFromOpenCfp::handle
+    controller: App\Speaker\UploadFromOpenCfp\UploadFromOpenCfpAction::handle
 
 speaker_send_interview:
     path: /{id}/send_interview
     methods: [GET, POST]
-    controller: App\Controller\Speaker\SendInterview::handle
+    controller: App\Speaker\Interview\SendInterviewAction::handle
     requirements:
         id: '%routing.uuid%'

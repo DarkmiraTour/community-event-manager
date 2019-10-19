@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Speaker;
 
-use App\Entity\Speaker;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 

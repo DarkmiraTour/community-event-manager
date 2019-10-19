@@ -2,18 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Speaker;
 
+use App\Entity\Event;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity()
- */
 class Speaker
 {
+    private $id;
+    private $name;
+    private $title;
+    private $email;
+    private $biography;
+    private $photo;
+    private $twitter;
+    private $facebook;
+    private $linkedin;
+    private $github;
+    private $talks;
+    private $events;
+    private $interviewSent = false;
+
     public function __construct(
         UuidInterface $id,
         string $name,
@@ -38,72 +49,6 @@ class Speaker
         $this->github = $github;
         $this->events = new ArrayCollection();
     }
-
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="guid")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private $title;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $biography;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $photo;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $twitter;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $facebook;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $linkedin;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $github;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Talk\Talk", mappedBy="speaker")
-     */
-    private $talks;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", cascade={"persist", "remove"}))
-     */
-    private $events;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $interviewSent = false;
 
     public function getId(): ?string
     {
