@@ -197,9 +197,6 @@
     "knplabs/knp-gaufrette-bundle": {
         "version": "v0.5.3"
     },
-    "knplabs/knp-paginator-bundle": {
-        "version": "v3.0.0"
-    },
     "league/csv": {
         "version": "9.2.0"
     },
