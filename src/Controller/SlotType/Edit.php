@@ -39,7 +39,7 @@ final class Edit
         $slotTypeRequest = SlotTypeRequest::createFromEntity($slotType);
 
         $form = $this->formFactory->create(SlotTypeType::class, $slotTypeRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 

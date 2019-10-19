@@ -48,7 +48,7 @@ final class Edit
 
         $organisationRequest = OrganisationRequest::createFrom($organisation);
         $form = $this->formFactory->create(OrganisationType::class, $organisationRequest, [
-            'method' => 'PUT',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 

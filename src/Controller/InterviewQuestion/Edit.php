@@ -43,7 +43,7 @@ final class Edit
         $interviewQuestionRequest = InterviewQuestionRequest::createFromInterviewQuestion($interviewQuestion);
 
         $form = $this->formFactory->create(InterviewQuestionType::class, $interviewQuestionRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 

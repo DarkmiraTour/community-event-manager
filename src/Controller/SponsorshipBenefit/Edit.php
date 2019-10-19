@@ -43,7 +43,7 @@ final class Edit
         $sponsorshipBenefitRequest = SponsorshipBenefitRequest::createFromEntity($sponsorshipBenefit);
 
         $form = $this->formFactory->create(SponsorshipBenefitType::class, $sponsorshipBenefitRequest, [
-            'method' => 'put',
+            'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);
 
