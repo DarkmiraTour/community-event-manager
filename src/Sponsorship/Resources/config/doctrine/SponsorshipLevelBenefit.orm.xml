@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Sponsorship\SponsorshipLevelBenefit" repository-class="App\Sponsorship\Doctrine\SponsorshipLevelBenefitRepository">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <many-to-one field="sponsorshipLevel" target-entity="App\Sponsorship\SponsorshipLevel" inversed-by="sponsorshipLevelBenefits">
+            <join-column nullable="false"/>
+        </many-to-one>
+        <many-to-one field="sponsorshipBenefit" target-entity="App\Sponsorship\SponsorshipBenefit" inversed-by="sponsorshipLevelBenefits">
+            <join-column nullable="false"/>
+        </many-to-one>
+        <field name="content" length="255" nullable="true"/>
+    </entity>
+</doctrine-mapping>

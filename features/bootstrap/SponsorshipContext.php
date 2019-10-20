@@ -107,7 +107,7 @@ final class SponsorshipContext extends RawMinkContext
      */
     public function iFillTheSponsorshipBenefitFieldWith(string $field, string $value): void
     {
-        $field = $this->fixStepArgument('sponsorship_benefit['.$field.']');
+        $field = $this->fixStepArgument('sponsorship_benefit_form['.$field.']');
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }
@@ -117,7 +117,7 @@ final class SponsorshipContext extends RawMinkContext
      */
     public function iFillTheSponsorshipLevelFieldWith(string $field, string $value): void
     {
-        $field = $this->fixStepArgument('sponsorship_level['.$field.']');
+        $field = $this->fixStepArgument('sponsorship_level_form['.$field.']');
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }
@@ -127,7 +127,7 @@ final class SponsorshipContext extends RawMinkContext
      */
     public function iFillTheSpecialbenefitFieldWith(string $field, string $value): void
     {
-        $field = $this->fixStepArgument('special_benefit['.$field.']');
+        $field = $this->fixStepArgument('special_benefit_form['.$field.']');
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }
