@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Page;
-
-use App\Entity\Page;
-use App\Dto\PageRequest;
+namespace App\Page;
 
 interface PageManagerInterface
 {

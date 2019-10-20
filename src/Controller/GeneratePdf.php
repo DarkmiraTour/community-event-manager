@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use App\Repository\Page\PageManagerInterface;
+use App\Page\PageManagerInterface;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;

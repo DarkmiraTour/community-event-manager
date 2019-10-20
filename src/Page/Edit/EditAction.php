@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Page;
+namespace App\Page\Edit;
 
-use App\Dto\PageRequest;
-use App\Form\PageType;
-use App\Repository\Page\PageManagerInterface;
+use App\Action;
+use App\Page\PageRequest;
+use App\Page\PageFormType;
+use App\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Edit
+final class EditAction implements Action
 {
     private $renderer;
     private $pageManager;
@@ -48,7 +49,7 @@ final class Edit
         $pageRequest = PageRequest::createFromEntity($page);
         $backgroundPath = $pageRequest->backgroundPath;
 
-        $form = $this->formFactory->create(PageType::class, $pageRequest, [
+        $form = $this->formFactory->create(PageFormType::class, $pageRequest, [
             'method' => Request::METHOD_PUT,
         ]);
         $form->handleRequest($request);

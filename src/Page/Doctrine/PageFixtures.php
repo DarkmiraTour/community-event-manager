@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace App\Page\Doctrine;
 
-use App\Repository\Page\PageManagerInterface;
+use App\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;

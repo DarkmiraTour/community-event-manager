@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Page;
+namespace App\Page;
 
-use App\Entity\Page;
-use App\Dto\PageRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class PageManager implements PageManagerInterface

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Page;
 
-use App\Dto\PageRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -13,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class PageType extends AbstractType implements DataMapperInterface
+final class PageFormType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
