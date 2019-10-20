@@ -1,0 +1,3 @@
+organisation:
+  resource: routes/organisations.yaml
+  prefix: organisations
