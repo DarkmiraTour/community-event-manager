@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Page\PageManagerInterface;
-use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
-use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
-use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
 use App\Service\Event\EventServiceInterface;
-use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
+use App\Sponsorship\SpecialBenefit\SpecialBenefitManagerInterface;
+use App\Sponsorship\SponsorshipLevel\SponsorshipLevelManagerInterface;
+use App\Sponsorship\SponsorshipLevelBenefit\FormatSponsorshipLevelBenefit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
@@ -19,7 +18,6 @@ final class GeneratePdf
 {
     private $renderer;
     private $pdfCreator;
-    private $sponsorshipLevelBenefitManager;
     private $formatSponsorshipLevelBenefit;
     private $sponsorshipLevelManager;
     private $pageManager;
@@ -29,7 +27,6 @@ final class GeneratePdf
     public function __construct(
         Twig $renderer,
         PdfCreatorInterface $pdfCreator,
-        SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager,
         FormatSponsorshipLevelBenefit $formatSponsorshipLevelBenefit,
         SponsorshipLevelManagerInterface $sponsorshipLevelManager,
         PageManagerInterface $pageManager,
@@ -38,7 +35,6 @@ final class GeneratePdf
     ) {
         $this->renderer = $renderer;
         $this->pdfCreator = $pdfCreator;
-        $this->sponsorshipLevelBenefitManager = $sponsorshipLevelBenefitManager;
         $this->formatSponsorshipLevelBenefit = $formatSponsorshipLevelBenefit;
         $this->sponsorshipLevelManager = $sponsorshipLevelManager;
         $this->pageManager = $pageManager;

@@ -15,10 +15,7 @@ final class DateRangeInFuture
     public function __construct(\DateTimeInterface $startAt, \DateTimeInterface $endAt)
     {
         if ($startAt > $endAt) {
-            throw new InvalidDateRangeException(sprintf('start At %s cannot be higher than end At %s',
-                $startAt->format('Y-m-d'),
-                $endAt->format('Y-m-d')
-            ));
+            throw new InvalidDateRangeException(sprintf('start At %s cannot be higher than end At %s', $startAt->format('Y-m-d'), $endAt->format('Y-m-d')));
         }
 
         if ($startAt < (new \DateTime())) {

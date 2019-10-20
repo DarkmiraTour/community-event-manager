@@ -16,9 +16,7 @@ final class Title
     public function __construct(string $title)
     {
         if (self::MIN_LENGTH >= strlen($title) && self::MAX_LENGTH <= strlen($title)) {
-            throw new UnableToCreateTitleException(
-                sprintf('Title length is %d and does not match the requested range from %d to %d.', strlen($title), self::MIN_LENGTH, self::MAX_LENGTH)
-            );
+            throw new UnableToCreateTitleException(sprintf('Title length is %d and does not match the requested range from %d to %d.', strlen($title), self::MIN_LENGTH, self::MAX_LENGTH));
         }
         $this->title = $title;
     }

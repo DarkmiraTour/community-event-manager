@@ -15,11 +15,8 @@ interface InterviewQuestionRepositoryInterface
     public function remove(InterviewQuestion $interviewQuestion): void;
 
     /**
-     * @param mixed    $id
      * @param int|null $lockMode
      * @param int|null $lockVersion
-     *
-     * @return InterviewQuestion|null
      */
     public function find($id, $lockMode = null, $lockVersion = null): ?InterviewQuestion;
 

@@ -48,8 +48,6 @@ final class InterviewQuestionRepository extends ServiceEntityRepository implemen
     }
 
     /**
-     * @return UuidInterface
-     *
      * @throws \InvalidArgumentException
      * @throws \Exception
      */

@@ -20,7 +20,6 @@ final class ScheduleRepositoryManager
      * Counts slot types for a list of schedules,
      * and returns an array indexed by scheludes ids.
      *
-     * @param Event      $event
      * @param Schedule[] $schedules
      *
      * @return int[][] Array like:
@@ -46,8 +45,6 @@ final class ScheduleRepositoryManager
 
     /**
      * Counts slot types for a schedule day.
-     *
-     * @param Schedule $schedule
      *
      * @return int[] Array like: ['Talk' => 3, 'Workshop' => 2]
      */

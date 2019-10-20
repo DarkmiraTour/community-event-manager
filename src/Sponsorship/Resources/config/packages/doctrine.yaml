@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Sponsorship:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Sponsorship/Resources/config/doctrine'
+        prefix: 'App\Sponsorship'
+        alias: App\Sponsorship
