@@ -51,8 +51,6 @@ final class PageRepository extends ServiceEntityRepository implements PageReposi
     }
 
     /**
-     * @return UuidInterface
-     *
      * @throws \InvalidArgumentException
      * @throws \Exception
      */

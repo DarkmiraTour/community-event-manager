@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Sponsorship\SponsorshipBenefit" repository-class="App\Sponsorship\Doctrine\SponsorshipBenefitRepository">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="label" length="255"/>
+        <one-to-many field="sponsorshipLevelBenefits" target-entity="App\Sponsorship\SponsorshipLevelBenefit" mapped-by="sponsorshipBenefit">
+            <orphan-removal/>
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </one-to-many>
+        <field name="position" type="integer" nullable="true"/>
+    </entity>
+</doctrine-mapping>

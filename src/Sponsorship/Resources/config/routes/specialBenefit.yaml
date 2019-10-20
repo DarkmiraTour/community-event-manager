@@ -1,0 +1,37 @@
+special_benefit_index:
+    path: /
+    methods: [GET]
+    controller: App\Sponsorship\SpecialBenefit\Index\IndexAction::handle
+
+special_benefit_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Sponsorship\SpecialBenefit\Create\CreateAction::handle
+
+special_benefit_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Sponsorship\SpecialBenefit\Edit\EditAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+special_benefit_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Sponsorship\SpecialBenefit\Delete\DeleteAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+special_benefit_show:
+    path: /{id}
+    controller: App\Sponsorship\SpecialBenefit\Show\ShowAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
+
+special_benefit_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Sponsorship\SpecialBenefit\Delete\DeleteConfirmationAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'

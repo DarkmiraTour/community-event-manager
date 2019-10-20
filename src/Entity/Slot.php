@@ -90,9 +90,6 @@ class Slot
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     */
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -106,9 +103,6 @@ class Slot
         return $this->title;
     }
 
-    /**
-     * @param Title $title
-     */
     public function setTitle(Title $title): void
     {
         $this->title = $title->__toString();
@@ -122,9 +116,6 @@ class Slot
         return $this->duration;
     }
 
-    /**
-     * @param int $duration
-     */
     public function setDuration(int $duration): void
     {
         $this->duration = $duration;
@@ -138,9 +129,6 @@ class Slot
         return $this->start;
     }
 
-    /**
-     * @param \DateTimeInterface $start
-     */
     public function setStart(\DateTimeInterface $start): void
     {
         $this->start = $start;
@@ -154,25 +142,16 @@ class Slot
         return $this->end;
     }
 
-    /**
-     * @param \DateTimeInterface $end
-     */
     public function setEnd(\DateTimeInterface $end): void
     {
         $this->end = $end;
     }
 
-    /**
-     * @return SlotType
-     */
     public function getType(): SlotType
     {
         return $this->type;
     }
 
-    /**
-     * @param SlotType $type
-     */
     public function setType(SlotType $type): void
     {
         $this->type = $type;
@@ -186,9 +165,6 @@ class Slot
         return $this->space;
     }
 
-    /**
-     * @param Space $space
-     */
     public function setSpace(Space $space): void
     {
         $this->space = $space;

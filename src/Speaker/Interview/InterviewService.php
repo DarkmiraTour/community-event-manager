@@ -30,9 +30,6 @@ final class InterviewService
         return $questionList;
     }
 
-    /**
-     * @return \Swift_Mailer
-     */
     public function getMailer(): \Swift_Mailer
     {
         return $this->mailer;

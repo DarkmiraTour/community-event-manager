@@ -114,8 +114,6 @@ final class UploadedCsvCreateSpeakerTalkService
 
     /**
      * This function will set parameters to the column number if found or at false if the column is not found.
-     *
-     * @param array $columnHeader
      */
     private function associateEmailExportColumns(array $columnHeader): void
     {
@@ -127,8 +125,6 @@ final class UploadedCsvCreateSpeakerTalkService
 
     /**
      * This function will set parameters to the column number if found or at false if the column is not found.
-     *
-     * @param array $columnHeader
      */
     private function associateTalkExportColumns(array $columnHeader): void
     {
