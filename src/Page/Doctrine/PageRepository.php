@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Page;
+namespace App\Page\Doctrine;
 
-use App\Entity\Page;
+use App\Page\Page;
+use App\Page\PageRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

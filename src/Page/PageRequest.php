@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Page;
 
-use App\Entity\Page;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 

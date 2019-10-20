@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Page;
+namespace App\Page\Create;
 
-use App\Form\PageType;
-use App\Repository\Page\PageManagerInterface;
+use App\Action;
+use App\Page\PageFormType;
+use App\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Create
+final class CreateAction implements Action
 {
     private $renderer;
     private $pageManager;
@@ -42,7 +43,7 @@ final class Create
      */
     public function handle(Request $request): Response
     {
-        $form = $this->formFactory->create(PageType::class, null, [
+        $form = $this->formFactory->create(PageFormType::class, null, [
             'validation_groups' => ['addFile'],
         ]);
         $form->handleRequest($request);

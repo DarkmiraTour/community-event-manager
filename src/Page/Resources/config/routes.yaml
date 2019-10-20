@@ -1,0 +1,3 @@
+page:
+  resource: routes/page.yaml
+  prefix: page

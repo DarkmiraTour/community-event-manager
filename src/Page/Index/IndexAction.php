@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Page;
+namespace App\Page\Index;
 
-use App\Repository\Page\PageManagerInterface;
+use App\Action;
+use App\Page\PageManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
-final class Index
+final class IndexAction implements Action
 {
     private $renderer;
     private $pageManager;
@@ -25,7 +27,7 @@ final class Index
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    public function handle(): Response
+    public function handle(Request $request): Response
     {
         return new Response($this->renderer->render('page/index.html.twig', [
             'pages' => $this->pageManager->findAll(),

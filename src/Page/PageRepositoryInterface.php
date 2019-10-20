@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Page;
-
-use App\Entity\Page;
+namespace App\Page;
 
 interface PageRepositoryInterface
 {

@@ -36,10 +36,6 @@ schedule:
     resource: routes/schedule.yaml
     prefix: schedule
 
-page:
-    resource: routes/page.yaml
-    prefix: page
-
 sponsorships_pdf:
     path: /sponsorships/pdf
     methods: [GET]

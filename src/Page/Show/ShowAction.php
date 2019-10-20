@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Page;
+namespace App\Page\Show;
 
-use App\Repository\Page\PageManagerInterface;
+use App\Action;
+use App\Page\PageManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
-final class Show
+final class ShowAction implements Action
 {
     private $renderer;
     private $pageManager;

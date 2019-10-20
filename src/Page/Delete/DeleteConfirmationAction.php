@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Page;
+namespace App\Page\Delete;
 
-use App\Repository\Page\PageRepositoryInterface;
+use App\Action;
+use App\Page\PageRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment as Twig;
@@ -13,7 +15,7 @@ use Twig\Environment as Twig;
 /**
  * @Security("is_granted('ROLE_ADMIN')")
  */
-final class DeleteConfirmation
+final class DeleteConfirmationAction implements Action
 {
     private $repository;
     private $renderer;
@@ -26,9 +28,9 @@ final class DeleteConfirmation
         $this->renderer = $renderer;
     }
 
-    public function handle(string $id): Response
+    public function handle(Request $request): Response
     {
-        $page = $this->repository->find($id);
+        $page = $this->repository->find($request->attributes->get('id'));
         if (null === $page) {
             throw new NotFoundHttpException();
         }
