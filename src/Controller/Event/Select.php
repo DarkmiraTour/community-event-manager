@@ -7,7 +7,7 @@ namespace App\Controller\Event;
 use App\Repository\Event\EventRepository;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
 use App\Repository\Schedule\ScheduleRepositoryManager;
-use App\Repository\SponsorshipLevel\SponsorshipLevelRepositoryInterface;
+use App\Sponsorship\SponsorshipLevel\SponsorshipLevelRepositoryInterface;
 use App\Service\Event\EventService;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\Request;

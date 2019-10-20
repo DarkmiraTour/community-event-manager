@@ -1,0 +1,30 @@
+sponsorship_level_index:
+    path: /
+    methods: [GET]
+    controller: App\Sponsorship\SponsorshipLevel\Index\IndexAction::handle
+
+sponsorship_level_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Sponsorship\SponsorshipLevel\Create\CreateAction::handle
+
+sponsorship_level_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Sponsorship\SponsorshipLevel\Edit\EditAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+sponsorship_level_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Sponsorship\SponsorshipLevel\Delete\DeleteAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+sponsorship_level_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Sponsorship\SponsorshipLevel\Delete\DeleteConfirmationAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
