@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\Page\PageManagerInterface;
-use App\Sponsorship\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Service\Event\EventServiceInterface;
 use App\Service\PdfCreatorInterface;
+use App\Sponsorship\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Sponsorship\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Sponsorship\SponsorshipLevelBenefit\FormatSponsorshipLevelBenefit;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -60,13 +60,9 @@ final class GeneratePdf
         $dateAtom = (new \DateTime())->format(\DateTime::ATOM);
         $eventName = $this->eventService->getSelectedEventName();
 
-        return new Response(
-            $pdf,
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => sprintf('inline; filename="%s-%s.pdf"', $eventName, $dateAtom),
-            ]
-        );
+        return new Response($pdf, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => sprintf('inline; filename="%s-%s.pdf"', $eventName, $dateAtom),
+        ]);
     }
 }

@@ -1,0 +1,42 @@
+organisation_list:
+    path: /
+    controller: App\Organisation\Index\IndexAction::handle
+    methods: [GET]
+
+organisation_create:
+    path: /create
+    controller: App\Organisation\Create\CreateAction::handle
+    methods: [GET, POST]
+
+organisation_show:
+    path: /{id}
+    controller: App\Organisation\Show\ShowAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
+
+organisation_edit:
+    path: /{id}/edit
+    controller: App\Organisation\Edit\EditAction::handle
+    methods: [GET, PUT]
+    requirements:
+        id: '%routing.uuid%'
+
+organisation_delete:
+    path: /{id}/delete
+    controller: App\Organisation\Delete\DeleteAction::handle
+    methods: [DELETE]
+    requirements:
+        id: '%routing.uuid%'
+
+organization_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Organisation\Delete\DeleteConfirmationAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
+
+organisation_csv_upload:
+    path: /upload
+    controller: App\Organisation\Upload\UploadAction::handle
+    methods: [GET, POST]

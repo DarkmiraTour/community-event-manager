@@ -7,13 +7,11 @@ parameters:
     locale: 'en'
     currency: 'USD'
     routing.uuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
-    max.list.organisation.entries: 10
     pdf_orientation: 'landscape'
     pdf_format: 'A4'
     pdf_options:
         isHtml5ParserEnabled: true
         isRemoteEnabled: true
-    csvHeaderFormatOrganisation: ['name', 'website', 'contact', 'comment']
 
 services:
     # default configuration for services in *this* file
@@ -39,10 +37,6 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Config\Organisation:
-        arguments:
-            $maxListOrganisationEntries: '%max.list.organisation.entries%'
-    
     App\Service\FileUploader:
         arguments:
             $filesystem: '@gaufrette.photos_filesystem'
@@ -51,10 +45,6 @@ services:
         arguments:
             $pdfOptions: '%pdf_options%'
 
-    App\Service\Organisation\FileCsvUploader:
-        arguments:
-            $csvHeaderFormat: '%csvHeaderFormatOrganisation%'
-
     App\ValueObject\PdfFormat:
         arguments:
             $format: '%pdf_format%'
@@ -62,8 +52,3 @@ services:
     App\ValueObject\PdfOrientation:
         arguments:
             $orientation: '%pdf_orientation%'
-
-    organisation.import.listener:
-        class: App\EventListener\OrganisationImportListener
-        tags:
-            - { name: kernel.event_listener, event: 'organisation.imported', method: onOrganisationImported }

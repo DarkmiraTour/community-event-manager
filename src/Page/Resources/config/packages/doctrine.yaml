@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Page:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Page/Resources/config/doctrine'
+        prefix: 'App\Page'
+        alias: App\Page

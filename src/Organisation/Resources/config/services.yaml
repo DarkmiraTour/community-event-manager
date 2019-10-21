@@ -1,0 +1,28 @@
+parameters:
+  csvHeaderFormatOrganisation: ['name', 'website', 'contact', 'comment']
+  max.list.organisation.entries: 10
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  _instanceof:
+    App\Action:
+      tags: [controller.service_arguments]
+
+  App\Organisation\:
+    resource: '../../'
+
+  App\Organisation\Config\Organisation:
+    arguments:
+      $maxListOrganisationEntries: '%max.list.organisation.entries%'
+
+  App\Organisation\Upload\FileCsvUploader:
+    arguments:
+      $csvHeaderFormat: '%csvHeaderFormatOrganisation%'
+
+  App\Organisation\Upload\OrganisationImportListener:
+    tags:
+      - { name: kernel.event_listener, event: 'organisation.imported', method: onOrganisationImported }

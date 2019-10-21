@@ -1,0 +1,37 @@
+page_index:
+    path: /
+    methods: [GET]
+    controller: App\Page\Index\IndexAction::handle
+
+page_create:
+    path: /create
+    methods: [GET, POST]
+    controller: App\Page\Create\CreateAction::handle
+
+page_edit:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    controller: App\Page\Edit\EditAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+page_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Page\Delete\DeleteAction::handle
+    requirements:
+        id: '%routing.uuid%'
+
+page_show:
+    path: /{id}
+    controller: App\Page\Show\ShowAction::handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'
+
+page_confirm_delete:
+    path: /{id}/confirm_delete
+    controller: App\Page\Delete\DeleteConfirmationAction:handle
+    methods: [GET]
+    requirements:
+        id: '%routing.uuid%'

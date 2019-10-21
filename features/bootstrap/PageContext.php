@@ -50,8 +50,8 @@ final class PageContext extends RawMinkContext
         }
 
         $file = new File(dirname(__DIR__).'/testFiles/'.$testFile);
-        $field = $this->fixStepArgument('page[background]');
-        $this->getSession()->getPage()->fillField('page[background]', $file);
+        $field = $this->fixStepArgument('page_form[background]');
+        $this->getSession()->getPage()->fillField('page_form[background]', $file);
     }
 
     /**
@@ -59,7 +59,7 @@ final class PageContext extends RawMinkContext
      */
     public function iFillThePageFieldWith(string $field, string $value): void
     {
-        $field = $this->fixStepArgument('page['.$field.']');
+        $field = $this->fixStepArgument('page_form['.$field.']');
         $value = $this->fixStepArgument($value);
         $this->getSession()->getPage()->fillField($field, $value);
     }
