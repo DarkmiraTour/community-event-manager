@@ -42,7 +42,7 @@ bucket:
 	           --entrypoint="" \
 	           -v `pwd`:/app \
 	           -w /app \
-	           minio/mc \
+	           minio/mc:RELEASE.2019-09-24T01-36-20Z \
 	           /bin/sh -c "chmod +x ./docker/minio/create-bucket.sh && ./docker/minio/create-bucket.sh"
 
 ##
