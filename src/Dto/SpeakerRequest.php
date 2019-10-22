@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Dto;
 
 use App\Entity\Speaker;
+use App\Entity\SpeakerEventInterviewSent;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -73,7 +74,7 @@ final class SpeakerRequest
      */
     public $isInterviewSent;
 
-    public static function createFromEntity(Speaker $speaker): self
+    public static function createFromEntity(Speaker $speaker, ?SpeakerEventInterviewSent $speakerEvent): self
     {
         $request = new self();
 
@@ -86,12 +87,14 @@ final class SpeakerRequest
         $request->facebook = $speaker->getFacebook();
         $request->linkedin = $speaker->getLinkedin();
         $request->github = $speaker->getGithub();
-        $request->isInterviewSent = $speaker->isInterviewSent();
+        if (null !== $speakerEvent) {
+            $request->isInterviewSent = $speakerEvent->isInterviewSent();
+        }
 
         return $request;
     }
 
-    public function updateEntity(Speaker $speaker): Speaker
+    public function updateEntity(Speaker $speaker, ?SpeakerEventInterviewSent $speakerEvent): Speaker
     {
         $speaker->setName($this->name)
             ->setTitle($this->title)
@@ -106,7 +109,9 @@ final class SpeakerRequest
             $speaker->setPhoto($this->photoPath);
         }
 
-        $this->isInterviewSent ? $speaker->confirmInterviewIsSent() : $speaker->confirmInterviewNotSent();
+        if (null !== $speakerEvent) {
+            $this->isInterviewSent ? $speakerEvent->confirmInterviewIsSent() : $speakerEvent->confirmInterviewNotSent();
+        }
 
         return $speaker;
     }

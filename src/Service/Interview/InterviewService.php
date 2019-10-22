@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Interview;
 
 use App\Dto\InterviewRequest;
+use App\Entity\Event;
 use App\Entity\Speaker;
 use Twig\Environment as Twig;
 
@@ -39,7 +40,7 @@ final class InterviewService
         return $this->mailer;
     }
 
-    public function sendInterviewEmail(Speaker $speaker, array $questionList): int
+    public function sendInterviewEmail(Speaker $speaker, Event $event, array $questionList): int
     {
         $message = (new \Swift_Message('Your interview'))
             ->setFrom('no-reply-admin-cem@gmail.com')
@@ -49,6 +50,7 @@ final class InterviewService
                     [
                         'questionList' => $questionList,
                         'speaker' => $speaker,
+                        'event' => $event,
                     ]),
                 'text/html'
             );

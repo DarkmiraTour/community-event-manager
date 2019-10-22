@@ -49,11 +49,13 @@
                     <th>Github</th>
                     <td>{{ speaker.github }}</td>
                 </tr>
-                <tr>
-                    <th>Interview sent</th>
-                    <td>{% if speaker.interviewSent %} Yes
-                        {% else %} No {% endif %}</td>
-                </tr>
+                {% if sendInterview|default(false) %}
+                    <tr>
+                        <th>Interview sent for the selected Event</th>
+                        <td>{% if sendInterview.interviewSent %} Yes
+                            {% else %} No {% endif %}</td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <th>Talks</th>
                     <td>
@@ -69,7 +71,7 @@
                     <th>Attending Events</th>
                     <td>
                         <ul>
-                            {% for event in speaker.events %}
+                            {% for event in attendingEvents %}
                                 <li>{{ event.name }}</a></li>
                             {% endfor %}
                         </ul>
@@ -83,7 +85,7 @@
     <div class="row mb-3">
         <div class="col-5">
             <a href="{{ path('speaker_index') }}" class="btn btn-light">Back to list</a>
-            {% if is_granted('ROLE_ADMIN') and not speaker.interviewSent %}
+            {% if is_granted('ROLE_ADMIN') and sendInterview|default(false) and not sendInterview.interviewSent %}
                 <a href="{{ path('speaker_send_interview', {'id': speaker.id}) }}" class="btn btn-warning">Send an Interview</a>
             {% endif %}
         </div>

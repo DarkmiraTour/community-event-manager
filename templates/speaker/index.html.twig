@@ -33,11 +33,13 @@
                 {% for speaker in speakers %}
                     <tr>
                         <td>
+                            {{ speaker.title }}
+                        </td>
+                        <td>
                             <a href="{{ path('speaker_show', {'id': speaker.id}) }}">
-                                {{ speaker.title }}
+                            {{ speaker.name }}
                             </a>
                         </td>
-                        <td>{{ speaker.name }}</td>
                         <td>{{ speaker.email }}</td>
                         <td class="text-center">
                             {% if is_granted('ROLE_ADMIN') %}

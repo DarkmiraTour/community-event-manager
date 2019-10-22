@@ -2,7 +2,8 @@
 
 {% block content %}
 
-    <p>Hello, {{ speaker.name }}, you have been chosen to make a talk during our event, and we wanted to make an interview about you that will be publish on our website.</p>
+    <p>Hello {{ speaker.name }}, </p>
+    <p>You have been chosen to make a talk during the event {{ event.name }}, and we wanted to make an interview about you that will be publish on our website.</p>
     <p>If you accept, could you answer those questions below and send your response by email at community-event-manager@gmail.com?</p>
 
     {% for question in questionList %}

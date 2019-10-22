@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
@@ -36,7 +35,6 @@ class Speaker
         $this->facebook = $facebook;
         $this->linkedin = $linkedin;
         $this->github = $github;
-        $this->events = new ArrayCollection();
     }
 
     /**
@@ -94,16 +92,6 @@ class Speaker
      * @ORM\OneToMany(targetEntity="App\Talk\Talk", mappedBy="speaker")
      */
     private $talks;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", cascade={"persist", "remove"}))
-     */
-    private $events;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $interviewSent = false;
 
     public function getId(): ?string
     {
@@ -218,33 +206,8 @@ class Speaker
         return $this;
     }
 
-    public function isInterviewSent(): bool
-    {
-        return $this->interviewSent;
-    }
-
-    public function confirmInterviewIsSent(): void
-    {
-        $this->interviewSent = true;
-    }
-
-    public function confirmInterviewNotSent(): void
-    {
-        $this->interviewSent = false;
-    }
-
     public function getTalks(): Collection
     {
         return $this->talks;
-    }
-
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-
-    public function addAttendingEvent(Event $event): void
-    {
-        $this->events->add($event);
     }
 }
