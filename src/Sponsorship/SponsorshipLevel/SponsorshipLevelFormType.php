@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Sponsorship\SponsorshipLevel;
 
+use App\G11n\Currency;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -15,7 +16,7 @@ final class SponsorshipLevelFormType extends AbstractType implements DataMapperI
 {
     private $currency;
 
-    public function __construct(string $currency)
+    public function __construct(Currency $currency)
     {
         $this->currency = $currency;
     }
@@ -25,7 +26,7 @@ final class SponsorshipLevelFormType extends AbstractType implements DataMapperI
         $builder
             ->add('label', TextType::class)
             ->add('price', MoneyType::class, [
-                'currency' => $this->currency,
+                'currency' => $this->currency->getValue(),
             ])
             ->setDataMapper($this);
     }

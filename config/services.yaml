@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     currency: 'USD'
+    currency_authorized: ['EUR','USD']
     routing.uuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
     pdf_orientation: 'landscape'
     pdf_format: 'A4'
@@ -52,3 +53,9 @@ services:
     App\ValueObject\PdfOrientation:
         arguments:
             $orientation: '%pdf_orientation%'
+
+    App\G11n\Currency:
+        arguments: 
+            $currency: '%currency%'
+            $currencyAuthorized: '%currency_authorized%'
+           
