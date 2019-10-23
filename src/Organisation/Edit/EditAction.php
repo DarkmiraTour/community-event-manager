@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Organisation\Edit;
 
 use App\Action;
-use App\Organisation\OrganisationRequest;
 use App\Organisation\OrganisationFormType;
 use App\Organisation\OrganisationRepositoryInterface;
+use App\Organisation\OrganisationRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;

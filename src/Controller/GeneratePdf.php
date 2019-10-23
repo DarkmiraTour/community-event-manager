@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Page\PageManagerInterface;
 use App\Repository\SpecialBenefit\SpecialBenefitManagerInterface;
 use App\Repository\SponsorshipLevel\SponsorshipLevelManagerInterface;
 use App\Repository\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterface;
+use App\Service\Event\EventServiceInterface;
 use App\Service\FormatSponsorshipLevelBenefit;
 use App\Service\PdfCreatorInterface;
-use Twig\Environment as Twig;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\Event\EventServiceInterface;
+use Twig\Environment as Twig;
 
 final class GeneratePdf
 {

@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Speaker\Doctrine;
 
 use App\DataFixtures\EventFixture;
-use App\Speaker\Speaker;
 use App\Repository\Event\EventRepository;
-use App\Speaker\SpeakerRepositoryInterface;
 use App\Service\FileUploaderInterface;
+use App\Speaker\Speaker;
+use App\Speaker\SpeakerRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;

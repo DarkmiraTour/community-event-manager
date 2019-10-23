@@ -6,16 +6,16 @@ namespace App\Controller\Schedule;
 
 use App\Dto\ScheduleRequest;
 use App\Form\ScheduleType;
-use App\Service\Event\EventServiceInterface;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Service\Event\EventServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
 final class Duplicate

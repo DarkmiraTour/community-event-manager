@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository\SpecialBenefit;
 
-use App\Entity\SpecialBenefit;
 use App\Dto\SpecialBenefitRequest;
+use App\Entity\SpecialBenefit;
 
 interface SpecialBenefitManagerInterface
 {

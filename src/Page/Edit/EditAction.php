@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Page\Edit;
 
 use App\Action;
-use App\Page\PageRequest;
 use App\Page\PageFormType;
 use App\Page\PageManagerInterface;
+use App\Page\PageRequest;
 use App\Service\FileUploaderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;

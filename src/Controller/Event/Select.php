@@ -10,11 +10,11 @@ use App\Repository\Schedule\ScheduleRepositoryManager;
 use App\Repository\SponsorshipLevel\SponsorshipLevelRepositoryInterface;
 use App\Service\Event\EventService;
 use Ramsey\Uuid\Uuid;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\SessionUnavailableException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Twig\Environment as Twig;
 
 /**

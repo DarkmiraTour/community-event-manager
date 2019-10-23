@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dto;
 
+use App\Entity\Event;
+use App\Validator\Constraints as CustomAssert;
 use App\ValueObject\DateRangeInFuture;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Validator\Constraints as CustomAssert;
-use App\Entity\Event;
 
 final class EventRequest
 {

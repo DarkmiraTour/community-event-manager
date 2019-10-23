@@ -6,8 +6,8 @@ namespace App\Speaker\UploadFromOpenCfp;
 
 use App\Speaker\Speaker;
 use App\Speaker\SpeakerRepositoryInterface;
-use App\Talk\Talk;
 use App\Talk\Create\TalkFactory;
+use App\Talk\Talk;
 use App\Talk\TalkRepositoryInterface;
 use SplFileObject;
 use Symfony\Component\Process\Exception\LogicException;

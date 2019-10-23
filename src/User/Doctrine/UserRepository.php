@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\User\Doctrine;
 
-use App\User\UserFactory;
-use App\User\UserRepositoryInterface;
-use App\User\User;
 use App\User\Delete\UnableToDeleteUserException;
 use App\User\Update\UnableToSaveUserException;
+use App\User\User;
+use App\User\UserFactory;
 use App\User\Username\Username;
+use App\User\UserRepositoryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
