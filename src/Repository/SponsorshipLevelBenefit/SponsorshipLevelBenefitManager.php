@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Repository\SponsorshipLevelBenefit;
 
-use App\Entity\SponsorshipLevel;
-use App\Entity\SponsorshipBenefit;
-use App\Entity\SponsorshipLevelBenefit;
 use App\Dto\SponsorshipLevelBenefitRequest;
+use App\Entity\SponsorshipBenefit;
+use App\Entity\SponsorshipLevel;
+use App\Entity\SponsorshipLevelBenefit;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SponsorshipLevelBenefitManager implements SponsorshipLevelBenefitManagerInterface

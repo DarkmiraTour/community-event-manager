@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repository\SponsorshipBenefit;
 
-use App\Entity\SponsorshipBenefit;
 use App\Dto\SponsorshipBenefitRequest;
+use App\Entity\SponsorshipBenefit;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SponsorshipBenefitManager implements SponsorshipBenefitManagerInterface

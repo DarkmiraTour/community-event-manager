@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use Twig\Extension\RuntimeExtensionInterface;
 use App\Service\FileUploaderInterface;
+use Twig\Extension\RuntimeExtensionInterface;
 
 final class ImageToBase64Runtime implements RuntimeExtensionInterface
 {

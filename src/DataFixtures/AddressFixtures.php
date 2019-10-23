@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory as Faker;
-use App\Entity\Address;
 
 class AddressFixtures extends Fixture
 {

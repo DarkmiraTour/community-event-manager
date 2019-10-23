@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Organisation\Doctrine;
 
-use App\Organisation\OrganisationRequest;
 use App\Organisation\Organisation;
 use App\Organisation\OrganisationRepositoryInterface;
+use App\Organisation\OrganisationRequest;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

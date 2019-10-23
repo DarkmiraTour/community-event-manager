@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Speaker\Edit;
 
 use App\Action;
-use App\Speaker\SpeakerRequest;
+use App\Service\FileUploaderInterface;
 use App\Speaker\SpeakerFormType;
 use App\Speaker\SpeakerRepositoryInterface;
-use App\Service\FileUploaderInterface;
+use App\Speaker\SpeakerRequest;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;

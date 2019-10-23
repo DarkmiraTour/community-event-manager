@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Organisation\Index;
 
 use App\Action;
-use App\Organisation\OrganisationRepositoryInterface;
 use App\Organisation\Config\Organisation;
+use App\Organisation\OrganisationRepositoryInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;

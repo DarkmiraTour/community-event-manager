@@ -7,8 +7,8 @@ namespace App\Controller;
 use App\Repository\Event\EventRepository;
 use App\Service\Event\EventService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 

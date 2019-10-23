@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Dto\ScheduleRequest;
+use App\Service\Event\EventServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use App\Service\Event\EventServiceInterface;
 
 final class ScheduleType extends AbstractType
 {

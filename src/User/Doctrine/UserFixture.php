@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\User\Doctrine;
 
+use App\User\UserManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\User\UserManagerInterface;
 
 class UserFixture extends Fixture
 {
