@@ -60,13 +60,9 @@ final class GeneratePdf
         $dateAtom = (new \DateTime())->format(\DateTime::ATOM);
         $eventName = $this->eventService->getSelectedEventName();
 
-        return new Response(
-            $pdf,
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => sprintf('inline; filename="%s-%s.pdf"', $eventName, $dateAtom),
-            ]
-        );
+        return new Response($pdf, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => sprintf('inline; filename="%s-%s.pdf"', $eventName, $dateAtom),
+        ]);
     }
 }
