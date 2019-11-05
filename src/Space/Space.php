@@ -2,49 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Space;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity()
- */
 class Space
 {
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="guid")
-     */
     private $id;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $visible;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SpaceType", inversedBy="spaces")
-     * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
-     */
     private $type;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Schedule", inversedBy="spaces")
-     * @ORM\JoinColumn(name="schedule_id", referencedColumnName="id")
-     */
     private $schedule;
-
-    /**
-     * @ORM\Column(length=50)
-     */
     private $name;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Slot", mappedBy="space", cascade={"all"})
-     */
     private $slots;
 
     public function __construct()

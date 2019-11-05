@@ -2,36 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Space\SpaceType;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity()
- */
 class SpaceType
 {
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="guid")
-     */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $description;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Space", mappedBy="type")
-     */
     private $spaces;
 
     public function __construct(UuidInterface $id, string $name, string $description)

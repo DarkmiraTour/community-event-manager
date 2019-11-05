@@ -15,17 +15,7 @@ schedule_schedule_delete:
     requirements:
         id: '%routing.uuid%'
 
-schedule_space_insert:
-    path: /space/create
-    controller: App\Controller\Space\Create::handle
-    methods: [POST]
 
-schedule_space_delete:
-    path: /space/{id}/delete
-    methods: [DELETE]
-    controller: App\Controller\Space\Delete::handle
-    requirements:
-        id: '%routing.uuid%'
 
 schedule_slot_insert:
     path: /slot/create
@@ -84,26 +74,3 @@ schedule_confirm_delete:
     requirements:
         id: '%routing.uuid%'
 
-schedule_space_type_index:
-    path: /space-types/
-    controller: App\Controller\SpaceType\Index::handle
-    methods: [GET]
-
-schedule_space_type_create:
-    path: /space-types/create
-    controller: App\Controller\SpaceType\Create::handle
-    methods: [GET, POST]
-
-schedule_space_type_edit:
-    path: /space-types/{id}/edit
-    controller: App\Controller\SpaceType\Edit::handle
-    methods: [GET, POST]
-    requirements:
-        id: '%routing.uuid%'
-
-schedule_space_type_delete:
-    path: /space-types/{id}/delete
-    controller: App\Controller\SpaceType\Delete::handle
-    methods: [DELETE]
-    requirements:
-        id: '%routing.uuid%'

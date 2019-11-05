@@ -1,0 +1,12 @@
+schedule_space_insert:
+    path: /create
+    controller: App\Space\Create\CreateSpaceAction::handle
+    methods: [POST]
+
+schedule_space_delete:
+    path: /{id}/delete
+    methods: [DELETE]
+    controller: App\Space\Delete\DeleteSpaceAction::handle
+    requirements:
+        id: '%routing.uuid%'
+        

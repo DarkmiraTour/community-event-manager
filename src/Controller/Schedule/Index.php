@@ -6,14 +6,14 @@ namespace App\Controller\Schedule;
 
 use App\Dto\ScheduleRequest;
 use App\Dto\SlotRequest;
-use App\Dto\SpaceRequest;
 use App\Exceptions\NoEventSelectedException;
 use App\Form\ScheduleType;
 use App\Form\SlotType;
-use App\Form\SpaceType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
 use App\Service\Schedule\CreateDailySchedule;
+use App\Space\Create\CreateSpaceFormType;
+use App\Space\Create\CreateSpaceRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +52,7 @@ final class Index
 
         $schedules = $this->repository->findBy(['event' => $this->eventService->getSelectedEvent()]);
 
-        $form = $this->formFactory->create(SpaceType::class, new SpaceRequest());
+        $form = $this->formFactory->create(CreateSpaceFormType::class, new CreateSpaceRequest());
 
         $formSlot = $this->formFactory->create(SlotType::class, new SlotRequest());
 

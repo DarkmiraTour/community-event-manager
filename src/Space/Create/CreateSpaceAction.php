@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Space;
+namespace App\Space\Create;
 
-use App\Dto\SpaceRequest;
+use App\Action;
 use App\Exceptions\NoEventSelectedException;
-use App\Form\SpaceType;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
-use App\Repository\Schedule\SpaceRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
+use App\Space\SpaceRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Create
+final class CreateSpaceAction implements Action
 {
     private $router;
     private $renderer;
@@ -52,9 +51,9 @@ final class Create
             throw new NoEventSelectedException();
         }
 
-        $spaceRequest = new SpaceRequest();
+        $spaceRequest = new CreateSpaceRequest();
 
-        $form = $this->formFactory->create(SpaceType::class, $spaceRequest);
+        $form = $this->formFactory->create(CreateSpaceFormType::class, $spaceRequest);
         $form->handleRequest($request);
 
         $space = $this->repository->createFrom($spaceRequest);

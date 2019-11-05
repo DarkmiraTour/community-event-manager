@@ -1,0 +1,4 @@
+
+spaceTypes:
+  resource: routes/spaceTypes.yaml
+  prefix: space-types

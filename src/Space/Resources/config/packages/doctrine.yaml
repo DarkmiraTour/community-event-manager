@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Space:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Space/Resources/config/doctrine'
+        prefix: 'App\Space'
+        alias: App\Space

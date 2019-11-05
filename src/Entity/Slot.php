@@ -54,7 +54,7 @@ class Slot
 
     /**
      * @var Space
-     * @ORM\ManyToOne(targetEntity="App\Entity\Space", inversedBy="slots")
+     * @ORM\ManyToOne(targetEntity="App\Space\Space", inversedBy="slots")
      * @ORM\JoinColumn(name="space_id", referencedColumnName="id")
      */
     private $space;

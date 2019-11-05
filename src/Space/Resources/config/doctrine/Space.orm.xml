@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Space\Space">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="name" type="string" length="50"/>
+        <field name="visible" type="boolean"/>
+        
+        <many-to-one field="type" target-entity="App\Space\SpaceType\SpaceType" inversed-by="spaces">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+        <many-to-one field="schedule" target-entity="App\Entity\Schedule" inversed-by="spaces">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-one>
+        <one-to-many field="slots" target-entity="App\Entity\Slot" mapped-by="space"/>
+    </entity>
+</doctrine-mapping>

@@ -2,26 +2,24 @@
 
 declare(strict_types=1);
 
-namespace App\Dto;
+namespace App\Space\SpaceType\Create;
 
-use App\Entity\SpaceType;
+use App\Space\SpaceType\SpaceType;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class SpaceTypeRequest
+class CreateSpaceTypeRequest
 {
     /**
-     * @var string
      * @Assert\NotBlank()
      */
     public $name;
 
     /**
-     * @var string
      * @Assert\NotBlank()
      */
     public $description;
 
-    public static function createFromEntity(SpaceType $spaceType): SpaceTypeRequest
+    public static function createFromEntity(SpaceType $spaceType): CreateSpaceTypeRequest
     {
         $spaceTypeRequest = new self();
 
@@ -29,14 +27,5 @@ final class SpaceTypeRequest
         $spaceTypeRequest->description = $spaceType->getDescription();
 
         return $spaceTypeRequest;
-    }
-
-    public function updateEntity(SpaceType $spaceType): SpaceType
-    {
-        $spaceType
-            ->setName($this->name)
-            ->setDescription($this->description);
-
-        return $spaceType;
     }
 }

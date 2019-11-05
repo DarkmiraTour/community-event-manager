@@ -6,9 +6,9 @@ namespace App\Form;
 
 use App\Dto\SlotRequest;
 use App\Entity\SlotType as SlotTypeEntity;
-use App\Entity\Space;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
-use App\Repository\Schedule\SpaceRepositoryInterface;
+use App\Space\Space;
+use App\Space\SpaceRepositoryInterface;
 use App\Talk\Talk;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
