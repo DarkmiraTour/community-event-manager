@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Schedule\Delete;
 
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\ScheduleRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -13,7 +13,7 @@ use Twig\Environment as Twig;
 /**
  * @Security("is_granted('ROLE_ADMIN')")
  */
-final class DeleteConfirmation
+final class DeleteConfirmationScheduleAction
 {
     private $repository;
     private $renderer;

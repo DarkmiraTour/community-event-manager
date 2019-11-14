@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Schedule\Delete;
 
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\ScheduleRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class Delete
+final class DeleteScheduleAction
 {
     private $router;
     private $csrfTokenManager;

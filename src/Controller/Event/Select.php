@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Event;
 
 use App\Repository\Event\EventRepository;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
-use App\Repository\Schedule\ScheduleRepositoryManager;
+use App\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\ScheduleRepositoryManager;
 use App\Service\Event\EventService;
 use App\Sponsorship\SponsorshipLevel\SponsorshipLevelRepositoryInterface;
 use Ramsey\Uuid\Uuid;

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Repository\Schedule;
 
 use App\Dto\SpaceRequest;
-use App\Entity\Schedule;
 use App\Entity\Space;
 use App\Entity\SpaceType;
+use App\Schedule\Schedule;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

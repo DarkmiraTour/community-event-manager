@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Schedule\Create;
 
-use App\Dto\ScheduleRequest;
 use App\Exceptions\NoEventSelectedException;
-use App\Form\ScheduleType;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\ScheduleRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -18,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Create
+final class CreateScheduleAction
 {
     private $router;
     private $renderer;
@@ -52,9 +50,9 @@ final class Create
             throw new NoEventSelectedException();
         }
 
-        $scheduleRequest = new ScheduleRequest();
+        $scheduleRequest = new CreateScheduleRequest();
 
-        $form = $this->formFactory->create(ScheduleType::class, $scheduleRequest);
+        $form = $this->formFactory->create(CreateScheduleFormType::class, $scheduleRequest);
         $form->handleRequest($request);
 
         $schedule = $this->repository->createFrom(

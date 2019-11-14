@@ -1,0 +1,9 @@
+doctrine:
+  orm:
+    mappings:
+      App\Schedule:
+        is_bundle: false
+        type: xml
+        dir: '%kernel.project_dir%/src/Schedule/Resources/config/doctrine'
+        prefix: 'App\Schedule'
+        alias: App\Schedule

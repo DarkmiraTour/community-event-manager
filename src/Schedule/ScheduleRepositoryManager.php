@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Schedule;
 
 use App\Entity\Event;
-use App\Entity\Schedule;
 
 final class ScheduleRepositoryManager
 {

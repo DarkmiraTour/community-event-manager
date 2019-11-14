@@ -9,10 +9,6 @@ fos_js_routing:
 app_logout:
     path: /logout
 
-schedule:
-    resource: routes/schedule.yaml
-    prefix: schedule
-
 sponsorships_pdf:
     path: /sponsorships/pdf
     methods: [GET]

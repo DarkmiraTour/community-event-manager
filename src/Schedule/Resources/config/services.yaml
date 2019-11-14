@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  _instanceof:
+    App\Action:
+      tags: [controller.service_arguments]
+
+  App\Schedule\:
+    resource: '../../'

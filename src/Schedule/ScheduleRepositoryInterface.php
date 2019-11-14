@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Schedule;
 
-use App\Dto\ScheduleRequest;
 use App\Entity\Event;
-use App\Entity\Schedule;
+use App\Schedule\Create\CreateScheduleRequest;
 use Ramsey\Uuid\UuidInterface;
 
 interface ScheduleRepositoryInterface
@@ -23,7 +22,7 @@ interface ScheduleRepositoryInterface
      */
     public function findBy(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array;
 
-    public function createFrom(Event $event, ScheduleRequest $scheduleRequest): Schedule;
+    public function createFrom(Event $event, CreateScheduleRequest $scheduleRequest): Schedule;
 
     public function nextIdentity(): UuidInterface;
 
