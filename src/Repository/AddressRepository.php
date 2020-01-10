@@ -44,15 +44,15 @@ class AddressRepository implements AddressRepositoryInterface
 
     public function createFromRequest(AddressRequest $addressRequest): Address
     {
-        $address = new Address();
+        $address = new Address(
+            $this->nextIdentity()->toString(),
+            $this->streetAddress,
+            $this->streetAddressComplementary,
+            $this->postalCode,
+            $this->city
+        );
 
-        return $address
-            ->setId($this->nextIdentity()->toString())
-            ->setStreetAddress($this->streetAddress)
-            ->setStreetAddressComplementary($this->streetAddressComplementary)
-            ->setPostalCode($this->postalCode)
-            ->setCity($this->city)
-        ;
+        return $address;
     }
 
     public function createWith(
@@ -61,15 +61,15 @@ class AddressRepository implements AddressRepositoryInterface
         string $postalCode,
         string $city
     ): Address {
-        $address = new Address();
+        $address = new Address(
+            $this->nextIdentity()->toString(),
+            $streetAddress,
+            $streetAddressComplementary,
+            $postalCode,
+            $city
+        );
 
-        return $address
-            ->setId($this->nextIdentity()->toString())
-            ->setStreetAddress($streetAddress)
-            ->setStreetAddressComplementary($streetAddressComplementary)
-            ->setPostalCode($postalCode)
-            ->setCity($city)
-        ;
+        return $address;
     }
 
     public function nextIdentity(): UuidInterface

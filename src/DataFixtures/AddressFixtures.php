@@ -16,15 +16,13 @@ class AddressFixtures extends Fixture
         $faker = Faker::create();
 
         for ($i = 0; $i < 20; $i++) {
-            $address = new Address();
-
-            $address
-                ->setName($faker->word)
-                ->setStreetAddress($faker->streetAddress)
-                ->setStreetAddressComplementary($faker->secondaryAddress)
-                ->setPostalCode($faker->postcode)
-                ->setCity($faker->city)
-            ;
+            $address = new Address(
+                $faker->word,
+                $faker->streetAddress,
+                $faker->secondaryAddress,
+                $faker->postcode,
+                $faker->city
+            );
 
             $this->setReference("address-$i", $address);
             $manager->persist($address);
