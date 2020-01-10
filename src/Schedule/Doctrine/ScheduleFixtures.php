@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\DataFixtures;
+namespace App\Schedule\Doctrine;
 
+use App\DataFixtures\EventFixture;
 use App\Entity\Event;
-use App\Entity\Schedule;
 use App\Repository\Event\EventRepositoryInterface;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\Schedule;
+use App\Schedule\ScheduleRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;

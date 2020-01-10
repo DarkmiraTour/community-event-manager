@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\Schedule;
 
-use App\Entity\Schedule;
 use App\Entity\Slot;
 use App\Entity\Space;
+use App\Schedule\Schedule;
 
 final class CreateDailySchedule
 {

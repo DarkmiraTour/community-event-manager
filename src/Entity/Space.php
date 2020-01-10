@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Schedule\Schedule;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
@@ -32,7 +33,7 @@ class Space
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Schedule", inversedBy="spaces")
+     * @ORM\ManyToOne(targetEntity="App\Schedule\Schedule", inversedBy="spaces")
      * @ORM\JoinColumn(name="schedule_id", referencedColumnName="id")
      */
     private $schedule;

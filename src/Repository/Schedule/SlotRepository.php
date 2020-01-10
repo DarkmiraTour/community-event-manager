@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Repository\Schedule;
 
 use App\Dto\SlotRequest;
-use App\Entity\Schedule;
 use App\Entity\Slot;
 use App\Entity\Space;
+use App\Schedule\Schedule;
 use App\Talk\Talk;
 use App\ValueObject\Title;
 use Doctrine\ORM\EntityManagerInterface;

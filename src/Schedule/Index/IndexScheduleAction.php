@@ -2,24 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Schedule\Index;
 
-use App\Dto\ScheduleRequest;
+use App\Action;
 use App\Dto\SlotRequest;
 use App\Dto\SpaceRequest;
 use App\Exceptions\NoEventSelectedException;
-use App\Form\ScheduleType;
 use App\Form\SlotType;
 use App\Form\SpaceType;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\Create\CreateScheduleFormType;
+use App\Schedule\Create\CreateScheduleRequest;
+use App\Schedule\ScheduleRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
 use App\Service\Schedule\CreateDailySchedule;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
-final class Index
+final class IndexScheduleAction implements Action
 {
     private $renderer;
     private $repository;
@@ -44,7 +46,7 @@ final class Index
     /**
      * @Security("is_granted('ROLE_USER')")
      */
-    public function handle(): Response
+    public function handle(Request $request): Response
     {
         if (!$this->eventService->isUserLoggedIn() || !$this->eventService->isEventSelected()) {
             throw new NoEventSelectedException('No event has been selected');
@@ -56,7 +58,7 @@ final class Index
 
         $formSlot = $this->formFactory->create(SlotType::class, new SlotRequest());
 
-        $formSchedule = $this->formFactory->create(ScheduleType::class, new ScheduleRequest());
+        $formSchedule = $this->formFactory->create(CreateScheduleFormType::class, new CreateScheduleRequest());
 
         return new Response($this->renderer->render('schedule/index.html.twig', [
             'schedules' => $schedules,

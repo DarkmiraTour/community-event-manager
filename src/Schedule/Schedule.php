@@ -2,40 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Schedule;
 
+use App\Entity\Event;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-/**
- * @ORM\Entity()
- */
 class Schedule
 {
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="guid")
-     */
     private $id;
-
-    /**
-     * @ORM\Column(type="date")
-     */
     private $day;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Space", mappedBy="schedule", cascade={"all"})
-     * @ORM\OrderBy({"visible"="DESC"})
-     */
     private $spaces;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Event::class)
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     */
     private $event;
 
     public function __construct(Event $event)

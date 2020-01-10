@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Schedule\Doctrine;
 
-use App\Dto\ScheduleRequest;
 use App\Entity\Event;
-use App\Entity\Schedule;
 use App\Exceptions\NoEventSelectedException;
+use App\Schedule\Create\CreateScheduleRequest;
+use App\Schedule\Schedule;
+use App\Schedule\ScheduleRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -54,7 +55,7 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
-    public function createFrom(Event $event, ScheduleRequest $scheduleRequest): Schedule
+    public function createFrom(Event $event, CreateScheduleRequest $scheduleRequest): Schedule
     {
         $schedule = new Schedule($event);
         $schedule->setId($this->nextIdentity()->toString());
@@ -66,7 +67,7 @@ final class ScheduleRepository implements ScheduleRepositoryInterface
     public function findScheduleAndSlots(Event $event): array
     {
         $queryBuilder = $this->entityManager->createQueryBuilder()
-            ->from('App:Schedule', 'schedule')
+            ->from('App\Schedule\Schedule', 'schedule')
             ->select('schedule, space, slot, slotType')
             ->leftJoin('schedule.spaces', 'space')
             ->leftJoin('space.slots', 'slot')

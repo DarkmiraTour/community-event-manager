@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Schedule;
+namespace App\Schedule\Create;
 
-use App\Dto\ScheduleRequest;
-use App\Form\ScheduleType;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\ScheduleRepositoryInterface;
 use App\Service\Event\EventServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -18,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Duplicate
+final class DuplicateScheduleAction
 {
     private $router;
     private $repository;
@@ -51,9 +49,9 @@ final class Duplicate
         if (null === ($schedule = $this->repository->find($request->attributes->get('id')))) {
             throw new NotFoundHttpException();
         }
-        $scheduleRequest = new ScheduleRequest();
+        $scheduleRequest = new CreateScheduleRequest();
 
-        $form = $this->formFactory->create(ScheduleType::class, $scheduleRequest);
+        $form = $this->formFactory->create(CreateScheduleFormType::class, $scheduleRequest);
         $form->handleRequest($request);
 
         $scheduleExists = $this->repository->findBy(['day' => $scheduleRequest->day]);

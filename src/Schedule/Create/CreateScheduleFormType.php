@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Schedule\Create;
 
-use App\Dto\ScheduleRequest;
 use App\Service\Event\EventServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -13,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-final class ScheduleType extends AbstractType
+class CreateScheduleFormType extends AbstractType
 {
     private $eventService;
 
@@ -50,7 +49,7 @@ final class ScheduleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => ScheduleRequest::class,
+            'data_class' => CreateScheduleRequest::class,
         ]);
     }
 }

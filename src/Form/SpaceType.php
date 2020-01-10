@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Dto\SpaceRequest;
-use App\Entity\Schedule;
 use App\Entity\SpaceType as SpaceTypeEntity;
-use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Schedule\Schedule;
+use App\Schedule\ScheduleRepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
