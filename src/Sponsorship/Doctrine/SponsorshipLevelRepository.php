@@ -7,13 +7,13 @@ namespace App\Sponsorship\Doctrine;
 use App\Sponsorship\SponsorshipLevel;
 use App\Sponsorship\SponsorshipLevel\SponsorshipLevelRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 final class SponsorshipLevelRepository extends ServiceEntityRepository implements SponsorshipLevelRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SponsorshipLevel::class);
     }

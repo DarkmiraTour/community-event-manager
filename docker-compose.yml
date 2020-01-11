@@ -38,9 +38,9 @@ services:
             - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
             - ./var/logs/nginx/:/var/log/nginx:cached
     composer:
-        image: composer:latest
+        build: ./docker/composer
         volumes:
-            - .:/app
+          - ./:/var/www/symfony:cached
     storage:
         image: minio/minio:RELEASE.2019-09-26T19-42-35Z
         ports:

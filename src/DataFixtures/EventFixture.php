@@ -23,7 +23,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
-
+        $nextYear = (int) date('Y') + 1;
         $nextAddress = 0;
 
         for ($iterationCount = 0; $iterationCount < 3; $iterationCount++) {
@@ -31,7 +31,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             $eventRequest->name = $faker->company;
             $eventRequest->address = $this->getReference('address-'.($nextAddress++));
             $eventRequest->description = $faker->text(50);
-            $eventRequest->startAt = $faker->dateTimeBetween('2020-01-01', '2020-12-31');
+            $eventRequest->startAt = $faker->dateTimeBetween("{$nextYear}-01-01", "{$nextYear}-12-31");
             $eventRequest->endAt = new \DateTime($eventRequest->startAt->format('Y-m-d'));
             $eventRequest->endAt->add(new \DateInterval('P3D'));
 
@@ -43,7 +43,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
         $eventRequest->name = 'DarkmiraTour Behat';
         $eventRequest->address = $this->getReference('address-'.($nextAddress));
         $eventRequest->description = $faker->text(50);
-        $eventRequest->startAt = $faker->dateTimeBetween('2020-01-01', '2020-12-31');
+        $eventRequest->startAt = $faker->dateTimeBetween("{$nextYear}-01-01", "{$nextYear}-12-31");
         $eventRequest->endAt = new \DateTime($eventRequest->startAt->format('Y-m-d'));
         $eventRequest->endAt->add(new \DateInterval('P3D'));
 

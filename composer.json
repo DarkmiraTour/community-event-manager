@@ -20,9 +20,8 @@
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/apache-pack": "^1.0",
-        "symfony/asset": "*",
         "symfony/console": "*",
-        "symfony/expression-language": "4.1.*",
+        "symfony/expression-language": "4.4.*",
         "symfony/flex": "^1.1",
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
@@ -34,9 +33,9 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-profiler-bundle": "*",
-        "symfony/webpack-encore-pack": "^1.0",
+        "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "*",
-        "twbs/bootstrap": "^4.1",
+        "twbs/bootstrap": "^4.4",
         "twig/extensions": "^1.5"
     },
     "require-dev": {
@@ -102,7 +101,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.1.*"
+            "require": "4.4.*"
         }
     }
 }

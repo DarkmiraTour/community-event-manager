@@ -7,13 +7,13 @@ namespace App\Sponsorship\Doctrine;
 use App\Sponsorship\SpecialBenefit;
 use App\Sponsorship\SpecialBenefit\SpecialBenefitRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 final class SpecialBenefitRepository extends ServiceEntityRepository implements SpecialBenefitRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SpecialBenefit::class);
     }

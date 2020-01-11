@@ -14,7 +14,7 @@ if ('prod' !== $_SERVER['APP_ENV']) {
     }
 
     $path = dirname(__DIR__).'/.env';
-    $dotenv = new Dotenv();
+    $dotenv = new Dotenv(false);
 
     if (method_exists($dotenv, 'loadEnv')) {
         $dotenv->loadEnv($path);

@@ -9,13 +9,13 @@ use App\Sponsorship\SponsorshipLevel;
 use App\Sponsorship\SponsorshipLevelBenefit;
 use App\Sponsorship\SponsorshipLevelBenefit\SponsorshipLevelBenefitRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 final class SponsorshipLevelBenefitRepository extends ServiceEntityRepository implements SponsorshipLevelBenefitRepositoryInterface
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SponsorshipLevelBenefit::class);
     }
