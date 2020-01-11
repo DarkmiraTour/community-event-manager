@@ -4,6 +4,7 @@
     "require": {
         "php": "^7.3",
         "ext-ctype": "*",
+        "ext-curl": "*",
         "ext-iconv": "*",
         "aws/aws-sdk-php": "^3.71",
         "doctrine/annotations": "^1.6",

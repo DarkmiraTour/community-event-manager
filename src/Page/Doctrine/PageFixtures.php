@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Page\Doctrine;
 
+use App\Faker\Provider\PicsumImage;
 use App\Page\PageManagerInterface;
 use App\Service\FileUploaderInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -25,6 +26,8 @@ final class PageFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Faker::create();
+        $faker->addProvider(new PicsumImage($faker));
+
         for ($pageNbr = 0; $pageNbr < 3; $pageNbr++) {
             $page = $this->pageManager->createWith(
                 "Page {$pageNbr}",

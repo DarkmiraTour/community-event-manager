@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Speaker\Doctrine;
 
 use App\DataFixtures\EventFixture;
+use App\Faker\Provider\PicsumImage;
 use App\Repository\Event\EventRepository;
 use App\Service\FileUploaderInterface;
 use App\Speaker\Speaker;
@@ -39,6 +40,7 @@ final class SpeakerFixtures extends Fixture implements DependentFixtureInterface
     {
         $events = $this->eventRepository->findAll();
         $faker = Faker::create();
+        $faker->addProvider(new PicsumImage($faker));
 
         for ($i = 0; $i < 10; $i++) {
             $speaker = new  Speaker(
