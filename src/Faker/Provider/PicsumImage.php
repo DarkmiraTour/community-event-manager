@@ -20,9 +20,11 @@ use InvalidArgumentException;
 use function is_dir;
 use function is_null;
 use function is_writable;
+use function md5;
 use RuntimeException;
 use function sprintf;
 use function sys_get_temp_dir;
+use function uniqid;
 use function unlink;
 
 final class PicsumImage extends Base
@@ -97,7 +99,7 @@ final class PicsumImage extends Base
 
         // Generate a random filename. Use the server address so that a file
         // generated at the same time on a different server won't have a collision.
-        $name = \md5(\uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
+        $name = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
         $filename = $name.'.jpg';
         $filepath = $dir.DIRECTORY_SEPARATOR.$filename;
 
@@ -105,27 +107,38 @@ final class PicsumImage extends Base
 
         // save file
         if (function_exists('curl_exec')) {
-            // use cURL
-            $fp = fopen($filepath, 'w');
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_FILE, $fp);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            $success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
-            fclose($fp);
-            curl_close($ch);
+            $filepath = static::curlImage($filepath, $url);
 
-            if (!$success) {
-                unlink($filepath);
-                // could not contact the distant URL or HTTP error - fail silently.
-                return false;
-            }
-        } elseif (ini_get('allow_url_fopen')) {
-            // use remote fopen() via copy()
-            copy($url, $filepath);
-        } else {
-            return new RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()');
+            return $fullPath ? $filepath : $filename;
         }
 
-        return $fullPath ? $filepath : $filename;
+        if (ini_get('allow_url_fopen')) {
+            // use remote fopen() via copy()
+            copy($url, $filepath);
+
+            return $fullPath ? $filepath : $filename;
+        }
+
+        return new RuntimeException('The image formatter downloads an image from a remote HTTP server. Therefore, it requires that PHP can request remote hosts, either via cURL or fopen()');
+    }
+
+    private static function curlImage(string $filepath, string $url)
+    {
+        // use cURL
+        $file = fopen($filepath, 'w');
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_FILE, $file);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        $success = curl_exec($curl) && curl_getinfo($curl, CURLINFO_HTTP_CODE) === 200;
+        fclose($file);
+        curl_close($curl);
+
+        if (!$success) {
+            unlink($filepath);
+            // could not contact the distant URL or HTTP error - fail silently.
+            return false;
+        }
+
+        return $filepath;
     }
 }
