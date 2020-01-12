@@ -27,7 +27,7 @@ use function sys_get_temp_dir;
 use function uniqid;
 use function unlink;
 
-final class PicsumImage extends Base
+final class PicsumImage extends Base implements Image
 {
     /**
      * Generate the URL that will return a random image.

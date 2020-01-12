@@ -10,15 +10,17 @@ use App\Talk\Create\TalkFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 final class TalkFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $faker;
     private $talkFactory;
     private $speakerRepository;
 
-    public function __construct(TalkFactory $talkFactory, SpeakerRepositoryInterface $speakerRepository)
+    public function __construct(TalkFactory $talkFactory, SpeakerRepositoryInterface $speakerRepository, Generator $faker)
     {
+        $this->faker = $faker;
         $this->talkFactory = $talkFactory;
         $this->speakerRepository = $speakerRepository;
     }
@@ -26,14 +28,13 @@ final class TalkFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $speakers = $this->speakerRepository->findAll();
-        $faker = Faker::create();
 
         for ($iterationCount = 0; $iterationCount < 10; $iterationCount++) {
-            $speakerIndex = $faker->numberBetween(0, count($speakers) - 1);
+            $speakerIndex = $this->faker->numberBetween(0, count($speakers) - 1);
 
             $talk = $this->talkFactory->createWith(
-                $faker->sentence,
-                $faker->paragraphs(3, true),
+                $this->faker->sentence,
+                $this->faker->paragraphs(3, true),
                 $speakers[$speakerIndex]
             );
 

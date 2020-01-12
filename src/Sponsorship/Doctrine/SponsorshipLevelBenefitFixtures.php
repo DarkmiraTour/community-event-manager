@@ -8,17 +8,16 @@ use App\Sponsorship\SponsorshipLevelBenefit\SponsorshipLevelBenefitManagerInterf
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 final class SponsorshipLevelBenefitFixtures extends Fixture implements DependentFixtureInterface
 {
     private $faker;
-
     private $sponsorshipLevelBenefitManager;
 
-    public function __construct(SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager)
+    public function __construct(SponsorshipLevelBenefitManagerInterface $sponsorshipLevelBenefitManager, Generator $faker)
     {
-        $this->faker = Faker::create();
+        $this->faker = $faker;
         $this->sponsorshipLevelBenefitManager = $sponsorshipLevelBenefitManager;
     }
 

@@ -12,38 +12,39 @@ use App\Repository\Event\EventRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 final class OrganisationFixtures extends Fixture implements DependentFixtureInterface
 {
     private $repository;
     private $eventRepository;
+    private $faker;
 
-    public function __construct(OrganisationRepositoryInterface $repository, EventRepositoryInterface $eventRepository)
+    public function __construct(OrganisationRepositoryInterface $repository, EventRepositoryInterface $eventRepository, Generator $faker)
     {
         $this->repository = $repository;
         $this->eventRepository = $eventRepository;
+        $this->faker = $faker;
     }
 
     public function load(ObjectManager $manager): void
     {
         $events = $this->eventRepository->findAll();
-        $faker = Faker::create();
 
         for ($i = 0; $i < 10; $i++) {
             $uuid = $this->repository->nextIdentity();
             $organisation = new Organisation(
                 $uuid,
-                $faker->company,
-                "http://{$faker->domainName}",
+                $this->faker->company,
+                "http://{$this->faker->domainName}",
                 $this->getReference("contact-$i")
             );
 
-            if ($faker->boolean) {
-                $organisation->setComment($faker->sentence);
+            if ($this->faker->boolean) {
+                $organisation->setComment($this->faker->sentence);
             }
 
-            $organisation->addSponsoredEvent($events[$faker->numberBetween(0, count($events) - 1)]);
+            $organisation->addSponsoredEvent($events[$this->faker->numberBetween(0, count($events) - 1)]);
             $manager->persist($organisation);
         }
 

@@ -8,30 +8,35 @@ use App\Entity\Contact;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
-class ContactFixtures extends Fixture implements DependentFixtureInterface
+final class ContactFixtures extends Fixture implements DependentFixtureInterface
 {
+    private $faker;
+
+    public function __construct(Generator $faker)
+    {
+        $this->faker = $faker;
+    }
+
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker::create();
-
         $nextAddress = 0;
 
         for ($i = 0; $i < 10; $i++) {
             $contact = new Contact();
 
             $contact
-                ->setFirstName($faker->firstName)
-                ->setLastName($faker->lastName)
-                ->setEmail($faker->email)
-                ->setPhoneNumber($faker->phoneNumber)
+                ->setFirstName($this->faker->firstName)
+                ->setLastName($this->faker->lastName)
+                ->setEmail($this->faker->email)
+                ->setPhoneNumber($this->faker->phoneNumber)
             ;
 
-            if ($faker->boolean) {
+            if ($this->faker->boolean) {
                 $contact->addAddress($this->getReference('address-'.($nextAddress++)));
             }
-            if ($faker->boolean) {
+            if ($this->faker->boolean) {
                 $contact->addAddress($this->getReference('address-'.($nextAddress++)));
             }
 

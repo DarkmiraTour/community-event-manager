@@ -7,14 +7,16 @@ namespace App\Sponsorship\Doctrine;
 use App\Sponsorship\SpecialBenefit\SpecialBenefitManagerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 final class SpecialBenefitFixtures extends Fixture
 {
+    private $faker;
     private $specialBenefitManager;
 
-    public function __construct(SpecialBenefitManagerInterface $specialBenefitManager)
+    public function __construct(SpecialBenefitManagerInterface $specialBenefitManager, Generator $faker)
     {
+        $this->faker = $faker;
         $this->specialBenefitManager = $specialBenefitManager;
     }
 
@@ -23,12 +25,11 @@ final class SpecialBenefitFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker::create();
         for ($specialBenefitNbr = 0; $specialBenefitNbr < 10; $specialBenefitNbr++) {
             $specialBenefit = $this->specialBenefitManager->createWith(
                 "Special Package {$specialBenefitNbr}",
-                $faker->randomFloat(2),
-                $faker->text()
+                $this->faker->randomFloat(2),
+                $this->faker->text()
             );
             $manager->persist($specialBenefit);
         }

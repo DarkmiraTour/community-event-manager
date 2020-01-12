@@ -7,23 +7,28 @@ namespace App\DataFixtures;
 use App\Entity\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
-class AddressFixtures extends Fixture
+final class AddressFixtures extends Fixture
 {
+    private $faker;
+
+    public function __construct(Generator $faker)
+    {
+        $this->faker = $faker;
+    }
+
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker::create();
-
         for ($i = 0; $i < 20; $i++) {
             $address = new Address();
 
             $address
-                ->setName($faker->word)
-                ->setStreetAddress($faker->streetAddress)
-                ->setStreetAddressComplementary($faker->secondaryAddress)
-                ->setPostalCode($faker->postcode)
-                ->setCity($faker->city)
+                ->setName($this->faker->word)
+                ->setStreetAddress($this->faker->streetAddress)
+                ->setStreetAddressComplementary($this->faker->secondaryAddress)
+                ->setPostalCode($this->faker->postcode)
+                ->setCity($this->faker->city)
             ;
 
             $this->setReference("address-$i", $address);

@@ -11,32 +11,33 @@ use App\Repository\Schedule\ScheduleRepositoryInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory as Faker;
+use Faker\Generator;
 
 final class ScheduleFixtures extends Fixture implements DependentFixtureInterface
 {
     private $scheduleRepository;
     private $eventRepository;
+    private $faker;
 
-    public function __construct(ScheduleRepositoryInterface $scheduleRepository, EventRepositoryInterface $eventRepository)
+    public function __construct(ScheduleRepositoryInterface $scheduleRepository, EventRepositoryInterface $eventRepository, Generator $faker)
     {
         $this->scheduleRepository = $scheduleRepository;
         $this->eventRepository = $eventRepository;
+        $this->faker = $faker;
     }
 
     public function load(ObjectManager $manager): void
     {
         $events = $this->eventRepository->findAll();
-        $faker = Faker::create();
 
         for ($i = 0; $i < 5; $i++) {
             /** @var Event $selectedEvent */
-            $selectedEvent = $events[$faker->numberBetween(0, count($events) - 1)];
+            $selectedEvent = $events[$this->faker->numberBetween(0, count($events) - 1)];
             $schedule = new Schedule($selectedEvent);
             $schedule->setId(
                 $this->scheduleRepository->nextIdentity()->toString()
             );
-            $schedule->setDay($faker->dateTimeBetween($selectedEvent->getStartAt(), $selectedEvent->getEndAt()));
+            $schedule->setDay($this->faker->dateTimeBetween($selectedEvent->getStartAt(), $selectedEvent->getEndAt()));
 
             $manager->persist($schedule);
         }

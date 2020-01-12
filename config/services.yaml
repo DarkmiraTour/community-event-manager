@@ -52,3 +52,11 @@ services:
     App\ValueObject\PdfOrientation:
         arguments:
             $orientation: '%pdf_orientation%'
+
+    Faker\Generator:
+        factory: ['Faker\Factory', 'create']
+        arguments: ['en_US']
+        calls:
+            - method: addProvider
+              arguments:
+                  - '@App\Faker\Provider\FallbackImageProvider'
