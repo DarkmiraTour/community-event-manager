@@ -1,5 +1,17 @@
 parameters:
-  csvHeaderFormatOrganisation: ['name', 'website', 'contact', 'comment']
+  csvHeaderFormatOrganisation:
+    - name
+    - website
+    - contact_first_name
+    - contact_last_name
+    - contact_email
+    - contact_phone_number
+    - address_name
+    - street_address
+    - street_address_complementary
+    - postal_code
+    - city
+    - comment
   max.list.organisation.entries: 10
 
 services:

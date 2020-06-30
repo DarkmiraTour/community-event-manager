@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Dto\ContactRequest;
+use App\Entity\Address;
 use App\Entity\Contact;
+use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -61,17 +63,16 @@ class ContactRepository implements ContactRepositoryInterface
         string $lastName,
         string $email,
         string $phoneNumber,
-        string $addresses
+        Address $address
     ): Contact {
         $contact = new Contact();
 
         return $contact
-            ->setId($this->nextIdentity()->toString())
             ->setFirstName($firstName)
             ->setLastName($lastName)
             ->setEmail($email)
             ->setPhoneNumber($phoneNumber)
-            ->setAddresses($addresses)
+            ->addAddress($address)
         ;
     }
 

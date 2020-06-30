@@ -21,4 +21,6 @@ interface AddressRepositoryInterface
     public function nextIdentity(): UuidInterface;
 
     public function createFromRequest(AddressRequest $addressRequest): Address;
+
+    public function createWith(string $name, string $streetAddress, string $streetAddressComplementary, string $postalCode, string $city): Address;
 }
