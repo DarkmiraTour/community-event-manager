@@ -6,7 +6,7 @@ namespace App\Service\Schedule;
 
 use App\Entity\Schedule;
 use App\Entity\Slot;
-use App\Entity\Space;
+use App\Space\Space;
 
 final class CreateDailySchedule
 {

@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Space\Doctrine;
 
-use App\Dto\SpaceRequest;
 use App\Entity\Schedule;
-use App\Entity\Space;
-use App\Entity\SpaceType;
+use App\Space\Create\CreateSpaceRequest;
+use App\Space\Space;
+use App\Space\SpaceRepositoryInterface;
+use App\Space\SpaceType\SpaceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
@@ -42,7 +43,7 @@ final class SpaceRepository implements SpaceRepositoryInterface
         return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
-    public function createFrom(SpaceRequest $spaceRequest): Space
+    public function createFrom(CreateSpaceRequest $spaceRequest): Space
     {
         $space = new Space();
         $space->setId($this->nextIdentity()->toString());

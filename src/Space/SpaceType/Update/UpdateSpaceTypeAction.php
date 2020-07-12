@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\SpaceType;
+namespace App\Space\SpaceType\Update;
 
-use App\Dto\SpaceTypeRequest;
-use App\Form\SpaceTypeType;
-use App\Repository\Schedule\SpaceTypeRepositoryInterface;
+use App\Space\SpaceType\Create\CreateSpaceTypeFormType;
+use App\Space\SpaceType\Create\CreateSpaceTypeRequest;
+use App\Space\SpaceType\SpaceTypeRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Edit
+final class UpdateSpaceTypeAction
 {
     private $renderer;
     private $formFactory;
@@ -48,8 +48,8 @@ final class Edit
             throw new NotFoundHttpException();
         }
 
-        $spaceTypeRequest = SpaceTypeRequest::createFromEntity($spaceType);
-        $form = $this->formFactory->create(SpaceTypeType::class, $spaceTypeRequest);
+        $spaceTypeRequest = CreateSpaceTypeRequest::createFromEntity($spaceType);
+        $form = $this->formFactory->create(CreateSpaceTypeFormType::class, $spaceTypeRequest);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

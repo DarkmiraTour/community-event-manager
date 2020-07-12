@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Space\SpaceType;
 
-use App\Dto\SpaceTypeRequest;
-use App\Entity\SpaceType;
+use App\Space\SpaceType\Create\CreateSpaceTypeRequest;
 use Ramsey\Uuid\UuidInterface;
 
 interface SpaceTypeRepositoryInterface
@@ -23,5 +22,5 @@ interface SpaceTypeRepositoryInterface
 
     public function remove(SpaceType $spaceType): void;
 
-    public function createFromRequest(SpaceTypeRequest $spaceTypeRequest): SpaceType;
+    public function createFromRequest(CreateSpaceTypeRequest $spaceTypeRequest): SpaceType;
 }

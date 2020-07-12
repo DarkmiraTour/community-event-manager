@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\SpaceType;
+namespace App\Space\SpaceType\Delete;
 
-use App\Repository\Schedule\SpaceTypeRepositoryInterface;
+use App\Space\SpaceType\SpaceTypeRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class Delete
+final class DeleteSpaceTypeAction
 {
     private $router;
     private $csrfTokenManager;

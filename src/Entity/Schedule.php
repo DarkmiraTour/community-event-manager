@@ -27,7 +27,7 @@ class Schedule
     private $day;
 
     /**
-     * @ORM\OneToMany(targetEntity="Space", mappedBy="schedule", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="App\Space\Space", mappedBy="schedule", cascade={"all"})
      * @ORM\OrderBy({"visible"="DESC"})
      */
     private $spaces;

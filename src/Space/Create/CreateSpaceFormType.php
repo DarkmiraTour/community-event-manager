@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Form;
+namespace App\Space\Create;
 
-use App\Dto\SpaceRequest;
 use App\Entity\Schedule;
-use App\Entity\SpaceType as SpaceTypeEntity;
 use App\Repository\Schedule\ScheduleRepositoryInterface;
+use App\Space\SpaceType\SpaceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SpaceType extends AbstractType
+class CreateSpaceFormType extends AbstractType
 {
     private $scheduleRepository;
 
@@ -37,8 +36,8 @@ class SpaceType extends AbstractType
             ])
             ->add('type', EntityType::class, [
                 'required' => true,
-                'class' => SpaceTypeEntity::class,
-                'choice_label' => function (SpaceTypeEntity $spaceType) {
+                'class' => SpaceType::class,
+                'choice_label' => function (SpaceType $spaceType) {
                     return $spaceType->getName();
                 },
                 'attr' => ['class' => 'form-control'],
@@ -64,7 +63,7 @@ class SpaceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => SpaceRequest::class,
+            'data_class' => CreateSpaceRequest::class,
         ]);
     }
 }

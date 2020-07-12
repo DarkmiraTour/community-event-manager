@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\Schedule;
+namespace App\Space;
 
-use App\Dto\SpaceRequest;
-use App\Entity\Space;
+use App\Space\Create\CreateSpaceRequest;
 use Ramsey\Uuid\UuidInterface;
 
 interface SpaceRepositoryInterface
@@ -17,7 +16,7 @@ interface SpaceRepositoryInterface
      */
     public function findAll(): array;
 
-    public function createFrom(SpaceRequest $spaceRequest): Space;
+    public function createFrom(CreateSpaceRequest $spaceRequest): Space;
 
     public function nextIdentity(): UuidInterface;
 

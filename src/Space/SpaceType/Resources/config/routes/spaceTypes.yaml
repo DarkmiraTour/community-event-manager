@@ -1,0 +1,24 @@
+schedule_space_type_index:
+    path: /
+    controller: App\Space\Index\IndexSpaceTypeAction::handle
+    methods: [GET]
+
+schedule_space_type_create:
+    path: /create
+    controller: App\Space\Create\CreateSpaceTypeAction::handle
+    methods: [GET, POST]
+
+schedule_space_type_edit:
+    path: /{id}/edit
+    controller: App\Space\Update\UpdateSpaceTypeAction::handle
+    methods: [GET, POST]
+    requirements:
+        id: '%routing.uuid%'
+
+schedule_space_type_delete:
+    path: /{id}/delete
+    controller: App\Space\Delete\DeleteSpaceTypeAction::handle
+    methods: [DELETE]
+    requirements:
+        id: '%routing.uuid%'
+        

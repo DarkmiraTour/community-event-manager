@@ -7,7 +7,7 @@ namespace App\Repository\Schedule;
 use App\Dto\SlotRequest;
 use App\Entity\Schedule;
 use App\Entity\Slot;
-use App\Entity\Space;
+use App\Space\Space;
 use App\Talk\Talk;
 use App\ValueObject\Title;
 use Doctrine\ORM\EntityManagerInterface;

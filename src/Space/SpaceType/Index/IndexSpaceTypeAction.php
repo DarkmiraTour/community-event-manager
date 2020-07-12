@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\SpaceType;
+namespace App\Space\SpaceType\Index;
 
-use App\Repository\Schedule\SpaceTypeRepositoryInterface;
+use App\Space\SpaceType\SpaceTypeRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment as Twig;
 
-final class Index
+final class IndexSpaceTypeAction
 {
     private $renderer;
     private $spaceTypeRepository;

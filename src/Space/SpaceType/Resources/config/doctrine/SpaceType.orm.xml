@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Space\SpaceType\SpaceType">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="name" type="string" length="255"/>
+        <field name="description" type="string" length="255"/>
+
+        <one-to-many field="spaces" target-entity="App\Space\Space" mapped-by="type"/>
+    </entity>
+</doctrine-mapping>

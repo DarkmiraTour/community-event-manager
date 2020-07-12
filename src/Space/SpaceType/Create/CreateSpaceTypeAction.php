@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\SpaceType;
+namespace App\Space\SpaceType\Create;
 
-use App\Form\SpaceTypeType;
-use App\Repository\Schedule\SpaceTypeRepositoryInterface;
+use App\Action;
+use App\Space\SpaceType\SpaceTypeRepositoryInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment as Twig;
 
-final class Create
+final class CreateSpaceTypeAction implements Action
 {
     private $renderer;
     private $formFactory;
@@ -38,7 +38,7 @@ final class Create
      */
     public function handle(Request $request): Response
     {
-        $form = $this->formFactory->create(SpaceTypeType::class);
+        $form = $this->formFactory->create(SpaceTypeFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
